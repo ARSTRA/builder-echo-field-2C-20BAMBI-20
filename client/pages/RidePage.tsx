@@ -1769,8 +1769,265 @@ export default function RidePage() {
         </Tabs>
       </div>
 
+      {/* Company Footer */}
+      <footer className="bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800 relative overflow-hidden mt-16">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-yellow-400 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-400 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 py-16">
+          {/* Header Section */}
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center space-x-4 mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl">
+                <Car className="w-8 h-8 text-white" />
+              </div>
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">SmartCommute</h2>
+                <p className="text-xl text-blue-200">Revolutionizing Urban Transportation</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+            {/* Company Story */}
+            <div className="lg:col-span-2 space-y-8">
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+                <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+                  <Compass className="w-6 h-6 mr-3 text-yellow-400" />
+                  Our Mission
+                </h3>
+                <p className="text-blue-100 leading-relaxed mb-6 text-lg">
+                  At SmartCommute, we're transforming the way people move through cities. Founded in 2018,
+                  we've built the most advanced, reliable, and user-friendly transportation platform that
+                  connects millions of riders with professional drivers worldwide.
+                </p>
+                <p className="text-blue-100 leading-relaxed text-lg">
+                  Our cutting-edge technology, combined with our commitment to safety and sustainability,
+                  makes every journey smooth, secure, and environmentally conscious. We're not just a ride
+                  service – we're your trusted partner in urban mobility.
+                </p>
+              </div>
+
+              {/* Statistics */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="bg-gradient-to-br from-yellow-400/20 to-orange-500/20 backdrop-blur-md rounded-xl p-6 border border-yellow-400/30 text-center">
+                  <div className="text-3xl font-bold text-yellow-300 mb-2">5M+</div>
+                  <div className="text-sm text-yellow-100">Happy Riders</div>
+                </div>
+                <div className="bg-gradient-to-br from-green-400/20 to-blue-500/20 backdrop-blur-md rounded-xl p-6 border border-green-400/30 text-center">
+                  <div className="text-3xl font-bold text-green-300 mb-2">100K+</div>
+                  <div className="text-sm text-green-100">Active Drivers</div>
+                </div>
+                <div className="bg-gradient-to-br from-purple-400/20 to-pink-500/20 backdrop-blur-md rounded-xl p-6 border border-purple-400/30 text-center">
+                  <div className="text-3xl font-bold text-purple-300 mb-2">250+</div>
+                  <div className="text-sm text-purple-100">Cities Served</div>
+                </div>
+                <div className="bg-gradient-to-br from-blue-400/20 to-indigo-500/20 backdrop-blur-md rounded-xl p-6 border border-blue-400/30 text-center">
+                  <div className="text-3xl font-bold text-blue-300 mb-2">99.9%</div>
+                  <div className="text-sm text-blue-100">Uptime</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Image Section */}
+            <div className="space-y-6">
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl group">
+                <img
+                  src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center"
+                  alt="Smart Technology"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-4 left-4 text-white">
+                  <h4 className="font-bold text-lg">Smart Technology</h4>
+                  <p className="text-sm opacity-90">AI-powered route optimization</p>
+                </div>
+              </div>
+
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl group">
+                <img
+                  src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=300&fit=crop&crop=center"
+                  alt="Safety First"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-4 left-4 text-white">
+                  <h4 className="font-bold text-lg">Safety First</h4>
+                  <p className="text-sm opacity-90">24/7 monitoring & support</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Features Grid */}
+          <div className="mb-16">
+            <h3 className="text-3xl font-bold text-white text-center mb-12">Why Choose SmartCommute?</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 text-center hover:bg-white/15 transition-colors">
+                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="font-bold text-white mb-2">100% Safe</h4>
+                <p className="text-blue-100 text-sm">Background-checked drivers, real-time tracking, and 24/7 support</p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 text-center hover:bg-white/15 transition-colors">
+                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Zap className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="font-bold text-white mb-2">Lightning Fast</h4>
+                <p className="text-blue-100 text-sm">Average pickup time under 3 minutes in major cities</p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 text-center hover:bg-white/15 transition-colors">
+                <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <DollarSign className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="font-bold text-white mb-2">Best Prices</h4>
+                <p className="text-blue-100 text-sm">Transparent pricing with no hidden fees or surge charges</p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 text-center hover:bg-white/15 transition-colors">
+                <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Heart className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="font-bold text-white mb-2">Eco-Friendly</h4>
+                <p className="text-blue-100 text-sm">Carbon-neutral rides with electric and hybrid fleet options</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Awards & Recognition */}
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 mb-16">
+            <h3 className="text-2xl font-bold text-white text-center mb-8">Awards & Recognition</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Star className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-bold text-white mb-2">Best Transportation App 2023</h4>
+                <p className="text-blue-200 text-sm">TechCrunch Awards</p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-bold text-white mb-2">Top Safety Innovation</h4>
+                <p className="text-blue-200 text-sm">Urban Mobility Summit</p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-bold text-white mb-2">Customer Choice Award</h4>
+                <p className="text-blue-200 text-sm">Global Service Excellence</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact & Social */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Contact Info */}
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+              <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+                <Phone className="w-6 h-6 mr-3 text-green-400" />
+                Get in Touch
+              </h3>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3 text-blue-100">
+                  <Mail className="w-5 h-5 text-blue-400" />
+                  <span>support@smartcommute.com</span>
+                </div>
+                <div className="flex items-center space-x-3 text-blue-100">
+                  <Phone className="w-5 h-5 text-green-400" />
+                  <span>1-800-SMART-RIDE</span>
+                </div>
+                <div className="flex items-center space-x-3 text-blue-100">
+                  <MapPin className="w-5 h-5 text-red-400" />
+                  <span>Global Headquarters: San Francisco, CA</span>
+                </div>
+              </div>
+            </div>
+
+            {/* App Download */}
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+              <h3 className="text-2xl font-bold text-white mb-6">Download Our App</h3>
+              <p className="text-blue-100 mb-6">Experience the future of transportation. Available on all platforms.</p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  className="bg-black hover:bg-gray-800 text-white flex items-center justify-center space-x-2 h-14"
+                  onClick={() => toast.success("Redirecting to App Store...")}
+                >
+                  <div className="text-left">
+                    <div className="text-xs">Download on the</div>
+                    <div className="text-lg font-bold">App Store</div>
+                  </div>
+                </Button>
+                <Button
+                  className="bg-black hover:bg-gray-800 text-white flex items-center justify-center space-x-2 h-14"
+                  onClick={() => toast.success("Redirecting to Google Play...")}
+                >
+                  <div className="text-left">
+                    <div className="text-xs">Get it on</div>
+                    <div className="text-lg font-bold">Google Play</div>
+                  </div>
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="mt-16 pt-8 border-t border-white/20 text-center">
+            <p className="text-blue-200 text-sm mb-4">
+              © 2024 SmartCommute Inc. All rights reserved. | Privacy Policy | Terms of Service | Accessibility
+            </p>
+            <div className="flex items-center justify-center space-x-6">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-blue-200 hover:text-white"
+                onClick={() => toast.info("Following us on Facebook")}
+              >
+                Facebook
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-blue-200 hover:text-white"
+                onClick={() => toast.info("Following us on Twitter")}
+              >
+                Twitter
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-blue-200 hover:text-white"
+                onClick={() => toast.info("Connecting on LinkedIn")}
+              >
+                LinkedIn
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-blue-200 hover:text-white"
+                onClick={() => toast.info("Following us on Instagram")}
+              >
+                Instagram
+              </Button>
+            </div>
+          </div>
+        </div>
+      </footer>
+
       {/* Auth Modal */}
-      <AuthModal 
+      <AuthModal
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
         userType="passenger"
