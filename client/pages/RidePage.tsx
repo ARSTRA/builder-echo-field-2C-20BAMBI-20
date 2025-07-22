@@ -2669,11 +2669,11 @@ export default function RidePage() {
 
               <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 text-center hover:bg-white/15 transition-colors">
                 <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Zap className="w-6 h-6 text-white" />
+                  <Navigation className="w-6 h-6 text-white" />
                 </div>
-                <h4 className="font-bold text-white mb-2">Lightning Fast</h4>
+                <h4 className="font-bold text-white mb-2">Smart GPS Technology</h4>
                 <p className="text-blue-100 text-sm">
-                  Average pickup time under 3 minutes in major cities
+                  AI-powered route optimization and real-time navigation for fastest routes
                 </p>
               </div>
 
