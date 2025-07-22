@@ -563,10 +563,10 @@ export default function AdminPage() {
           <p className="text-taxi-gray">Manage passengers and their accounts</p>
         </div>
         <div className="flex gap-2">
-          <Button 
+          <Button
             variant="outline"
             className="bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 border-0"
-            onClick={() => handleAction("Export Users")}
+            onClick={() => handleExportData("Users")}
             disabled={isLoading}
           >
             <Download className="w-4 h-4 mr-2" />
