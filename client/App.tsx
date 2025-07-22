@@ -13,6 +13,7 @@ import BookingPage from "./pages/passenger/BookingPage";
 import HistoryPage from "./pages/passenger/HistoryPage";
 import NotificationsPage from "./pages/passenger/NotificationsPage";
 import DriverHome from "./pages/driver/DriverHome";
+import DriverDashboard from "./pages/driver/DriverDashboard";
 import EarningsPage from "./pages/driver/EarningsPage";
 import RidePage from "./pages/RidePage";
 import DriverPage from "./pages/DriverPage";
