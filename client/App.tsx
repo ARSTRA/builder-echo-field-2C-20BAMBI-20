@@ -73,11 +73,32 @@ function AppContent() {
           <Route path="/driver/home" element={<DriverHome />} />
 
           {/* Admin Panel Routes */}
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/admin/users" element={<AdminPage />} />
-          <Route path="/admin/trips" element={<AdminPage />} />
-          <Route path="/admin/reports" element={<AdminPage />} />
-          <Route path="/admin/settings" element={<AdminPage />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={
+            <ProtectedAdminRoute>
+              <AdminPage />
+            </ProtectedAdminRoute>
+          } />
+          <Route path="/admin/users" element={
+            <ProtectedAdminRoute>
+              <AdminPage />
+            </ProtectedAdminRoute>
+          } />
+          <Route path="/admin/trips" element={
+            <ProtectedAdminRoute>
+              <AdminPage />
+            </ProtectedAdminRoute>
+          } />
+          <Route path="/admin/reports" element={
+            <ProtectedAdminRoute>
+              <AdminPage />
+            </ProtectedAdminRoute>
+          } />
+          <Route path="/admin/settings" element={
+            <ProtectedAdminRoute>
+              <AdminPage />
+            </ProtectedAdminRoute>
+          } />
 
           {/* Legacy Routes */}
           <Route path="/ride" element={<RidePage />} />
