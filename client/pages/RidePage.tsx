@@ -60,7 +60,8 @@ import {
   Receipt,
   ThumbsUp,
   ThumbsDown,
-  Plus
+  Plus,
+  Share
 } from "lucide-react";
 
 export default function RidePage() {
