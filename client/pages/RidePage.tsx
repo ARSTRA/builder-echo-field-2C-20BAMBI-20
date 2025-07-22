@@ -2578,10 +2578,12 @@ export default function RidePage() {
                   worldwide.
                 </p>
                 <p className="text-blue-100 leading-relaxed text-lg">
-                  Our cutting-edge technology, combined with our commitment to
-                  safety and sustainability, makes every journey smooth, secure,
+                  Our cutting-edge technology features AI-powered route optimization,
+                  real-time GPS navigation, and smart matching algorithms that connect
+                  you with the perfect driver. Combined with our commitment to
+                  safety and sustainability, we make every journey smooth, secure,
                   and environmentally conscious. We're not just a ride service –
-                  we're your trusted partner in urban mobility.
+                  we're your trusted partner in smart urban mobility.
                 </p>
               </div>
 
