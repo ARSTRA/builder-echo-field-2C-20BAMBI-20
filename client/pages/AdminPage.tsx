@@ -105,11 +105,19 @@ export default function AdminPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedUser, setSelectedUser] = useState<any>(null);
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+  const [selectedDriver, setSelectedDriver] = useState<any>(null);
+  const [selectedTransaction, setSelectedTransaction] = useState<any>(null);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<any>(null);
   const [formData, setFormData] = useState<any>({});
   const [showUserDialog, setShowUserDialog] = useState(false);
   const [showDriverDialog, setShowDriverDialog] = useState(false);
+  const [showDriverViewDialog, setShowDriverViewDialog] = useState(false);
+  const [showDriverChatDialog, setShowDriverChatDialog] = useState(false);
   const [showTransactionDialog, setShowTransactionDialog] = useState(false);
+  const [showTransactionViewDialog, setShowTransactionViewDialog] = useState(false);
+  const [showPaymentConfigDialog, setShowPaymentConfigDialog] = useState(false);
+  const [showPaymentStatsDialog, setShowPaymentStatsDialog] = useState(false);
+  const [showWalletManagerDialog, setShowWalletManagerDialog] = useState(false);
   const [showZoneDialog, setShowZoneDialog] = useState(false);
   const [showPriceDialog, setShowPriceDialog] = useState(false);
 
