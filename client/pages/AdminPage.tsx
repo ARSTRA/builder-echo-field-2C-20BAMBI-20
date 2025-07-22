@@ -453,9 +453,9 @@ export default function AdminPage() {
           <h2 className="text-2xl font-bold text-taxi-dark">Payment Methods</h2>
           <p className="text-taxi-gray">Manage and configure payment options</p>
         </div>
-        <Button 
+        <Button
           className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
-          onClick={() => handleAction("Add Payment Method")}
+          onClick={() => handleConfigurePayment({id: "new", name: "New Payment Method"})}
           disabled={isLoading}
         >
           <Plus className="w-4 h-4 mr-2" />
