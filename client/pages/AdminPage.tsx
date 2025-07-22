@@ -86,6 +86,7 @@ import {
   Timer,
   Route,
   LogOut,
+  User,
 } from "lucide-react";
 
 export default function AdminPage() {
