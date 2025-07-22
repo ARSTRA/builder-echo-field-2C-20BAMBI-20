@@ -365,6 +365,58 @@ export default function AdminPage() {
     });
   };
 
+  const handleSelectChatUser = (user: any) => {
+    setActiveChatUser(user);
+    // Mark messages as read
+    setChatUsers(prev => prev.map(u => u.id === user.id ? {...u, unread: 0} : u));
+
+    // Load mock conversation history
+    const mockMessages = [
+      { id: 1, sender: "user", message: user.lastMessage, time: "10:30 AM", type: "text" },
+      { id: 2, sender: "admin", message: "Hello! I'm here to help you. What seems to be the issue?", time: "10:32 AM", type: "text" },
+      { id: 3, sender: "user", message: "I'm having trouble with my recent ride payment", time: "10:33 AM", type: "text" },
+      { id: 4, sender: "admin", message: "I can help you with that. Let me check your account details.", time: "10:34 AM", type: "text" },
+    ];
+    setChatMessages(mockMessages);
+
+    toast({
+      title: "Chat Opened",
+      description: `Now chatting with ${user.name}`,
+    });
+  };
+
+  const handleSendMessage = () => {
+    if (!newMessage.trim() || !activeChatUser) return;
+
+    const newMsg = {
+      id: chatMessages.length + 1,
+      sender: "admin",
+      message: newMessage,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      type: "text"
+    };
+
+    setChatMessages(prev => [...prev, newMsg]);
+    setNewMessage("");
+
+    // Update user's last message
+    setChatUsers(prev => prev.map(u =>
+      u.id === activeChatUser.id
+        ? {...u, lastMessage: newMessage, time: "now"}
+        : u
+    ));
+
+    toast({
+      title: "Message Sent",
+      description: `Message sent to ${activeChatUser.name}`,
+    });
+  };
+
+  const handleQuickResponse = (response: string) => {
+    setNewMessage(response);
+    setTimeout(() => handleSendMessage(), 100);
+  };
+
   const stats = [
     { label: "Active Drivers", value: "2,847", icon: Users, trend: "+12%", color: "bg-blue-500" },
     { label: "Total Rides Today", value: "18,392", icon: Car, trend: "+8%", color: "bg-green-500" },
