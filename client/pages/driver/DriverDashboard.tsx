@@ -87,9 +87,9 @@ export default function DriverDashboard() {
   const [currentRide, setCurrentRide] = useState(null);
   const [driverEarnings, setDriverEarnings] = useState({
     today: 156.50,
-    week: 1,245.75,
-    month: 4,890.25,
-    total: 15,678.90
+    week: 1245.75,
+    month: 4890.25,
+    total: 15678.90
   });
 
   // Driver profile state
