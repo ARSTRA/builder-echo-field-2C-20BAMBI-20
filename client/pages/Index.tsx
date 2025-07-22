@@ -100,6 +100,25 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-taxi-light-blue via-white to-taxi-light-gray">
+      {/* Navigation Header */}
+      <nav className="relative z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between py-4">
+            <div className="flex items-center">
+              <h1 className="text-2xl font-bold text-taxi-dark">BAMBI</h1>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Link to="/admin/login">
+                <Button variant="outline" size="sm" className="flex items-center">
+                  <ShieldCheck className="w-4 h-4 mr-2" />
+                  Admin Login
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden py-20 lg:py-32">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10"></div>
