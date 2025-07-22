@@ -74,7 +74,10 @@ import {
   ThumbsDown,
   Plus,
   Share,
+  Banknote,
 } from "lucide-react";
+import { useCurrency } from "@/hooks/use-currency";
+import { PaymentMethod, formatCurrency } from "@shared/currency";
 
 export default function RidePage() {
   const [activeTab, setActiveTab] = useState("booking");
@@ -2102,7 +2105,7 @@ export default function RidePage() {
                       <div className="flex items-center space-x-3">
                         <CreditCard className="w-6 h-6 text-blue-600" />
                         <div>
-                          <p className="font-medium">Visa •••• 1234</p>
+                          <p className="font-medium">Visa ••���• 1234</p>
                           <p className="text-sm text-gray-500">Expires 12/25</p>
                         </div>
                       </div>
