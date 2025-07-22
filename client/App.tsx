@@ -27,16 +27,17 @@ function AppContent() {
 
   // Determine user type based on route
   const getUserType = () => {
-    if (location.pathname.startsWith('/passenger')) return 'passenger';
-    if (location.pathname.startsWith('/driver')) return 'driver';
-    if (location.pathname.startsWith('/admin')) return 'admin';
-    return 'passenger'; // default
+    if (location.pathname.startsWith("/passenger")) return "passenger";
+    if (location.pathname.startsWith("/driver")) return "driver";
+    if (location.pathname.startsWith("/admin")) return "admin";
+    return "passenger"; // default
   };
 
   // Show mobile navigation for app routes
-  const shouldShowMobileNav = location.pathname.startsWith('/passenger') ||
-                              location.pathname.startsWith('/driver') ||
-                              location.pathname.startsWith('/admin');
+  const shouldShowMobileNav =
+    location.pathname.startsWith("/passenger") ||
+    location.pathname.startsWith("/driver") ||
+    location.pathname.startsWith("/admin");
 
   return (
     <>
@@ -52,7 +53,10 @@ function AppContent() {
           <Route path="/passenger/share" element={<BookingPage />} />
           <Route path="/passenger/packages" element={<BookingPage />} />
           <Route path="/passenger/history" element={<HistoryPage />} />
-          <Route path="/passenger/notifications" element={<NotificationsPage />} />
+          <Route
+            path="/passenger/notifications"
+            element={<NotificationsPage />}
+          />
           <Route path="/passenger/profile" element={<PassengerHome />} />
           <Route path="/passenger/offers" element={<PassengerHome />} />
 

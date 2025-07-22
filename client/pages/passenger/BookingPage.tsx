@@ -1,10 +1,22 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -30,7 +42,7 @@ import {
   RotateCcw,
   User,
   Gift,
-  Percent
+  Percent,
 } from "lucide-react";
 
 export default function BookingPage() {
@@ -53,7 +65,7 @@ export default function BookingPage() {
       eta: "2-5 min",
       passengers: 4,
       features: ["AC", "Music"],
-      popular: false
+      popular: false,
     },
     {
       id: "comfort",
@@ -65,7 +77,7 @@ export default function BookingPage() {
       eta: "3-7 min",
       passengers: 4,
       features: ["AC", "Music", "Extra Space"],
-      popular: true
+      popular: true,
     },
     {
       id: "premium",
@@ -77,7 +89,7 @@ export default function BookingPage() {
       eta: "5-10 min",
       passengers: 4,
       features: ["AC", "Music", "Luxury", "WiFi"],
-      popular: false
+      popular: false,
     },
     {
       id: "share",
@@ -89,31 +101,53 @@ export default function BookingPage() {
       eta: "5-15 min",
       passengers: 6,
       features: ["AC", "Shared Journey"],
-      popular: false
-    }
+      popular: false,
+    },
   ];
 
   const specialRequirements = [
     { id: "baby-seat", label: "Baby Seat", icon: Baby, price: 5 },
-    { id: "wheelchair", label: "Wheelchair Accessible", icon: Accessibility, price: 0 },
+    {
+      id: "wheelchair",
+      label: "Wheelchair Accessible",
+      icon: Accessibility,
+      price: 0,
+    },
     { id: "pet-friendly", label: "Pet Friendly", icon: Heart, price: 3 },
-    { id: "extra-luggage", label: "Extra Luggage Space", icon: Car, price: 2 }
+    { id: "extra-luggage", label: "Extra Luggage Space", icon: Car, price: 2 },
   ];
 
   const paymentMethods = [
-    { id: "card", name: "Credit/Debit Card", icon: CreditCard, details: "**** 1234" },
-    { id: "wallet", name: "BAMBI Wallet", icon: DollarSign, details: "$45.50 available" },
-    { id: "cash", name: "Cash", icon: DollarSign, details: "Pay driver directly" }
+    {
+      id: "card",
+      name: "Credit/Debit Card",
+      icon: CreditCard,
+      details: "**** 1234",
+    },
+    {
+      id: "wallet",
+      name: "BAMBI Wallet",
+      icon: DollarSign,
+      details: "$45.50 available",
+    },
+    {
+      id: "cash",
+      name: "Cash",
+      icon: DollarSign,
+      details: "Pay driver directly",
+    },
   ];
 
   const genderPreferences = [
     { id: "any", label: "Any Driver" },
     { id: "male", label: "Male Driver" },
-    { id: "female", label: "Female Driver" }
+    { id: "female", label: "Female Driver" },
   ];
 
   const calculateEstimatedFare = () => {
-    const selectedVehicleData = vehicleOptions.find(v => v.id === selectedVehicle);
+    const selectedVehicleData = vehicleOptions.find(
+      (v) => v.id === selectedVehicle,
+    );
     if (!selectedVehicleData || !pickupLocation || !destination) return;
 
     // Mock calculation - in real app, would use actual distance
@@ -131,7 +165,7 @@ export default function BookingPage() {
       subtotal: subtotal.toFixed(2),
       tax: tax.toFixed(2),
       total: total.toFixed(2),
-      duration: Math.floor(mockDistance * 2 + 5) // rough time estimate
+      duration: Math.floor(mockDistance * 2 + 5), // rough time estimate
     });
   };
 
@@ -145,7 +179,9 @@ export default function BookingPage() {
       <div className="px-4 py-6">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-taxi-dark mb-2">Book Your Ride</h1>
+          <h1 className="text-2xl font-bold text-taxi-dark mb-2">
+            Book Your Ride
+          </h1>
           <p className="text-taxi-gray">Choose your pickup and destination</p>
         </div>
 
@@ -189,7 +225,7 @@ export default function BookingPage() {
               <Label htmlFor="pickup">Pickup Location</Label>
               <div className="relative">
                 <Navigation className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-success" />
-                <Input 
+                <Input
                   id="pickup"
                   placeholder="Current location or enter address"
                   className="pl-10 h-12"
@@ -205,12 +241,12 @@ export default function BookingPage() {
                 </Button>
               </div>
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="destination">Destination</Label>
               <div className="relative">
                 <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-destructive" />
-                <Input 
+                <Input
                   id="destination"
                   placeholder="Where would you like to go?"
                   className="pl-10 h-12"
@@ -224,24 +260,16 @@ export default function BookingPage() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-2">
                   <Label htmlFor="date">Date</Label>
-                  <Input 
-                    id="date" 
-                    type="date"
-                    className="h-12"
-                  />
+                  <Input id="date" type="date" className="h-12" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="time">Time</Label>
-                  <Input 
-                    id="time" 
-                    type="time"
-                    className="h-12"
-                  />
+                  <Input id="time" type="time" className="h-12" />
                 </div>
               </div>
             )}
 
-            <Button 
+            <Button
               onClick={calculateEstimatedFare}
               disabled={!pickupLocation || !destination}
               className="w-full btn-mobile btn-primary"
@@ -253,14 +281,16 @@ export default function BookingPage() {
         </Card>
 
         {/* Map Placeholder */}
-        {(pickupLocation && destination) && (
+        {pickupLocation && destination && (
           <Card className="mobile-card mb-6">
             <CardContent className="p-0">
               <div className="h-48 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl flex items-center justify-center relative">
                 <div className="text-center">
                   <MapPin className="w-12 h-12 text-primary mx-auto mb-3" />
                   <p className="text-taxi-gray font-medium">Interactive Map</p>
-                  <p className="text-sm text-taxi-gray">Real-time route and traffic info</p>
+                  <p className="text-sm text-taxi-gray">
+                    Real-time route and traffic info
+                  </p>
                 </div>
                 <div className="absolute top-3 right-3">
                   <Badge className="bg-success text-success-foreground">
@@ -293,14 +323,18 @@ export default function BookingPage() {
                     <div className="text-2xl">{vehicle.icon}</div>
                     <div>
                       <div className="flex items-center space-x-2">
-                        <h3 className="font-semibold text-taxi-dark">{vehicle.name}</h3>
+                        <h3 className="font-semibold text-taxi-dark">
+                          {vehicle.name}
+                        </h3>
                         {vehicle.popular && (
                           <Badge className="bg-primary text-primary-foreground text-xs">
                             Popular
                           </Badge>
                         )}
                       </div>
-                      <p className="text-sm text-taxi-gray">{vehicle.description}</p>
+                      <p className="text-sm text-taxi-gray">
+                        {vehicle.description}
+                      </p>
                       <div className="flex items-center space-x-3 mt-1">
                         <span className="text-xs text-taxi-gray">
                           <Users className="w-3 h-3 inline mr-1" />
@@ -313,7 +347,11 @@ export default function BookingPage() {
                       </div>
                       <div className="flex items-center space-x-2 mt-1">
                         {vehicle.features.map((feature, idx) => (
-                          <Badge key={idx} variant="secondary" className="text-xs">
+                          <Badge
+                            key={idx}
+                            variant="secondary"
+                            className="text-xs"
+                          >
                             {feature}
                           </Badge>
                         ))}
@@ -345,13 +383,16 @@ export default function BookingPage() {
               {specialRequirements.map((req) => {
                 const Icon = req.icon;
                 return (
-                  <div key={req.id} className="flex items-center space-x-2 p-3 border rounded-lg">
+                  <div
+                    key={req.id}
+                    className="flex items-center space-x-2 p-3 border rounded-lg"
+                  >
                     <Checkbox id={req.id} />
                     <div className="flex-1">
                       <div className="flex items-center space-x-2">
                         <Icon className="w-4 h-4 text-taxi-gray" />
-                        <label 
-                          htmlFor={req.id} 
+                        <label
+                          htmlFor={req.id}
                           className="text-sm font-medium cursor-pointer"
                         >
                           {req.label}
@@ -392,7 +433,7 @@ export default function BookingPage() {
 
             <div className="space-y-2">
               <Label htmlFor="notes">Special Instructions</Label>
-              <Textarea 
+              <Textarea
                 id="notes"
                 placeholder="Any special instructions for the driver..."
                 className="min-h-[80px]"
@@ -434,7 +475,9 @@ export default function BookingPage() {
                   <div className="flex items-center space-x-3">
                     <Icon className="w-5 h-5 text-taxi-gray" />
                     <div>
-                      <p className="font-medium text-taxi-dark">{method.name}</p>
+                      <p className="font-medium text-taxi-dark">
+                        {method.name}
+                      </p>
                       <p className="text-sm text-taxi-gray">{method.details}</p>
                     </div>
                   </div>
@@ -458,11 +501,15 @@ export default function BookingPage() {
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
                   <span className="text-taxi-gray">Distance</span>
-                  <span className="font-medium">{estimatedFare.distance} km</span>
+                  <span className="font-medium">
+                    {estimatedFare.distance} km
+                  </span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-taxi-gray">Estimated time</span>
-                  <span className="font-medium">{estimatedFare.duration} min</span>
+                  <span className="font-medium">
+                    {estimatedFare.duration} min
+                  </span>
                 </div>
                 <div className="border-t pt-3 space-y-2">
                   <div className="flex justify-between text-sm">
@@ -492,10 +539,7 @@ export default function BookingPage() {
           <CardContent className="p-4">
             <div className="flex items-center space-x-3">
               <Percent className="w-5 h-5 text-accent" />
-              <Input 
-                placeholder="Enter promo code"
-                className="flex-1 h-12"
-              />
+              <Input placeholder="Enter promo code" className="flex-1 h-12" />
               <Button variant="outline" size="sm">
                 Apply
               </Button>
@@ -505,7 +549,7 @@ export default function BookingPage() {
 
         {/* Book Button */}
         <div className="sticky bottom-20 bg-white/95 backdrop-blur-xl p-4 rounded-2xl shadow-lg border">
-          <Button 
+          <Button
             onClick={handleBookRide}
             disabled={!pickupLocation || !destination}
             className="w-full btn-mobile btn-primary text-lg"

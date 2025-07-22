@@ -1,16 +1,22 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { AuthModal } from "@/components/auth/AuthModal";
-import { 
-  MapPin, 
-  Navigation, 
-  Clock, 
-  CreditCard, 
-  Star, 
+import {
+  MapPin,
+  Navigation,
+  Clock,
+  CreditCard,
+  Star,
   Car,
   Shield,
   Gift,
@@ -23,7 +29,7 @@ import {
   Percent,
   Calendar,
   Users,
-  DollarSign
+  DollarSign,
 } from "lucide-react";
 
 export default function PassengerHome() {
@@ -37,7 +43,7 @@ export default function PassengerHome() {
       icon: Car,
       href: "/passenger/book",
       color: "bg-primary",
-      textColor: "text-primary-foreground"
+      textColor: "text-primary-foreground",
     },
     {
       title: "Schedule",
@@ -45,7 +51,7 @@ export default function PassengerHome() {
       icon: Calendar,
       href: "/passenger/schedule",
       color: "bg-accent",
-      textColor: "text-accent-foreground"
+      textColor: "text-accent-foreground",
     },
     {
       title: "Share Ride",
@@ -53,7 +59,7 @@ export default function PassengerHome() {
       icon: Users,
       href: "/passenger/share",
       color: "bg-success",
-      textColor: "text-success-foreground"
+      textColor: "text-success-foreground",
     },
     {
       title: "Packages",
@@ -61,8 +67,8 @@ export default function PassengerHome() {
       icon: Gift,
       href: "/passenger/packages",
       color: "bg-warning",
-      textColor: "text-warning-foreground"
-    }
+      textColor: "text-warning-foreground",
+    },
   ];
 
   const vehicleTypes = [
@@ -73,16 +79,16 @@ export default function PassengerHome() {
       eta: "2-5 min",
       icon: "🚗",
       passengers: "1-4",
-      popular: false
+      popular: false,
     },
     {
       name: "Comfort",
       description: "More space and comfort",
       price: "From $12",
-      eta: "3-7 min", 
+      eta: "3-7 min",
       icon: "🚙",
       passengers: "1-4",
-      popular: true
+      popular: true,
     },
     {
       name: "Premium",
@@ -91,7 +97,7 @@ export default function PassengerHome() {
       eta: "5-10 min",
       icon: "🚘",
       passengers: "1-4",
-      popular: false
+      popular: false,
     },
     {
       name: "Share",
@@ -100,8 +106,8 @@ export default function PassengerHome() {
       eta: "5-15 min",
       icon: "🚐",
       passengers: "1-6",
-      popular: false
-    }
+      popular: false,
+    },
   ];
 
   const promoOffers = [
@@ -110,22 +116,22 @@ export default function PassengerHome() {
       description: "First 3 rides",
       code: "WELCOME50",
       validUntil: "Dec 31",
-      color: "bg-gradient-to-r from-primary to-accent"
+      color: "bg-gradient-to-r from-primary to-accent",
     },
     {
       title: "Free Ride",
       description: "Refer a friend",
       code: "REFER2024",
       validUntil: "Limited time",
-      color: "bg-gradient-to-r from-success to-accent"
-    }
+      color: "bg-gradient-to-r from-success to-accent",
+    },
   ];
 
   const recentDestinations = [
     { name: "Home", address: "123 Main Street", icon: "🏠" },
     { name: "Work", address: "456 Business Ave", icon: "🏢" },
     { name: "Airport", address: "Terminal 1", icon: "✈️" },
-    { name: "Mall", address: "Downtown Shopping", icon: "🛍️" }
+    { name: "Mall", address: "Downtown Shopping", icon: "🛍️" },
   ];
 
   return (
@@ -139,15 +145,13 @@ export default function PassengerHome() {
               {isLoggedIn ? "Welcome back, John!" : "Where to?"}
             </h1>
             <p className="text-taxi-gray mt-1">
-              {isLoggedIn ? "Your ride is just a tap away" : "Sign in for a better experience"}
+              {isLoggedIn
+                ? "Your ride is just a tap away"
+                : "Sign in for a better experience"}
             </p>
           </div>
           <div className="flex items-center space-x-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="relative"
-            >
+            <Button variant="ghost" size="sm" className="relative">
               <Bell className="w-5 h-5" />
               <Badge className="absolute -top-1 -right-1 h-4 w-4 p-0 text-xs bg-destructive">
                 3
@@ -174,20 +178,22 @@ export default function PassengerHome() {
               </div>
               <div className="flex-1">
                 <h3 className="font-semibold text-taxi-dark">Quick Book</h3>
-                <p className="text-sm text-taxi-gray">Tap to select destination</p>
+                <p className="text-sm text-taxi-gray">
+                  Tap to select destination
+                </p>
               </div>
               <Zap className="w-5 h-5 text-primary" />
             </div>
-            
+
             <div className="space-y-3">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-taxi-gray" />
-                <Input 
+                <Input
                   placeholder="Where are you going?"
                   className="pl-10 h-12 bg-white/80"
                 />
               </div>
-              
+
               <Link to="/passenger/book">
                 <Button className="w-full btn-mobile btn-primary">
                   <Navigation className="w-5 h-5 mr-2" />
@@ -206,7 +212,9 @@ export default function PassengerHome() {
               <Link key={index} to={action.href}>
                 <Card className="mobile-card-interactive h-full">
                   <CardContent className="p-4 text-center">
-                    <div className={`w-12 h-12 ${action.color} rounded-xl flex items-center justify-center mx-auto mb-3`}>
+                    <div
+                      className={`w-12 h-12 ${action.color} rounded-xl flex items-center justify-center mx-auto mb-3`}
+                    >
                       <Icon className={`w-6 h-6 ${action.textColor}`} />
                     </div>
                     <h3 className="font-semibold text-taxi-dark text-sm mb-1">
@@ -225,14 +233,16 @@ export default function PassengerHome() {
         {/* Promotional Offers */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-semibold text-taxi-dark">Special Offers</h2>
+            <h2 className="text-lg font-semibold text-taxi-dark">
+              Special Offers
+            </h2>
             <Link to="/passenger/offers">
               <Button variant="link" className="text-sm p-0 h-auto">
                 View All <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </Link>
           </div>
-          
+
           <div className="space-y-3">
             {promoOffers.map((offer, index) => (
               <Card key={index} className="overflow-hidden">
@@ -243,8 +253,12 @@ export default function PassengerHome() {
                         <Percent className="w-5 h-5" />
                         <span className="text-lg font-bold">{offer.title}</span>
                       </div>
-                      <p className="text-sm opacity-90 mb-1">{offer.description}</p>
-                      <p className="text-xs opacity-75">Code: {offer.code} • Valid until {offer.validUntil}</p>
+                      <p className="text-sm opacity-90 mb-1">
+                        {offer.description}
+                      </p>
+                      <p className="text-xs opacity-75">
+                        Code: {offer.code} • Valid until {offer.validUntil}
+                      </p>
                     </div>
                     <Gift className="w-8 h-8 opacity-80" />
                   </div>
@@ -256,7 +270,9 @@ export default function PassengerHome() {
 
         {/* Vehicle Types */}
         <div className="mb-6">
-          <h2 className="text-lg font-semibold text-taxi-dark mb-3">Choose Your Ride</h2>
+          <h2 className="text-lg font-semibold text-taxi-dark mb-3">
+            Choose Your Ride
+          </h2>
           <div className="space-y-3">
             {vehicleTypes.map((vehicle, index) => (
               <Card key={index} className="mobile-card-interactive">
@@ -266,14 +282,18 @@ export default function PassengerHome() {
                       <div className="text-2xl">{vehicle.icon}</div>
                       <div>
                         <div className="flex items-center space-x-2">
-                          <h3 className="font-semibold text-taxi-dark">{vehicle.name}</h3>
+                          <h3 className="font-semibold text-taxi-dark">
+                            {vehicle.name}
+                          </h3>
                           {vehicle.popular && (
                             <Badge className="bg-primary text-primary-foreground text-xs">
                               Popular
                             </Badge>
                           )}
                         </div>
-                        <p className="text-sm text-taxi-gray">{vehicle.description}</p>
+                        <p className="text-sm text-taxi-gray">
+                          {vehicle.description}
+                        </p>
                         <div className="flex items-center space-x-4 mt-1">
                           <span className="text-xs text-taxi-gray">
                             <Users className="w-3 h-3 inline mr-1" />
@@ -287,7 +307,9 @@ export default function PassengerHome() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-lg font-bold text-primary">{vehicle.price}</div>
+                      <div className="text-lg font-bold text-primary">
+                        {vehicle.price}
+                      </div>
                       <ArrowRight className="w-4 h-4 text-taxi-gray ml-auto" />
                     </div>
                   </div>
@@ -300,7 +322,9 @@ export default function PassengerHome() {
         {/* Recent Destinations */}
         {isLoggedIn && (
           <div className="mb-6">
-            <h2 className="text-lg font-semibold text-taxi-dark mb-3">Recent Destinations</h2>
+            <h2 className="text-lg font-semibold text-taxi-dark mb-3">
+              Recent Destinations
+            </h2>
             <div className="grid grid-cols-2 gap-3">
               {recentDestinations.map((destination, index) => (
                 <Card key={index} className="mobile-card-interactive">
@@ -328,7 +352,7 @@ export default function PassengerHome() {
               <p className="text-xs text-taxi-gray">Verified drivers</p>
             </CardContent>
           </Card>
-          
+
           <Card className="mobile-card text-center">
             <CardContent className="p-3">
               <Clock className="w-8 h-8 text-accent mx-auto mb-2" />
@@ -336,7 +360,7 @@ export default function PassengerHome() {
               <p className="text-xs text-taxi-gray">Quick pickup</p>
             </CardContent>
           </Card>
-          
+
           <Card className="mobile-card text-center">
             <CardContent className="p-3">
               <Star className="w-8 h-8 text-warning mx-auto mb-2" />
@@ -355,9 +379,15 @@ export default function PassengerHome() {
               </div>
               <div className="flex-1">
                 <h3 className="font-semibold text-red-800">Emergency</h3>
-                <p className="text-sm text-red-600">24/7 safety support available</p>
+                <p className="text-sm text-red-600">
+                  24/7 safety support available
+                </p>
               </div>
-              <Button size="sm" variant="outline" className="border-red-300 text-red-600">
+              <Button
+                size="sm"
+                variant="outline"
+                className="border-red-300 text-red-600"
+              >
                 Call 911
               </Button>
             </div>
@@ -366,7 +396,7 @@ export default function PassengerHome() {
       </div>
 
       {/* Auth Modal */}
-      <AuthModal 
+      <AuthModal
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
         userType="passenger"

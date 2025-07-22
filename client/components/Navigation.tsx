@@ -1,15 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
-import { 
-  Car, 
-  Menu, 
-  X, 
-  MapPin, 
-  Shield, 
-  Users, 
-  Settings 
-} from "lucide-react";
+import { Car, Menu, X, MapPin, Shield, Users, Settings } from "lucide-react";
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -33,13 +25,17 @@ export function Navigation() {
             <div className="relative">
               <div className="w-8 h-8 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
                 <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-lg opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                <span className="relative text-white font-black text-sm tracking-wider">B</span>
+                <span className="relative text-white font-black text-sm tracking-wider">
+                  B
+                </span>
               </div>
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
                 <Car className="w-1.5 h-1.5 text-white" />
               </div>
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">BAMBI</span>
+            <span className="text-xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              BAMBI
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -113,7 +109,11 @@ export function Navigation() {
               })}
               <div className="pt-4 pb-2 border-t border-gray-200">
                 <div className="space-y-2">
-                  <Button variant="ghost" size="sm" className="w-full justify-start">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="w-full justify-start"
+                  >
                     Sign In
                   </Button>
                   <Button size="sm" className="w-full btn-primary">

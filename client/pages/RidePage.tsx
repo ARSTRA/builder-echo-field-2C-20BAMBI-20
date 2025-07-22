@@ -1,23 +1,35 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 import { Progress } from "@/components/ui/progress";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { toast } from "sonner";
-import { 
-  MapPin, 
-  Navigation, 
-  Clock, 
-  CreditCard, 
-  Star, 
+import {
+  MapPin,
+  Navigation,
+  Clock,
+  CreditCard,
+  Star,
   Car,
   Users,
   Phone,
@@ -61,7 +73,7 @@ import {
   ThumbsUp,
   ThumbsDown,
   Plus,
-  Share
+  Share,
 } from "lucide-react";
 
 export default function RidePage() {
@@ -89,7 +101,7 @@ export default function RidePage() {
     email: "john@example.com",
     phone: "+1 (555) 123-4567",
     photo: "👨‍💼",
-    emergencyContact: "+1 (555) 987-6543"
+    emergencyContact: "+1 (555) 987-6543",
   });
 
   // Notifications state
@@ -100,7 +112,7 @@ export default function RidePage() {
       message: "Your driver Sarah is waiting outside",
       time: "2 min ago",
       type: "urgent",
-      read: false
+      read: false,
     },
     {
       id: "2",
@@ -108,13 +120,13 @@ export default function RidePage() {
       message: "Your ride to Airport has been completed",
       time: "1 hour ago",
       type: "info",
-      read: true
-    }
+      read: true,
+    },
   ]);
 
   // Payment state
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("card");
-  const [walletBalance, setWalletBalance] = useState(45.50);
+  const [walletBalance, setWalletBalance] = useState(45.5);
 
   // Review state
   const [tripRating, setTripRating] = useState(0);
@@ -125,8 +137,14 @@ export default function RidePage() {
       id: "economy",
       name: "EcoRide",
       subtitle: "Smart & Sustainable",
-      description: "Perfect for budget-conscious travelers who care about the environment. Featuring fuel-efficient vehicles with modern amenities.",
-      features: ["Eco-friendly", "Budget-friendly", "GPS tracking", "Clean interior"],
+      description:
+        "Perfect for budget-conscious travelers who care about the environment. Featuring fuel-efficient vehicles with modern amenities.",
+      features: [
+        "Eco-friendly",
+        "Budget-friendly",
+        "GPS tracking",
+        "Clean interior",
+      ],
       icon: "🌱",
       basePrice: 8,
       perKm: 1.2,
@@ -135,14 +153,21 @@ export default function RidePage() {
       rating: 4.8,
       savingsText: "Save 30%",
       color: "emerald",
-      image: "https://images.unsplash.com/photo-1523983302122-73e869e1f850?w=500&h=300&fit=crop&crop=center"
+      image:
+        "https://images.unsplash.com/photo-1523983302122-73e869e1f850?w=500&h=300&fit=crop&crop=center",
     },
     {
       id: "comfort",
       name: "ComfortPlus",
       subtitle: "Premium Experience",
-      description: "The perfect balance of comfort and value. Spacious interiors, professional drivers, and enhanced safety features.",
-      features: ["Extra legroom", "Climate control", "Premium audio", "Phone charging"],
+      description:
+        "The perfect balance of comfort and value. Spacious interiors, professional drivers, and enhanced safety features.",
+      features: [
+        "Extra legroom",
+        "Climate control",
+        "Premium audio",
+        "Phone charging",
+      ],
       icon: "✨",
       basePrice: 12,
       perKm: 1.8,
@@ -151,14 +176,21 @@ export default function RidePage() {
       rating: 4.9,
       popularText: "Most Popular",
       color: "blue",
-      image: "https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=500&h=300&fit=crop&crop=center"
+      image:
+        "https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=500&h=300&fit=crop&crop=center",
     },
     {
       id: "premium",
       name: "Executive",
       subtitle: "Luxury Redefined",
-      description: "First-class travel experience with premium vehicles, top-rated drivers, and exclusive amenities for discerning passengers.",
-      features: ["Luxury vehicles", "Executive service", "Complimentary water", "Priority support"],
+      description:
+        "First-class travel experience with premium vehicles, top-rated drivers, and exclusive amenities for discerning passengers.",
+      features: [
+        "Luxury vehicles",
+        "Executive service",
+        "Complimentary water",
+        "Priority support",
+      ],
       icon: "👑",
       basePrice: 20,
       perKm: 2.5,
@@ -167,14 +199,21 @@ export default function RidePage() {
       rating: 5.0,
       premiumText: "VIP Experience",
       color: "purple",
-      image: "https://images.unsplash.com/photo-1563720223-b09b1bd4f6c2?w=500&h=300&fit=crop&crop=center"
+      image:
+        "https://images.unsplash.com/photo-1563720223-b09b1bd4f6c2?w=500&h=300&fit=crop&crop=center",
     },
     {
       id: "xl",
       name: "GroupXL",
       subtitle: "Perfect for Groups",
-      description: "Spacious vehicles for larger groups and families. Extra luggage space and comfortable seating for up to 6 passengers.",
-      features: ["6+ passengers", "Extra luggage space", "Family-friendly", "Group discounts"],
+      description:
+        "Spacious vehicles for larger groups and families. Extra luggage space and comfortable seating for up to 6 passengers.",
+      features: [
+        "6+ passengers",
+        "Extra luggage space",
+        "Family-friendly",
+        "Group discounts",
+      ],
       icon: "👥",
       basePrice: 16,
       perKm: 2.2,
@@ -183,8 +222,9 @@ export default function RidePage() {
       rating: 4.7,
       groupText: "Best for Groups",
       color: "orange",
-      image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=500&h=300&fit=crop&crop=center"
-    }
+      image:
+        "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=500&h=300&fit=crop&crop=center",
+    },
   ];
 
   const tripHistory = [
@@ -193,28 +233,28 @@ export default function RidePage() {
       date: "Today, 2:30 PM",
       from: "Downtown Mall",
       to: "Airport Terminal 1",
-      fare: 32.00,
+      fare: 32.0,
       rating: 5,
       driver: "Sarah Johnson",
-      status: "completed"
+      status: "completed",
     },
     {
-      id: "TR002", 
+      id: "TR002",
       date: "Yesterday, 9:15 AM",
       from: "Home",
       to: "Office",
-      fare: 18.50,
+      fare: 18.5,
       rating: 4,
       driver: "Mike Wilson",
-      status: "completed"
-    }
+      status: "completed",
+    },
   ];
 
   // Simulate driver tracking
   useEffect(() => {
     if (isTracking && driverETA > 0) {
       const timer = setInterval(() => {
-        setDriverETA(prev => {
+        setDriverETA((prev) => {
           if (prev <= 1) {
             setTripProgress("pickup");
             return 0;
@@ -229,7 +269,7 @@ export default function RidePage() {
   // Button Handlers
   const handleNotificationClick = () => {
     toast.info("Opening notifications...", {
-      description: `You have ${notifications.filter(n => !n.read).length} unread notifications`
+      description: `You have ${notifications.filter((n) => !n.read).length} unread notifications`,
     });
   };
 
@@ -250,7 +290,9 @@ export default function RidePage() {
       return;
     }
 
-    const selectedVehicleData = vehicleOptions.find(v => v.id === selectedVehicle);
+    const selectedVehicleData = vehicleOptions.find(
+      (v) => v.id === selectedVehicle,
+    );
     const mockDistance = Math.random() * 15 + 2;
     const basePrice = selectedVehicleData.basePrice;
     const distancePrice = mockDistance * selectedVehicleData.perKm;
@@ -261,11 +303,11 @@ export default function RidePage() {
       basePrice,
       distancePrice: distancePrice.toFixed(2),
       total: total.toFixed(2),
-      duration: Math.floor(mockDistance * 2 + 5)
+      duration: Math.floor(mockDistance * 2 + 5),
     });
 
     toast.success("Fare calculated successfully!", {
-      description: `Estimated total: $${total.toFixed(2)}`
+      description: `Estimated total: $${total.toFixed(2)}`,
     });
   };
 
@@ -283,7 +325,7 @@ export default function RidePage() {
 
     // Simulate booking process
     toast.loading("Booking your ride...", { duration: 2000 });
-    
+
     setTimeout(() => {
       setCurrentTrip({
         id: "TR" + Math.random().toString(36).substr(2, 9),
@@ -291,14 +333,14 @@ export default function RidePage() {
         pickup: pickupLocation,
         destination: destination,
         vehicle: selectedVehicle,
-        fare: estimatedFare?.total || "0"
+        fare: estimatedFare?.total || "0",
       });
-      
+
       setIsTracking(true);
       setActiveTab("tracking");
-      
+
       toast.success("Ride booked successfully!", {
-        description: "Finding a driver near you..."
+        description: "Finding a driver near you...",
       });
     }, 2000);
   };
@@ -314,31 +356,31 @@ export default function RidePage() {
 
   const handleCallDriver = () => {
     toast.info("Calling driver...", {
-      description: "Connecting you to Mike Johnson"
+      description: "Connecting you to Mike Johnson",
     });
   };
 
   const handleMessageDriver = () => {
     toast.info("Opening chat...", {
-      description: "Chat with your driver"
+      description: "Chat with your driver",
     });
   };
 
   const handleEmergency = () => {
     toast.error("Emergency alert sent!", {
-      description: "Notifying emergency contacts and authorities"
+      description: "Notifying emergency contacts and authorities",
     });
   };
 
   const handleShareTrip = () => {
     toast.success("Trip shared successfully!", {
-      description: "Emergency contacts have been notified"
+      description: "Emergency contacts have been notified",
     });
   };
 
   const handleDownloadReceipt = (tripId) => {
     toast.success("Receipt downloaded!", {
-      description: `Receipt for trip ${tripId} saved to downloads`
+      description: `Receipt for trip ${tripId} saved to downloads`,
     });
   };
 
@@ -351,46 +393,44 @@ export default function RidePage() {
 
   const handleProfileSave = () => {
     toast.success("Profile updated successfully!", {
-      description: "Your changes have been saved"
+      description: "Your changes have been saved",
     });
   };
 
   const handlePhotoUpload = () => {
     toast.info("Photo upload coming soon!", {
-      description: "Camera integration will be available in the next update"
+      description: "Camera integration will be available in the next update",
     });
   };
 
   const handleAddPaymentMethod = () => {
     toast.info("Add payment method", {
-      description: "This will open the payment setup flow"
+      description: "This will open the payment setup flow",
     });
   };
 
   const handleTopUpWallet = () => {
     const amount = 50;
-    setWalletBalance(prev => prev + amount);
+    setWalletBalance((prev) => prev + amount);
     toast.success(`Wallet topped up!`, {
-      description: `Added $${amount} to your wallet`
+      description: `Added $${amount} to your wallet`,
     });
   };
 
   const handleMarkNotificationRead = (id) => {
-    setNotifications(prev => 
-      prev.map(n => n.id === id ? { ...n, read: true } : n)
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
     );
     toast.success("Notification marked as read");
   };
 
   const handleMarkAllNotificationsRead = () => {
-    setNotifications(prev => 
-      prev.map(n => ({ ...n, read: true }))
-    );
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
     toast.success("All notifications marked as read");
   };
 
   const handleDeleteNotification = (id) => {
-    setNotifications(prev => prev.filter(n => n.id !== id));
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
     toast.success("Notification deleted");
   };
 
@@ -401,22 +441,22 @@ export default function RidePage() {
     }
 
     toast.success("Review submitted!", {
-      description: `Thank you for rating ${tripRating} stars`
+      description: `Thank you for rating ${tripRating} stars`,
     });
-    
+
     setTripRating(0);
     setReviewText("");
   };
 
   const handleCallSupport = () => {
     toast.info("Calling support...", {
-      description: "Connecting you to customer service"
+      description: "Connecting you to customer service",
     });
   };
 
   const handleLiveChat = () => {
     toast.info("Opening live chat...", {
-      description: "Chat with our support team"
+      description: "Chat with our support team",
     });
   };
 
@@ -427,34 +467,40 @@ export default function RidePage() {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="flex items-center space-x-3 hover:opacity-80 transition-opacity cursor-pointer group"
             >
               <div className="relative">
                 <div className="w-12 h-12 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
                   <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                  <span className="relative text-white font-black text-lg tracking-wider">B</span>
+                  <span className="relative text-white font-black text-lg tracking-wider">
+                    B
+                  </span>
                 </div>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-xs">🚕</span>
                 </div>
               </div>
               <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">BAMBI</h1>
-                <p className="text-sm text-gray-600">Beautiful Rides, Anywhere</p>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                  BAMBI
+                </h1>
+                <p className="text-sm text-gray-600">
+                  Beautiful Rides, Anywhere
+                </p>
               </div>
             </button>
-            
+
             <div className="flex items-center space-x-2">
-              <Button 
-                variant="ghost" 
-                size="sm" 
+              <Button
+                variant="ghost"
+                size="sm"
                 className="relative"
                 onClick={handleNotificationClick}
               >
                 <Bell className="w-5 h-5" />
                 <Badge className="absolute -top-1 -right-1 h-4 w-4 p-0 text-xs bg-red-500">
-                  {notifications.filter(n => !n.read).length}
+                  {notifications.filter((n) => !n.read).length}
                 </Badge>
               </Button>
               {!isLoggedIn && (
@@ -465,8 +511,8 @@ export default function RidePage() {
               {isLoggedIn && (
                 <div className="flex items-center space-x-2">
                   <span className="text-sm">Welcome, {profile.firstName}!</span>
-                  <Button 
-                    variant="ghost" 
+                  <Button
+                    variant="ghost"
                     size="sm"
                     onClick={() => setIsLoggedIn(false)}
                   >
@@ -483,12 +529,24 @@ export default function RidePage() {
       <div className="max-w-7xl mx-auto px-4 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-4 lg:grid-cols-6 mb-8 bg-white/80 backdrop-blur-md">
-            <TabsTrigger value="booking" className="text-xs">Booking</TabsTrigger>
-            <TabsTrigger value="tracking" className="text-xs">Tracking</TabsTrigger>
-            <TabsTrigger value="history" className="text-xs">History</TabsTrigger>
-            <TabsTrigger value="profile" className="text-xs">Profile</TabsTrigger>
-            <TabsTrigger value="payment" className="text-xs">Payment</TabsTrigger>
-            <TabsTrigger value="notifications" className="text-xs">Alerts</TabsTrigger>
+            <TabsTrigger value="booking" className="text-xs">
+              Booking
+            </TabsTrigger>
+            <TabsTrigger value="tracking" className="text-xs">
+              Tracking
+            </TabsTrigger>
+            <TabsTrigger value="history" className="text-xs">
+              History
+            </TabsTrigger>
+            <TabsTrigger value="profile" className="text-xs">
+              Profile
+            </TabsTrigger>
+            <TabsTrigger value="payment" className="text-xs">
+              Payment
+            </TabsTrigger>
+            <TabsTrigger value="notifications" className="text-xs">
+              Alerts
+            </TabsTrigger>
           </TabsList>
 
           {/* Booking Tab */}
@@ -497,16 +555,21 @@ export default function RidePage() {
               {/* Hero Image */}
               <div className="lg:order-2">
                 <Card className="overflow-hidden shadow-xl">
-                  <div 
+                  <div
                     className="h-64 lg:h-80 bg-cover bg-center relative"
                     style={{
-                      backgroundImage: "url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=400&fit=crop&crop=center')"
+                      backgroundImage:
+                        "url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=400&fit=crop&crop=center')",
                     }}
                   >
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div className="absolute bottom-4 left-4 text-white">
-                      <h2 className="text-2xl font-bold mb-2">Book Your Ride</h2>
-                      <p className="text-sm opacity-90">Safe, fast, and reliable transportation</p>
+                      <h2 className="text-2xl font-bold mb-2">
+                        Book Your Ride
+                      </h2>
+                      <p className="text-sm opacity-90">
+                        Safe, fast, and reliable transportation
+                      </p>
                     </div>
                   </div>
                 </Card>
@@ -522,18 +585,20 @@ export default function RidePage() {
                         <User className="w-5 h-5 mr-2 text-blue-600" />
                         Account Access
                       </CardTitle>
-                      <CardDescription>Sign in or create an account for the best experience</CardDescription>
+                      <CardDescription>
+                        Sign in or create an account for the best experience
+                      </CardDescription>
                     </CardHeader>
                     <CardContent className="pt-0">
                       <div className="grid grid-cols-2 gap-3">
-                        <Button 
+                        <Button
                           onClick={handleSignInClick}
                           className="bg-blue-600 hover:bg-blue-700"
                         >
                           <User className="w-4 h-4 mr-2" />
                           Sign In
                         </Button>
-                        <Button 
+                        <Button
                           variant="outline"
                           onClick={() => {
                             setShowAuthModal(true);
@@ -570,7 +635,9 @@ export default function RidePage() {
                         <span>Book Now</span>
                       </Button>
                       <Button
-                        variant={bookingType === "schedule" ? "default" : "outline"}
+                        variant={
+                          bookingType === "schedule" ? "default" : "outline"
+                        }
                         className="h-16 flex-col"
                         onClick={() => {
                           setBookingType("schedule");
@@ -597,7 +664,7 @@ export default function RidePage() {
                       <Label htmlFor="pickup">Pickup Location</Label>
                       <div className="relative">
                         <Navigation className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-green-500" />
-                        <Input 
+                        <Input
                           id="pickup"
                           placeholder="Current location or enter address"
                           className="pl-10 h-12"
@@ -617,12 +684,12 @@ export default function RidePage() {
                         </Button>
                       </div>
                     </div>
-                    
+
                     <div className="space-y-2">
                       <Label htmlFor="destination">Destination</Label>
                       <div className="relative">
                         <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-red-500" />
-                        <Input 
+                        <Input
                           id="destination"
                           placeholder="Where would you like to go?"
                           className="pl-10 h-12"
@@ -636,9 +703,9 @@ export default function RidePage() {
                       <div className="grid grid-cols-2 gap-3">
                         <div className="space-y-2">
                           <Label htmlFor="date">Date</Label>
-                          <Input 
-                            id="date" 
-                            type="date" 
+                          <Input
+                            id="date"
+                            type="date"
                             className="h-12"
                             value={selectedDate}
                             onChange={(e) => setSelectedDate(e.target.value)}
@@ -646,9 +713,9 @@ export default function RidePage() {
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="time">Time</Label>
-                          <Input 
-                            id="time" 
-                            type="time" 
+                          <Input
+                            id="time"
+                            type="time"
                             className="h-12"
                             value={selectedTime}
                             onChange={(e) => setSelectedTime(e.target.value)}
@@ -667,7 +734,8 @@ export default function RidePage() {
                       Choose Your Perfect Ride
                     </CardTitle>
                     <CardDescription className="text-center text-blue-100 mt-2">
-                      Select from our premium fleet designed for every journey and budget
+                      Select from our premium fleet designed for every journey
+                      and budget
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="pt-8 px-6 space-y-6">
@@ -675,33 +743,41 @@ export default function RidePage() {
                       {vehicleOptions.map((vehicle) => {
                         const colorClasses = {
                           emerald: {
-                            selected: "border-emerald-500 bg-gradient-to-br from-emerald-50 to-green-50 shadow-emerald-200",
-                            hover: "hover:border-emerald-300 hover:shadow-emerald-100",
+                            selected:
+                              "border-emerald-500 bg-gradient-to-br from-emerald-50 to-green-50 shadow-emerald-200",
+                            hover:
+                              "hover:border-emerald-300 hover:shadow-emerald-100",
                             accent: "text-emerald-600",
                             badge: "bg-emerald-500",
-                            icon: "bg-gradient-to-br from-emerald-400 to-green-500"
+                            icon: "bg-gradient-to-br from-emerald-400 to-green-500",
                           },
                           blue: {
-                            selected: "border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-blue-200",
-                            hover: "hover:border-blue-300 hover:shadow-blue-100",
+                            selected:
+                              "border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-blue-200",
+                            hover:
+                              "hover:border-blue-300 hover:shadow-blue-100",
                             accent: "text-blue-600",
                             badge: "bg-blue-500",
-                            icon: "bg-gradient-to-br from-blue-400 to-indigo-500"
+                            icon: "bg-gradient-to-br from-blue-400 to-indigo-500",
                           },
                           purple: {
-                            selected: "border-purple-500 bg-gradient-to-br from-purple-50 to-pink-50 shadow-purple-200",
-                            hover: "hover:border-purple-300 hover:shadow-purple-100",
+                            selected:
+                              "border-purple-500 bg-gradient-to-br from-purple-50 to-pink-50 shadow-purple-200",
+                            hover:
+                              "hover:border-purple-300 hover:shadow-purple-100",
                             accent: "text-purple-600",
                             badge: "bg-purple-500",
-                            icon: "bg-gradient-to-br from-purple-400 to-pink-500"
+                            icon: "bg-gradient-to-br from-purple-400 to-pink-500",
                           },
                           orange: {
-                            selected: "border-orange-500 bg-gradient-to-br from-orange-50 to-yellow-50 shadow-orange-200",
-                            hover: "hover:border-orange-300 hover:shadow-orange-100",
+                            selected:
+                              "border-orange-500 bg-gradient-to-br from-orange-50 to-yellow-50 shadow-orange-200",
+                            hover:
+                              "hover:border-orange-300 hover:shadow-orange-100",
                             accent: "text-orange-600",
                             badge: "bg-orange-500",
-                            icon: "bg-gradient-to-br from-orange-400 to-yellow-500"
-                          }
+                            icon: "bg-gradient-to-br from-orange-400 to-yellow-500",
+                          },
                         };
 
                         const colors = colorClasses[vehicle.color];
@@ -717,14 +793,24 @@ export default function RidePage() {
                             }`}
                             onClick={() => {
                               setSelectedVehicle(vehicle.id);
-                              toast.success(`${vehicle.name} selected - ${vehicle.subtitle}`);
+                              toast.success(
+                                `${vehicle.name} selected - ${vehicle.subtitle}`,
+                              );
                             }}
                           >
                             {/* Premium Badge */}
-                            {(vehicle.popularText || vehicle.savingsText || vehicle.premiumText || vehicle.groupText) && (
+                            {(vehicle.popularText ||
+                              vehicle.savingsText ||
+                              vehicle.premiumText ||
+                              vehicle.groupText) && (
                               <div className="absolute top-4 right-4 z-20">
-                                <Badge className={`${colors.badge} text-white px-3 py-1 text-xs font-bold shadow-lg`}>
-                                  {vehicle.popularText || vehicle.savingsText || vehicle.premiumText || vehicle.groupText}
+                                <Badge
+                                  className={`${colors.badge} text-white px-3 py-1 text-xs font-bold shadow-lg`}
+                                >
+                                  {vehicle.popularText ||
+                                    vehicle.savingsText ||
+                                    vehicle.premiumText ||
+                                    vehicle.groupText}
                                 </Badge>
                               </div>
                             )}
@@ -739,14 +825,18 @@ export default function RidePage() {
                               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 
                               {/* Vehicle Icon */}
-                              <div className={`absolute top-4 left-4 w-12 h-12 ${colors.icon} rounded-full flex items-center justify-center shadow-lg`}>
+                              <div
+                                className={`absolute top-4 left-4 w-12 h-12 ${colors.icon} rounded-full flex items-center justify-center shadow-lg`}
+                              >
                                 <span className="text-2xl">{vehicle.icon}</span>
                               </div>
 
                               {/* Rating */}
                               <div className="absolute bottom-4 left-4 flex items-center space-x-1 bg-white/90 backdrop-blur-sm rounded-full px-2 py-1">
                                 <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                                <span className="text-xs font-bold text-gray-800">{vehicle.rating}</span>
+                                <span className="text-xs font-bold text-gray-800">
+                                  {vehicle.rating}
+                                </span>
                               </div>
                             </div>
 
@@ -755,12 +845,22 @@ export default function RidePage() {
                               {/* Header */}
                               <div className="flex items-start justify-between">
                                 <div className="flex-1">
-                                  <h3 className="text-xl font-bold text-gray-900 mb-1">{vehicle.name}</h3>
-                                  <p className={`text-sm font-medium ${colors.accent} mb-2`}>{vehicle.subtitle}</p>
-                                  <p className="text-sm text-gray-600 leading-relaxed">{vehicle.description}</p>
+                                  <h3 className="text-xl font-bold text-gray-900 mb-1">
+                                    {vehicle.name}
+                                  </h3>
+                                  <p
+                                    className={`text-sm font-medium ${colors.accent} mb-2`}
+                                  >
+                                    {vehicle.subtitle}
+                                  </p>
+                                  <p className="text-sm text-gray-600 leading-relaxed">
+                                    {vehicle.description}
+                                  </p>
                                 </div>
                                 <div className="text-right ml-4">
-                                  <div className={`text-2xl font-bold ${colors.accent}`}>
+                                  <div
+                                    className={`text-2xl font-bold ${colors.accent}`}
+                                  >
                                     ${vehicle.basePrice}
                                   </div>
                                   <div className="text-xs text-gray-500">
@@ -772,8 +872,13 @@ export default function RidePage() {
                               {/* Features */}
                               <div className="grid grid-cols-2 gap-2">
                                 {vehicle.features.map((feature, index) => (
-                                  <div key={index} className="flex items-center space-x-1 text-xs text-gray-600">
-                                    <CheckCircle className={`w-3 h-3 ${colors.accent}`} />
+                                  <div
+                                    key={index}
+                                    className="flex items-center space-x-1 text-xs text-gray-600"
+                                  >
+                                    <CheckCircle
+                                      className={`w-3 h-3 ${colors.accent}`}
+                                    />
                                     <span>{feature}</span>
                                   </div>
                                 ))}
@@ -794,7 +899,9 @@ export default function RidePage() {
 
                                 {/* Selection Indicator */}
                                 {isSelected && (
-                                  <div className={`flex items-center space-x-1 text-sm font-medium ${colors.accent}`}>
+                                  <div
+                                    className={`flex items-center space-x-1 text-sm font-medium ${colors.accent}`}
+                                  >
                                     <CheckCircle className="w-4 h-4" />
                                     <span>Selected</span>
                                   </div>
@@ -806,7 +913,9 @@ export default function RidePage() {
                             {isSelected && (
                               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none">
                                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                  <CheckCircle className={`w-16 h-16 ${colors.accent} opacity-20`} />
+                                  <CheckCircle
+                                    className={`w-16 h-16 ${colors.accent} opacity-20`}
+                                  />
                                 </div>
                               </div>
                             )}
@@ -846,7 +955,11 @@ export default function RidePage() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => toast.info("Fare estimates may vary based on traffic and demand")}
+                        onClick={() =>
+                          toast.info(
+                            "Fare estimates may vary based on traffic and demand",
+                          )
+                        }
                       >
                         <AlertTriangle className="w-4 h-4" />
                       </Button>
@@ -870,7 +983,9 @@ export default function RidePage() {
                         size="sm"
                         onClick={() => {
                           if (!pickupLocation || !destination) {
-                            toast.error("Please enter pickup and destination first");
+                            toast.error(
+                              "Please enter pickup and destination first",
+                            );
                             return;
                           }
                           const quickFare = Math.random() * 10 + 8;
@@ -879,7 +994,7 @@ export default function RidePage() {
                             basePrice: 8,
                             distancePrice: (quickFare - 8).toFixed(2),
                             total: quickFare.toFixed(2),
-                            duration: 15
+                            duration: 15,
                           });
                           toast.success("Quick estimate calculated!");
                         }}
@@ -895,8 +1010,14 @@ export default function RidePage() {
                             toast.error("Please calculate fare first");
                             return;
                           }
-                          const discountedTotal = (parseFloat(estimatedFare.total) * 0.85).toFixed(2);
-                          setEstimatedFare(prev => ({ ...prev, total: discountedTotal, discount: "15%" }));
+                          const discountedTotal = (
+                            parseFloat(estimatedFare.total) * 0.85
+                          ).toFixed(2);
+                          setEstimatedFare((prev) => ({
+                            ...prev,
+                            total: discountedTotal,
+                            discount: "15%",
+                          }));
                           toast.success("15% discount applied!");
                         }}
                       >
@@ -911,9 +1032,17 @@ export default function RidePage() {
                             toast.error("Please calculate fare first");
                             return;
                           }
-                          const shareTotal = (parseFloat(estimatedFare.total) * 0.6).toFixed(2);
-                          setEstimatedFare(prev => ({ ...prev, total: shareTotal, shareRide: true }));
-                          toast.success("Share ride option selected - 40% savings!");
+                          const shareTotal = (
+                            parseFloat(estimatedFare.total) * 0.6
+                          ).toFixed(2);
+                          setEstimatedFare((prev) => ({
+                            ...prev,
+                            total: shareTotal,
+                            shareRide: true,
+                          }));
+                          toast.success(
+                            "Share ride option selected - 40% savings!",
+                          );
                         }}
                       >
                         <Users className="w-3 h-3 mr-1" />
@@ -928,11 +1057,15 @@ export default function RidePage() {
                         <div className="space-y-2">
                           <div className="flex justify-between text-sm">
                             <span>Distance</span>
-                            <span className="font-medium">{estimatedFare.distance} km</span>
+                            <span className="font-medium">
+                              {estimatedFare.distance} km
+                            </span>
                           </div>
                           <div className="flex justify-between text-sm">
                             <span>Duration</span>
-                            <span className="font-medium">{estimatedFare.duration} min</span>
+                            <span className="font-medium">
+                              {estimatedFare.duration} min
+                            </span>
                           </div>
 
                           {/* Detailed Breakdown */}
@@ -948,7 +1081,14 @@ export default function RidePage() {
                             {estimatedFare.discount && (
                               <div className="flex justify-between text-xs text-green-600">
                                 <span>Discount ({estimatedFare.discount})</span>
-                                <span>-${(parseFloat(estimatedFare.basePrice) + parseFloat(estimatedFare.distancePrice) - parseFloat(estimatedFare.total)).toFixed(2)}</span>
+                                <span>
+                                  -$
+                                  {(
+                                    parseFloat(estimatedFare.basePrice) +
+                                    parseFloat(estimatedFare.distancePrice) -
+                                    parseFloat(estimatedFare.total)
+                                  ).toFixed(2)}
+                                </span>
                               </div>
                             )}
                             {estimatedFare.shareRide && (
@@ -961,7 +1101,9 @@ export default function RidePage() {
 
                           <div className="border-t pt-2 flex justify-between font-semibold text-lg">
                             <span>Total Fare</span>
-                            <span className="text-green-600">${estimatedFare.total}</span>
+                            <span className="text-green-600">
+                              ${estimatedFare.total}
+                            </span>
                           </div>
                         </div>
 
@@ -972,8 +1114,12 @@ export default function RidePage() {
                             size="sm"
                             className="flex-1"
                             onClick={() => {
-                              navigator.clipboard?.writeText(`Estimated fare: $${estimatedFare.total} for ${estimatedFare.distance}km trip`);
-                              toast.success("Fare details copied to clipboard!");
+                              navigator.clipboard?.writeText(
+                                `Estimated fare: $${estimatedFare.total} for ${estimatedFare.distance}km trip`,
+                              );
+                              toast.success(
+                                "Fare details copied to clipboard!",
+                              );
                             }}
                           >
                             <Share className="w-3 h-3 mr-1" />
@@ -1006,48 +1152,74 @@ export default function RidePage() {
 
                         {/* Price Comparison */}
                         <div className="border-t pt-3">
-                          <h4 className="text-sm font-medium text-gray-700 mb-2">Compare with other options:</h4>
+                          <h4 className="text-sm font-medium text-gray-700 mb-2">
+                            Compare with other options:
+                          </h4>
                           <div className="grid grid-cols-3 gap-2 text-xs">
                             <Button
                               variant="ghost"
                               size="sm"
                               className="h-auto p-2 flex-col"
-                              onClick={() => toast.info("Economy: Cheaper option available")}
+                              onClick={() =>
+                                toast.info("Economy: Cheaper option available")
+                              }
                             >
                               <span className="font-medium">Economy</span>
-                              <span className="text-green-600">${(parseFloat(estimatedFare.total) * 0.8).toFixed(2)}</span>
+                              <span className="text-green-600">
+                                $
+                                {(
+                                  parseFloat(estimatedFare.total) * 0.8
+                                ).toFixed(2)}
+                              </span>
                             </Button>
                             <Button
                               variant="ghost"
                               size="sm"
                               className="h-auto p-2 flex-col bg-blue-50"
-                              onClick={() => toast.info("Current selection: Comfort")}
+                              onClick={() =>
+                                toast.info("Current selection: Comfort")
+                              }
                             >
                               <span className="font-medium">Comfort</span>
-                              <span className="text-blue-600">${estimatedFare.total}</span>
+                              <span className="text-blue-600">
+                                ${estimatedFare.total}
+                              </span>
                             </Button>
                             <Button
                               variant="ghost"
                               size="sm"
                               className="h-auto p-2 flex-col"
-                              onClick={() => toast.info("Premium: Luxury option available")}
+                              onClick={() =>
+                                toast.info("Premium: Luxury option available")
+                              }
                             >
                               <span className="font-medium">Premium</span>
-                              <span className="text-purple-600">${(parseFloat(estimatedFare.total) * 1.4).toFixed(2)}</span>
+                              <span className="text-purple-600">
+                                $
+                                {(
+                                  parseFloat(estimatedFare.total) * 1.4
+                                ).toFixed(2)}
+                              </span>
                             </Button>
                           </div>
                         </div>
 
                         {/* Time-based Pricing */}
                         <div className="border-t pt-3">
-                          <h4 className="text-sm font-medium text-gray-700 mb-2">Peak time adjustments:</h4>
+                          <h4 className="text-sm font-medium text-gray-700 mb-2">
+                            Peak time adjustments:
+                          </h4>
                           <div className="flex space-x-2">
                             <Button
                               variant="outline"
                               size="sm"
                               onClick={() => {
-                                const peakPrice = (parseFloat(estimatedFare.total) * 1.2).toFixed(2);
-                                toast.warning(`Peak time: $${peakPrice} (+20%)`);
+                                const peakPrice = (
+                                  parseFloat(estimatedFare.total) * 1.2
+                                ).toFixed(2);
+                                toast.warning(
+                                  `Peak time: $${peakPrice} (+20%)`,
+                                );
                               }}
                             >
                               <Clock className="w-3 h-3 mr-1" />
@@ -1057,7 +1229,9 @@ export default function RidePage() {
                               variant="outline"
                               size="sm"
                               onClick={() => {
-                                const nightPrice = (parseFloat(estimatedFare.total) * 1.15).toFixed(2);
+                                const nightPrice = (
+                                  parseFloat(estimatedFare.total) * 1.15
+                                ).toFixed(2);
                                 toast.info(`Night rate: $${nightPrice} (+15%)`);
                               }}
                             >
@@ -1069,19 +1243,34 @@ export default function RidePage() {
 
                         {/* Promo Code Input */}
                         <div className="border-t pt-3">
-                          <Label htmlFor="promo" className="text-sm font-medium text-gray-700">Promo Code</Label>
+                          <Label
+                            htmlFor="promo"
+                            className="text-sm font-medium text-gray-700"
+                          >
+                            Promo Code
+                          </Label>
                           <div className="flex space-x-2 mt-1">
                             <Input
                               id="promo"
                               placeholder="Enter promo code"
                               className="flex-1"
                               onKeyPress={(e) => {
-                                if (e.key === 'Enter') {
-                                  const promoValue = (e.target as HTMLInputElement).value;
-                                  if (promoValue.toLowerCase() === 'save20') {
-                                    const discountedPrice = (parseFloat(estimatedFare.total) * 0.8).toFixed(2);
-                                    setEstimatedFare(prev => ({ ...prev, total: discountedPrice, promoApplied: 'SAVE20' }));
-                                    toast.success("Promo code SAVE20 applied! 20% off");
+                                if (e.key === "Enter") {
+                                  const promoValue = (
+                                    e.target as HTMLInputElement
+                                  ).value;
+                                  if (promoValue.toLowerCase() === "save20") {
+                                    const discountedPrice = (
+                                      parseFloat(estimatedFare.total) * 0.8
+                                    ).toFixed(2);
+                                    setEstimatedFare((prev) => ({
+                                      ...prev,
+                                      total: discountedPrice,
+                                      promoApplied: "SAVE20",
+                                    }));
+                                    toast.success(
+                                      "Promo code SAVE20 applied! 20% off",
+                                    );
                                   } else {
                                     toast.error("Invalid promo code");
                                   }
@@ -1091,14 +1280,28 @@ export default function RidePage() {
                             <Button
                               size="sm"
                               onClick={(e) => {
-                                const input = (e.target as HTMLElement).parentElement?.querySelector('input') as HTMLInputElement;
+                                const input = (
+                                  e.target as HTMLElement
+                                ).parentElement?.querySelector(
+                                  "input",
+                                ) as HTMLInputElement;
                                 const promoValue = input?.value;
-                                if (promoValue?.toLowerCase() === 'save20') {
-                                  const discountedPrice = (parseFloat(estimatedFare.total) * 0.8).toFixed(2);
-                                  setEstimatedFare(prev => ({ ...prev, total: discountedPrice, promoApplied: 'SAVE20' }));
-                                  toast.success("Promo code SAVE20 applied! 20% off");
+                                if (promoValue?.toLowerCase() === "save20") {
+                                  const discountedPrice = (
+                                    parseFloat(estimatedFare.total) * 0.8
+                                  ).toFixed(2);
+                                  setEstimatedFare((prev) => ({
+                                    ...prev,
+                                    total: discountedPrice,
+                                    promoApplied: "SAVE20",
+                                  }));
+                                  toast.success(
+                                    "Promo code SAVE20 applied! 20% off",
+                                  );
                                 } else {
-                                  toast.error("Invalid promo code. Try 'SAVE20'");
+                                  toast.error(
+                                    "Invalid promo code. Try 'SAVE20'",
+                                  );
                                 }
                               }}
                             >
@@ -1117,10 +1320,14 @@ export default function RidePage() {
                     {/* Alternative Fare Options */}
                     {!estimatedFare && (
                       <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                        <h4 className="text-sm font-medium text-blue-800 mb-2">💡 Pro Tips</h4>
+                        <h4 className="text-sm font-medium text-blue-800 mb-2">
+                          💡 Pro Tips
+                        </h4>
                         <ul className="text-xs text-blue-700 space-y-1">
                           <li>• Share rides to save up to 40%</li>
-                          <li>• Avoid peak hours (7-9 AM, 5-7 PM) for better rates</li>
+                          <li>
+                            • Avoid peak hours (7-9 AM, 5-7 PM) for better rates
+                          </li>
                           <li>• Use promo code 'SAVE20' for 20% off</li>
                           <li>• Economy rides cost 20% less</li>
                         </ul>
@@ -1130,7 +1337,7 @@ export default function RidePage() {
                 </Card>
 
                 {/* Book Button */}
-                <Button 
+                <Button
                   size="lg"
                   onClick={handleBookRide}
                   disabled={!pickupLocation || !destination}
@@ -1145,7 +1352,7 @@ export default function RidePage() {
 
                 {/* Cancel Trip Button (shown when trip is active) */}
                 {currentTrip && (
-                  <Button 
+                  <Button
                     variant="destructive"
                     size="lg"
                     onClick={handleCancelTrip}
@@ -1165,27 +1372,34 @@ export default function RidePage() {
               {/* Live Tracking Map */}
               <div className="lg:col-span-2">
                 <Card className="shadow-xl overflow-hidden">
-                  <div 
+                  <div
                     className="h-96 bg-cover bg-center relative"
                     style={{
-                      backgroundImage: "url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=400&fit=crop&crop=center')"
+                      backgroundImage:
+                        "url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=400&fit=crop&crop=center')",
                     }}
                   >
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                    
+
                     {/* Live tracking overlay */}
                     <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md rounded-lg p-3">
                       <div className="flex items-center space-x-2">
-                        <div className={`w-3 h-3 rounded-full ${isTracking ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+                        <div
+                          className={`w-3 h-3 rounded-full ${isTracking ? "bg-green-500 animate-pulse" : "bg-gray-400"}`}
+                        ></div>
                         <span className="text-sm font-medium">
-                          {isTracking ? 'Live Tracking Active' : 'Tracking Inactive'}
+                          {isTracking
+                            ? "Live Tracking Active"
+                            : "Tracking Inactive"}
                         </span>
                       </div>
                     </div>
 
                     {/* Driver location marker */}
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <div className={`bg-blue-500 rounded-full p-3 shadow-lg ${isTracking ? 'animate-bounce' : ''}`}>
+                      <div
+                        className={`bg-blue-500 rounded-full p-3 shadow-lg ${isTracking ? "animate-bounce" : ""}`}
+                      >
                         <Car className="w-6 h-6 text-white" />
                       </div>
                     </div>
@@ -1195,9 +1409,13 @@ export default function RidePage() {
                       <div className="bg-white/90 backdrop-blur-md rounded-lg p-4">
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="text-sm text-gray-600">Driver arriving in</p>
+                            <p className="text-sm text-gray-600">
+                              Driver arriving in
+                            </p>
                             <p className="text-lg font-bold text-blue-600">
-                              {driverETA > 0 ? `${driverETA} minutes` : 'Arrived!'}
+                              {driverETA > 0
+                                ? `${driverETA} minutes`
+                                : "Arrived!"}
                             </p>
                           </div>
                           <div className="text-right">
@@ -1230,23 +1448,25 @@ export default function RidePage() {
                         <h3 className="font-semibold">Mike Johnson</h3>
                         <div className="flex items-center space-x-1">
                           <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                          <span className="text-sm text-gray-600">4.9 • Toyota Camry</span>
+                          <span className="text-sm text-gray-600">
+                            4.9 • Toyota Camry
+                          </span>
                         </div>
                         <p className="text-sm text-gray-500">ABC-1234</p>
                       </div>
                     </div>
-                    
+
                     <div className="space-y-3">
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         className="w-full"
                         onClick={handleCallDriver}
                       >
                         <Phone className="w-4 h-4 mr-2" />
                         Call Driver
                       </Button>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         className="w-full"
                         onClick={handleMessageDriver}
                       >
@@ -1274,23 +1494,31 @@ export default function RidePage() {
                           <p className="text-sm text-gray-500">2:30 PM</p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center space-x-3">
-                        <div className={`w-4 h-4 rounded-full ${tripProgress === "enroute" || driverETA > 0 ? "bg-yellow-500 animate-pulse" : "border-2 border-gray-300"}`}></div>
+                        <div
+                          className={`w-4 h-4 rounded-full ${tripProgress === "enroute" || driverETA > 0 ? "bg-yellow-500 animate-pulse" : "border-2 border-gray-300"}`}
+                        ></div>
                         <div>
                           <p className="font-medium">En Route to Pickup</p>
                           <p className="text-sm text-gray-500">
-                            {driverETA > 0 ? `ETA: ${driverETA} minutes` : "Arriving now"}
+                            {driverETA > 0
+                              ? `ETA: ${driverETA} minutes`
+                              : "Arriving now"}
                           </p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center space-x-3">
-                        <div className={`w-4 h-4 rounded-full ${tripProgress === "pickup" ? "bg-blue-500 animate-pulse" : "border-2 border-gray-300"}`}></div>
+                        <div
+                          className={`w-4 h-4 rounded-full ${tripProgress === "pickup" ? "bg-blue-500 animate-pulse" : "border-2 border-gray-300"}`}
+                        ></div>
                         <div>
                           <p className="font-medium">Pickup</p>
                           <p className="text-sm text-gray-500">
-                            {tripProgress === "pickup" ? "Driver waiting" : "Waiting..."}
+                            {tripProgress === "pickup"
+                              ? "Driver waiting"
+                              : "Waiting..."}
                           </p>
                         </div>
                       </div>
@@ -1308,16 +1536,16 @@ export default function RidePage() {
                   </CardHeader>
                   <CardContent className="pt-0">
                     <div className="space-y-3">
-                      <Button 
-                        variant="destructive" 
+                      <Button
+                        variant="destructive"
                         className="w-full"
                         onClick={handleEmergency}
                       >
                         <AlertTriangle className="w-4 h-4 mr-2" />
                         Emergency
                       </Button>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         className="w-full"
                         onClick={handleShareTrip}
                       >
@@ -1341,17 +1569,19 @@ export default function RidePage() {
                     Trip History
                   </CardTitle>
                   <div className="flex items-center space-x-2">
-                    <Button 
-                      variant="ghost" 
+                    <Button
+                      variant="ghost"
                       size="sm"
                       onClick={() => toast.info("Filter options coming soon")}
                     >
                       <Filter className="w-4 h-4" />
                     </Button>
-                    <Button 
-                      variant="ghost" 
+                    <Button
+                      variant="ghost"
                       size="sm"
-                      onClick={() => toast.success("Downloading trip history...")}
+                      onClick={() =>
+                        toast.success("Downloading trip history...")
+                      }
                     >
                       <Download className="w-4 h-4" />
                     </Button>
@@ -1361,7 +1591,10 @@ export default function RidePage() {
               <CardContent>
                 <div className="space-y-4">
                   {tripHistory.map((trip) => (
-                    <div key={trip.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <div
+                      key={trip.id}
+                      className="border rounded-lg p-4 hover:shadow-md transition-shadow"
+                    >
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center space-x-3">
                           <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
@@ -1373,40 +1606,46 @@ export default function RidePage() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className="text-lg font-bold text-green-600">${trip.fare}</p>
+                          <p className="text-lg font-bold text-green-600">
+                            ${trip.fare}
+                          </p>
                           <div className="flex items-center">
                             {[...Array(5)].map((_, i) => (
-                              <Star 
-                                key={i} 
-                                className={`w-3 h-3 ${i < trip.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+                              <Star
+                                key={i}
+                                className={`w-3 h-3 ${i < trip.rating ? "text-yellow-400 fill-current" : "text-gray-300"}`}
                               />
                             ))}
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="space-y-2">
                         <div className="flex items-center space-x-2">
                           <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                          <span className="text-sm text-gray-700">{trip.from}</span>
+                          <span className="text-sm text-gray-700">
+                            {trip.from}
+                          </span>
                         </div>
                         <div className="flex items-center space-x-2">
                           <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                          <span className="text-sm text-gray-700">{trip.to}</span>
+                          <span className="text-sm text-gray-700">
+                            {trip.to}
+                          </span>
                         </div>
                       </div>
-                      
+
                       <div className="mt-3 flex items-center space-x-2">
-                        <Button 
-                          variant="ghost" 
+                        <Button
+                          variant="ghost"
                           size="sm"
                           onClick={() => handleDownloadReceipt(trip.id)}
                         >
                           <Download className="w-4 h-4 mr-1" />
                           Receipt
                         </Button>
-                        <Button 
-                          variant="ghost" 
+                        <Button
+                          variant="ghost"
                           size="sm"
                           onClick={() => handleRebookTrip(trip)}
                         >
@@ -1434,24 +1673,22 @@ export default function RidePage() {
                 </CardHeader>
                 <CardContent className="pt-0 text-center">
                   <div className="w-32 h-32 mx-auto mb-4 relative">
-                    <div 
+                    <div
                       className="w-full h-full rounded-full bg-cover bg-center border-4 border-white shadow-lg"
                       style={{
-                        backgroundImage: "url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face')"
+                        backgroundImage:
+                          "url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face')",
                       }}
                     ></div>
-                    <Button 
-                      size="sm" 
+                    <Button
+                      size="sm"
                       className="absolute bottom-0 right-0 rounded-full w-10 h-10 p-0"
                       onClick={handlePhotoUpload}
                     >
                       <Camera className="w-4 h-4" />
                     </Button>
                   </div>
-                  <Button 
-                    variant="outline"
-                    onClick={handlePhotoUpload}
-                  >
+                  <Button variant="outline" onClick={handlePhotoUpload}>
                     <Upload className="w-4 h-4 mr-2" />
                     Change Photo
                   </Button>
@@ -1470,56 +1707,78 @@ export default function RidePage() {
                   <div className="grid grid-cols-2 gap-3">
                     <div className="space-y-2">
                       <Label htmlFor="firstName">First Name</Label>
-                      <Input 
+                      <Input
                         id="firstName"
                         value={profile.firstName}
-                        onChange={(e) => setProfile(prev => ({ ...prev, firstName: e.target.value }))}
+                        onChange={(e) =>
+                          setProfile((prev) => ({
+                            ...prev,
+                            firstName: e.target.value,
+                          }))
+                        }
                       />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="lastName">Last Name</Label>
-                      <Input 
+                      <Input
                         id="lastName"
                         value={profile.lastName}
-                        onChange={(e) => setProfile(prev => ({ ...prev, lastName: e.target.value }))}
+                        onChange={(e) =>
+                          setProfile((prev) => ({
+                            ...prev,
+                            lastName: e.target.value,
+                          }))
+                        }
                       />
                     </div>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address</Label>
-                    <Input 
+                    <Input
                       id="email"
                       type="email"
                       value={profile.email}
-                      onChange={(e) => setProfile(prev => ({ ...prev, email: e.target.value }))}
+                      onChange={(e) =>
+                        setProfile((prev) => ({
+                          ...prev,
+                          email: e.target.value,
+                        }))
+                      }
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
-                    <Input 
+                    <Input
                       id="phone"
                       type="tel"
                       value={profile.phone}
-                      onChange={(e) => setProfile(prev => ({ ...prev, phone: e.target.value }))}
+                      onChange={(e) =>
+                        setProfile((prev) => ({
+                          ...prev,
+                          phone: e.target.value,
+                        }))
+                      }
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="emergency">Emergency Contact</Label>
-                    <Input 
+                    <Input
                       id="emergency"
                       type="tel"
                       value={profile.emergencyContact}
-                      onChange={(e) => setProfile(prev => ({ ...prev, emergencyContact: e.target.value }))}
+                      onChange={(e) =>
+                        setProfile((prev) => ({
+                          ...prev,
+                          emergencyContact: e.target.value,
+                        }))
+                      }
                     />
                   </div>
-                  
-                  <Button 
-                    className="w-full"
-                    onClick={handleProfileSave}
-                  >
+
+                  <Button className="w-full" onClick={handleProfileSave}>
                     <Save className="w-4 h-4 mr-2" />
                     Save Changes
                   </Button>
@@ -1542,67 +1801,81 @@ export default function RidePage() {
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <Label htmlFor="music">Music Allowed</Label>
-                        <Switch 
-                          id="music" 
-                          defaultChecked 
-                          onCheckedChange={(checked) => 
-                            toast.success(`Music ${checked ? 'enabled' : 'disabled'}`)
+                        <Switch
+                          id="music"
+                          defaultChecked
+                          onCheckedChange={(checked) =>
+                            toast.success(
+                              `Music ${checked ? "enabled" : "disabled"}`,
+                            )
                           }
                         />
                       </div>
                       <div className="flex items-center justify-between">
                         <Label htmlFor="conversation">Conversation</Label>
-                        <Switch 
-                          id="conversation" 
-                          defaultChecked 
-                          onCheckedChange={(checked) => 
-                            toast.success(`Conversation ${checked ? 'enabled' : 'disabled'}`)
+                        <Switch
+                          id="conversation"
+                          defaultChecked
+                          onCheckedChange={(checked) =>
+                            toast.success(
+                              `Conversation ${checked ? "enabled" : "disabled"}`,
+                            )
                           }
                         />
                       </div>
                       <div className="flex items-center justify-between">
                         <Label htmlFor="ac">Air Conditioning</Label>
-                        <Switch 
-                          id="ac" 
-                          defaultChecked 
-                          onCheckedChange={(checked) => 
-                            toast.success(`AC ${checked ? 'enabled' : 'disabled'}`)
+                        <Switch
+                          id="ac"
+                          defaultChecked
+                          onCheckedChange={(checked) =>
+                            toast.success(
+                              `AC ${checked ? "enabled" : "disabled"}`,
+                            )
                           }
                         />
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-4">
                     <h4 className="font-medium">Safety Settings</h4>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <Label htmlFor="shareTrip">Auto Share Trip</Label>
-                        <Switch 
-                          id="shareTrip" 
-                          defaultChecked 
-                          onCheckedChange={(checked) => 
-                            toast.success(`Auto share ${checked ? 'enabled' : 'disabled'}`)
+                        <Switch
+                          id="shareTrip"
+                          defaultChecked
+                          onCheckedChange={(checked) =>
+                            toast.success(
+                              `Auto share ${checked ? "enabled" : "disabled"}`,
+                            )
                           }
                         />
                       </div>
                       <div className="flex items-center justify-between">
                         <Label htmlFor="smsAlerts">SMS Alerts</Label>
-                        <Switch 
-                          id="smsAlerts" 
-                          defaultChecked 
-                          onCheckedChange={(checked) => 
-                            toast.success(`SMS alerts ${checked ? 'enabled' : 'disabled'}`)
+                        <Switch
+                          id="smsAlerts"
+                          defaultChecked
+                          onCheckedChange={(checked) =>
+                            toast.success(
+                              `SMS alerts ${checked ? "enabled" : "disabled"}`,
+                            )
                           }
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="locationSharing">Location Sharing</Label>
-                        <Switch 
-                          id="locationSharing" 
-                          defaultChecked 
-                          onCheckedChange={(checked) => 
-                            toast.success(`Location sharing ${checked ? 'enabled' : 'disabled'}`)
+                        <Label htmlFor="locationSharing">
+                          Location Sharing
+                        </Label>
+                        <Switch
+                          id="locationSharing"
+                          defaultChecked
+                          onCheckedChange={(checked) =>
+                            toast.success(
+                              `Location sharing ${checked ? "enabled" : "disabled"}`,
+                            )
                           }
                         />
                       </div>
@@ -1625,9 +1898,11 @@ export default function RidePage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0 space-y-4">
-                  <div 
+                  <div
                     className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                      selectedPaymentMethod === "card" ? "bg-blue-50 border-blue-200" : "hover:bg-gray-50"
+                      selectedPaymentMethod === "card"
+                        ? "bg-blue-50 border-blue-200"
+                        : "hover:bg-gray-50"
                     }`}
                     onClick={() => {
                       setSelectedPaymentMethod("card");
@@ -1647,10 +1922,12 @@ export default function RidePage() {
                       )}
                     </div>
                   </div>
-                  
-                  <div 
+
+                  <div
                     className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                      selectedPaymentMethod === "wallet" ? "bg-purple-50 border-purple-200" : "hover:bg-gray-50"
+                      selectedPaymentMethod === "wallet"
+                        ? "bg-purple-50 border-purple-200"
+                        : "hover:bg-gray-50"
                     }`}
                     onClick={() => {
                       setSelectedPaymentMethod("wallet");
@@ -1662,11 +1939,13 @@ export default function RidePage() {
                         <Wallet className="w-6 h-6 text-purple-600" />
                         <div>
                           <p className="font-medium">BAMBI Wallet</p>
-                          <p className="text-sm text-gray-500">${walletBalance.toFixed(2)} available</p>
+                          <p className="text-sm text-gray-500">
+                            ${walletBalance.toFixed(2)} available
+                          </p>
                         </div>
                       </div>
-                      <Button 
-                        variant="ghost" 
+                      <Button
+                        variant="ghost"
                         size="sm"
                         onClick={(e) => {
                           e.stopPropagation();
@@ -1678,9 +1957,9 @@ export default function RidePage() {
                       </Button>
                     </div>
                   </div>
-                  
-                  <Button 
-                    variant="outline" 
+
+                  <Button
+                    variant="outline"
                     className="w-full"
                     onClick={handleAddPaymentMethod}
                   >
@@ -1707,7 +1986,9 @@ export default function RidePage() {
                         </div>
                         <div>
                           <p className="font-medium">Airport Trip</p>
-                          <p className="text-sm text-gray-500">Today, 2:30 PM</p>
+                          <p className="text-sm text-gray-500">
+                            Today, 2:30 PM
+                          </p>
                         </div>
                       </div>
                       <div className="text-right">
@@ -1715,10 +1996,12 @@ export default function RidePage() {
                         <p className="text-sm text-gray-500">Paid</p>
                       </div>
                     </div>
-                    
-                    <div 
+
+                    <div
                       className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50 cursor-pointer"
-                      onClick={() => toast.info("Transaction details: Wallet top-up")}
+                      onClick={() =>
+                        toast.info("Transaction details: Wallet top-up")
+                      }
                     >
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
@@ -1749,24 +2032,26 @@ export default function RidePage() {
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="h-20 flex-col"
                     onClick={() => toast.success("Downloading all receipts...")}
                   >
                     <Download className="w-6 h-6 mb-2" />
                     <span>Download All</span>
                   </Button>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="h-20 flex-col"
-                    onClick={() => toast.success("Receipts will be emailed to you")}
+                    onClick={() =>
+                      toast.success("Receipts will be emailed to you")
+                    }
                   >
                     <Mail className="w-6 h-6 mb-2" />
                     <span>Email Receipts</span>
                   </Button>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="h-20 flex-col"
                     onClick={() => toast.info("Tax settings opened")}
                   >
@@ -1788,33 +2073,43 @@ export default function RidePage() {
                     Notifications & Alerts
                   </CardTitle>
                   <Badge className="bg-red-500">
-                    {notifications.filter(n => !n.read).length} New
+                    {notifications.filter((n) => !n.read).length} New
                   </Badge>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {notifications.map((notification) => (
-                    <div 
-                      key={notification.id} 
+                    <div
+                      key={notification.id}
                       className={`p-4 rounded-lg border cursor-pointer transition-colors ${
-                        !notification.read ? 'bg-blue-50 border-blue-200' : 'bg-gray-50 border-gray-200'
+                        !notification.read
+                          ? "bg-blue-50 border-blue-200"
+                          : "bg-gray-50 border-gray-200"
                       }`}
-                      onClick={() => handleMarkNotificationRead(notification.id)}
+                      onClick={() =>
+                        handleMarkNotificationRead(notification.id)
+                      }
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-1">
-                            <h3 className="font-semibold">{notification.title}</h3>
+                            <h3 className="font-semibold">
+                              {notification.title}
+                            </h3>
                             {!notification.read && (
                               <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                             )}
                           </div>
-                          <p className="text-sm text-gray-600 mb-2">{notification.message}</p>
-                          <p className="text-xs text-gray-500">{notification.time}</p>
+                          <p className="text-sm text-gray-600 mb-2">
+                            {notification.message}
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            {notification.time}
+                          </p>
                         </div>
-                        <Button 
-                          variant="ghost" 
+                        <Button
+                          variant="ghost"
                           size="sm"
                           onClick={(e) => {
                             e.stopPropagation();
@@ -1827,16 +2122,16 @@ export default function RidePage() {
                     </div>
                   ))}
                 </div>
-                
+
                 <div className="mt-6 flex items-center justify-between">
-                  <Button 
+                  <Button
                     variant="outline"
                     onClick={handleMarkAllNotificationsRead}
                   >
                     <CheckCheck className="w-4 h-4 mr-2" />
                     Mark All Read
                   </Button>
-                  <Button 
+                  <Button
                     variant="outline"
                     onClick={() => toast.info("Notification settings opened")}
                   >
@@ -1857,16 +2152,16 @@ export default function RidePage() {
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="h-16 flex-col"
                     onClick={handleCallSupport}
                   >
                     <Phone className="w-6 h-6 mb-2" />
                     <span>Call Support</span>
                   </Button>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="h-16 flex-col"
                     onClick={handleLiveChat}
                   >
@@ -1874,7 +2169,7 @@ export default function RidePage() {
                     <span>Live Chat</span>
                   </Button>
                 </div>
-                
+
                 {/* Review Section */}
                 <div className="mt-6 pt-6 border-t">
                   <h4 className="font-medium mb-4 flex items-center">
@@ -1893,25 +2188,24 @@ export default function RidePage() {
                           toast.success(`Rated ${star} stars`);
                         }}
                       >
-                        <Star 
+                        <Star
                           className={`w-6 h-6 ${
-                            star <= tripRating ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                          }`} 
+                            star <= tripRating
+                              ? "text-yellow-400 fill-current"
+                              : "text-gray-300"
+                          }`}
                         />
                       </Button>
                     ))}
                   </div>
-                  <Textarea 
+                  <Textarea
                     placeholder="Leave a review for your driver..."
                     className="mb-3"
                     value={reviewText}
                     onChange={(e) => setReviewText(e.target.value)}
                   />
                   <div className="flex space-x-2">
-                    <Button 
-                      className="flex-1"
-                      onClick={handleSubmitReview}
-                    >
+                    <Button className="flex-1" onClick={handleSubmitReview}>
                       <Send className="w-4 h-4 mr-2" />
                       Submit Review
                     </Button>
@@ -1944,7 +2238,9 @@ export default function RidePage() {
                   <div className="relative mr-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-3xl flex items-center justify-center shadow-2xl">
                       <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-3xl opacity-30"></div>
-                      <span className="relative text-white font-black text-3xl tracking-wider">B</span>
+                      <span className="relative text-white font-black text-3xl tracking-wider">
+                        B
+                      </span>
                     </div>
                     <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
                       <span className="text-white font-bold text-sm">🚕</span>
@@ -1952,7 +2248,9 @@ export default function RidePage() {
                   </div>
                   BAMBI
                 </h2>
-                <p className="text-xl text-blue-200">Beautiful Rides, Anywhere</p>
+                <p className="text-xl text-blue-200">
+                  Beautiful Rides, Anywhere
+                </p>
               </div>
             </div>
           </div>
@@ -1967,33 +2265,44 @@ export default function RidePage() {
                   Our Mission
                 </h3>
                 <p className="text-blue-100 leading-relaxed mb-6 text-lg">
-                  At BAMBI, we're transforming the way people move through cities. Founded in 2018,
-                  we've built the most advanced, reliable, and user-friendly transportation platform that
-                  connects millions of riders with professional drivers worldwide.
+                  At BAMBI, we're transforming the way people move through
+                  cities. Founded in 2018, we've built the most advanced,
+                  reliable, and user-friendly transportation platform that
+                  connects millions of riders with professional drivers
+                  worldwide.
                 </p>
                 <p className="text-blue-100 leading-relaxed text-lg">
-                  Our cutting-edge technology, combined with our commitment to safety and sustainability,
-                  makes every journey smooth, secure, and environmentally conscious. We're not just a ride
-                  service – we're your trusted partner in urban mobility.
+                  Our cutting-edge technology, combined with our commitment to
+                  safety and sustainability, makes every journey smooth, secure,
+                  and environmentally conscious. We're not just a ride service –
+                  we're your trusted partner in urban mobility.
                 </p>
               </div>
 
               {/* Statistics */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div className="bg-gradient-to-br from-yellow-400/20 to-orange-500/20 backdrop-blur-md rounded-xl p-6 border border-yellow-400/30 text-center">
-                  <div className="text-3xl font-bold text-yellow-300 mb-2">5M+</div>
+                  <div className="text-3xl font-bold text-yellow-300 mb-2">
+                    5M+
+                  </div>
                   <div className="text-sm text-yellow-100">Happy Riders</div>
                 </div>
                 <div className="bg-gradient-to-br from-green-400/20 to-blue-500/20 backdrop-blur-md rounded-xl p-6 border border-green-400/30 text-center">
-                  <div className="text-3xl font-bold text-green-300 mb-2">100K+</div>
+                  <div className="text-3xl font-bold text-green-300 mb-2">
+                    100K+
+                  </div>
                   <div className="text-sm text-green-100">Active Drivers</div>
                 </div>
                 <div className="bg-gradient-to-br from-purple-400/20 to-pink-500/20 backdrop-blur-md rounded-xl p-6 border border-purple-400/30 text-center">
-                  <div className="text-3xl font-bold text-purple-300 mb-2">250+</div>
+                  <div className="text-3xl font-bold text-purple-300 mb-2">
+                    250+
+                  </div>
                   <div className="text-sm text-purple-100">Cities Served</div>
                 </div>
                 <div className="bg-gradient-to-br from-blue-400/20 to-indigo-500/20 backdrop-blur-md rounded-xl p-6 border border-blue-400/30 text-center">
-                  <div className="text-3xl font-bold text-blue-300 mb-2">99.9%</div>
+                  <div className="text-3xl font-bold text-blue-300 mb-2">
+                    99.9%
+                  </div>
                   <div className="text-sm text-blue-100">Uptime</div>
                 </div>
               </div>
@@ -2010,7 +2319,9 @@ export default function RidePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div className="absolute bottom-4 left-4 text-white">
                   <h4 className="font-bold text-lg">Smart Technology</h4>
-                  <p className="text-sm opacity-90">AI-powered route optimization</p>
+                  <p className="text-sm opacity-90">
+                    AI-powered route optimization
+                  </p>
                 </div>
               </div>
 
@@ -2023,7 +2334,9 @@ export default function RidePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div className="absolute bottom-4 left-4 text-white">
                   <h4 className="font-bold text-lg">Safety First</h4>
-                  <p className="text-sm opacity-90">24/7 monitoring & support</p>
+                  <p className="text-sm opacity-90">
+                    24/7 monitoring & support
+                  </p>
                 </div>
               </div>
             </div>
@@ -2031,14 +2344,19 @@ export default function RidePage() {
 
           {/* Features Grid */}
           <div className="mb-16">
-            <h3 className="text-3xl font-bold text-white text-center mb-12">Why Choose BAMBI?</h3>
+            <h3 className="text-3xl font-bold text-white text-center mb-12">
+              Why Choose BAMBI?
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 text-center hover:bg-white/15 transition-colors">
                 <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Shield className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="font-bold text-white mb-2">100% Safe</h4>
-                <p className="text-blue-100 text-sm">Background-checked drivers, real-time tracking, and 24/7 support</p>
+                <p className="text-blue-100 text-sm">
+                  Background-checked drivers, real-time tracking, and 24/7
+                  support
+                </p>
               </div>
 
               <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 text-center hover:bg-white/15 transition-colors">
@@ -2046,7 +2364,9 @@ export default function RidePage() {
                   <Zap className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="font-bold text-white mb-2">Lightning Fast</h4>
-                <p className="text-blue-100 text-sm">Average pickup time under 3 minutes in major cities</p>
+                <p className="text-blue-100 text-sm">
+                  Average pickup time under 3 minutes in major cities
+                </p>
               </div>
 
               <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 text-center hover:bg-white/15 transition-colors">
@@ -2054,7 +2374,9 @@ export default function RidePage() {
                   <DollarSign className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="font-bold text-white mb-2">Best Prices</h4>
-                <p className="text-blue-100 text-sm">Transparent pricing with no hidden fees or surge charges</p>
+                <p className="text-blue-100 text-sm">
+                  Transparent pricing with no hidden fees or surge charges
+                </p>
               </div>
 
               <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 text-center hover:bg-white/15 transition-colors">
@@ -2062,20 +2384,26 @@ export default function RidePage() {
                   <Heart className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="font-bold text-white mb-2">Eco-Friendly</h4>
-                <p className="text-blue-100 text-sm">Carbon-neutral rides with electric and hybrid fleet options</p>
+                <p className="text-blue-100 text-sm">
+                  Carbon-neutral rides with electric and hybrid fleet options
+                </p>
               </div>
             </div>
           </div>
 
           {/* Awards & Recognition */}
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 mb-16">
-            <h3 className="text-2xl font-bold text-white text-center mb-8">Awards & Recognition</h3>
+            <h3 className="text-2xl font-bold text-white text-center mb-8">
+              Awards & Recognition
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Star className="w-8 h-8 text-white" />
                 </div>
-                <h4 className="font-bold text-white mb-2">Best Transportation App 2023</h4>
+                <h4 className="font-bold text-white mb-2">
+                  Best Transportation App 2023
+                </h4>
                 <p className="text-blue-200 text-sm">TechCrunch Awards</p>
               </div>
 
@@ -2083,7 +2411,9 @@ export default function RidePage() {
                 <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Shield className="w-8 h-8 text-white" />
                 </div>
-                <h4 className="font-bold text-white mb-2">Top Safety Innovation</h4>
+                <h4 className="font-bold text-white mb-2">
+                  Top Safety Innovation
+                </h4>
                 <p className="text-blue-200 text-sm">Urban Mobility Summit</p>
               </div>
 
@@ -2091,8 +2421,12 @@ export default function RidePage() {
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Users className="w-8 h-8 text-white" />
                 </div>
-                <h4 className="font-bold text-white mb-2">Customer Choice Award</h4>
-                <p className="text-blue-200 text-sm">Global Service Excellence</p>
+                <h4 className="font-bold text-white mb-2">
+                  Customer Choice Award
+                </h4>
+                <p className="text-blue-200 text-sm">
+                  Global Service Excellence
+                </p>
               </div>
             </div>
           </div>
@@ -2123,8 +2457,13 @@ export default function RidePage() {
 
             {/* App Download */}
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
-              <h3 className="text-2xl font-bold text-white mb-6">Download Our App</h3>
-              <p className="text-blue-100 mb-6">Experience the future of transportation. Available on all platforms.</p>
+              <h3 className="text-2xl font-bold text-white mb-6">
+                Download Our App
+              </h3>
+              <p className="text-blue-100 mb-6">
+                Experience the future of transportation. Available on all
+                platforms.
+              </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   className="bg-black hover:bg-gray-800 text-white flex items-center justify-center space-x-2 h-14"
@@ -2151,7 +2490,8 @@ export default function RidePage() {
           {/* Bottom Bar */}
           <div className="mt-16 pt-8 border-t border-white/20 text-center">
             <p className="text-blue-200 text-sm mb-4">
-              © 2024 BAMBI Inc. All rights reserved. | Privacy Policy | Terms of Service | Accessibility
+              © 2024 BAMBI Inc. All rights reserved. | Privacy Policy | Terms
+              of Service | Accessibility
             </p>
             <div className="flex items-center justify-center space-x-6">
               <Button
@@ -2216,11 +2556,11 @@ function Calculator({ className, ...props }: React.SVGProps<SVGSVGElement>) {
       className={className}
       {...props}
     >
-      <rect x="4" y="2" width="16" height="20" rx="2"/>
-      <path d="M8 6h8"/>
-      <path d="M8 10h8"/>
-      <path d="M8 14h8"/>
-      <path d="M8 18h8"/>
+      <rect x="4" y="2" width="16" height="20" rx="2" />
+      <path d="M8 6h8" />
+      <path d="M8 10h8" />
+      <path d="M8 14h8" />
+      <path d="M8 18h8" />
     </svg>
   );
 }

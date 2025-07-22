@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import { 
-  Car, 
+import {
+  Car,
   Home,
-  MapPin, 
+  MapPin,
   Bell,
   User,
   History,
@@ -17,7 +17,7 @@ import {
   MessageCircle,
   Shield,
   Menu,
-  X
+  X,
 } from "lucide-react";
 
 interface NavigationItem {
@@ -28,7 +28,7 @@ interface NavigationItem {
 }
 
 interface MobileNavigationProps {
-  userType: 'passenger' | 'driver' | 'admin';
+  userType: "passenger" | "driver" | "admin";
 }
 
 export function MobileNavigation({ userType }: MobileNavigationProps) {
@@ -39,7 +39,12 @@ export function MobileNavigation({ userType }: MobileNavigationProps) {
     { name: "Home", href: "/passenger", icon: Home },
     { name: "Book", href: "/passenger/book", icon: MapPin },
     { name: "History", href: "/passenger/history", icon: History },
-    { name: "Notifications", href: "/passenger/notifications", icon: Bell, badge: 3 },
+    {
+      name: "Notifications",
+      href: "/passenger/notifications",
+      icon: Bell,
+      badge: 3,
+    },
     { name: "Profile", href: "/passenger/profile", icon: User },
   ];
 
@@ -59,8 +64,12 @@ export function MobileNavigation({ userType }: MobileNavigationProps) {
     { name: "Settings", href: "/admin/settings", icon: Settings },
   ];
 
-  const currentTabs = userType === 'passenger' ? passengerTabs : 
-                     userType === 'driver' ? driverTabs : adminTabs;
+  const currentTabs =
+    userType === "passenger"
+      ? passengerTabs
+      : userType === "driver"
+        ? driverTabs
+        : adminTabs;
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -80,13 +89,17 @@ export function MobileNavigation({ userType }: MobileNavigationProps) {
             <div className="relative">
               <div className="w-8 h-8 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
                 <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-lg opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                <span className="relative text-white font-black text-sm tracking-wider">B</span>
+                <span className="relative text-white font-black text-sm tracking-wider">
+                  B
+                </span>
               </div>
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
                 <Car className="w-1.5 h-1.5 text-white" />
               </div>
             </div>
-            <span className="text-lg font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">BAMBI</span>
+            <span className="text-lg font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              BAMBI
+            </span>
           </Link>
 
           {/* Header Actions */}
@@ -97,7 +110,11 @@ export function MobileNavigation({ userType }: MobileNavigationProps) {
               className="relative"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </Button>
           </div>
         </div>
@@ -135,7 +152,7 @@ export function MobileNavigation({ userType }: MobileNavigationProps) {
           {currentTabs.map((tab) => {
             const Icon = tab.icon;
             const active = isActive(tab.href);
-            
+
             return (
               <Link
                 key={tab.name}
@@ -147,17 +164,21 @@ export function MobileNavigation({ userType }: MobileNavigationProps) {
                 }`}
               >
                 <div className="relative">
-                  <Icon className={`w-6 h-6 ${active ? 'scale-110' : ''} transition-transform duration-200`} />
+                  <Icon
+                    className={`w-6 h-6 ${active ? "scale-110" : ""} transition-transform duration-200`}
+                  />
                   {tab.badge && tab.badge > 0 && (
-                    <Badge 
-                      variant="destructive" 
+                    <Badge
+                      variant="destructive"
                       className="absolute -top-2 -right-2 h-5 w-5 text-xs p-0 flex items-center justify-center"
                     >
-                      {tab.badge > 9 ? '9+' : tab.badge}
+                      {tab.badge > 9 ? "9+" : tab.badge}
                     </Badge>
                   )}
                 </div>
-                <span className={`text-xs font-medium truncate ${active ? 'text-primary' : ''}`}>
+                <span
+                  className={`text-xs font-medium truncate ${active ? "text-primary" : ""}`}
+                >
                   {tab.name}
                 </span>
                 {active && (

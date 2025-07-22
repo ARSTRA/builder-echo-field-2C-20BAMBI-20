@@ -1,17 +1,23 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Car, 
-  DollarSign, 
-  Users, 
-  Clock, 
-  MapPin, 
-  Star, 
+import {
+  Car,
+  DollarSign,
+  Users,
+  Clock,
+  MapPin,
+  Star,
   TrendingUp,
   Navigation,
   Shield,
-  Smartphone
+  Smartphone,
 } from "lucide-react";
 
 export default function DriverPage() {
@@ -23,7 +29,8 @@ export default function DriverPage() {
             Drive with BAMBI
           </h1>
           <p className="text-lg text-taxi-gray max-w-2xl mx-auto">
-            Join thousands of drivers earning flexible income on their own schedule
+            Join thousands of drivers earning flexible income on their own
+            schedule
           </p>
         </div>
 
@@ -50,11 +57,13 @@ export default function DriverPage() {
                   <div className="text-sm text-taxi-gray">Weekly Potential</div>
                 </div>
               </div>
-              
+
               <div className="space-y-3">
                 <div className="flex items-center">
                   <Clock className="w-5 h-5 text-primary mr-3" />
-                  <span className="text-taxi-dark">Drive on your own schedule</span>
+                  <span className="text-taxi-dark">
+                    Drive on your own schedule
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <DollarSign className="w-5 h-5 text-primary mr-3" />
@@ -62,7 +71,9 @@ export default function DriverPage() {
                 </div>
                 <div className="flex items-center">
                   <Shield className="w-5 h-5 text-primary mr-3" />
-                  <span className="text-taxi-dark">Insurance coverage included</span>
+                  <span className="text-taxi-dark">
+                    Insurance coverage included
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <Smartphone className="w-5 h-5 text-primary mr-3" />
@@ -92,24 +103,46 @@ export default function DriverPage() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between p-3 bg-success/10 rounded-lg">
                   <span className="text-taxi-dark">Valid driver's license</span>
-                  <Badge variant="secondary" className="bg-success text-success-foreground">Required</Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-success text-success-foreground"
+                  >
+                    Required
+                  </Badge>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-success/10 rounded-lg">
                   <span className="text-taxi-dark">Vehicle insurance</span>
-                  <Badge variant="secondary" className="bg-success text-success-foreground">Required</Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-success text-success-foreground"
+                  >
+                    Required
+                  </Badge>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-success/10 rounded-lg">
                   <span className="text-taxi-dark">Background check</span>
-                  <Badge variant="secondary" className="bg-success text-success-foreground">Required</Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-success text-success-foreground"
+                  >
+                    Required
+                  </Badge>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-warning/10 rounded-lg">
                   <span className="text-taxi-dark">Vehicle inspection</span>
-                  <Badge variant="secondary" className="bg-warning text-warning-foreground">Optional</Badge>
+                  <Badge
+                    variant="secondary"
+                    className="bg-warning text-warning-foreground"
+                  >
+                    Optional
+                  </Badge>
                 </div>
               </div>
 
               <div className="pt-4 border-t border-gray-200">
-                <h4 className="font-medium text-taxi-dark mb-2">Vehicle Requirements:</h4>
+                <h4 className="font-medium text-taxi-dark mb-2">
+                  Vehicle Requirements:
+                </h4>
                 <ul className="text-sm text-taxi-gray space-y-1">
                   <li>• 2010 or newer model year</li>
                   <li>• 4-door vehicle</li>
@@ -126,27 +159,33 @@ export default function DriverPage() {
           <Card className="shadow-lg bg-white/80 backdrop-blur-sm border-0 text-center">
             <CardContent className="p-6">
               <Navigation className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="font-semibold text-taxi-dark mb-2">Smart Navigation</h3>
+              <h3 className="font-semibold text-taxi-dark mb-2">
+                Smart Navigation
+              </h3>
               <p className="text-taxi-gray text-sm">
                 Built-in GPS with traffic optimization and route suggestions
               </p>
             </CardContent>
           </Card>
-          
+
           <Card className="shadow-lg bg-white/80 backdrop-blur-sm border-0 text-center">
             <CardContent className="p-6">
               <Users className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="font-semibold text-taxi-dark mb-2">Driver Community</h3>
+              <h3 className="font-semibold text-taxi-dark mb-2">
+                Driver Community
+              </h3>
               <p className="text-taxi-gray text-sm">
                 Connect with other drivers and access 24/7 support
               </p>
             </CardContent>
           </Card>
-          
+
           <Card className="shadow-lg bg-white/80 backdrop-blur-sm border-0 text-center">
             <CardContent className="p-6">
               <Star className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="font-semibold text-taxi-dark mb-2">Earn Bonuses</h3>
+              <h3 className="font-semibold text-taxi-dark mb-2">
+                Earn Bonuses
+              </h3>
               <p className="text-taxi-gray text-sm">
                 Weekly bonuses, surge pricing, and referral rewards
               </p>
@@ -161,16 +200,20 @@ export default function DriverPage() {
               Ready to Start Earning?
             </h2>
             <p className="text-primary-foreground/90 mb-6 max-w-2xl mx-auto">
-              Join BAMBI today and start earning money on your schedule. 
-              The application process takes just minutes.
+              Join BAMBI today and start earning money on your schedule. The
+              application process takes just minutes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="text-lg px-8 py-4 h-auto">
+              <Button
+                size="lg"
+                variant="secondary"
+                className="text-lg px-8 py-4 h-auto"
+              >
                 Apply to Drive
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
+              <Button
+                size="lg"
+                variant="outline"
                 className="text-lg px-8 py-4 h-auto border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
               >
                 Learn More
