@@ -38,6 +38,8 @@ import {
   Phone,
   User,
 } from "lucide-react";
+import { useCurrency } from "@/hooks/use-currency";
+import { formatCurrency } from "@shared/currency";
 
 interface Trip {
   id: string;
