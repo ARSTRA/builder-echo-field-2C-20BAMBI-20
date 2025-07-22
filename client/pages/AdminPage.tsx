@@ -78,6 +78,7 @@ import {
   Heart,
   LogOut,
   User,
+  Timer,
   Bitcoin,
   Smartphone,
   Banknote,
