@@ -10,6 +10,8 @@ import { MobileNavigation } from "@/components/MobileNavigation";
 import Index from "./pages/Index";
 import PassengerHome from "./pages/passenger/PassengerHome";
 import BookingPage from "./pages/passenger/BookingPage";
+import HistoryPage from "./pages/passenger/HistoryPage";
+import NotificationsPage from "./pages/passenger/NotificationsPage";
 import RidePage from "./pages/RidePage";
 import DriverPage from "./pages/DriverPage";
 import AdminPage from "./pages/AdminPage";
