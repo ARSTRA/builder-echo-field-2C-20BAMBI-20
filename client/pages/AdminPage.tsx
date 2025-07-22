@@ -85,12 +85,14 @@ import {
   Target,
   Timer,
   Route,
+  LogOut,
 } from "lucide-react";
 
 export default function AdminPage() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedRide, setSelectedRide] = useState(null);
   const [activeModule, setActiveModule] = useState("dashboard");
+  const { user, logout } = useAdminAuth();
 
   const stats = [
     { label: "Active Drivers", value: "2,847", icon: Users, trend: "+12%" },
