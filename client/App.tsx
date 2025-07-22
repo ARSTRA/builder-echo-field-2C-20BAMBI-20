@@ -25,6 +25,14 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// Development helper for admin access
+if (typeof window !== 'undefined') {
+  console.log('%c🔐 BAMBI Admin Access', 'color: #f59e0b; font-weight: bold; font-size: 16px;');
+  console.log('%cURL: /admin/login', 'color: #3b82f6; font-weight: bold;');
+  console.log('%cEmail: admin@bambi.com', 'color: #10b981;');
+  console.log('%cPassword: admin123', 'color: #10b981;');
+}
+
 function AppContent() {
   const location = useLocation();
 
