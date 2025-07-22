@@ -123,36 +123,67 @@ export default function RidePage() {
   const vehicleOptions = [
     {
       id: "economy",
-      name: "Economy",
-      description: "Affordable everyday rides",
-      icon: "🚗",
+      name: "EcoRide",
+      subtitle: "Smart & Sustainable",
+      description: "Perfect for budget-conscious travelers who care about the environment. Featuring fuel-efficient vehicles with modern amenities.",
+      features: ["Eco-friendly", "Budget-friendly", "GPS tracking", "Clean interior"],
+      icon: "🌱",
       basePrice: 8,
       perKm: 1.2,
       eta: "2-5 min",
       passengers: 4,
-      image: "https://images.unsplash.com/photo-1549924231-f129b911e442?w=400&h=200&fit=crop&crop=center"
+      rating: 4.8,
+      savingsText: "Save 30%",
+      color: "emerald",
+      image: "https://images.unsplash.com/photo-1523983302122-73e869e1f850?w=500&h=300&fit=crop&crop=center"
     },
     {
       id: "comfort",
-      name: "Comfort",
-      description: "More space and comfort",
-      icon: "🚙",
+      name: "ComfortPlus",
+      subtitle: "Premium Experience",
+      description: "The perfect balance of comfort and value. Spacious interiors, professional drivers, and enhanced safety features.",
+      features: ["Extra legroom", "Climate control", "Premium audio", "Phone charging"],
+      icon: "✨",
       basePrice: 12,
       perKm: 1.8,
       eta: "3-7 min",
       passengers: 4,
-      image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&h=200&fit=crop&crop=center"
+      rating: 4.9,
+      popularText: "Most Popular",
+      color: "blue",
+      image: "https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=500&h=300&fit=crop&crop=center"
     },
     {
       id: "premium",
-      name: "Premium",
-      description: "Luxury vehicles",
-      icon: "🚘",
+      name: "Executive",
+      subtitle: "Luxury Redefined",
+      description: "First-class travel experience with premium vehicles, top-rated drivers, and exclusive amenities for discerning passengers.",
+      features: ["Luxury vehicles", "Executive service", "Complimentary water", "Priority support"],
+      icon: "👑",
       basePrice: 20,
       perKm: 2.5,
       eta: "5-10 min",
       passengers: 4,
-      image: "https://images.unsplash.com/photo-1563720223-b09b1bd4f6c2?w=400&h=200&fit=crop&crop=center"
+      rating: 5.0,
+      premiumText: "VIP Experience",
+      color: "purple",
+      image: "https://images.unsplash.com/photo-1563720223-b09b1bd4f6c2?w=500&h=300&fit=crop&crop=center"
+    },
+    {
+      id: "xl",
+      name: "GroupXL",
+      subtitle: "Perfect for Groups",
+      description: "Spacious vehicles for larger groups and families. Extra luggage space and comfortable seating for up to 6 passengers.",
+      features: ["6+ passengers", "Extra luggage space", "Family-friendly", "Group discounts"],
+      icon: "👥",
+      basePrice: 16,
+      perKm: 2.2,
+      eta: "4-8 min",
+      passengers: 6,
+      rating: 4.7,
+      groupText: "Best for Groups",
+      color: "orange",
+      image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=500&h=300&fit=crop&crop=center"
     }
   ];
 
@@ -619,65 +650,179 @@ export default function RidePage() {
                   </CardContent>
                 </Card>
 
-                {/* Car Selection Tab */}
-                <Card className="shadow-lg">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="flex items-center">
-                      <Car className="w-5 h-5 mr-2 text-blue-600" />
-                      Vehicle Selection
+                {/* Vehicle Selection Section */}
+                <Card className="shadow-2xl border-0 bg-gradient-to-br from-white to-gray-50/50 overflow-hidden">
+                  <CardHeader className="pb-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                    <CardTitle className="flex items-center justify-center text-2xl">
+                      <Car className="w-7 h-7 mr-3 text-yellow-300" />
+                      Choose Your Perfect Ride
                     </CardTitle>
+                    <CardDescription className="text-center text-blue-100 mt-2">
+                      Select from our premium fleet designed for every journey and budget
+                    </CardDescription>
                   </CardHeader>
-                  <CardContent className="pt-0 space-y-4">
-                    {vehicleOptions.map((vehicle) => (
-                      <div
-                        key={vehicle.id}
-                        className={`relative overflow-hidden rounded-xl border-2 cursor-pointer transition-all ${
-                          selectedVehicle === vehicle.id
-                            ? "border-blue-500 bg-blue-50"
-                            : "border-gray-200 hover:border-gray-300"
-                        }`}
-                        onClick={() => {
-                          setSelectedVehicle(vehicle.id);
-                          toast.success(`${vehicle.name} selected`);
-                        }}
-                      >
-                        <div 
-                          className="h-24 bg-cover bg-center"
-                          style={{ backgroundImage: `url(${vehicle.image})` }}
-                        >
-                          <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
-                        </div>
-                        <div className="p-4">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-3">
-                              <div className="text-2xl">{vehicle.icon}</div>
-                              <div>
-                                <h3 className="font-semibold text-gray-900">{vehicle.name}</h3>
-                                <p className="text-sm text-gray-600">{vehicle.description}</p>
-                                <div className="flex items-center space-x-3 mt-1">
-                                  <span className="text-xs text-gray-500">
-                                    <Users className="w-3 h-3 inline mr-1" />
-                                    {vehicle.passengers} seats
-                                  </span>
-                                  <span className="text-xs text-gray-500">
-                                    <Clock className="w-3 h-3 inline mr-1" />
-                                    {vehicle.eta}
-                                  </span>
+                  <CardContent className="pt-8 px-6 space-y-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      {vehicleOptions.map((vehicle) => {
+                        const colorClasses = {
+                          emerald: {
+                            selected: "border-emerald-500 bg-gradient-to-br from-emerald-50 to-green-50 shadow-emerald-200",
+                            hover: "hover:border-emerald-300 hover:shadow-emerald-100",
+                            accent: "text-emerald-600",
+                            badge: "bg-emerald-500",
+                            icon: "bg-gradient-to-br from-emerald-400 to-green-500"
+                          },
+                          blue: {
+                            selected: "border-blue-500 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-blue-200",
+                            hover: "hover:border-blue-300 hover:shadow-blue-100",
+                            accent: "text-blue-600",
+                            badge: "bg-blue-500",
+                            icon: "bg-gradient-to-br from-blue-400 to-indigo-500"
+                          },
+                          purple: {
+                            selected: "border-purple-500 bg-gradient-to-br from-purple-50 to-pink-50 shadow-purple-200",
+                            hover: "hover:border-purple-300 hover:shadow-purple-100",
+                            accent: "text-purple-600",
+                            badge: "bg-purple-500",
+                            icon: "bg-gradient-to-br from-purple-400 to-pink-500"
+                          },
+                          orange: {
+                            selected: "border-orange-500 bg-gradient-to-br from-orange-50 to-yellow-50 shadow-orange-200",
+                            hover: "hover:border-orange-300 hover:shadow-orange-100",
+                            accent: "text-orange-600",
+                            badge: "bg-orange-500",
+                            icon: "bg-gradient-to-br from-orange-400 to-yellow-500"
+                          }
+                        };
+
+                        const colors = colorClasses[vehicle.color];
+                        const isSelected = selectedVehicle === vehicle.id;
+
+                        return (
+                          <div
+                            key={vehicle.id}
+                            className={`relative overflow-hidden rounded-2xl border-2 cursor-pointer transition-all duration-300 transform hover:scale-[1.02] ${
+                              isSelected
+                                ? `${colors.selected} shadow-xl scale-[1.02]`
+                                : `border-gray-200 bg-white ${colors.hover} shadow-lg hover:shadow-xl`
+                            }`}
+                            onClick={() => {
+                              setSelectedVehicle(vehicle.id);
+                              toast.success(`${vehicle.name} selected - ${vehicle.subtitle}`);
+                            }}
+                          >
+                            {/* Premium Badge */}
+                            {(vehicle.popularText || vehicle.savingsText || vehicle.premiumText || vehicle.groupText) && (
+                              <div className="absolute top-4 right-4 z-20">
+                                <Badge className={`${colors.badge} text-white px-3 py-1 text-xs font-bold shadow-lg`}>
+                                  {vehicle.popularText || vehicle.savingsText || vehicle.premiumText || vehicle.groupText}
+                                </Badge>
+                              </div>
+                            )}
+
+                            {/* Vehicle Image */}
+                            <div className="relative h-40 overflow-hidden">
+                              <img
+                                src={vehicle.image}
+                                alt={vehicle.name}
+                                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+
+                              {/* Vehicle Icon */}
+                              <div className={`absolute top-4 left-4 w-12 h-12 ${colors.icon} rounded-full flex items-center justify-center shadow-lg`}>
+                                <span className="text-2xl">{vehicle.icon}</span>
+                              </div>
+
+                              {/* Rating */}
+                              <div className="absolute bottom-4 left-4 flex items-center space-x-1 bg-white/90 backdrop-blur-sm rounded-full px-2 py-1">
+                                <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                                <span className="text-xs font-bold text-gray-800">{vehicle.rating}</span>
+                              </div>
+                            </div>
+
+                            {/* Content */}
+                            <div className="p-6 space-y-4">
+                              {/* Header */}
+                              <div className="flex items-start justify-between">
+                                <div className="flex-1">
+                                  <h3 className="text-xl font-bold text-gray-900 mb-1">{vehicle.name}</h3>
+                                  <p className={`text-sm font-medium ${colors.accent} mb-2`}>{vehicle.subtitle}</p>
+                                  <p className="text-sm text-gray-600 leading-relaxed">{vehicle.description}</p>
+                                </div>
+                                <div className="text-right ml-4">
+                                  <div className={`text-2xl font-bold ${colors.accent}`}>
+                                    ${vehicle.basePrice}
+                                  </div>
+                                  <div className="text-xs text-gray-500">
+                                    +${vehicle.perKm}/km
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            <div className="text-right">
-                              <div className="text-lg font-bold text-blue-600">
-                                ${vehicle.basePrice}+
+
+                              {/* Features */}
+                              <div className="grid grid-cols-2 gap-2">
+                                {vehicle.features.map((feature, index) => (
+                                  <div key={index} className="flex items-center space-x-1 text-xs text-gray-600">
+                                    <CheckCircle className={`w-3 h-3 ${colors.accent}`} />
+                                    <span>{feature}</span>
+                                  </div>
+                                ))}
                               </div>
-                              <div className="text-xs text-gray-500">
-                                ${vehicle.perKm}/km
+
+                              {/* Stats */}
+                              <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                                <div className="flex items-center space-x-4">
+                                  <div className="flex items-center space-x-1 text-sm text-gray-500">
+                                    <Users className="w-4 h-4" />
+                                    <span>{vehicle.passengers} seats</span>
+                                  </div>
+                                  <div className="flex items-center space-x-1 text-sm text-gray-500">
+                                    <Clock className="w-4 h-4" />
+                                    <span>{vehicle.eta}</span>
+                                  </div>
+                                </div>
+
+                                {/* Selection Indicator */}
+                                {isSelected && (
+                                  <div className={`flex items-center space-x-1 text-sm font-medium ${colors.accent}`}>
+                                    <CheckCircle className="w-4 h-4" />
+                                    <span>Selected</span>
+                                  </div>
+                                )}
                               </div>
                             </div>
+
+                            {/* Selection Overlay */}
+                            {isSelected && (
+                              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none">
+                                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                  <CheckCircle className={`w-16 h-16 ${colors.accent} opacity-20`} />
+                                </div>
+                              </div>
+                            )}
                           </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Additional Info */}
+                    <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-200/50">
+                      <div className="flex items-center justify-center space-x-6 text-sm text-gray-600">
+                        <div className="flex items-center space-x-2">
+                          <Shield className="w-4 h-4 text-green-500" />
+                          <span>All vehicles insured & verified</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <Zap className="w-4 h-4 text-yellow-500" />
+                          <span>Real-time GPS tracking</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <Star className="w-4 h-4 text-blue-500" />
+                          <span>Professional drivers</span>
                         </div>
                       </div>
-                    ))}
+                    </div>
                   </CardContent>
                 </Card>
 
