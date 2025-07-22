@@ -426,15 +426,24 @@ export default function RidePage() {
       <div className="bg-white/90 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-blue-500 rounded-xl flex items-center justify-center">
-                <Car className="w-6 h-6 text-white" />
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="flex items-center space-x-3 hover:opacity-80 transition-opacity cursor-pointer group"
+            >
+              <div className="relative">
+                <div className="w-12 h-12 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                  <span className="relative text-white font-black text-lg tracking-wider">B</span>
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold text-xs">🚕</span>
+                </div>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">SmartCommute</h1>
-                <p className="text-sm text-gray-600">Your ride companion</p>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">BAMBI</h1>
+                <p className="text-sm text-gray-600">Beautiful Rides, Anywhere</p>
               </div>
-            </div>
+            </button>
             
             <div className="flex items-center space-x-2">
               <Button 
@@ -1652,7 +1661,7 @@ export default function RidePage() {
                       <div className="flex items-center space-x-3">
                         <Wallet className="w-6 h-6 text-purple-600" />
                         <div>
-                          <p className="font-medium">SmartCommute Wallet</p>
+                          <p className="font-medium">BAMBI Wallet</p>
                           <p className="text-sm text-gray-500">${walletBalance.toFixed(2)} available</p>
                         </div>
                       </div>
@@ -1931,8 +1940,19 @@ export default function RidePage() {
                 <Car className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">SmartCommute</h2>
-                <p className="text-xl text-blue-200">Revolutionizing Urban Transportation</p>
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-2 flex items-center justify-center">
+                  <div className="relative mr-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-3xl flex items-center justify-center shadow-2xl">
+                      <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-3xl opacity-30"></div>
+                      <span className="relative text-white font-black text-3xl tracking-wider">B</span>
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                      <span className="text-white font-bold text-sm">🚕</span>
+                    </div>
+                  </div>
+                  BAMBI
+                </h2>
+                <p className="text-xl text-blue-200">Beautiful Rides, Anywhere</p>
               </div>
             </div>
           </div>
@@ -1947,7 +1967,7 @@ export default function RidePage() {
                   Our Mission
                 </h3>
                 <p className="text-blue-100 leading-relaxed mb-6 text-lg">
-                  At SmartCommute, we're transforming the way people move through cities. Founded in 2018,
+                  At BAMBI, we're transforming the way people move through cities. Founded in 2018,
                   we've built the most advanced, reliable, and user-friendly transportation platform that
                   connects millions of riders with professional drivers worldwide.
                 </p>
@@ -2011,7 +2031,7 @@ export default function RidePage() {
 
           {/* Features Grid */}
           <div className="mb-16">
-            <h3 className="text-3xl font-bold text-white text-center mb-12">Why Choose SmartCommute?</h3>
+            <h3 className="text-3xl font-bold text-white text-center mb-12">Why Choose BAMBI?</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 text-center hover:bg-white/15 transition-colors">
                 <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -2088,7 +2108,7 @@ export default function RidePage() {
               <div className="space-y-4">
                 <div className="flex items-center space-x-3 text-blue-100">
                   <Mail className="w-5 h-5 text-blue-400" />
-                  <span>support@smartcommute.com</span>
+                  <span>support@bambi.com</span>
                 </div>
                 <div className="flex items-center space-x-3 text-blue-100">
                   <Phone className="w-5 h-5 text-green-400" />
@@ -2131,7 +2151,7 @@ export default function RidePage() {
           {/* Bottom Bar */}
           <div className="mt-16 pt-8 border-t border-white/20 text-center">
             <p className="text-blue-200 text-sm mb-4">
-              © 2024 SmartCommute Inc. All rights reserved. | Privacy Policy | Terms of Service | Accessibility
+              © 2024 BAMBI Inc. All rights reserved. | Privacy Policy | Terms of Service | Accessibility
             </p>
             <div className="flex items-center justify-center space-x-6">
               <Button
