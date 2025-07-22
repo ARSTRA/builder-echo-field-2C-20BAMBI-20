@@ -636,11 +636,13 @@ export default function AdminPage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="sm"
                 className="bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 border-0"
-                onClick={() => handleAction("Filter Users")}
+                onClick={() => {
+                  toast({title: "Filter Applied", description: "User filter has been applied"});
+                }}
                 disabled={isLoading}
               >
                 <Filter className="w-4 h-4" />
