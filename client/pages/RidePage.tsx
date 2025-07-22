@@ -923,7 +923,7 @@ export default function RidePage() {
                               className="flex-1"
                               onKeyPress={(e) => {
                                 if (e.key === 'Enter') {
-                                  const promoValue = e.target.value;
+                                  const promoValue = (e.target as HTMLInputElement).value;
                                   if (promoValue.toLowerCase() === 'save20') {
                                     const discountedPrice = (parseFloat(estimatedFare.total) * 0.8).toFixed(2);
                                     setEstimatedFare(prev => ({ ...prev, total: discountedPrice, promoApplied: 'SAVE20' }));
