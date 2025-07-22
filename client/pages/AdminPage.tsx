@@ -1338,20 +1338,50 @@ export default function AdminPage() {
 
         {/* Mobile Navigation */}
         <div className="lg:hidden">
-          <div className="flex items-center justify-between p-4 bg-white/90 backdrop-blur-md border-b border-gray-200">
-            <h1 className="text-xl font-bold text-taxi-dark">BAMBI Admin</h1>
-            <Select value={activeModule} onValueChange={setActiveModule}>
-              <SelectTrigger className="w-48">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {navigationItems.map((item) => (
-                  <SelectItem key={item.id} value={item.id}>
-                    {item.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <div className="bg-white/90 backdrop-blur-md border-b border-gray-200">
+            <div className="flex items-center justify-between p-4">
+              <h1 className="text-xl font-bold text-taxi-dark">BAMBI Admin</h1>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={logout}
+                className="flex items-center"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </Button>
+            </div>
+
+            {/* User Info on Mobile */}
+            <div className="px-4 pb-4">
+              <div className="bg-primary/5 rounded-lg p-3">
+                <div className="flex items-center">
+                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                    <User className="w-4 h-4 text-primary-foreground" />
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-taxi-dark">{user?.name}</p>
+                    <p className="text-xs text-taxi-gray">{user?.email}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Module Selector */}
+            <div className="px-4 pb-4">
+              <Select value={activeModule} onValueChange={setActiveModule}>
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {navigationItems.map((item) => (
+                    <SelectItem key={item.id} value={item.id}>
+                      {item.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
 
