@@ -306,24 +306,74 @@ export default function DriverDashboard() {
           <div className="flex items-center justify-between">
             <button
               onClick={() => (window.location.href = "/")}
-              className="flex items-center space-x-3 hover:opacity-80 transition-opacity cursor-pointer group"
+              className="flex items-center space-x-3 hover:scale-105 transition-all duration-300 cursor-pointer group"
             >
               <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                  <span className="relative text-white font-black text-lg tracking-wider">
-                    B
-                  </span>
+                {/* Professional Driver SVG Logo */}
+                <div className="w-12 h-12 group-hover:rotate-3 transition-transform duration-300">
+                  <svg
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="drop-shadow-lg group-hover:drop-shadow-xl transition-all duration-300"
+                  >
+                    <defs>
+                      <linearGradient id="driverBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#10B981" />
+                        <stop offset="30%" stopColor="#3B82F6" />
+                        <stop offset="70%" stopColor="#8B5CF6" />
+                        <stop offset="100%" stopColor="#EC4899" />
+                      </linearGradient>
+                      <linearGradient id="driverCarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#F59E0B" />
+                        <stop offset="100%" stopColor="#EF4444" />
+                      </linearGradient>
+                      <linearGradient id="driverBGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FFFFFF" />
+                        <stop offset="100%" stopColor="#F1F5F9" />
+                      </linearGradient>
+                    </defs>
+
+                    {/* Main Background */}
+                    <circle cx="24" cy="24" r="22" fill="url(#driverBgGradient)" stroke="#FFFFFF" strokeWidth="2"/>
+
+                    {/* Driver Steering Wheel */}
+                    <circle cx="24" cy="24" r="12" fill="none" stroke="#FFFFFF" strokeWidth="2" opacity="0.7"/>
+                    <circle cx="24" cy="24" r="3" fill="#FFFFFF"/>
+                    <path d="M24 12 L24 16 M24 32 L24 36 M12 24 L16 24 M32 24 L36 24" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round"/>
+
+                    {/* Letter B */}
+                    <g transform="translate(14, 12)">
+                      <path
+                        d="M0 0 L0 20 L10 20 Q15 20 15 15 Q15 12.5 12.5 11.25 Q15 10 15 7.5 Q15 0 10 0 Z M4 4 L10 4 Q10 4 10 7.5 Q10 10 8 10 L4 10 Z M4 12 L10 12 Q12.5 12 12.5 15 Q12.5 17 10 17 L4 17 Z"
+                        fill="url(#driverBGradient)"
+                        stroke="#3B82F6"
+                        strokeWidth="0.5"
+                      />
+                    </g>
+
+                    {/* Speed indicators */}
+                    <g className="animate-pulse">
+                      <circle cx="38" cy="14" r="1" fill="#10B981" opacity="0.8" />
+                      <circle cx="10" cy="34" r="1" fill="#F59E0B" opacity="0.8" />
+                      <circle cx="38" cy="34" r="1" fill="#EC4899" opacity="0.8" />
+                    </g>
+                  </svg>
                 </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
+
+                {/* Driver Badge */}
+                <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
                   <Car className="w-2.5 h-2.5 text-white" />
                 </div>
               </div>
-              <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+
+              <div className="group-hover:translate-x-1 transition-transform duration-300">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent tracking-wide">
                   BAMBI Driver
                 </h1>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm bg-gradient-to-r from-gray-600 to-gray-500 bg-clip-text text-transparent font-medium">
                   Professional driver dashboard
                 </p>
               </div>
