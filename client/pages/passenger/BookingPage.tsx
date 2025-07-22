@@ -450,12 +450,17 @@ export default function BookingPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold text-primary">
-                      ${vehicle.basePrice}+
+                    <div className={`text-lg font-bold ${vehicle.isVip ? 'text-yellow-700' : 'text-primary'}`}>
+                      {formatAmount(vehicle.basePrice)}+
                     </div>
                     <div className="text-xs text-taxi-gray">
-                      ${vehicle.perKm}/km
+                      {formatAmount(vehicle.perKm)}/km
                     </div>
+                    {vehicle.isVip && (
+                      <div className="text-xs text-yellow-600 font-medium mt-1">
+                        Premium Service
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
