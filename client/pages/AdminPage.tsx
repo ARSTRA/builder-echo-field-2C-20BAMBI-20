@@ -120,6 +120,16 @@ export default function AdminPage() {
   const [showWalletManagerDialog, setShowWalletManagerDialog] = useState(false);
   const [showZoneDialog, setShowZoneDialog] = useState(false);
   const [showPriceDialog, setShowPriceDialog] = useState(false);
+  const [chatMessages, setChatMessages] = useState<any[]>([]);
+  const [activeChatUser, setActiveChatUser] = useState<any>(null);
+  const [newMessage, setNewMessage] = useState("");
+  const [chatUsers, setChatUsers] = useState<any[]>([
+    { id: 1, name: "John Doe", avatar: "JD", lastMessage: "Need help with my ride", time: "2 min ago", unread: 3, status: "online" },
+    { id: 2, name: "Sarah Smith", avatar: "SS", lastMessage: "Payment issue", time: "5 min ago", unread: 1, status: "online" },
+    { id: 3, name: "Mike Johnson", avatar: "MJ", lastMessage: "Thanks for the help!", time: "10 min ago", unread: 0, status: "offline" },
+    { id: 4, name: "Emma Brown", avatar: "EB", lastMessage: "Driver was late", time: "15 min ago", unread: 2, status: "online" },
+    { id: 5, name: "David Wilson", avatar: "DW", lastMessage: "Great service!", time: "1 hour ago", unread: 0, status: "away" },
+  ]);
 
   // Show loading if user data is not yet available
   if (!user) {
