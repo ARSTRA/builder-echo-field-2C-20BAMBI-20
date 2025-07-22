@@ -468,24 +468,128 @@ export default function RidePage() {
           <div className="flex items-center justify-between">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="flex items-center space-x-3 hover:opacity-80 transition-opacity cursor-pointer group"
+              className="flex items-center space-x-3 hover:scale-105 transition-all duration-300 cursor-pointer group"
             >
               <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                  <span className="relative text-white font-black text-lg tracking-wider">
-                    B
-                  </span>
+                {/* Professional SVG Logo */}
+                <div className="w-14 h-14 group-hover:rotate-3 transition-transform duration-300">
+                  <svg
+                    width="56"
+                    height="56"
+                    viewBox="0 0 56 56"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="drop-shadow-lg group-hover:drop-shadow-xl transition-all duration-300"
+                  >
+                    {/* Background Circle with Gradient */}
+                    <defs>
+                      <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FF6B9D" />
+                        <stop offset="30%" stopColor="#8B5CF6" />
+                        <stop offset="70%" stopColor="#3B82F6" />
+                        <stop offset="100%" stopColor="#06B6D4" />
+                      </linearGradient>
+                      <linearGradient id="carGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#FBBF24" />
+                        <stop offset="50%" stopColor="#F59E0B" />
+                        <stop offset="100%" stopColor="#D97706" />
+                      </linearGradient>
+                      <linearGradient id="roadGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#6366F1" />
+                        <stop offset="100%" stopColor="#8B5CF6" />
+                      </linearGradient>
+                      <linearGradient id="bGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FFFFFF" />
+                        <stop offset="50%" stopColor="#F1F5F9" />
+                        <stop offset="100%" stopColor="#E2E8F0" />
+                      </linearGradient>
+                    </defs>
+
+                    {/* Main Background Circle */}
+                    <circle cx="28" cy="28" r="26" fill="url(#bgGradient)" stroke="#FFFFFF" strokeWidth="2"/>
+
+                    {/* Inner Glow Effect */}
+                    <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>
+
+                    {/* Stylized Road/Path */}
+                    <path
+                      d="M8 30 Q20 25 28 30 Q36 35 48 30"
+                      stroke="url(#roadGradient)"
+                      strokeWidth="3"
+                      fill="none"
+                      strokeLinecap="round"
+                      className="animate-pulse"
+                    />
+
+                    {/* Road Lines */}
+                    <path
+                      d="M12 30 L16 30 M24 30 L28 30 M36 30 L40 30"
+                      stroke="#FFFFFF"
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      opacity="0.8"
+                    />
+
+                    {/* Stylized Car */}
+                    <g transform="translate(35, 26)">
+                      <ellipse cx="0" cy="0" rx="8" ry="4" fill="url(#carGradient)" />
+                      <circle cx="-4" cy="2" r="1.5" fill="#1F2937" />
+                      <circle cx="4" cy="2" r="1.5" fill="#1F2937" />
+                      <rect x="-6" y="-2" width="4" height="2" rx="1" fill="#F3F4F6" opacity="0.9" />
+                    </g>
+
+                    {/* Letter B - Artistic Design */}
+                    <g transform="translate(16, 14)">
+                      <path
+                        d="M0 0 L0 24 L12 24 Q18 24 18 18 Q18 15 15 13.5 Q18 12 18 9 Q18 0 12 0 Z M6 6 L12 6 Q12 6 12 9 Q12 12 9 12 L6 12 Z M6 15 L12 15 Q15 15 15 18 Q15 21 12 21 L6 21 Z"
+                        fill="url(#bGradient)"
+                        stroke="#3B82F6"
+                        strokeWidth="0.5"
+                      />
+                    </g>
+
+                    {/* Speed/Motion Lines */}
+                    <g opacity="0.6">
+                      <path d="M6 20 L12 20" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" />
+                      <path d="M4 24 L10 24" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" />
+                      <path d="M6 36 L12 36" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" />
+                    </g>
+
+                    {/* Sparkle Effects */}
+                    <g className="animate-pulse">
+                      <circle cx="42" cy="16" r="1" fill="#FBBF24" opacity="0.8" />
+                      <circle cx="12" cy="42" r="1.5" fill="#FF6B9D" opacity="0.8" />
+                      <circle cx="44" cy="44" r="1" fill="#8B5CF6" opacity="0.8" />
+                    </g>
+
+                    {/* Top Accent Ring */}
+                    <circle
+                      cx="28"
+                      cy="28"
+                      r="24"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.2)"
+                      strokeWidth="0.5"
+                      strokeDasharray="4 4"
+                      className="animate-spin"
+                      style={{ animationDuration: '20s' }}
+                    />
+                  </svg>
                 </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-xs">🚕</span>
+
+                {/* Premium Badge */}
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="white" />
+                  </svg>
                 </div>
               </div>
-              <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+
+              <div className="group-hover:translate-x-1 transition-transform duration-300">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent tracking-wide">
                   BAMBI
                 </h1>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm bg-gradient-to-r from-gray-600 to-gray-500 bg-clip-text text-transparent font-medium">
                   Beautiful Rides, Anywhere
                 </p>
               </div>
