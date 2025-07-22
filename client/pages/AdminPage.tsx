@@ -1361,6 +1361,318 @@ export default function AdminPage() {
           </main>
         </div>
       </div>
+
+      {/* User Details/Edit Dialog */}
+      <Dialog open={showUserDialog} onOpenChange={setShowUserDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>{selectedUser ? `User: ${selectedUser.name}` : "User Details"}</DialogTitle>
+            <DialogDescription>View and edit user information</DialogDescription>
+          </DialogHeader>
+          {selectedUser && (
+            <div className="space-y-4 pt-4">
+              <div>
+                <Label>Name</Label>
+                <Input defaultValue={selectedUser.name} />
+              </div>
+              <div>
+                <Label>Email</Label>
+                <Input defaultValue={selectedUser.email} />
+              </div>
+              <div>
+                <Label>Phone</Label>
+                <Input defaultValue={selectedUser.phone} />
+              </div>
+              <div>
+                <Label>Status</Label>
+                <Select defaultValue={selectedUser.status}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="active">Active</SelectItem>
+                    <SelectItem value="suspended">Suspended</SelectItem>
+                    <SelectItem value="banned">Banned</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+                  onClick={() => {
+                    toast({title: "User Updated", description: `${selectedUser.name}'s information has been updated`});
+                    setShowUserDialog(false);
+                  }}
+                  disabled={isLoading}
+                >
+                  Save Changes
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => setShowUserDialog(false)}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Driver Dialog */}
+      <Dialog open={showDriverDialog} onOpenChange={setShowDriverDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Add New Driver</DialogTitle>
+            <DialogDescription>Register a new driver to the platform</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 pt-4">
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <Label>First Name</Label>
+                <Input placeholder="John" />
+              </div>
+              <div>
+                <Label>Last Name</Label>
+                <Input placeholder="Doe" />
+              </div>
+            </div>
+            <div>
+              <Label>Email</Label>
+              <Input placeholder="john.driver@example.com" />
+            </div>
+            <div>
+              <Label>Phone</Label>
+              <Input placeholder="+1 (555) 123-4567" />
+            </div>
+            <div>
+              <Label>License Number</Label>
+              <Input placeholder="DL123456789" />
+            </div>
+            <div>
+              <Label>Vehicle Type</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select vehicle type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="sedan">Sedan</SelectItem>
+                  <SelectItem value="suv">SUV</SelectItem>
+                  <SelectItem value="hatchback">Hatchback</SelectItem>
+                  <SelectItem value="luxury">Luxury</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+                onClick={() => {
+                  toast({title: "Driver Added", description: "New driver has been registered successfully"});
+                  setShowDriverDialog(false);
+                }}
+                disabled={isLoading}
+              >
+                Register Driver
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => setShowDriverDialog(false)}
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Manual Transaction Dialog */}
+      <Dialog open={showTransactionDialog} onOpenChange={setShowTransactionDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Manual Transaction</DialogTitle>
+            <DialogDescription>Create a manual transaction entry</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 pt-4">
+            <div>
+              <Label>User</Label>
+              <Input placeholder="Enter user email or name" />
+            </div>
+            <div>
+              <Label>Transaction Type</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select transaction type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="ride_payment">Ride Payment</SelectItem>
+                  <SelectItem value="driver_payout">Driver Payout</SelectItem>
+                  <SelectItem value="wallet_topup">Wallet Top-up</SelectItem>
+                  <SelectItem value="refund">Refund</SelectItem>
+                  <SelectItem value="bonus">Bonus</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label>Amount</Label>
+              <Input placeholder="$0.00" type="number" />
+            </div>
+            <div>
+              <Label>Payment Method</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select payment method" />
+                </SelectTrigger>
+                <SelectContent>
+                  {paymentMethods.map((method) => (
+                    <SelectItem key={method.id} value={method.id}>
+                      {method.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label>Description</Label>
+              <Input placeholder="Transaction description" />
+            </div>
+            <div className="flex gap-2">
+              <Button
+                className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+                onClick={() => {
+                  toast({title: "Transaction Created", description: "Manual transaction has been processed successfully"});
+                  setShowTransactionDialog(false);
+                }}
+                disabled={isLoading}
+              >
+                Process Transaction
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => setShowTransactionDialog(false)}
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Red Zone Configuration Dialog */}
+      <Dialog open={showZoneDialog} onOpenChange={setShowZoneDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Red Zone Configuration</DialogTitle>
+            <DialogDescription>Set up restricted areas and special pricing</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 pt-4">
+            <div>
+              <Label>Zone Name</Label>
+              <Input placeholder="Downtown Red Zone" />
+            </div>
+            <div>
+              <Label>Zone Type</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select zone type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="restricted">Restricted Zone</SelectItem>
+                  <SelectItem value="premium">Premium Zone</SelectItem>
+                  <SelectItem value="priority">Priority Zone</SelectItem>
+                  <SelectItem value="airport">Airport Zone</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label>Price Multiplier</Label>
+              <Input placeholder="2.0" type="number" step="0.1" />
+            </div>
+            <div>
+              <Label>Active Hours</Label>
+              <div className="grid grid-cols-2 gap-2">
+                <Input placeholder="Start time" type="time" />
+                <Input placeholder="End time" type="time" />
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Switch id="zone-active" defaultChecked />
+              <Label htmlFor="zone-active">Zone Active</Label>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                className="flex-1 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white border-0"
+                onClick={() => {
+                  toast({title: "Red Zone Created", description: "Restricted zone has been configured successfully"});
+                  setShowZoneDialog(false);
+                }}
+                disabled={isLoading}
+              >
+                Create Zone
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => setShowZoneDialog(false)}
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Price Update Dialog */}
+      <Dialog open={showPriceDialog} onOpenChange={setShowPriceDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Price Configuration</DialogTitle>
+            <DialogDescription>Update base rates and surge pricing</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 pt-4">
+            <div>
+              <Label>Base Rate (per km)</Label>
+              <Input placeholder="$1.50" type="number" step="0.01" />
+            </div>
+            <div>
+              <Label>Base Time Rate (per minute)</Label>
+              <Input placeholder="$0.25" type="number" step="0.01" />
+            </div>
+            <div>
+              <Label>Surge Multiplier</Label>
+              <Input placeholder="1.5" type="number" step="0.1" />
+            </div>
+            <div>
+              <Label>Peak Hours Multiplier</Label>
+              <Input placeholder="1.3" type="number" step="0.1" />
+            </div>
+            <div>
+              <Label>Night Time Multiplier</Label>
+              <Input placeholder="1.2" type="number" step="0.1" />
+            </div>
+            <div className="flex items-center space-x-2">
+              <Switch id="dynamic-pricing" defaultChecked />
+              <Label htmlFor="dynamic-pricing">Enable Dynamic Pricing</Label>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+                onClick={() => {
+                  toast({title: "Prices Updated", description: "Pricing configuration has been saved successfully"});
+                  setShowPriceDialog(false);
+                }}
+                disabled={isLoading}
+              >
+                Update Prices
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => setShowPriceDialog(false)}
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
