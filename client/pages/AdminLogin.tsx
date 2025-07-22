@@ -17,41 +17,30 @@ export default function AdminLogin() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { toast } = useToast();
-
-  // Demo credentials for admin access
-  const ADMIN_CREDENTIALS = {
-    email: "admin@bambi.com",
-    password: "admin123"
-  };
+  const { login } = useAdminAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
 
-    // Simulate API call
-    setTimeout(() => {
-      if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
-        // Store admin session
-        localStorage.setItem("bambi_admin_authenticated", "true");
-        localStorage.setItem("bambi_admin_user", JSON.stringify({
-          email: email,
-          name: "Admin User",
-          role: "admin",
-          loginTime: new Date().toISOString()
-        }));
+    try {
+      const success = await login(email, password);
 
+      if (success) {
         toast({
           title: "Login Successful",
           description: "Welcome to BAMBI Admin Dashboard",
         });
-
         navigate("/admin");
       } else {
         setError("Invalid email or password. Please try again.");
       }
+    } catch (err) {
+      setError("An error occurred during login. Please try again.");
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (
