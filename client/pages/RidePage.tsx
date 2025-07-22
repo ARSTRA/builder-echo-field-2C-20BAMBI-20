@@ -1077,16 +1077,20 @@ export default function RidePage() {
                               </div>
 
                               {/* Features */}
-                              <div className="grid grid-cols-2 gap-2">
+                              <div className={`grid grid-cols-2 gap-2 ${
+                                vehicle.premiumText ? 'bg-purple-50 p-3 rounded-lg border border-purple-100' : ''
+                              }`}>
                                 {vehicle.features.map((feature, index) => (
                                   <div
                                     key={index}
-                                    className="flex items-center space-x-1 text-xs text-gray-600"
+                                    className={`flex items-center space-x-1 text-xs ${
+                                      vehicle.premiumText ? 'text-purple-700' : 'text-gray-600'
+                                    }`}
                                   >
                                     <CheckCircle
                                       className={`w-3 h-3 ${colors.accent}`}
                                     />
-                                    <span>{feature}</span>
+                                    <span className={vehicle.premiumText ? 'font-medium' : ''}>{feature}</span>
                                   </div>
                                 ))}
                               </div>
