@@ -289,11 +289,70 @@ export default function AdminPage() {
   };
 
   const handleViewTransaction = (transaction: any) => {
+    setSelectedTransaction(transaction);
+    setShowTransactionViewDialog(true);
     toast({
       title: "Transaction Details",
       description: `Viewing transaction #${transaction.id} - ${transaction.amount}`,
     });
-    console.log("Transaction details:", transaction);
+  };
+
+  const handleViewDriver = (driver: any) => {
+    setSelectedDriver(driver);
+    setShowDriverViewDialog(true);
+    toast({
+      title: "Driver Profile",
+      description: `Viewing ${driver.name}'s detailed profile`,
+    });
+  };
+
+  const handleChatWithDriver = (driver: any) => {
+    setSelectedDriver(driver);
+    setShowDriverChatDialog(true);
+    toast({
+      title: "Driver Communication",
+      description: `Opening chat interface with ${driver.name}`,
+    });
+  };
+
+  const handleSuspendDriver = async (driver: any) => {
+    setIsLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      toast({
+        title: "Driver Suspended",
+        description: `${driver.name} has been suspended from the platform`,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleConfigurePaymentMethod = (method: any) => {
+    setSelectedPaymentMethod(method);
+    setShowPaymentConfigDialog(true);
+    toast({
+      title: "Payment Configuration",
+      description: `Configuring ${method.name} settings`,
+    });
+  };
+
+  const handleViewPaymentStats = (method: any) => {
+    setSelectedPaymentMethod(method);
+    setShowPaymentStatsDialog(true);
+    toast({
+      title: "Payment Statistics",
+      description: `Viewing ${method.name} analytics and statistics`,
+    });
+  };
+
+  const handleOpenWalletManager = () => {
+    setShowWalletManagerDialog(true);
+    toast({
+      title: "Wallet Manager",
+      description: "Opening comprehensive wallet management system",
+    });
   };
 
   const stats = [
