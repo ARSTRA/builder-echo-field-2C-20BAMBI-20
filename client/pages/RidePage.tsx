@@ -937,7 +937,7 @@ export default function RidePage() {
                             <Button
                               size="sm"
                               onClick={(e) => {
-                                const input = e.target.parentElement.querySelector('input');
+                                const input = (e.target as HTMLElement).parentElement?.querySelector('input') as HTMLInputElement;
                                 const promoValue = input?.value;
                                 if (promoValue?.toLowerCase() === 'save20') {
                                   const discountedPrice = (parseFloat(estimatedFare.total) * 0.8).toFixed(2);
