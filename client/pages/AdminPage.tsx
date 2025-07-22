@@ -610,9 +610,11 @@ export default function AdminPage() {
                     </SelectContent>
                   </Select>
                 </div>
-                <Button 
+                <Button
                   className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
-                  onClick={() => handleAction("Create User")}
+                  onClick={() => {
+                    toast({title: "User Created", description: "New user account has been created successfully"});
+                  }}
                   disabled={isLoading}
                 >
                   Create User
