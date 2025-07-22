@@ -2618,18 +2618,30 @@ export default function RidePage() {
 
             {/* Image Section */}
             <div className="space-y-6">
-              <div className="relative overflow-hidden rounded-2xl shadow-2xl group">
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl group hover:shadow-blue-500/20 transition-all duration-300">
                 <img
                   src="https://images.pexels.com/photos/1412214/pexels-photo-1412214.jpeg"
                   alt="Smart GPS Navigation Technology - AI-powered route optimization"
                   className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/70 via-black/30 to-transparent"></div>
+                <div className="absolute top-4 right-4">
+                  <div className="bg-blue-500 p-2 rounded-full shadow-lg">
+                    <Navigation className="w-4 h-4 text-white" />
+                  </div>
+                </div>
                 <div className="absolute bottom-4 left-4 text-white">
-                  <h4 className="font-bold text-lg">Smart Technology</h4>
+                  <h4 className="font-bold text-lg flex items-center">
+                    <Zap className="w-5 h-5 mr-2 text-blue-400" />
+                    Smart Technology
+                  </h4>
                   <p className="text-sm opacity-90">
                     AI-powered route optimization & real-time navigation
                   </p>
+                  <div className="flex items-center mt-2 space-x-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-xs text-green-400">Live GPS Tracking</span>
+                  </div>
                 </div>
               </div>
 
