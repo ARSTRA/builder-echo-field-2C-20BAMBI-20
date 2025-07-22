@@ -1017,10 +1017,14 @@ export default function RidePage() {
                             <div className="relative h-40 overflow-hidden">
                               <img
                                 src={vehicle.image}
-                                alt={vehicle.name}
+                                alt={`${vehicle.name} - ${vehicle.subtitle}`}
                                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                              <div className={`absolute inset-0 ${
+                                vehicle.premiumText
+                                  ? 'bg-gradient-to-t from-purple-900/70 via-purple-800/20 to-transparent'
+                                  : 'bg-gradient-to-t from-black/70 via-black/20 to-transparent'
+                              }`}></div>
 
                               {/* Vehicle Icon */}
                               <div
