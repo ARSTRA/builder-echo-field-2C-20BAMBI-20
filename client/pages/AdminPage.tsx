@@ -1353,18 +1353,242 @@ export default function AdminPage() {
         );
       case "chat":
         return (
-          <div className="text-center py-12">
-            <MessageCircle className="w-16 h-16 text-taxi-gray mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-taxi-dark mb-2">Chat Module</h3>
-            <p className="text-taxi-gray mb-6">Customer support chat system and communication tools</p>
-            <Button
-              className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
-              onClick={() => toast({title: "Chat System", description: "Customer support chat interface loaded"})}
-              disabled={isLoading}
-            >
-              <MessageCircle className="w-4 h-4 mr-2" />
-              Open Chat System
-            </Button>
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div>
+                <h2 className="text-2xl font-bold text-taxi-dark">Customer Support Chat</h2>
+                <p className="text-taxi-gray">Real-time customer support and communication</p>
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  className="bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 border-0"
+                  onClick={() => toast({title: "Chat Settings", description: "Opening chat configuration"})}
+                  disabled={isLoading}
+                >
+                  <Settings className="w-4 h-4 mr-2" />
+                  Settings
+                </Button>
+                <Button
+                  className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+                  onClick={() => toast({title: "New Chat", description: "Starting new customer conversation"})}
+                  disabled={isLoading}
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  New Chat
+                </Button>
+              </div>
+            </div>
+
+            {/* Chat Statistics */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <Card className="shadow-lg bg-gradient-to-r from-green-500 to-green-600 text-white border-0">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-green-100">Active Chats</p>
+                      <p className="text-xl font-bold">12</p>
+                    </div>
+                    <MessageCircle className="w-8 h-8 text-green-200" />
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="shadow-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-blue-100">Waiting</p>
+                      <p className="text-xl font-bold">3</p>
+                    </div>
+                    <Clock className="w-8 h-8 text-blue-200" />
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="shadow-lg bg-gradient-to-r from-purple-500 to-purple-600 text-white border-0">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-purple-100">Resolved Today</p>
+                      <p className="text-xl font-bold">47</p>
+                    </div>
+                    <CheckCircle className="w-8 h-8 text-purple-200" />
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="shadow-lg bg-gradient-to-r from-orange-500 to-orange-600 text-white border-0">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-orange-100">Avg Response</p>
+                      <p className="text-xl font-bold">2.3m</p>
+                    </div>
+                    <Timer className="w-8 h-8 text-orange-200" />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Main Chat Interface */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-96">
+              {/* Chat Users List */}
+              <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
+                <CardHeader>
+                  <CardTitle className="flex items-center justify-between">
+                    <span>Customer Chats</span>
+                    <Badge className="bg-primary text-primary-foreground">
+                      {chatUsers.reduce((acc, user) => acc + user.unread, 0)} unread
+                    </Badge>
+                  </CardTitle>
+                  <Input placeholder="Search conversations..." className="mt-2" />
+                </CardHeader>
+                <CardContent className="p-0">
+                  <div className="max-h-80 overflow-y-auto">
+                    {chatUsers.map((user) => (
+                      <div
+                        key={user.id}
+                        onClick={() => handleSelectChatUser(user)}
+                        className={`p-4 border-b cursor-pointer hover:bg-gray-50 transition-colors ${
+                          activeChatUser?.id === user.id ? "bg-primary/10 border-l-4 border-l-primary" : ""
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="relative">
+                            <div className="w-10 h-10 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center text-white font-medium">
+                              {user.avatar}
+                            </div>
+                            <div className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${
+                              user.status === "online" ? "bg-green-500" :
+                              user.status === "away" ? "bg-yellow-500" : "bg-gray-400"
+                            }`}></div>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between">
+                              <p className="font-medium text-taxi-dark truncate">{user.name}</p>
+                              <span className="text-xs text-taxi-gray">{user.time}</span>
+                            </div>
+                            <p className="text-sm text-taxi-gray truncate">{user.lastMessage}</p>
+                          </div>
+                          {user.unread > 0 && (
+                            <Badge className="bg-primary text-primary-foreground">
+                              {user.unread}
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Chat Messages Area */}
+              <Card className="lg:col-span-2 shadow-xl bg-white/90 backdrop-blur-md border-0">
+                {activeChatUser ? (
+                  <>
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="relative">
+                            <div className="w-10 h-10 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center text-white font-medium">
+                              {activeChatUser.avatar}
+                            </div>
+                            <div className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${
+                              activeChatUser.status === "online" ? "bg-green-500" :
+                              activeChatUser.status === "away" ? "bg-yellow-500" : "bg-gray-400"
+                            }`}></div>
+                          </div>
+                          <div>
+                            <h3 className="font-semibold text-taxi-dark">{activeChatUser.name}</h3>
+                            <p className="text-sm text-taxi-gray capitalize">{activeChatUser.status}</p>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button size="sm" variant="outline">
+                            <Phone className="w-4 h-4" />
+                          </Button>
+                          <Button size="sm" variant="outline">
+                            <Eye className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="flex flex-col h-80">
+                      {/* Messages */}
+                      <div className="flex-1 overflow-y-auto space-y-3 mb-4">
+                        {chatMessages.map((message) => (
+                          <div
+                            key={message.id}
+                            className={`flex ${message.sender === "admin" ? "justify-end" : "justify-start"}`}
+                          >
+                            <div
+                              className={`max-w-xs px-4 py-2 rounded-lg ${
+                                message.sender === "admin"
+                                  ? "bg-primary text-primary-foreground"
+                                  : "bg-gray-100 text-taxi-dark"
+                              }`}
+                            >
+                              <p className="text-sm">{message.message}</p>
+                              <span className="text-xs opacity-75">{message.time}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Quick Responses */}
+                      <div className="flex gap-2 mb-3 flex-wrap">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleQuickResponse("Thank you for contacting us! How can I help you today?")}
+                          disabled={isLoading}
+                        >
+                          Greeting
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleQuickResponse("I understand your concern. Let me look into this for you.")}
+                          disabled={isLoading}
+                        >
+                          Understanding
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleQuickResponse("Your issue has been resolved. Is there anything else I can help you with?")}
+                          disabled={isLoading}
+                        >
+                          Resolution
+                        </Button>
+                      </div>
+
+                      {/* Message Input */}
+                      <div className="flex gap-2">
+                        <Input
+                          placeholder="Type your message..."
+                          value={newMessage}
+                          onChange={(e) => setNewMessage(e.target.value)}
+                          onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                          className="flex-1"
+                        />
+                        <Button
+                          onClick={handleSendMessage}
+                          disabled={!newMessage.trim() || isLoading}
+                          className="bg-primary hover:bg-primary/90"
+                        >
+                          <Send className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </>
+                ) : (
+                  <CardContent className="flex flex-col items-center justify-center h-full text-center">
+                    <MessageCircle className="w-16 h-16 text-taxi-gray mb-4" />
+                    <h3 className="text-lg font-medium text-taxi-dark mb-2">Select a Chat</h3>
+                    <p className="text-taxi-gray">Choose a customer from the left to start chatting</p>
+                  </CardContent>
+                )}
+              </Card>
+            </div>
           </div>
         );
       default:
