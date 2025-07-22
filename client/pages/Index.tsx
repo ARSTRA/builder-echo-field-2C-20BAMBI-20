@@ -107,14 +107,6 @@ export default function Index() {
             <div className="flex items-center">
               <h1 className="text-2xl font-bold text-taxi-dark">BAMBI</h1>
             </div>
-            <div className="flex items-center space-x-4">
-              <Link to="/admin/login">
-                <Button variant="outline" size="sm" className="flex items-center">
-                  <ShieldCheck className="w-4 h-4 mr-2" />
-                  Admin Login
-                </Button>
-              </Link>
-            </div>
           </div>
         </div>
       </nav>
