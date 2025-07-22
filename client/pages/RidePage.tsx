@@ -2618,15 +2618,15 @@ export default function RidePage() {
             <div className="space-y-6">
               <div className="relative overflow-hidden rounded-2xl shadow-2xl group">
                 <img
-                  src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center"
-                  alt="Smart Technology"
+                  src="https://images.pexels.com/photos/1412214/pexels-photo-1412214.jpeg"
+                  alt="Smart GPS Navigation Technology - AI-powered route optimization"
                   className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-4 left-4 text-white">
                   <h4 className="font-bold text-lg">Smart Technology</h4>
                   <p className="text-sm opacity-90">
-                    AI-powered route optimization
+                    AI-powered route optimization & real-time navigation
                   </p>
                 </div>
               </div>
