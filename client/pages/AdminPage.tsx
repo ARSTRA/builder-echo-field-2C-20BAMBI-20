@@ -14,7 +14,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-
 import {
   Table,
   TableBody,
@@ -31,6 +30,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
 import {
   Users,
   Car,
@@ -59,7 +59,6 @@ import {
   Search,
   Eye,
   Ban,
-
   XCircle,
   RefreshCw,
   MapPinOff,
@@ -79,11 +78,35 @@ import {
   Heart,
   LogOut,
   User,
+  Bitcoin,
+  Smartphone,
+  Banknote,
+  Landmark,
+  Coins,
+  QrCode,
+  ArrowUpDown,
+  TrendingDown,
+  Send,
+  Receipt,
+  PiggyBank,
+  WalletCards,
+  HandCoins,
+  DollarSign as DollarIcon,
+  EuroIcon,
+  PoundSterlingIcon,
 } from "lucide-react";
 
 export default function AdminPage() {
   const [activeModule, setActiveModule] = useState("dashboard");
   const { user, logout } = useAdminAuth();
+  const { toast } = useToast();
+
+  // State for various forms and operations
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+  const [formData, setFormData] = useState({});
 
   // Show loading if user data is not yet available
   if (!user) {
@@ -97,11 +120,35 @@ export default function AdminPage() {
     );
   }
 
+  // Utility functions for button actions
+  const handleAction = async (action: string, data?: any) => {
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      toast({
+        title: "Success!",
+        description: `${action} completed successfully`,
+      });
+      
+      console.log(`Action: ${action}`, data);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An error occurred while processing your request",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const stats = [
-    { label: "Active Drivers", value: "2,847", icon: Users, trend: "+12%" },
-    { label: "Total Rides Today", value: "18,392", icon: Car, trend: "+8%" },
-    { label: "Revenue Today", value: "$42,847", icon: DollarSign, trend: "+15%" },
-    { label: "Average Rating", value: "4.9", icon: CheckCircle, trend: "+0.1" },
+    { label: "Active Drivers", value: "2,847", icon: Users, trend: "+12%", color: "bg-blue-500" },
+    { label: "Total Rides Today", value: "18,392", icon: Car, trend: "+8%", color: "bg-green-500" },
+    { label: "Revenue Today", value: "$42,847", icon: DollarSign, trend: "+15%", color: "bg-purple-500" },
+    { label: "Average Rating", value: "4.9", icon: CheckCircle, trend: "+0.1", color: "bg-orange-500" },
   ];
 
   const users = [
@@ -123,9 +170,23 @@ export default function AdminPage() {
   ];
 
   const transactions = [
-    { id: 1, user: "John Doe", type: "ride_payment", amount: "$24.50", status: "completed", date: "2024-01-20", method: "card" },
-    { id: 2, user: "Sarah Smith", type: "driver_payout", amount: "$19.60", status: "completed", date: "2024-01-20", method: "bank" },
-    { id: 3, user: "Mike Johnson", type: "wallet_topup", amount: "$50.00", status: "pending", date: "2024-01-20", method: "card" },
+    { id: 1, user: "John Doe", type: "ride_payment", amount: "$24.50", status: "completed", date: "2024-01-20", method: "credit_card", paymentId: "CC_001" },
+    { id: 2, user: "Sarah Smith", type: "driver_payout", amount: "$19.60", status: "completed", date: "2024-01-20", method: "bank_transfer", paymentId: "BT_002" },
+    { id: 3, user: "Mike Johnson", type: "wallet_topup", amount: "$50.00", status: "pending", date: "2024-01-20", method: "crypto", paymentId: "BTC_003" },
+    { id: 4, user: "Alice Johnson", type: "ride_payment", amount: "$18.75", status: "completed", date: "2024-01-20", method: "debit_card", paymentId: "DC_004" },
+    { id: 5, user: "Bob Smith", type: "refund", amount: "$15.30", status: "processing", date: "2024-01-20", method: "paypal", paymentId: "PP_005" },
+  ];
+
+  const paymentMethods = [
+    { id: "credit_card", name: "Credit Card", icon: CreditCard, color: "bg-blue-600", description: "Visa, Mastercard, Amex" },
+    { id: "debit_card", name: "Debit Card", icon: WalletCards, color: "bg-green-600", description: "Bank debit cards" },
+    { id: "bank_transfer", name: "Bank Transfer", icon: Landmark, color: "bg-purple-600", description: "Direct bank transfers" },
+    { id: "crypto", name: "Cryptocurrency", icon: Bitcoin, color: "bg-orange-600", description: "Bitcoin, Ethereum, USDT" },
+    { id: "digital_wallet", name: "Digital Wallet", icon: Smartphone, color: "bg-pink-600", description: "Apple Pay, Google Pay" },
+    { id: "paypal", name: "PayPal", icon: DollarIcon, color: "bg-blue-500", description: "PayPal payments" },
+    { id: "cash", name: "Cash", icon: Banknote, color: "bg-green-500", description: "Cash payments" },
+    { id: "qr_payment", name: "QR Payment", icon: QrCode, color: "bg-indigo-600", description: "QR code payments" },
+    { id: "gift_card", name: "Gift Card", icon: Coins, color: "bg-yellow-600", description: "Platform gift cards" },
   ];
 
   const specialZones = [
@@ -141,7 +202,7 @@ export default function AdminPage() {
         {stats.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <Card key={index} className="shadow-lg bg-white/90 backdrop-blur-md border-0">
+            <Card key={index} className="shadow-lg bg-white/90 backdrop-blur-md border-0 hover:shadow-xl transition-shadow">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -152,8 +213,8 @@ export default function AdminPage() {
                       <span className="text-sm text-success">{stat.trend}</span>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-primary-foreground" />
+                  <div className={`w-12 h-12 ${stat.color} rounded-lg flex items-center justify-center shadow-lg`}>
+                    <Icon className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </CardContent>
@@ -172,19 +233,39 @@ export default function AdminPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="grid grid-cols-2 gap-4">
-            <Button variant="outline" className="h-20 flex flex-col">
+            <Button 
+              variant="outline" 
+              className="h-20 flex flex-col bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 border-0"
+              onClick={() => handleAction("Add Driver")}
+              disabled={isLoading}
+            >
               <Plus className="w-6 h-6 mb-2" />
               Add Driver
             </Button>
-            <Button variant="outline" className="h-20 flex flex-col">
+            <Button 
+              variant="outline" 
+              className="h-20 flex flex-col bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 border-0"
+              onClick={() => handleAction("Set Red Zone")}
+              disabled={isLoading}
+            >
               <MapPinOff className="w-6 h-6 mb-2" />
               Set Red Zone
             </Button>
-            <Button variant="outline" className="h-20 flex flex-col">
+            <Button 
+              variant="outline" 
+              className="h-20 flex flex-col bg-gradient-to-r from-green-500 to-green-600 text-white hover:from-green-600 hover:to-green-700 border-0"
+              onClick={() => handleAction("Price Update")}
+              disabled={isLoading}
+            >
               <DollarSign className="w-6 h-6 mb-2" />
               Price Update
             </Button>
-            <Button variant="outline" className="h-20 flex flex-col">
+            <Button 
+              variant="outline" 
+              className="h-20 flex flex-col bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 border-0"
+              onClick={() => handleAction("Generate Report")}
+              disabled={isLoading}
+            >
               <FileText className="w-6 h-6 mb-2" />
               Generate Report
             </Button>
@@ -201,20 +282,129 @@ export default function AdminPage() {
           </CardHeader>
           <CardContent className="space-y-3">
             {[
-              { name: "Payment Gateway", status: "online" },
-              { name: "GPS Tracking", status: "online" },
-              { name: "SMS Service", status: "degraded" },
-              { name: "Mobile Apps", status: "online" },
-              { name: "Driver App", status: "online" },
-              { name: "Admin Panel", status: "online" },
+              { name: "Payment Gateway", status: "online", color: "bg-green-500" },
+              { name: "GPS Tracking", status: "online", color: "bg-green-500" },
+              { name: "SMS Service", status: "degraded", color: "bg-yellow-500" },
+              { name: "Mobile Apps", status: "online", color: "bg-green-500" },
+              { name: "Driver App", status: "online", color: "bg-green-500" },
+              { name: "Admin Panel", status: "online", color: "bg-green-500" },
             ].map((service, index) => (
-              <div key={index} className="flex items-center justify-between p-2 bg-taxi-light-gray/30 rounded-lg">
-                <span className="text-taxi-dark">{service.name}</span>
-                <Badge className={service.status === "online" ? "bg-success" : "bg-warning"}>
+              <div key={index} className="flex items-center justify-between p-3 bg-taxi-light-gray/30 rounded-lg hover:bg-taxi-light-gray/50 transition-colors">
+                <span className="text-taxi-dark font-medium">{service.name}</span>
+                <Badge className={`${service.color} text-white border-0`}>
                   {service.status}
                 </Badge>
               </div>
             ))}
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+
+  const renderPaymentMethods = () => (
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 className="text-2xl font-bold text-taxi-dark">Payment Methods</h2>
+          <p className="text-taxi-gray">Manage and configure payment options</p>
+        </div>
+        <Button 
+          className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+          onClick={() => handleAction("Add Payment Method")}
+          disabled={isLoading}
+        >
+          <Plus className="w-4 h-4 mr-2" />
+          Add Payment Method
+        </Button>
+      </div>
+
+      {/* Payment Methods Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {paymentMethods.map((method) => {
+          const Icon = method.icon;
+          return (
+            <Card key={method.id} className="shadow-lg bg-white/90 backdrop-blur-md border-0 hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div className={`w-12 h-12 ${method.color} rounded-lg flex items-center justify-center shadow-lg`}>
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <Switch defaultChecked={method.id !== "cash"} />
+                </div>
+                <h3 className="text-lg font-semibold text-taxi-dark mb-2">{method.name}</h3>
+                <p className="text-sm text-taxi-gray mb-4">{method.description}</p>
+                <div className="flex gap-2">
+                  <Button 
+                    size="sm" 
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => handleAction(`Configure ${method.name}`)}
+                    disabled={isLoading}
+                  >
+                    <Settings className="w-4 h-4 mr-1" />
+                    Configure
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    className={`${method.color} text-white border-0 hover:opacity-90`}
+                    onClick={() => handleAction(`View ${method.name} Stats`)}
+                    disabled={isLoading}
+                  >
+                    <BarChart3 className="w-4 h-4 mr-1" />
+                    Stats
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
+
+      {/* Payment Statistics */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card className="shadow-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-blue-100">Card Payments</p>
+                <p className="text-2xl font-bold">67%</p>
+              </div>
+              <CreditCard className="w-8 h-8 text-blue-200" />
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="shadow-lg bg-gradient-to-r from-green-500 to-green-600 text-white border-0">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-green-100">Digital Wallets</p>
+                <p className="text-2xl font-bold">23%</p>
+              </div>
+              <Smartphone className="w-8 h-8 text-green-200" />
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="shadow-lg bg-gradient-to-r from-orange-500 to-orange-600 text-white border-0">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-orange-100">Crypto</p>
+                <p className="text-2xl font-bold">7%</p>
+              </div>
+              <Bitcoin className="w-8 h-8 text-orange-200" />
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="shadow-lg bg-gradient-to-r from-gray-500 to-gray-600 text-white border-0">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-gray-100">Cash</p>
+                <p className="text-2xl font-bold">3%</p>
+              </div>
+              <Banknote className="w-8 h-8 text-gray-200" />
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -228,48 +418,65 @@ export default function AdminPage() {
           <h2 className="text-2xl font-bold text-taxi-dark">Users Management</h2>
           <p className="text-taxi-gray">Manage passengers and their accounts</p>
         </div>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button className="btn-primary">
-              <Plus className="w-4 h-4 mr-2" />
-              Add User
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-md">
-            <DialogHeader>
-              <DialogTitle>Add New User</DialogTitle>
-              <DialogDescription>Create a new user account</DialogDescription>
-            </DialogHeader>
-            <div className="space-y-4 pt-4">
-              <div>
-                <Label htmlFor="name">Full Name</Label>
-                <Input id="name" placeholder="Enter full name" />
+        <div className="flex gap-2">
+          <Button 
+            variant="outline"
+            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 border-0"
+            onClick={() => handleAction("Export Users")}
+            disabled={isLoading}
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Export
+          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0">
+                <Plus className="w-4 h-4 mr-2" />
+                Add User
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-md">
+              <DialogHeader>
+                <DialogTitle>Add New User</DialogTitle>
+                <DialogDescription>Create a new user account</DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4 pt-4">
+                <div>
+                  <Label htmlFor="name">Full Name</Label>
+                  <Input id="name" placeholder="Enter full name" />
+                </div>
+                <div>
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" placeholder="Enter email address" />
+                </div>
+                <div>
+                  <Label htmlFor="phone">Phone Number</Label>
+                  <Input id="phone" placeholder="Enter phone number" />
+                </div>
+                <div>
+                  <Label htmlFor="role">Role</Label>
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="passenger">Passenger</SelectItem>
+                      <SelectItem value="driver">Driver</SelectItem>
+                      <SelectItem value="admin">Admin</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <Button 
+                  className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+                  onClick={() => handleAction("Create User")}
+                  disabled={isLoading}
+                >
+                  Create User
+                </Button>
               </div>
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="Enter email address" />
-              </div>
-              <div>
-                <Label htmlFor="phone">Phone Number</Label>
-                <Input id="phone" placeholder="Enter phone number" />
-              </div>
-              <div>
-                <Label htmlFor="role">Role</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select role" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="passenger">Passenger</SelectItem>
-                    <SelectItem value="driver">Driver</SelectItem>
-                    <SelectItem value="admin">Admin</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <Button className="w-full btn-primary">Create User</Button>
-            </div>
-          </DialogContent>
-        </Dialog>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
 
       <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
@@ -277,8 +484,19 @@ export default function AdminPage() {
           <div className="flex items-center justify-between">
             <CardTitle>User List</CardTitle>
             <div className="flex items-center gap-2">
-              <Input placeholder="Search users..." className="w-64" />
-              <Button variant="outline" size="sm">
+              <Input 
+                placeholder="Search users..." 
+                className="w-64" 
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 border-0"
+                onClick={() => handleAction("Filter Users")}
+                disabled={isLoading}
+              >
                 <Filter className="w-4 h-4" />
               </Button>
             </div>
@@ -298,8 +516,11 @@ export default function AdminPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {users.map((user) => (
-                <TableRow key={user.id}>
+              {users.filter(user => 
+                user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                user.email.toLowerCase().includes(searchTerm.toLowerCase())
+              ).map((user) => (
+                <TableRow key={user.id} className="hover:bg-taxi-light-gray/30">
                   <TableCell className="font-medium">{user.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.phone}</TableCell>
@@ -309,318 +530,41 @@ export default function AdminPage() {
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <Badge variant={user.status === "active" ? "default" : "destructive"}>
+                    <Badge 
+                      className={user.status === "active" ? "bg-green-500 text-white" : "bg-red-500 text-white"}
+                    >
                       {user.status}
                     </Badge>
                   </TableCell>
                   <TableCell>{user.totalRides}</TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        className="bg-blue-500 text-white hover:bg-blue-600 border-0"
+                        onClick={() => handleAction("View User", user)}
+                        disabled={isLoading}
+                      >
                         <Eye className="w-4 h-4" />
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        className="bg-green-500 text-white hover:bg-green-600 border-0"
+                        onClick={() => handleAction("Edit User", user)}
+                        disabled={isLoading}
+                      >
                         <Edit className="w-4 h-4" />
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        className="bg-red-500 text-white hover:bg-red-600 border-0"
+                        onClick={() => handleAction("Ban User", user)}
+                        disabled={isLoading}
+                      >
                         <Ban className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-    </div>
-  );
-
-  const renderDriversManager = () => (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h2 className="text-2xl font-bold text-taxi-dark">Drivers Management</h2>
-          <p className="text-taxi-gray">Manage driver registrations, shifts, and performance</p>
-        </div>
-        <div className="flex gap-2">
-          <Button variant="outline">
-            <Download className="w-4 h-4 mr-2" />
-            Export
-          </Button>
-          <Button className="btn-primary">
-            <Plus className="w-4 h-4 mr-2" />
-            Add Driver
-          </Button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="shadow-lg bg-white/90 backdrop-blur-md border-0">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-taxi-gray">Online Drivers</p>
-                <p className="text-xl font-bold text-success">847</p>
-              </div>
-              <Users className="w-8 h-8 text-success" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-lg bg-white/90 backdrop-blur-md border-0">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-taxi-gray">Day Shift</p>
-                <p className="text-xl font-bold text-primary">523</p>
-              </div>
-              <Sun className="w-8 h-8 text-primary" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-lg bg-white/90 backdrop-blur-md border-0">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-taxi-gray">Night Shift</p>
-                <p className="text-xl font-bold text-accent">324</p>
-              </div>
-              <Moon className="w-8 h-8 text-accent" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-lg bg-white/90 backdrop-blur-md border-0">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-taxi-gray">Pending Approval</p>
-                <p className="text-xl font-bold text-warning">23</p>
-              </div>
-              <Clock className="w-8 h-8 text-warning" />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
-        <CardHeader>
-          <CardTitle>Driver List</CardTitle>
-          <div className="flex items-center gap-2">
-            <Input placeholder="Search drivers..." className="w-64" />
-            <Select>
-              <SelectTrigger className="w-40">
-                <SelectValue placeholder="Filter by status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="online">Online</SelectItem>
-                <SelectItem value="offline">Offline</SelectItem>
-                <SelectItem value="busy">Busy</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Driver</TableHead>
-                <TableHead>Vehicle</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Rating</TableHead>
-                <TableHead>Total Rides</TableHead>
-                <TableHead>Earnings</TableHead>
-                <TableHead>Shift</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {drivers.map((driver) => (
-                <TableRow key={driver.id}>
-                  <TableCell>
-                    <div>
-                      <p className="font-medium">{driver.name}</p>
-                      <p className="text-sm text-taxi-gray">{driver.email}</p>
-                    </div>
-                  </TableCell>
-                  <TableCell>{driver.vehicle}</TableCell>
-                  <TableCell>
-                    <Badge variant={driver.status === "online" ? "default" : driver.status === "busy" ? "secondary" : "outline"}>
-                      {driver.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center">
-                      <Star className="w-4 h-4 text-yellow-500 mr-1" />
-                      {driver.rating}
-                    </div>
-                  </TableCell>
-                  <TableCell>{driver.totalRides}</TableCell>
-                  <TableCell>{driver.earnings}</TableCell>
-                  <TableCell>
-                    <Badge variant={driver.shift === "day" ? "default" : "secondary"}>
-                      {driver.shift}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button variant="outline" size="sm">
-                        <Eye className="w-4 h-4" />
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <MessageCircle className="w-4 h-4" />
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Ban className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-    </div>
-  );
-
-  const renderRidesManager = () => (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h2 className="text-2xl font-bold text-taxi-dark">Rides Management</h2>
-          <p className="text-taxi-gray">Monitor ongoing rides, trip history, and tracking</p>
-        </div>
-        <div className="flex gap-2">
-          <Button variant="outline">
-            <RefreshCw className="w-4 h-4 mr-2" />
-            Refresh
-          </Button>
-          <Button variant="outline">
-            <Navigation className="w-4 h-4 mr-2" />
-            Live Map
-          </Button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-        <Card className="shadow-lg bg-white/90 backdrop-blur-md border-0">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-taxi-gray">Active Rides</p>
-                <p className="text-xl font-bold text-success">156</p>
-              </div>
-              <Car className="w-8 h-8 text-success" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-lg bg-white/90 backdrop-blur-md border-0">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-taxi-gray">Completed Today</p>
-                <p className="text-xl font-bold text-primary">2,847</p>
-              </div>
-              <CheckCircle className="w-8 h-8 text-primary" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-lg bg-white/90 backdrop-blur-md border-0">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-taxi-gray">Cancelled</p>
-                <p className="text-xl font-bold text-destructive">89</p>
-              </div>
-              <XCircle className="w-8 h-8 text-destructive" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-lg bg-white/90 backdrop-blur-md border-0">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-taxi-gray">Scheduled</p>
-                <p className="text-xl font-bold text-accent">234</p>
-              </div>
-              <Calendar className="w-8 h-8 text-accent" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-lg bg-white/90 backdrop-blur-md border-0">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-taxi-gray">Pool Rides</p>
-                <p className="text-xl font-bold text-warning">67</p>
-              </div>
-              <Users2 className="w-8 h-8 text-warning" />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
-        <CardHeader>
-          <CardTitle>Recent Rides</CardTitle>
-          <div className="flex items-center gap-2">
-            <Input placeholder="Search rides..." className="w-64" />
-            <Select>
-              <SelectTrigger className="w-40">
-                <SelectValue placeholder="Filter by status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Rides</SelectItem>
-                <SelectItem value="active">Active</SelectItem>
-                <SelectItem value="completed">Completed</SelectItem>
-                <SelectItem value="cancelled">Cancelled</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Ride ID</TableHead>
-                <TableHead>Passenger</TableHead>
-                <TableHead>Driver</TableHead>
-                <TableHead>Route</TableHead>
-                <TableHead>Distance</TableHead>
-                <TableHead>Fare</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {rides.map((ride) => (
-                <TableRow key={ride.id}>
-                  <TableCell className="font-medium">#{ride.id}</TableCell>
-                  <TableCell>{ride.passenger}</TableCell>
-                  <TableCell>{ride.driver}</TableCell>
-                  <TableCell>
-                    <div>
-                      <p className="text-sm">{ride.from} → {ride.to}</p>
-                    </div>
-                  </TableCell>
-                  <TableCell>{ride.distance}</TableCell>
-                  <TableCell>{ride.fare}</TableCell>
-                  <TableCell>
-                    <Badge variant={ride.status === "completed" ? "default" : ride.status === "active" ? "secondary" : "destructive"}>
-                      {ride.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button variant="outline" size="sm">
-                        <Eye className="w-4 h-4" />
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Navigation className="w-4 h-4" />
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <MessageCircle className="w-4 h-4" />
                       </Button>
                     </div>
                   </TableCell>
@@ -641,11 +585,20 @@ export default function AdminPage() {
           <p className="text-taxi-gray">Monitor payments, payouts, and financial transactions</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline">
+          <Button 
+            variant="outline"
+            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 border-0"
+            onClick={() => handleAction("Export Transactions")}
+            disabled={isLoading}
+          >
             <Download className="w-4 h-4 mr-2" />
             Export
           </Button>
-          <Button className="btn-primary">
+          <Button 
+            className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+            onClick={() => handleAction("Manual Transaction")}
+            disabled={isLoading}
+          >
             <Plus className="w-4 h-4 mr-2" />
             Manual Transaction
           </Button>
@@ -653,47 +606,47 @@ export default function AdminPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="shadow-lg bg-white/90 backdrop-blur-md border-0">
+        <Card className="shadow-lg bg-gradient-to-r from-green-500 to-green-600 text-white border-0">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-taxi-gray">Today's Revenue</p>
-                <p className="text-xl font-bold text-success">$42,847</p>
+                <p className="text-green-100">Today's Revenue</p>
+                <p className="text-xl font-bold">$42,847</p>
               </div>
-              <DollarSign className="w-8 h-8 text-success" />
+              <DollarSign className="w-8 h-8 text-green-200" />
             </div>
           </CardContent>
         </Card>
-        <Card className="shadow-lg bg-white/90 backdrop-blur-md border-0">
+        <Card className="shadow-lg bg-gradient-to-r from-yellow-500 to-yellow-600 text-white border-0">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-taxi-gray">Pending Payouts</p>
-                <p className="text-xl font-bold text-warning">$8,750</p>
+                <p className="text-yellow-100">Pending Payouts</p>
+                <p className="text-xl font-bold">$8,750</p>
               </div>
-              <Clock className="w-8 h-8 text-warning" />
+              <Clock className="w-8 h-8 text-yellow-200" />
             </div>
           </CardContent>
         </Card>
-        <Card className="shadow-lg bg-white/90 backdrop-blur-md border-0">
+        <Card className="shadow-lg bg-gradient-to-r from-red-500 to-red-600 text-white border-0">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-taxi-gray">Failed Payments</p>
-                <p className="text-xl font-bold text-destructive">$1,230</p>
+                <p className="text-red-100">Failed Payments</p>
+                <p className="text-xl font-bold">$1,230</p>
               </div>
-              <XCircle className="w-8 h-8 text-destructive" />
+              <XCircle className="w-8 h-8 text-red-200" />
             </div>
           </CardContent>
         </Card>
-        <Card className="shadow-lg bg-white/90 backdrop-blur-md border-0">
+        <Card className="shadow-lg bg-gradient-to-r from-purple-500 to-purple-600 text-white border-0">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-taxi-gray">Wallet Balance</p>
-                <p className="text-xl font-bold text-primary">$125,450</p>
+                <p className="text-purple-100">Wallet Balance</p>
+                <p className="text-xl font-bold">$125,450</p>
               </div>
-              <Wallet className="w-8 h-8 text-primary" />
+              <Wallet className="w-8 h-8 text-purple-200" />
             </div>
           </CardContent>
         </Card>
@@ -706,14 +659,15 @@ export default function AdminPage() {
             <Input placeholder="Search transactions..." className="w-64" />
             <Select>
               <SelectTrigger className="w-40">
-                <SelectValue placeholder="Transaction type" />
+                <SelectValue placeholder="Payment method" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Types</SelectItem>
-                <SelectItem value="ride_payment">Ride Payment</SelectItem>
-                <SelectItem value="driver_payout">Driver Payout</SelectItem>
-                <SelectItem value="wallet_topup">Wallet Top-up</SelectItem>
-                <SelectItem value="refund">Refund</SelectItem>
+                <SelectItem value="all">All Methods</SelectItem>
+                {paymentMethods.map((method) => (
+                  <SelectItem key={method.id} value={method.id}>
+                    {method.name}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
@@ -726,497 +680,75 @@ export default function AdminPage() {
                 <TableHead>User</TableHead>
                 <TableHead>Type</TableHead>
                 <TableHead>Amount</TableHead>
-                <TableHead>Method</TableHead>
+                <TableHead>Payment Method</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Date</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {transactions.map((transaction) => (
-                <TableRow key={transaction.id}>
-                  <TableCell className="font-medium">#{transaction.id.toString().padStart(6, '0')}</TableCell>
-                  <TableCell>{transaction.user}</TableCell>
-                  <TableCell>
-                    <Badge variant="outline">
-                      {transaction.type.replace('_', ' ')}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="font-medium">{transaction.amount}</TableCell>
-                  <TableCell>{transaction.method}</TableCell>
-                  <TableCell>
-                    <Badge variant={transaction.status === "completed" ? "default" : transaction.status === "pending" ? "secondary" : "destructive"}>
-                      {transaction.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>{transaction.date}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button variant="outline" size="sm">
-                        <Eye className="w-4 h-4" />
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Download className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {transactions.map((transaction) => {
+                const paymentMethod = paymentMethods.find(p => p.id === transaction.method);
+                const PaymentIcon = paymentMethod?.icon || CreditCard;
+                return (
+                  <TableRow key={transaction.id} className="hover:bg-taxi-light-gray/30">
+                    <TableCell className="font-medium">#{transaction.id.toString().padStart(6, '0')}</TableCell>
+                    <TableCell>{transaction.user}</TableCell>
+                    <TableCell>
+                      <Badge variant="outline">
+                        {transaction.type.replace('_', ' ')}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="font-medium">{transaction.amount}</TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <div className={`w-6 h-6 ${paymentMethod?.color || 'bg-gray-500'} rounded flex items-center justify-center`}>
+                          <PaymentIcon className="w-3 h-3 text-white" />
+                        </div>
+                        <span className="text-sm">{paymentMethod?.name || transaction.method}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge 
+                        className={
+                          transaction.status === "completed" ? "bg-green-500 text-white" : 
+                          transaction.status === "pending" ? "bg-yellow-500 text-white" : 
+                          "bg-red-500 text-white"
+                        }
+                      >
+                        {transaction.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>{transaction.date}</TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          className="bg-blue-500 text-white hover:bg-blue-600 border-0"
+                          onClick={() => handleAction("View Transaction", transaction)}
+                          disabled={isLoading}
+                        >
+                          <Eye className="w-4 h-4" />
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          className="bg-green-500 text-white hover:bg-green-600 border-0"
+                          onClick={() => handleAction("Download Receipt", transaction)}
+                          disabled={isLoading}
+                        >
+                          <Download className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </CardContent>
       </Card>
-    </div>
-  );
-
-  const renderSpecialZones = () => (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h2 className="text-2xl font-bold text-taxi-dark">Special Zones & Pricing</h2>
-          <p className="text-taxi-gray">Manage red zones, premium areas, and dynamic pricing</p>
-        </div>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button className="btn-primary">
-              <Plus className="w-4 h-4 mr-2" />
-              Add Zone
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Create Special Zone</DialogTitle>
-              <DialogDescription>Define a new special pricing zone</DialogDescription>
-            </DialogHeader>
-            <div className="space-y-4 pt-4">
-              <div>
-                <Label htmlFor="zone-name">Zone Name</Label>
-                <Input id="zone-name" placeholder="Enter zone name" />
-              </div>
-              <div>
-                <Label htmlFor="zone-type">Zone Type</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select zone type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="premium">Premium Zone</SelectItem>
-                    <SelectItem value="restricted">Red Zone</SelectItem>
-                    <SelectItem value="priority">Priority Zone</SelectItem>
-                    <SelectItem value="airport">Airport Zone</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label htmlFor="multiplier">Price Multiplier</Label>
-                <Input id="multiplier" placeholder="e.g., 1.5" />
-              </div>
-              <div className="flex items-center space-x-2">
-                <Switch id="active" />
-                <Label htmlFor="active">Zone Active</Label>
-              </div>
-              <Button className="w-full btn-primary">Create Zone</Button>
-            </div>
-          </DialogContent>
-        </Dialog>
-      </div>
-
-      <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
-        <CardHeader>
-          <CardTitle>Active Special Zones</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Zone Name</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Price Multiplier</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Total Rides</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {specialZones.map((zone) => (
-                <TableRow key={zone.id}>
-                  <TableCell className="font-medium">{zone.name}</TableCell>
-                  <TableCell>
-                    <Badge variant={zone.type === "restricted" ? "destructive" : zone.type === "premium" ? "default" : "secondary"}>
-                      {zone.type}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="font-medium">{zone.multiplier}</TableCell>
-                  <TableCell>
-                    <Badge variant="default">{zone.status}</Badge>
-                  </TableCell>
-                  <TableCell>{zone.rides}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button variant="outline" size="sm">
-                        <Edit className="w-4 h-4" />
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <MapPin className="w-4 h-4" />
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
-          <CardHeader>
-            <CardTitle>Peak Time Pricing</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between p-3 bg-taxi-light-gray/30 rounded-lg">
-              <div>
-                <p className="font-medium">Morning Peak (7-9 AM)</p>
-                <p className="text-sm text-taxi-gray">1.3x multiplier</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            <div className="flex items-center justify-between p-3 bg-taxi-light-gray/30 rounded-lg">
-              <div>
-                <p className="font-medium">Evening Peak (5-7 PM)</p>
-                <p className="text-sm text-taxi-gray">1.4x multiplier</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            <div className="flex items-center justify-between p-3 bg-taxi-light-gray/30 rounded-lg">
-              <div>
-                <p className="font-medium">Night Time (10 PM-5 AM)</p>
-                <p className="text-sm text-taxi-gray">1.2x multiplier</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
-          <CardHeader>
-            <CardTitle>Dynamic Pricing Rules</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between p-3 bg-taxi-light-gray/30 rounded-lg">
-              <div>
-                <p className="font-medium">High Demand Areas</p>
-                <p className="text-sm text-taxi-gray">Auto-adjust based on demand</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            <div className="flex items-center justify-between p-3 bg-taxi-light-gray/30 rounded-lg">
-              <div>
-                <p className="font-medium">Weather-based Pricing</p>
-                <p className="text-sm text-taxi-gray">Increase during bad weather</p>
-              </div>
-              <Switch />
-            </div>
-            <div className="flex items-center justify-between p-3 bg-taxi-light-gray/30 rounded-lg">
-              <div>
-                <p className="font-medium">Event-based Pricing</p>
-                <p className="text-sm text-taxi-gray">Special events & holidays</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  );
-
-  const renderAdvancedFeatures = () => (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold text-taxi-dark">Advanced Features</h2>
-        <p className="text-taxi-gray">Configure special ride options and accessibility features</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Accessibility Features */}
-        <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Accessibility className="w-5 h-5 mr-2 text-primary" />
-              Accessibility
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Wheelchair Access</p>
-                <p className="text-sm text-taxi-gray">Enable wheelchair-accessible vehicles</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Baby Seat</p>
-                <p className="text-sm text-taxi-gray">Allow baby seat requests</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Audio Assistance</p>
-                <p className="text-sm text-taxi-gray">Voice guidance for visually impaired</p>
-              </div>
-              <Switch />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Ride Preferences */}
-        <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Heart className="w-5 h-5 mr-2 text-primary" />
-              Ride Preferences
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Gender Preference</p>
-                <p className="text-sm text-taxi-gray">Allow driver gender selection</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Favorite Driver</p>
-                <p className="text-sm text-taxi-gray">Save and request preferred drivers</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Quiet Mode</p>
-                <p className="text-sm text-taxi-gray">Silent ride option</p>
-              </div>
-              <Switch />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Security Features */}
-        <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Shield className="w-5 h-5 mr-2 text-primary" />
-              Security
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">OTP on Trip Start</p>
-                <p className="text-sm text-taxi-gray">Verify driver with OTP</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Guardian Tracking</p>
-                <p className="text-sm text-taxi-gray">Share ride with guardians</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Emergency SOS</p>
-                <p className="text-sm text-taxi-gray">One-tap emergency contact</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Corporate Features */}
-        <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Building className="w-5 h-5 mr-2 text-primary" />
-              Corporate Rides
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Corporate Accounts</p>
-                <p className="text-sm text-taxi-gray">Business ride accounts</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Expense Reporting</p>
-                <p className="text-sm text-taxi-gray">Automated expense tracking</p>
-              </div>
-              <Switch />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Bulk Booking</p>
-                <p className="text-sm text-taxi-gray">Multiple rides at once</p>
-              </div>
-              <Switch />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Recurring Rides */}
-        <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Repeat className="w-5 h-5 mr-2 text-primary" />
-              Recurring Rides
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Scheduled Rides</p>
-                <p className="text-sm text-taxi-gray">Daily/weekly recurring trips</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Auto Payment</p>
-                <p className="text-sm text-taxi-gray">Automatic payment for recurring rides</p>
-              </div>
-              <Switch />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Route Optimization</p>
-                <p className="text-sm text-taxi-gray">Smart route learning</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Special Services */}
-        <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <ShoppingBag className="w-5 h-5 mr-2 text-primary" />
-              Special Services
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Delivery Service</p>
-                <p className="text-sm text-taxi-gray">Package delivery option</p>
-              </div>
-              <Switch />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Outstation Booking</p>
-                <p className="text-sm text-taxi-gray">Long-distance trips</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Car Rental</p>
-                <p className="text-sm text-taxi-gray">Self-drive car rental</p>
-              </div>
-              <Switch />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Pool Service Configuration */}
-        <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Users2 className="w-5 h-5 mr-2 text-primary" />
-              Ride Pool Service
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <Label htmlFor="pool-radius">Pool Matching Radius (km)</Label>
-              <Input id="pool-radius" type="number" defaultValue="2" className="mt-1" />
-            </div>
-            <div>
-              <Label htmlFor="max-passengers">Max Passengers per Pool</Label>
-              <Input id="max-passengers" type="number" defaultValue="4" className="mt-1" />
-            </div>
-            <div>
-              <Label htmlFor="pool-discount">Pool Discount (%)</Label>
-              <Input id="pool-discount" type="number" defaultValue="25" className="mt-1" />
-            </div>
-            <div className="flex items-center space-x-2">
-              <Switch id="pool-active" defaultChecked />
-              <Label htmlFor="pool-active">Pool Service Active</Label>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Multi-City Management */}
-        <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Globe className="w-5 h-5 mr-2 text-primary" />
-              Multi-City Management
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <Label htmlFor="default-city">Default City</Label>
-              <Select>
-                <SelectTrigger className="mt-1">
-                  <SelectValue placeholder="Select default city" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="new-york">New York</SelectItem>
-                  <SelectItem value="los-angeles">Los Angeles</SelectItem>
-                  <SelectItem value="chicago">Chicago</SelectItem>
-                  <SelectItem value="houston">Houston</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label htmlFor="currency">Currency</Label>
-              <Select>
-                <SelectTrigger className="mt-1">
-                  <SelectValue placeholder="Select currency" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="usd">USD ($)</SelectItem>
-                  <SelectItem value="eur">EUR (€)</SelectItem>
-                  <SelectItem value="gbp">GBP (£)</SelectItem>
-                  <SelectItem value="cad">CAD (C$)</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Switch id="rtl-support" />
-              <Label htmlFor="rtl-support">RTL Support</Label>
-            </div>
-            <Button className="w-full btn-primary">
-              <Plus className="w-4 h-4 mr-2" />
-              Add New City
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
     </div>
   );
 
@@ -1226,6 +758,7 @@ export default function AdminPage() {
     { id: "drivers", label: "Drivers Manager", icon: UserCheck },
     { id: "rides", label: "Rides Manager", icon: Car },
     { id: "transactions", label: "Transaction Manager", icon: DollarSign },
+    { id: "payments", label: "Payment Methods", icon: CreditCard },
     { id: "wallet", label: "Wallet Manager", icon: Wallet },
     { id: "reports", label: "Reports & Analytics", icon: FileText },
     { id: "chat", label: "Chat Module", icon: MessageCircle },
@@ -1239,22 +772,24 @@ export default function AdminPage() {
         return renderDashboard();
       case "users":
         return renderUsersManager();
-      case "drivers":
-        return renderDriversManager();
-      case "rides":
-        return renderRidesManager();
       case "transactions":
         return renderTransactionManager();
-      case "zones":
-        return renderSpecialZones();
-      case "features":
-        return renderAdvancedFeatures();
+      case "payments":
+        return renderPaymentMethods();
       case "wallet":
         return (
           <div className="text-center py-12">
             <Wallet className="w-16 h-16 text-taxi-gray mx-auto mb-4" />
             <h3 className="text-lg font-medium text-taxi-dark mb-2">Wallet Manager</h3>
-            <p className="text-taxi-gray">Manage user wallets, top-ups, and balance transfers</p>
+            <p className="text-taxi-gray mb-6">Manage user wallets, top-ups, and balance transfers</p>
+            <Button 
+              className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0"
+              onClick={() => handleAction("Open Wallet Manager")}
+              disabled={isLoading}
+            >
+              <Wallet className="w-4 h-4 mr-2" />
+              Manage Wallets
+            </Button>
           </div>
         );
       case "reports":
@@ -1262,7 +797,15 @@ export default function AdminPage() {
           <div className="text-center py-12">
             <BarChart3 className="w-16 h-16 text-taxi-gray mx-auto mb-4" />
             <h3 className="text-lg font-medium text-taxi-dark mb-2">Reports & Analytics</h3>
-            <p className="text-taxi-gray">Comprehensive reporting and business analytics dashboard</p>
+            <p className="text-taxi-gray mb-6">Comprehensive reporting and business analytics dashboard</p>
+            <Button 
+              className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0"
+              onClick={() => handleAction("Generate Reports")}
+              disabled={isLoading}
+            >
+              <FileText className="w-4 h-4 mr-2" />
+              Generate Reports
+            </Button>
           </div>
         );
       case "chat":
@@ -1270,7 +813,15 @@ export default function AdminPage() {
           <div className="text-center py-12">
             <MessageCircle className="w-16 h-16 text-taxi-gray mx-auto mb-4" />
             <h3 className="text-lg font-medium text-taxi-dark mb-2">Chat Module</h3>
-            <p className="text-taxi-gray">Customer support chat system and communication tools</p>
+            <p className="text-taxi-gray mb-6">Customer support chat system and communication tools</p>
+            <Button 
+              className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+              onClick={() => handleAction("Open Chat Module")}
+              disabled={isLoading}
+            >
+              <MessageCircle className="w-4 h-4 mr-2" />
+              Open Chat
+            </Button>
           </div>
         );
       default:
@@ -1287,13 +838,13 @@ export default function AdminPage() {
             <div className="flex items-center flex-shrink-0 px-4">
               <h1 className="text-xl font-bold text-taxi-dark">BAMBI Admin</h1>
             </div>
-
+            
             {/* User Info */}
             <div className="mt-6 px-4">
-              <div className="bg-primary/5 rounded-lg p-3">
+              <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-3">
                 <div className="flex items-center">
-                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                    <User className="w-4 h-4 text-primary-foreground" />
+                  <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center">
+                    <User className="w-4 h-4 text-white" />
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-taxi-dark">{user?.name}</p>
@@ -1312,10 +863,10 @@ export default function AdminPage() {
                       key={item.id}
                       onClick={() => setActiveModule(item.id)}
                       aria-current={activeModule === item.id ? "page" : undefined}
-                      className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors ${
+                      className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-all duration-200 ${
                         activeModule === item.id
-                          ? "bg-primary text-primary-foreground"
-                          : "text-taxi-dark hover:bg-taxi-light-gray/50"
+                          ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg"
+                          : "text-taxi-dark hover:bg-gradient-to-r hover:from-taxi-light-gray/50 hover:to-taxi-light-gray/70"
                       }`}
                     >
                       <Icon className="mr-3 h-5 w-5" />
@@ -1324,13 +875,13 @@ export default function AdminPage() {
                   );
                 })}
               </nav>
-
+              
               {/* Logout Button */}
               <div className="px-2 pb-4">
                 <button
                   onClick={logout}
                   aria-label="Sign out of admin panel"
-                  className="group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left text-destructive hover:bg-destructive/10 transition-colors"
+                  className="group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left text-destructive hover:bg-gradient-to-r hover:from-destructive/10 hover:to-destructive/20 transition-all duration-200"
                 >
                   <LogOut className="mr-3 h-5 w-5" />
                   Sign Out
@@ -1349,19 +900,19 @@ export default function AdminPage() {
                 variant="outline"
                 size="sm"
                 onClick={logout}
-                className="flex items-center"
+                className="flex items-center bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 border-0"
               >
                 <LogOut className="w-4 h-4 mr-2" />
                 Logout
               </Button>
             </div>
-
+            
             {/* User Info on Mobile */}
             <div className="px-4 pb-4">
-              <div className="bg-primary/5 rounded-lg p-3">
+              <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-3">
                 <div className="flex items-center">
-                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                    <User className="w-4 h-4 text-primary-foreground" />
+                  <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center">
+                    <User className="w-4 h-4 text-white" />
                   </div>
                   <div className="ml-3">
                     <p className="text-sm font-medium text-taxi-dark">{user?.name}</p>
