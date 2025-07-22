@@ -180,6 +180,7 @@ export function MobileNavigation({ userType }: MobileNavigationProps) {
 
           {/* Header Actions */}
           <div className="flex items-center space-x-2">
+            <CurrencySelector />
             <Button
               variant="ghost"
               size="sm"
