@@ -20,7 +20,7 @@ export default function DriverPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl lg:text-4xl font-bold text-taxi-dark mb-4">
-            Drive with SmartCommute
+            Drive with BAMBI
           </h1>
           <p className="text-lg text-taxi-gray max-w-2xl mx-auto">
             Join thousands of drivers earning flexible income on their own schedule
@@ -161,7 +161,7 @@ export default function DriverPage() {
               Ready to Start Earning?
             </h2>
             <p className="text-primary-foreground/90 mb-6 max-w-2xl mx-auto">
-              Join SmartCommute today and start earning money on your schedule. 
+              Join BAMBI today and start earning money on your schedule. 
               The application process takes just minutes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
