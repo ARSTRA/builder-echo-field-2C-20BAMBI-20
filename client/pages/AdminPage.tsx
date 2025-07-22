@@ -104,9 +104,14 @@ export default function AdminPage() {
   // State for various forms and operations
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState<any>(null);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState<any>({});
+  const [showUserDialog, setShowUserDialog] = useState(false);
+  const [showDriverDialog, setShowDriverDialog] = useState(false);
+  const [showTransactionDialog, setShowTransactionDialog] = useState(false);
+  const [showZoneDialog, setShowZoneDialog] = useState(false);
+  const [showPriceDialog, setShowPriceDialog] = useState(false);
 
   // Show loading if user data is not yet available
   if (!user) {
@@ -120,28 +125,167 @@ export default function AdminPage() {
     );
   }
 
-  // Utility functions for button actions
-  const handleAction = async (action: string, data?: any) => {
+  // Specific button action handlers
+  const handleViewUser = (userData: any) => {
+    setSelectedUser(userData);
+    setShowUserDialog(true);
+    toast({
+      title: "User Details",
+      description: `Viewing details for ${userData.name}`,
+    });
+  };
+
+  const handleEditUser = (userData: any) => {
+    setSelectedUser(userData);
+    setFormData(userData);
+    setShowUserDialog(true);
+    toast({
+      title: "Edit Mode",
+      description: `Editing user ${userData.name}`,
+    });
+  };
+
+  const handleBanUser = async (userData: any) => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise(resolve => setTimeout(resolve, 1500));
       toast({
-        title: "Success!",
-        description: `${action} completed successfully`,
-      });
-      
-      console.log(`Action: ${action}`, data);
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "An error occurred while processing your request",
+        title: "User Banned",
+        description: `${userData.name} has been banned from the platform`,
         variant: "destructive",
       });
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleAddDriver = () => {
+    setShowDriverDialog(true);
+    setFormData({});
+    toast({
+      title: "Add Driver",
+      description: "Opening driver registration form",
+    });
+  };
+
+  const handleSetRedZone = () => {
+    setShowZoneDialog(true);
+    toast({
+      title: "Red Zone Manager",
+      description: "Configure restricted areas and pricing",
+    });
+  };
+
+  const handlePriceUpdate = () => {
+    setShowPriceDialog(true);
+    toast({
+      title: "Price Manager",
+      description: "Update pricing and surge rates",
+    });
+  };
+
+  const handleGenerateReport = async () => {
+    setIsLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      toast({
+        title: "Report Generated",
+        description: "Financial report has been generated and is ready for download",
+      });
+      // Simulate download
+      const reportData = `BAMBI Admin Report - ${new Date().toISOString()}\n\nRevenue: $42,847\nRides: 18,392\nDrivers: 2,847`;
+      const blob = new Blob([reportData], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `bambi-report-${Date.now()}.txt`;
+      a.click();
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleExportData = async (dataType: string) => {
+    setIsLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      toast({
+        title: "Export Complete",
+        description: `${dataType} data has been exported successfully`,
+      });
+      // Simulate CSV download
+      const csvData = `Name,Email,Status,Rides\nJohn Doe,john@example.com,active,45\nSarah Smith,sarah@example.com,active,128`;
+      const blob = new Blob([csvData], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${dataType.toLowerCase()}-export-${Date.now()}.csv`;
+      a.click();
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleManualTransaction = () => {
+    setShowTransactionDialog(true);
+    setFormData({});
+    toast({
+      title: "Manual Transaction",
+      description: "Create a manual transaction entry",
+    });
+  };
+
+  const handleConfigurePayment = (paymentMethod: any) => {
+    setSelectedPaymentMethod(paymentMethod.id);
+    toast({
+      title: "Payment Configuration",
+      description: `Configuring ${paymentMethod.name} settings`,
+    });
+  };
+
+  const handleManageWallet = () => {
+    setActiveModule("wallet");
+    toast({
+      title: "Wallet Manager",
+      description: "Opening wallet management interface",
+    });
+  };
+
+  const handleAdvancedFeatures = () => {
+    setActiveModule("features");
+    toast({
+      title: "Advanced Features",
+      description: "Accessing advanced platform features",
+    });
+  };
+
+  const handleDownloadReceipt = async (transaction: any) => {
+    setIsLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      toast({
+        title: "Receipt Downloaded",
+        description: `Receipt for transaction #${transaction.id} downloaded`,
+      });
+      // Simulate receipt download
+      const receiptData = `BAMBI RECEIPT\nTransaction ID: #${transaction.id}\nAmount: ${transaction.amount}\nUser: ${transaction.user}\nMethod: ${transaction.method}`;
+      const blob = new Blob([receiptData], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `receipt-${transaction.id}.txt`;
+      a.click();
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleViewTransaction = (transaction: any) => {
+    toast({
+      title: "Transaction Details",
+      description: `Viewing transaction #${transaction.id} - ${transaction.amount}`,
+    });
+    console.log("Transaction details:", transaction);
   };
 
   const stats = [
