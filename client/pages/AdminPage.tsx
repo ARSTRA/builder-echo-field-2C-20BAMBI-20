@@ -75,13 +75,8 @@ import {
   AlertCircle,
   Moon,
   Sun,
-  Plane,
   Users2,
-  UserX,
   Heart,
-  Target,
-  Timer,
-  Route,
   LogOut,
   User,
 } from "lucide-react";
