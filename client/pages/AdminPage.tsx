@@ -377,37 +377,37 @@ export default function AdminPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="grid grid-cols-2 gap-4">
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="h-20 flex flex-col bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 border-0"
-              onClick={() => handleAction("Add Driver")}
+              onClick={handleAddDriver}
               disabled={isLoading}
             >
               <Plus className="w-6 h-6 mb-2" />
               Add Driver
             </Button>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="h-20 flex flex-col bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 border-0"
-              onClick={() => handleAction("Set Red Zone")}
+              onClick={handleSetRedZone}
               disabled={isLoading}
             >
               <MapPinOff className="w-6 h-6 mb-2" />
               Set Red Zone
             </Button>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="h-20 flex flex-col bg-gradient-to-r from-green-500 to-green-600 text-white hover:from-green-600 hover:to-green-700 border-0"
-              onClick={() => handleAction("Price Update")}
+              onClick={handlePriceUpdate}
               disabled={isLoading}
             >
               <DollarSign className="w-6 h-6 mb-2" />
               Price Update
             </Button>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="h-20 flex flex-col bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 border-0"
-              onClick={() => handleAction("Generate Report")}
+              onClick={handleGenerateReport}
               disabled={isLoading}
             >
               <FileText className="w-6 h-6 mb-2" />
