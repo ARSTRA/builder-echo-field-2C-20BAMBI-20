@@ -102,7 +102,7 @@ export default function BookingPage() {
 
   const paymentMethods = [
     { id: "card", name: "Credit/Debit Card", icon: CreditCard, details: "**** 1234" },
-    { id: "wallet", name: "SmartCommute Wallet", icon: DollarSign, details: "$45.50 available" },
+    { id: "wallet", name: "BAMBI Wallet", icon: DollarSign, details: "$45.50 available" },
     { id: "cash", name: "Cash", icon: DollarSign, details: "Pay driver directly" }
   ];
 
