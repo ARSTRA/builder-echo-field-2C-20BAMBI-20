@@ -23,14 +23,75 @@ export function Navigation() {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
             <div className="relative">
-              <div className="w-8 h-8 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-lg opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                <span className="relative text-white font-black text-sm tracking-wider">
-                  B
-                </span>
+              {/* Desktop SVG Logo */}
+              <div className="w-10 h-10 group-hover:scale-110 transition-transform duration-300">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="drop-shadow-md group-hover:drop-shadow-lg transition-all duration-300"
+                >
+                  <defs>
+                    <linearGradient id="desktopBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#FF6B9D" />
+                      <stop offset="40%" stopColor="#8B5CF6" />
+                      <stop offset="80%" stopColor="#3B82F6" />
+                      <stop offset="100%" stopColor="#06B6D4" />
+                    </linearGradient>
+                    <linearGradient id="desktopCarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#F59E0B" />
+                      <stop offset="100%" stopColor="#EF4444" />
+                    </linearGradient>
+                    <linearGradient id="desktopBGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#FFFFFF" />
+                      <stop offset="100%" stopColor="#F1F5F9" />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Background Circle */}
+                  <circle cx="20" cy="20" r="18" fill="url(#desktopBgGradient)" stroke="#FFFFFF" strokeWidth="1.5"/>
+
+                  {/* Inner Ring */}
+                  <circle cx="20" cy="20" r="15" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5"/>
+
+                  {/* Road Path */}
+                  <path d="M6 21 Q14 18 20 21 Q26 24 34 21" stroke="#FFFFFF" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.8"/>
+
+                  {/* Road markings */}
+                  <path d="M10 21 L12 21 M18 21 L20 21 M26 21 L28 21" stroke="#FFFFFF" strokeWidth="0.8" strokeLinecap="round" opacity="0.7"/>
+
+                  {/* Car */}
+                  <g transform="translate(26, 19)">
+                    <ellipse cx="0" cy="0" rx="6" ry="3" fill="url(#desktopCarGradient)"/>
+                    <circle cx="-3" cy="1.5" r="1" fill="#1F2937"/>
+                    <circle cx="3" cy="1.5" r="1" fill="#1F2937"/>
+                    <rect x="-4" y="-1.5" width="3" height="1.5" rx="0.5" fill="#F3F4F6" opacity="0.9"/>
+                  </g>
+
+                  {/* Letter B */}
+                  <g transform="translate(11, 10)">
+                    <path
+                      d="M0 0 L0 20 L10 20 Q14 20 14 15 Q14 12.5 12 11.25 Q14 10 14 7.5 Q14 0 10 0 Z M3.5 3.5 L10 3.5 Q10 3.5 10 7.5 Q10 9.5 8 9.5 L3.5 9.5 Z M3.5 11.5 L10 11.5 Q12 11.5 12 15 Q12 16.5 10 16.5 L3.5 16.5 Z"
+                      fill="url(#desktopBGradient)"
+                      stroke="#3B82F6"
+                      strokeWidth="0.4"
+                    />
+                  </g>
+
+                  {/* Motion Effects */}
+                  <g className="animate-pulse">
+                    <circle cx="32" cy="12" r="0.8" fill="#FBBF24" opacity="0.8"/>
+                    <circle cx="8" cy="28" r="1" fill="#FF6B9D" opacity="0.8"/>
+                    <circle cx="32" cy="28" r="0.8" fill="#8B5CF6" opacity="0.8"/>
+                  </g>
+                </svg>
               </div>
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
-                <Car className="w-1.5 h-1.5 text-white" />
+
+              {/* Desktop Badge */}
+              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center shadow-md border border-white">
+                <Car className="w-2 h-2 text-white" />
               </div>
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
