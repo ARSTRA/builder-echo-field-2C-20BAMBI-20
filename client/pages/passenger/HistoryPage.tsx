@@ -137,7 +137,7 @@ export default function HistoryPage() {
       vehicleType: "Comfort",
       vehiclePlate: "GHI-3456",
       status: "completed",
-      fare: 15.75,
+      fare: 24413, // Equivalent to ~$15.75 in NGN
       distance: 4.1,
       duration: 12,
       rating: 5,
