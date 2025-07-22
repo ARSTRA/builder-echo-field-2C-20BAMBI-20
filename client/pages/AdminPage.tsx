@@ -479,20 +479,20 @@ export default function AdminPage() {
                 <h3 className="text-lg font-semibold text-taxi-dark mb-2">{method.name}</h3>
                 <p className="text-sm text-taxi-gray mb-4">{method.description}</p>
                 <div className="flex gap-2">
-                  <Button 
-                    size="sm" 
+                  <Button
+                    size="sm"
                     variant="outline"
                     className="flex-1"
-                    onClick={() => handleAction(`Configure ${method.name}`)}
+                    onClick={() => handleConfigurePayment(method)}
                     disabled={isLoading}
                   >
                     <Settings className="w-4 h-4 mr-1" />
                     Configure
                   </Button>
-                  <Button 
-                    size="sm" 
+                  <Button
+                    size="sm"
                     className={`${method.color} text-white border-0 hover:opacity-90`}
-                    onClick={() => handleAction(`View ${method.name} Stats`)}
+                    onClick={() => toast({title: `${method.name} Statistics`, description: "Payment method analytics opened"})}
                     disabled={isLoading}
                   >
                     <BarChart3 className="w-4 h-4 mr-1" />
