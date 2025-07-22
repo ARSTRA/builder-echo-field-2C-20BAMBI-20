@@ -939,7 +939,7 @@ export default function AdminPage() {
         <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
           <CardHeader>
             <CardTitle className="flex items-center">
-              <Wheelchair className="w-5 h-5 mr-2 text-primary" />
+              <Accessibility className="w-5 h-5 mr-2 text-primary" />
               Accessibility
             </CardTitle>
           </CardHeader>
