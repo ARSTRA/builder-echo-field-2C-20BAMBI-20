@@ -2092,63 +2092,158 @@ export default function RidePage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0 space-y-4">
-                  <div
-                    className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                      selectedPaymentMethod === "card"
-                        ? "bg-blue-50 border-blue-200"
-                        : "hover:bg-gray-50"
-                    }`}
-                    onClick={() => {
-                      setSelectedPaymentMethod("card");
-                      toast.success("Credit card selected");
-                    }}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <CreditCard className="w-6 h-6 text-blue-600" />
-                        <div>
-                          <p className="font-medium">Visa •••• 1234</p>
-                          <p className="text-sm text-gray-500">Expires 12/25</p>
+                  {/* USD Payment Methods */}
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-medium text-gray-700">USD Payment Methods</h4>
+
+                    <div
+                      className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                        selectedPaymentMethod === "card-usd"
+                          ? "bg-blue-50 border-blue-200"
+                          : "hover:bg-gray-50"
+                      }`}
+                      onClick={() => {
+                        setSelectedPaymentMethod("card-usd");
+                        toast.success("USD Credit card selected");
+                      }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <CreditCard className="w-6 h-6 text-blue-600" />
+                          <div>
+                            <p className="font-medium">Visa •••• 1234 (USD)</p>
+                            <p className="text-sm text-gray-500">Expires 12/25</p>
+                          </div>
                         </div>
+                        {selectedPaymentMethod === "card-usd" && (
+                          <Badge className="bg-blue-600">Primary</Badge>
+                        )}
                       </div>
-                      {selectedPaymentMethod === "card" && (
-                        <Badge className="bg-blue-600">Primary</Badge>
-                      )}
+                    </div>
+
+                    <div
+                      className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                        selectedPaymentMethod === "wallet-usd"
+                          ? "bg-purple-50 border-purple-200"
+                          : "hover:bg-gray-50"
+                      }`}
+                      onClick={() => {
+                        setSelectedPaymentMethod("wallet-usd");
+                        toast.success("USD Wallet selected");
+                      }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <Wallet className="w-6 h-6 text-purple-600" />
+                          <div>
+                            <p className="font-medium">BAMBI Wallet (USD)</p>
+                            <p className="text-sm text-gray-500">
+                              ${walletBalanceUSD.toFixed(2)} available
+                            </p>
+                          </div>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleTopUpWallet();
+                          }}
+                        >
+                          <Plus className="w-4 h-4 mr-1" />
+                          Top Up
+                        </Button>
+                      </div>
                     </div>
                   </div>
 
-                  <div
-                    className={`border rounded-lg p-4 cursor-pointer transition-colors ${
-                      selectedPaymentMethod === "wallet"
-                        ? "bg-purple-50 border-purple-200"
-                        : "hover:bg-gray-50"
-                    }`}
-                    onClick={() => {
-                      setSelectedPaymentMethod("wallet");
-                      toast.success("Wallet selected");
-                    }}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <Wallet className="w-6 h-6 text-purple-600" />
-                        <div>
-                          <p className="font-medium">BAMBI Wallet</p>
-                          <p className="text-sm text-gray-500">
-                            ${walletBalance.toFixed(2)} available
-                          </p>
+                  {/* NGN Payment Methods */}
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-medium text-gray-700">NGN Payment Methods</h4>
+
+                    <div
+                      className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                        selectedPaymentMethod === "card-ngn"
+                          ? "bg-green-50 border-green-200"
+                          : "hover:bg-gray-50"
+                      }`}
+                      onClick={() => {
+                        setSelectedPaymentMethod("card-ngn");
+                        toast.success("NGN Credit card selected");
+                      }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <CreditCard className="w-6 h-6 text-green-600" />
+                          <div>
+                            <p className="font-medium">Verve •••• 5678 (NGN)</p>
+                            <p className="text-sm text-gray-500">Expires 08/26</p>
+                          </div>
                         </div>
+                        {selectedPaymentMethod === "card-ngn" && (
+                          <Badge className="bg-green-600">Active</Badge>
+                        )}
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleTopUpWallet();
-                        }}
-                      >
-                        <Plus className="w-4 h-4 mr-1" />
-                        Top Up
-                      </Button>
+                    </div>
+
+                    <div
+                      className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                        selectedPaymentMethod === "wallet-ngn"
+                          ? "bg-orange-50 border-orange-200"
+                          : "hover:bg-gray-50"
+                      }`}
+                      onClick={() => {
+                        setSelectedPaymentMethod("wallet-ngn");
+                        toast.success("NGN Wallet selected");
+                      }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <Wallet className="w-6 h-6 text-orange-600" />
+                          <div>
+                            <p className="font-medium">BAMBI Wallet (NGN)</p>
+                            <p className="text-sm text-gray-500">
+                              ₦{walletBalanceNGN.toLocaleString()} available
+                            </p>
+                          </div>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleTopUpWallet();
+                          }}
+                        >
+                          <Plus className="w-4 h-4 mr-1" />
+                          Top Up
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div
+                      className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                        selectedPaymentMethod === "cash-ngn"
+                          ? "bg-yellow-50 border-yellow-200"
+                          : "hover:bg-gray-50"
+                      }`}
+                      onClick={() => {
+                        setSelectedPaymentMethod("cash-ngn");
+                        toast.success("Cash (NGN) selected");
+                      }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <Banknote className="w-6 h-6 text-yellow-600" />
+                          <div>
+                            <p className="font-medium">Cash (Nigerian Naira)</p>
+                            <p className="text-sm text-gray-500">Pay driver directly in NGN</p>
+                          </div>
+                        </div>
+                        {selectedPaymentMethod === "cash-ngn" && (
+                          <Badge className="bg-yellow-600">Cash</Badge>
+                        )}
+                      </div>
                     </div>
                   </div>
 
