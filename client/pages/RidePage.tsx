@@ -416,9 +416,11 @@ export default function RidePage() {
 
   const handleTopUpWallet = () => {
     const amount = 50;
-    setWalletBalance((prev) => prev + amount);
+    const amountNGN = 77500; // Equivalent in NGN
+    setWalletBalanceUSD((prev) => prev + amount);
+    setWalletBalanceNGN((prev) => prev + amountNGN);
     toast.success(`Wallet topped up!`, {
-      description: `Added $${amount} to your wallet`,
+      description: `Added $${amount} (₦${amountNGN.toLocaleString()}) to your wallet`,
     });
   };
 
