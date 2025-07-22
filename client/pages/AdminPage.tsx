@@ -64,7 +64,7 @@ import {
   RefreshCw,
   MapPinOff,
   Baby,
-  Wheelchair,
+  Accessibility,
   Crown,
   Repeat,
   Building,
