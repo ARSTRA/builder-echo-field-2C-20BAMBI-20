@@ -59,7 +59,7 @@ import {
   Search,
   Eye,
   Ban,
-  CheckSquare,
+
   XCircle,
   RefreshCw,
   MapPinOff,
