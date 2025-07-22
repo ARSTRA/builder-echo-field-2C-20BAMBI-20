@@ -958,9 +958,15 @@ export default function AdminPage() {
             <MessageCircle className="w-16 h-16 text-taxi-gray mx-auto mb-4" />
             <h3 className="text-lg font-medium text-taxi-dark mb-2">Chat Module</h3>
             <p className="text-taxi-gray mb-6">Customer support chat system and communication tools</p>
-            <Button 
+            <Button
               className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
-              onClick={() => handleAction("Open Chat Module")}
+              onClick={() => {
+                setActiveModule("chat");
+                toast({
+                  title: "Chat Module",
+                  description: "Customer support chat system activated",
+                });
+              }}
               disabled={isLoading}
             >
               <MessageCircle className="w-4 h-4 mr-2" />
