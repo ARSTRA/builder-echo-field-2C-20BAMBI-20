@@ -62,6 +62,10 @@ export default {
           "light-blue": "hsl(var(--taxi-light-blue))",
           gray: "hsl(var(--taxi-gray))",
           "light-gray": "hsl(var(--taxi-light-gray))",
+          green: "hsl(var(--taxi-green))",
+          orange: "hsl(var(--taxi-orange))",
+          red: "hsl(var(--taxi-red))",
+          purple: "hsl(var(--taxi-purple))",
         },
       },
       borderRadius: {
