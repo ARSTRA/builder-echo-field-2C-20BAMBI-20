@@ -550,7 +550,7 @@ export default function AdminPage() {
                     size="sm"
                     variant="outline"
                     className="flex-1"
-                    onClick={() => handleConfigurePayment(method)}
+                    onClick={() => handleConfigurePaymentMethod(method)}
                     disabled={isLoading}
                   >
                     <Settings className="w-4 h-4 mr-1" />
@@ -559,7 +559,7 @@ export default function AdminPage() {
                   <Button
                     size="sm"
                     className={`${method.color} text-white border-0 hover:opacity-90`}
-                    onClick={() => toast({title: `${method.name} Statistics`, description: "Payment method analytics opened"})}
+                    onClick={() => handleViewPaymentStats(method)}
                     disabled={isLoading}
                   >
                     <BarChart3 className="w-4 h-4 mr-1" />
