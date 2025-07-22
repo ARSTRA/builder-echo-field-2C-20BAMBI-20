@@ -988,7 +988,7 @@ export default function RidePage() {
                               isSelected
                                 ? `${colors.selected} shadow-xl scale-[1.02]`
                                 : `border-gray-200 bg-white ${colors.hover} shadow-lg hover:shadow-xl`
-                            } ${vehicle.premiumText ? 'ring-2 ring-purple-200 ring-opacity-50' : ''}`}
+                            } ${vehicle.premiumText ? "ring-2 ring-purple-200 ring-opacity-50" : ""}`}
                             onClick={() => {
                               setSelectedVehicle(vehicle.id);
                               toast.success(
@@ -1020,11 +1020,13 @@ export default function RidePage() {
                                 alt={`${vehicle.name} - ${vehicle.subtitle}`}
                                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                               />
-                              <div className={`absolute inset-0 ${
-                                vehicle.premiumText
-                                  ? 'bg-gradient-to-t from-purple-900/70 via-purple-800/20 to-transparent'
-                                  : 'bg-gradient-to-t from-black/70 via-black/20 to-transparent'
-                              }`}></div>
+                              <div
+                                className={`absolute inset-0 ${
+                                  vehicle.premiumText
+                                    ? "bg-gradient-to-t from-purple-900/70 via-purple-800/20 to-transparent"
+                                    : "bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+                                }`}
+                              ></div>
 
                               {/* Vehicle Icon */}
                               <div
@@ -1077,20 +1079,32 @@ export default function RidePage() {
                               </div>
 
                               {/* Features */}
-                              <div className={`grid grid-cols-2 gap-2 ${
-                                vehicle.premiumText ? 'bg-purple-50 p-3 rounded-lg border border-purple-100' : ''
-                              }`}>
+                              <div
+                                className={`grid grid-cols-2 gap-2 ${
+                                  vehicle.premiumText
+                                    ? "bg-purple-50 p-3 rounded-lg border border-purple-100"
+                                    : ""
+                                }`}
+                              >
                                 {vehicle.features.map((feature, index) => (
                                   <div
                                     key={index}
                                     className={`flex items-center space-x-1 text-xs ${
-                                      vehicle.premiumText ? 'text-purple-700' : 'text-gray-600'
+                                      vehicle.premiumText
+                                        ? "text-purple-700"
+                                        : "text-gray-600"
                                     }`}
                                   >
                                     <CheckCircle
                                       className={`w-3 h-3 ${colors.accent}`}
                                     />
-                                    <span className={vehicle.premiumText ? 'font-medium' : ''}>{feature}</span>
+                                    <span
+                                      className={
+                                        vehicle.premiumText ? "font-medium" : ""
+                                      }
+                                    >
+                                      {feature}
+                                    </span>
                                   </div>
                                 ))}
                               </div>
@@ -2111,7 +2125,9 @@ export default function RidePage() {
                 <CardContent className="pt-0 space-y-4">
                   {/* USD Payment Methods */}
                   <div className="space-y-2">
-                    <h4 className="text-sm font-medium text-gray-700">USD Payment Methods</h4>
+                    <h4 className="text-sm font-medium text-gray-700">
+                      USD Payment Methods
+                    </h4>
 
                     <div
                       className={`border rounded-lg p-4 cursor-pointer transition-colors ${
@@ -2129,7 +2145,9 @@ export default function RidePage() {
                           <CreditCard className="w-6 h-6 text-blue-600" />
                           <div>
                             <p className="font-medium">Visa •••• 1234 (USD)</p>
-                            <p className="text-sm text-gray-500">Expires 12/25</p>
+                            <p className="text-sm text-gray-500">
+                              Expires 12/25
+                            </p>
                           </div>
                         </div>
                         {selectedPaymentMethod === "card-usd" && (
@@ -2176,7 +2194,9 @@ export default function RidePage() {
 
                   {/* NGN Payment Methods */}
                   <div className="space-y-2">
-                    <h4 className="text-sm font-medium text-gray-700">NGN Payment Methods</h4>
+                    <h4 className="text-sm font-medium text-gray-700">
+                      NGN Payment Methods
+                    </h4>
 
                     <div
                       className={`border rounded-lg p-4 cursor-pointer transition-colors ${
@@ -2194,7 +2214,9 @@ export default function RidePage() {
                           <CreditCard className="w-6 h-6 text-green-600" />
                           <div>
                             <p className="font-medium">Verve •••• 5678 (NGN)</p>
-                            <p className="text-sm text-gray-500">Expires 08/26</p>
+                            <p className="text-sm text-gray-500">
+                              Expires 08/26
+                            </p>
                           </div>
                         </div>
                         {selectedPaymentMethod === "card-ngn" && (
@@ -2254,7 +2276,9 @@ export default function RidePage() {
                           <Banknote className="w-6 h-6 text-yellow-600" />
                           <div>
                             <p className="font-medium">Cash (Nigerian Naira)</p>
-                            <p className="text-sm text-gray-500">Pay driver directly in NGN</p>
+                            <p className="text-sm text-gray-500">
+                              Pay driver directly in NGN
+                            </p>
                           </div>
                         </div>
                         {selectedPaymentMethod === "cash-ngn" && (
@@ -2578,12 +2602,13 @@ export default function RidePage() {
                   worldwide.
                 </p>
                 <p className="text-blue-100 leading-relaxed text-lg">
-                  Our cutting-edge technology features AI-powered route optimization,
-                  real-time GPS navigation, and smart matching algorithms that connect
-                  you with the perfect driver. Combined with our commitment to
-                  safety and sustainability, we make every journey smooth, secure,
-                  and environmentally conscious. We're not just a ride service –
-                  we're your trusted partner in smart urban mobility.
+                  Our cutting-edge technology features AI-powered route
+                  optimization, real-time GPS navigation, and smart matching
+                  algorithms that connect you with the perfect driver. Combined
+                  with our commitment to safety and sustainability, we make
+                  every journey smooth, secure, and environmentally conscious.
+                  We're not just a ride service – we're your trusted partner in
+                  smart urban mobility.
                 </p>
               </div>
 
@@ -2625,19 +2650,27 @@ export default function RidePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span className="text-blue-100 text-sm">Real-time GPS tracking</span>
+                  <span className="text-blue-100 text-sm">
+                    Real-time GPS tracking
+                  </span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                  <span className="text-blue-100 text-sm">AI route optimization</span>
+                  <span className="text-blue-100 text-sm">
+                    AI route optimization
+                  </span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                  <span className="text-blue-100 text-sm">Smart driver matching</span>
+                  <span className="text-blue-100 text-sm">
+                    Smart driver matching
+                  </span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                  <span className="text-blue-100 text-sm">Predictive ETA calculations</span>
+                  <span className="text-blue-100 text-sm">
+                    Predictive ETA calculations
+                  </span>
                 </div>
               </div>
             </div>
@@ -2666,7 +2699,9 @@ export default function RidePage() {
                   </p>
                   <div className="flex items-center mt-2 space-x-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-xs text-green-400">Live GPS Tracking</span>
+                    <span className="text-xs text-green-400">
+                      Live GPS Tracking
+                    </span>
                   </div>
                 </div>
               </div>
@@ -2709,9 +2744,12 @@ export default function RidePage() {
                 <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Navigation className="w-6 h-6 text-white" />
                 </div>
-                <h4 className="font-bold text-white mb-2">Smart GPS Technology</h4>
+                <h4 className="font-bold text-white mb-2">
+                  Smart GPS Technology
+                </h4>
                 <p className="text-blue-100 text-sm">
-                  AI-powered route optimization and real-time navigation for fastest routes
+                  AI-powered route optimization and real-time navigation for
+                  fastest routes
                 </p>
               </div>
 

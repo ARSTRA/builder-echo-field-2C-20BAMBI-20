@@ -98,7 +98,8 @@ export default function BookingPage() {
       passengers: 4,
       features: ["AC", "Music", "Luxury", "WiFi", "Leather Seats"],
       popular: false,
-      image: "https://images.pexels.com/photos/8425026/pexels-photo-8425026.jpeg",
+      image:
+        "https://images.pexels.com/photos/8425026/pexels-photo-8425026.jpeg",
     },
     {
       id: "executive",
@@ -109,10 +110,19 @@ export default function BookingPage() {
       perKm: 4.0,
       eta: "10-15 min",
       passengers: 4,
-      features: ["Premium AC", "Premium Sound", "Luxury Interior", "WiFi", "Leather Seats", "Professional Chauffeur", "Refreshments"],
+      features: [
+        "Premium AC",
+        "Premium Sound",
+        "Luxury Interior",
+        "WiFi",
+        "Leather Seats",
+        "Professional Chauffeur",
+        "Refreshments",
+      ],
       popular: false,
       isVip: true,
-      image: "https://images.pexels.com/photos/13101559/pexels-photo-13101559.jpeg",
+      image:
+        "https://images.pexels.com/photos/13101559/pexels-photo-13101559.jpeg",
     },
     {
       id: "share",
@@ -146,29 +156,29 @@ export default function BookingPage() {
       name: "Credit/Debit Card (USD)",
       icon: CreditCard,
       details: "**** 1234",
-      currency: 'USD',
+      currency: "USD",
     },
     {
       id: "card-ngn",
       name: "Credit/Debit Card (NGN)",
       icon: CreditCard,
       details: "**** 5678",
-      currency: 'NGN',
+      currency: "NGN",
     },
     {
       id: "wallet-usd",
       name: "BAMBI Wallet (USD)",
       icon: Wallet,
       details: "$45.50 available",
-      currency: 'USD',
-      balance: 45.50,
+      currency: "USD",
+      balance: 45.5,
     },
     {
       id: "wallet-ngn",
       name: "BAMBI Wallet (NGN)",
       icon: Wallet,
       details: "₦70,575 available",
-      currency: 'NGN',
+      currency: "NGN",
       balance: 70575,
     },
     {
@@ -176,14 +186,14 @@ export default function BookingPage() {
       name: "Cash (USD)",
       icon: DollarSign,
       details: "Pay driver in US Dollars",
-      currency: 'USD',
+      currency: "USD",
     },
     {
       id: "cash-ngn",
       name: "Cash (NGN)",
       icon: Banknote,
       details: "Pay driver in Nigerian Naira",
-      currency: 'NGN',
+      currency: "NGN",
     },
   ];
 
@@ -229,7 +239,7 @@ export default function BookingPage() {
       vehicle: "Black Mercedes E-Class",
       plate: "ABC-123",
       eta: "5 mins",
-      photo: "👨‍💼"
+      photo: "👨‍💼",
     };
     setDriverInfo(assignedDriver);
 
@@ -425,7 +435,9 @@ export default function BookingPage() {
                     <div className="text-2xl">{vehicle.icon}</div>
                     <div>
                       <div className="flex items-center space-x-2">
-                        <h3 className={`font-semibold ${vehicle.isVip ? 'text-yellow-800' : 'text-taxi-dark'}`}>
+                        <h3
+                          className={`font-semibold ${vehicle.isVip ? "text-yellow-800" : "text-taxi-dark"}`}
+                        >
                           {vehicle.name}
                         </h3>
                         {vehicle.popular && (
@@ -466,7 +478,9 @@ export default function BookingPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className={`text-lg font-bold ${vehicle.isVip ? 'text-yellow-700' : 'text-primary'}`}>
+                    <div
+                      className={`text-lg font-bold ${vehicle.isVip ? "text-yellow-700" : "text-primary"}`}
+                    >
                       {formatAmount(vehicle.basePrice)}+
                     </div>
                     <div className="text-xs text-taxi-gray">
@@ -682,7 +696,9 @@ export default function BookingPage() {
             <div className="space-y-3">
               <div className="text-center py-2">
                 <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-2" />
-                <h3 className="text-lg font-semibold text-taxi-dark">Ride Booked!</h3>
+                <h3 className="text-lg font-semibold text-taxi-dark">
+                  Ride Booked!
+                </h3>
                 <p className="text-taxi-gray">Driver is on the way</p>
               </div>
 
@@ -693,13 +709,23 @@ export default function BookingPage() {
                     <div className="flex items-center space-x-3">
                       <div className="text-3xl">{driverInfo.photo}</div>
                       <div>
-                        <h4 className="font-semibold text-taxi-dark">{driverInfo.name}</h4>
-                        <p className="text-sm text-taxi-gray">{driverInfo.vehicle}</p>
-                        <p className="text-xs text-taxi-gray">{driverInfo.plate}</p>
+                        <h4 className="font-semibold text-taxi-dark">
+                          {driverInfo.name}
+                        </h4>
+                        <p className="text-sm text-taxi-gray">
+                          {driverInfo.vehicle}
+                        </p>
+                        <p className="text-xs text-taxi-gray">
+                          {driverInfo.plate}
+                        </p>
                         <div className="flex items-center space-x-1 mt-1">
                           <Star className="w-3 h-3 text-yellow-500 fill-current" />
-                          <span className="text-xs text-taxi-gray">{driverInfo.rating}</span>
-                          <span className="text-xs text-taxi-gray">• ETA: {driverInfo.eta}</span>
+                          <span className="text-xs text-taxi-gray">
+                            {driverInfo.rating}
+                          </span>
+                          <span className="text-xs text-taxi-gray">
+                            • ETA: {driverInfo.eta}
+                          </span>
                         </div>
                       </div>
                     </div>

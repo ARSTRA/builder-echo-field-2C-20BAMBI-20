@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { Currency, CURRENCIES, formatCurrency } from '@shared/currency';
+import { createContext, useContext, useState, ReactNode } from "react";
+import { Currency, CURRENCIES, formatCurrency } from "@shared/currency";
 
 interface CurrencyContextType {
   currency: Currency;
@@ -9,25 +9,29 @@ interface CurrencyContextType {
   getCurrencyName: () => string;
 }
 
-const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
+const CurrencyContext = createContext<CurrencyContextType | undefined>(
+  undefined,
+);
 
 export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
-  const [currency, setCurrency] = useState<Currency>('USD');
+  const [currency, setCurrency] = useState<Currency>("USD");
 
   const formatAmount = (amount: number) => formatCurrency(amount, currency);
-  
+
   const getCurrencySymbol = () => CURRENCIES[currency].symbol;
-  
+
   const getCurrencyName = () => CURRENCIES[currency].name;
 
   return (
-    <CurrencyContext.Provider value={{
-      currency,
-      setCurrency,
-      formatAmount,
-      getCurrencySymbol,
-      getCurrencyName,
-    }}>
+    <CurrencyContext.Provider
+      value={{
+        currency,
+        setCurrency,
+        formatAmount,
+        getCurrencySymbol,
+        getCurrencyName,
+      }}
+    >
       {children}
     </CurrencyContext.Provider>
   );
@@ -36,7 +40,7 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
 export const useCurrency = () => {
   const context = useContext(CurrencyContext);
   if (!context) {
-    throw new Error('useCurrency must be used within a CurrencyProvider');
+    throw new Error("useCurrency must be used within a CurrencyProvider");
   }
   return context;
 };

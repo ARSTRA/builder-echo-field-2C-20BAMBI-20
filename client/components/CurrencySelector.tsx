@@ -17,7 +17,7 @@ export function CurrencySelector() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm" className="gap-2">
-          {currency === 'USD' ? (
+          {currency === "USD" ? (
             <DollarSign className="w-4 h-4" />
           ) : (
             <Banknote className="w-4 h-4" />
@@ -28,20 +28,24 @@ export function CurrencySelector() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem
-          onClick={() => setCurrency('USD')}
-          className={currency === 'USD' ? 'bg-accent' : ''}
+          onClick={() => setCurrency("USD")}
+          className={currency === "USD" ? "bg-accent" : ""}
         >
           <DollarSign className="w-4 h-4 mr-2" />
           <span className="mr-2">{CURRENCIES.USD.name}</span>
-          <span className="text-sm text-muted-foreground">({CURRENCIES.USD.symbol})</span>
+          <span className="text-sm text-muted-foreground">
+            ({CURRENCIES.USD.symbol})
+          </span>
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => setCurrency('NGN')}
-          className={currency === 'NGN' ? 'bg-accent' : ''}
+          onClick={() => setCurrency("NGN")}
+          className={currency === "NGN" ? "bg-accent" : ""}
         >
           <Banknote className="w-4 h-4 mr-2" />
           <span className="mr-2">{CURRENCIES.NGN.name}</span>
-          <span className="text-sm text-muted-foreground">({CURRENCIES.NGN.symbol})</span>
+          <span className="text-sm text-muted-foreground">
+            ({CURRENCIES.NGN.symbol})
+          </span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
