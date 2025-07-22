@@ -58,6 +58,8 @@ export default function BookingPage() {
   const [rideType, setRideType] = useState("personal"); // personal, share
   const [showMap, setShowMap] = useState(false);
   const [estimatedFare, setEstimatedFare] = useState(null);
+  const [isBooked, setIsBooked] = useState(false);
+  const [driverInfo, setDriverInfo] = useState(null);
 
   const vehicleOptions = [
     {
