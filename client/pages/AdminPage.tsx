@@ -729,18 +729,18 @@ export default function AdminPage() {
           <p className="text-taxi-gray">Monitor payments, payouts, and financial transactions</p>
         </div>
         <div className="flex gap-2">
-          <Button 
+          <Button
             variant="outline"
             className="bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 border-0"
-            onClick={() => handleAction("Export Transactions")}
+            onClick={() => handleExportData("Transactions")}
             disabled={isLoading}
           >
             <Download className="w-4 h-4 mr-2" />
             Export
           </Button>
-          <Button 
+          <Button
             className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
-            onClick={() => handleAction("Manual Transaction")}
+            onClick={handleManualTransaction}
             disabled={isLoading}
           >
             <Plus className="w-4 h-4 mr-2" />
