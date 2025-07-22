@@ -117,7 +117,7 @@ export default function BookingPage() {
       id: "share",
       name: "Share",
       description: "Split costs with others",
-      icon: "🚐",
+      icon: "����",
       basePrice: 4,
       perKm: 0.8,
       eta: "5-15 min",
@@ -219,7 +219,31 @@ export default function BookingPage() {
 
   const handleBookRide = () => {
     // Handle ride booking logic
+    setIsBooked(true);
+    // Mock driver assignment
+    setDriverInfo({
+      name: "James Wilson",
+      phone: "+1 (555) 123-4567",
+      rating: 4.8,
+      vehicle: "Black Mercedes E-Class",
+      plate: "ABC-123",
+      eta: "5 mins",
+      photo: "👨‍💼"
+    });
     console.log("Booking ride...");
+  };
+
+  const handleCallDriver = () => {
+    if (driverInfo) {
+      window.location.href = `tel:${driverInfo.phone}`;
+    }
+  };
+
+  const handleMessageDriver = () => {
+    if (driverInfo) {
+      // In a real app, this would open a messaging interface
+      alert(`Opening message chat with ${driverInfo.name}`);
+    }
   };
 
   return (
