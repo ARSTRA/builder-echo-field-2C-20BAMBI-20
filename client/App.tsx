@@ -36,11 +36,10 @@ function AppContent() {
     return "passenger"; // default
   };
 
-  // Show mobile navigation for app routes
+  // Show mobile navigation for app routes (but not admin)
   const shouldShowMobileNav =
     location.pathname.startsWith("/passenger") ||
-    location.pathname.startsWith("/driver") ||
-    location.pathname.startsWith("/admin");
+    location.pathname.startsWith("/driver");
 
   return (
     <>
