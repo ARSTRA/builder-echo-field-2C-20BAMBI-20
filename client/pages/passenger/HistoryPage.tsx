@@ -141,8 +141,9 @@ export default function HistoryPage() {
       distance: 4.1,
       duration: 12,
       rating: 5,
-      paymentMethod: "Credit Card",
+      paymentMethod: "Credit Card (NGN)",
       bookingType: "instant",
+      currency: "NGN",
       specialRequirements: ["Wheelchair Accessible"],
     },
   ];
