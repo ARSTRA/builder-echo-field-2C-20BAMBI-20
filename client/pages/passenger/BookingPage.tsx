@@ -379,12 +379,17 @@ export default function BookingPage() {
                     <div className="text-2xl">{vehicle.icon}</div>
                     <div>
                       <div className="flex items-center space-x-2">
-                        <h3 className="font-semibold text-taxi-dark">
+                        <h3 className={`font-semibold ${vehicle.isVip ? 'text-yellow-800' : 'text-taxi-dark'}`}>
                           {vehicle.name}
                         </h3>
                         {vehicle.popular && (
                           <Badge className="bg-primary text-primary-foreground text-xs">
                             Popular
+                          </Badge>
+                        )}
+                        {vehicle.isVip && (
+                          <Badge className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-yellow-900 text-xs">
+                            VIP
                           </Badge>
                         )}
                       </div>
