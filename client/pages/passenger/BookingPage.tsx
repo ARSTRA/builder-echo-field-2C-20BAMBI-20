@@ -7,19 +7,19 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { 
-  MapPin, 
-  Navigation, 
-  Clock, 
-  CreditCard, 
-  Star, 
+import {
+  MapPin,
+  Navigation,
+  Clock,
+  CreditCard,
+  Star,
   Car,
   Users,
   Phone,
   MessageCircle,
   DollarSign,
   Baby,
-  Wheelchair,
+  Accessibility,
   Heart,
   Shield,
   Zap,
