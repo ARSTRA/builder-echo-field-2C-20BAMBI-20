@@ -76,11 +76,17 @@ export function MobileNavigation({ userType }: MobileNavigationProps) {
       <header className="mobile-header">
         <div className="flex items-center justify-between px-4 h-full">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-              <Car className="w-5 h-5 text-primary-foreground" />
+          <Link to="/" className="flex items-center space-x-2 group">
+            <div className="relative">
+              <div className="w-8 h-8 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-lg opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                <span className="relative text-white font-black text-sm tracking-wider">B</span>
+              </div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                <Car className="w-1.5 h-1.5 text-white" />
+              </div>
             </div>
-            <span className="text-lg font-bold text-taxi-dark">SmartCommute</span>
+            <span className="text-lg font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">BAMBI</span>
           </Link>
 
           {/* Header Actions */}
