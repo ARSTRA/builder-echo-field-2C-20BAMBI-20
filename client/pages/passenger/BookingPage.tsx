@@ -122,24 +122,50 @@ export default function BookingPage() {
     { id: "extra-luggage", label: "Extra Luggage Space", icon: Car, price: 2 },
   ];
 
-  const paymentMethods = [
+  const paymentMethods: PaymentMethod[] = [
     {
-      id: "card",
-      name: "Credit/Debit Card",
+      id: "card-usd",
+      name: "Credit/Debit Card (USD)",
       icon: CreditCard,
       details: "**** 1234",
+      currency: 'USD',
     },
     {
-      id: "wallet",
-      name: "BAMBI Wallet",
-      icon: DollarSign,
+      id: "card-ngn",
+      name: "Credit/Debit Card (NGN)",
+      icon: CreditCard,
+      details: "**** 5678",
+      currency: 'NGN',
+    },
+    {
+      id: "wallet-usd",
+      name: "BAMBI Wallet (USD)",
+      icon: Wallet,
       details: "$45.50 available",
+      currency: 'USD',
+      balance: 45.50,
     },
     {
-      id: "cash",
-      name: "Cash",
+      id: "wallet-ngn",
+      name: "BAMBI Wallet (NGN)",
+      icon: Wallet,
+      details: "₦70,575 available",
+      currency: 'NGN',
+      balance: 70575,
+    },
+    {
+      id: "cash-usd",
+      name: "Cash (USD)",
       icon: DollarSign,
-      details: "Pay driver directly",
+      details: "Pay driver in US Dollars",
+      currency: 'USD',
+    },
+    {
+      id: "cash-ngn",
+      name: "Cash (NGN)",
+      icon: Banknote,
+      details: "Pay driver in Nigerian Naira",
+      currency: 'NGN',
     },
   ];
 
