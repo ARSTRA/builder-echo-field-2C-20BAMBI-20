@@ -57,11 +57,13 @@ function AppContent() {
           <Route path="/passenger/offers" element={<PassengerHome />} />
 
           {/* Driver App Routes */}
-          <Route path="/driver" element={<DriverHome />} />
-          <Route path="/driver/navigate" element={<DriverHome />} />
-          <Route path="/driver/earnings" element={<EarningsPage />} />
-          <Route path="/driver/requests" element={<DriverHome />} />
-          <Route path="/driver/profile" element={<DriverHome />} />
+          <Route path="/driver" element={<DriverDashboard />} />
+          <Route path="/driver/dashboard" element={<DriverDashboard />} />
+          <Route path="/driver/navigate" element={<DriverDashboard />} />
+          <Route path="/driver/earnings" element={<DriverDashboard />} />
+          <Route path="/driver/requests" element={<DriverDashboard />} />
+          <Route path="/driver/profile" element={<DriverDashboard />} />
+          <Route path="/driver/home" element={<DriverHome />} />
 
           {/* Admin Panel Routes */}
           <Route path="/admin" element={<AdminPage />} />
