@@ -1329,6 +1329,7 @@ export default function AdminPage() {
               <div className="px-2 pb-4">
                 <button
                   onClick={logout}
+                  aria-label="Sign out of admin panel"
                   className="group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left text-destructive hover:bg-destructive/10 transition-colors"
                 >
                   <LogOut className="mr-3 h-5 w-5" />
