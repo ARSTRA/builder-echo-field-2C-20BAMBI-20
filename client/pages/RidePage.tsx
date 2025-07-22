@@ -130,7 +130,8 @@ export default function RidePage() {
 
   // Payment state
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("card");
-  const [walletBalance, setWalletBalance] = useState(45.5);
+  const [walletBalanceUSD, setWalletBalanceUSD] = useState(45.5);
+  const [walletBalanceNGN, setWalletBalanceNGN] = useState(70575);
 
   // Review state
   const [tripRating, setTripRating] = useState(0);
