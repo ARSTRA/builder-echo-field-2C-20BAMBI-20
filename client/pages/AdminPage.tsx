@@ -1744,6 +1744,538 @@ export default function AdminPage() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Driver View Details Dialog */}
+      <Dialog open={showDriverViewDialog} onOpenChange={setShowDriverViewDialog}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>{selectedDriver ? `Driver Profile: ${selectedDriver.name}` : "Driver Details"}</DialogTitle>
+            <DialogDescription>Complete driver information and performance metrics</DialogDescription>
+          </DialogHeader>
+          {selectedDriver && (
+            <div className="space-y-6 pt-4">
+              <div className="grid grid-cols-2 gap-6">
+                <Card className="p-4">
+                  <h4 className="font-semibold mb-3">Personal Information</h4>
+                  <div className="space-y-2">
+                    <p><span className="font-medium">Name:</span> {selectedDriver.name}</p>
+                    <p><span className="font-medium">Email:</span> {selectedDriver.email}</p>
+                    <p><span className="font-medium">Phone:</span> {selectedDriver.phone}</p>
+                    <p><span className="font-medium">Status:</span>
+                      <Badge className={`ml-2 ${selectedDriver.status === "online" ? "bg-green-500" : "bg-gray-500"}`}>
+                        {selectedDriver.status}
+                      </Badge>
+                    </p>
+                  </div>
+                </Card>
+                <Card className="p-4">
+                  <h4 className="font-semibold mb-3">Performance Metrics</h4>
+                  <div className="space-y-2">
+                    <p><span className="font-medium">Rating:</span> ⭐ {selectedDriver.rating}/5.0</p>
+                    <p><span className="font-medium">Total Rides:</span> {selectedDriver.totalRides}</p>
+                    <p><span className="font-medium">Earnings:</span> {selectedDriver.earnings}</p>
+                    <p><span className="font-medium">Shift:</span> {selectedDriver.shift}</p>
+                  </div>
+                </Card>
+              </div>
+              <Card className="p-4">
+                <h4 className="font-semibold mb-3">Vehicle Information</h4>
+                <p><span className="font-medium">Vehicle:</span> {selectedDriver.vehicle}</p>
+                <p><span className="font-medium">License Plate:</span> ABC-123</p>
+                <p><span className="font-medium">Insurance:</span> Valid until Dec 2024</p>
+              </Card>
+              <div className="flex gap-2">
+                <Button
+                  className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+                  onClick={() => handleChatWithDriver(selectedDriver)}
+                >
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  Chat with Driver
+                </Button>
+                <Button
+                  className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0"
+                  onClick={() => {
+                    toast({title: "Driver Location", description: "Opening live GPS tracking"});
+                  }}
+                >
+                  <Navigation className="w-4 h-4 mr-2" />
+                  Track Location
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => setShowDriverViewDialog(false)}
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Driver Chat Dialog */}
+      <Dialog open={showDriverChatDialog} onOpenChange={setShowDriverChatDialog}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>{selectedDriver ? `Chat with ${selectedDriver.name}` : "Driver Chat"}</DialogTitle>
+            <DialogDescription>Real-time communication with driver</DialogDescription>
+          </DialogHeader>
+          {selectedDriver && (
+            <div className="space-y-4 pt-4">
+              <Card className="p-4 bg-gray-50">
+                <div className="space-y-3">
+                  <div className="flex justify-start">
+                    <div className="bg-blue-500 text-white p-2 rounded-lg max-w-xs">
+                      <p className="text-sm">Hello {selectedDriver.name}, how are you doing today?</p>
+                      <span className="text-xs opacity-75">Admin - 2:30 PM</span>
+                    </div>
+                  </div>
+                  <div className="flex justify-end">
+                    <div className="bg-green-500 text-white p-2 rounded-lg max-w-xs">
+                      <p className="text-sm">Hi Admin! Everything is going well. Just finished a ride.</p>
+                      <span className="text-xs opacity-75">{selectedDriver.name} - 2:32 PM</span>
+                    </div>
+                  </div>
+                  <div className="flex justify-start">
+                    <div className="bg-blue-500 text-white p-2 rounded-lg max-w-xs">
+                      <p className="text-sm">Great! Keep up the excellent work!</p>
+                      <span className="text-xs opacity-75">Admin - 2:33 PM</span>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+              <div className="flex gap-2">
+                <Input placeholder="Type your message..." className="flex-1" />
+                <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+                  <Send className="w-4 h-4" />
+                </Button>
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => toast({title: "Quick Message", description: "Sent: 'Thanks for your hard work!'"})}
+                >
+                  Thanks!
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => toast({title: "Quick Message", description: "Sent: 'Please follow traffic rules.'"})}
+                >
+                  Safety Reminder
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => toast({title: "Quick Message", description: "Sent: 'Break time if needed.'"})}
+                >
+                  Break Time
+                </Button>
+              </div>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => setShowDriverChatDialog(false)}
+              >
+                Close Chat
+              </Button>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Transaction View Dialog */}
+      <Dialog open={showTransactionViewDialog} onOpenChange={setShowTransactionViewDialog}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>{selectedTransaction ? `Transaction #${selectedTransaction.id}` : "Transaction Details"}</DialogTitle>
+            <DialogDescription>Complete transaction information and history</DialogDescription>
+          </DialogHeader>
+          {selectedTransaction && (
+            <div className="space-y-4 pt-4">
+              <Card className="p-4">
+                <h4 className="font-semibold mb-3">Transaction Details</h4>
+                <div className="space-y-2">
+                  <p><span className="font-medium">ID:</span> #{selectedTransaction.id.toString().padStart(6, '0')}</p>
+                  <p><span className="font-medium">User:</span> {selectedTransaction.user}</p>
+                  <p><span className="font-medium">Type:</span> {selectedTransaction.type.replace('_', ' ')}</p>
+                  <p><span className="font-medium">Amount:</span> {selectedTransaction.amount}</p>
+                  <p><span className="font-medium">Method:</span> {selectedTransaction.method}</p>
+                  <p><span className="font-medium">Status:</span>
+                    <Badge className={`ml-2 ${selectedTransaction.status === "completed" ? "bg-green-500" : selectedTransaction.status === "pending" ? "bg-yellow-500" : "bg-red-500"}`}>
+                      {selectedTransaction.status}
+                    </Badge>
+                  </p>
+                  <p><span className="font-medium">Date:</span> {selectedTransaction.date}</p>
+                  <p><span className="font-medium">Payment ID:</span> {selectedTransaction.paymentId}</p>
+                </div>
+              </Card>
+              <Card className="p-4">
+                <h4 className="font-semibold mb-3">Transaction Timeline</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span>Transaction Initiated</span>
+                    <span className="text-gray-500">2:30 PM</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Payment Processed</span>
+                    <span className="text-gray-500">2:31 PM</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Transaction Completed</span>
+                    <span className="text-gray-500">2:32 PM</span>
+                  </div>
+                </div>
+              </Card>
+              <div className="flex gap-2">
+                <Button
+                  className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+                  onClick={() => handleDownloadReceipt(selectedTransaction)}
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Download Receipt
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => setShowTransactionViewDialog(false)}
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Payment Method Configuration Dialog */}
+      <Dialog open={showPaymentConfigDialog} onOpenChange={setShowPaymentConfigDialog}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>{selectedPaymentMethod ? `Configure ${selectedPaymentMethod.name}` : "Payment Configuration"}</DialogTitle>
+            <DialogDescription>Set up payment method settings and preferences</DialogDescription>
+          </DialogHeader>
+          {selectedPaymentMethod && (
+            <div className="space-y-4 pt-4">
+              <Card className="p-4">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`w-10 h-10 ${selectedPaymentMethod.color} rounded-lg flex items-center justify-center`}>
+                    <selectedPaymentMethod.icon className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">{selectedPaymentMethod.name}</h4>
+                    <p className="text-sm text-gray-600">{selectedPaymentMethod.description}</p>
+                  </div>
+                </div>
+              </Card>
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Enable Payment Method</p>
+                    <p className="text-sm text-gray-600">Allow users to pay with this method</p>
+                  </div>
+                  <Switch defaultChecked />
+                </div>
+
+                <div>
+                  <Label>Transaction Fee (%)</Label>
+                  <Input placeholder="2.9" type="number" step="0.1" />
+                </div>
+
+                <div>
+                  <Label>Minimum Amount</Label>
+                  <Input placeholder="$1.00" />
+                </div>
+
+                <div>
+                  <Label>Maximum Amount</Label>
+                  <Input placeholder="$500.00" />
+                </div>
+
+                {selectedPaymentMethod.id === 'crypto' && (
+                  <div>
+                    <Label>Supported Cryptocurrencies</Label>
+                    <div className="grid grid-cols-3 gap-2 mt-2">
+                      <div className="flex items-center space-x-2">
+                        <Switch defaultChecked />
+                        <span className="text-sm">Bitcoin</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Switch defaultChecked />
+                        <span className="text-sm">Ethereum</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Switch />
+                        <span className="text-sm">USDT</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex gap-2">
+                <Button
+                  className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+                  onClick={() => {
+                    toast({title: "Configuration Saved", description: `${selectedPaymentMethod.name} settings updated successfully`});
+                    setShowPaymentConfigDialog(false);
+                  }}
+                >
+                  Save Configuration
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => setShowPaymentConfigDialog(false)}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Payment Method Statistics Dialog */}
+      <Dialog open={showPaymentStatsDialog} onOpenChange={setShowPaymentStatsDialog}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>{selectedPaymentMethod ? `${selectedPaymentMethod.name} Statistics` : "Payment Statistics"}</DialogTitle>
+            <DialogDescription>Analytics and performance metrics for payment method</DialogDescription>
+          </DialogHeader>
+          {selectedPaymentMethod && (
+            <div className="space-y-6 pt-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <Card className="p-4 text-center">
+                  <div className={`w-12 h-12 ${selectedPaymentMethod.color} rounded-lg flex items-center justify-center mx-auto mb-2`}>
+                    <selectedPaymentMethod.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <p className="text-2xl font-bold">$24,650</p>
+                  <p className="text-sm text-gray-600">Total Volume</p>
+                </Card>
+                <Card className="p-4 text-center">
+                  <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <TrendingUp className="w-6 h-6 text-white" />
+                  </div>
+                  <p className="text-2xl font-bold">1,247</p>
+                  <p className="text-sm text-gray-600">Transactions</p>
+                </Card>
+                <Card className="p-4 text-center">
+                  <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <BarChart3 className="w-6 h-6 text-white" />
+                  </div>
+                  <p className="text-2xl font-bold">98.5%</p>
+                  <p className="text-sm text-gray-600">Success Rate</p>
+                </Card>
+                <Card className="p-4 text-center">
+                  <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <Clock className="w-6 h-6 text-white" />
+                  </div>
+                  <p className="text-2xl font-bold">2.3s</p>
+                  <p className="text-sm text-gray-600">Avg Processing</p>
+                </Card>
+              </div>
+
+              <Card className="p-4">
+                <h4 className="font-semibold mb-3">Recent Transactions</h4>
+                <div className="space-y-2">
+                  {[
+                    { amount: "$24.50", user: "John Doe", time: "2 min ago", status: "completed" },
+                    { amount: "$18.75", user: "Alice Johnson", time: "5 min ago", status: "completed" },
+                    { amount: "$31.20", user: "Bob Smith", time: "8 min ago", status: "completed" },
+                  ].map((tx, index) => (
+                    <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                      <div>
+                        <p className="font-medium">{tx.amount}</p>
+                        <p className="text-sm text-gray-600">{tx.user}</p>
+                      </div>
+                      <div className="text-right">
+                        <Badge className="bg-green-500 text-white">{tx.status}</Badge>
+                        <p className="text-sm text-gray-600">{tx.time}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => setShowPaymentStatsDialog(false)}
+              >
+                Close Statistics
+              </Button>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Wallet Manager Dialog */}
+      <Dialog open={showWalletManagerDialog} onOpenChange={setShowWalletManagerDialog}>
+        <DialogContent className="max-w-4xl">
+          <DialogHeader>
+            <DialogTitle>Wallet Manager</DialogTitle>
+            <DialogDescription>Comprehensive wallet management and balance operations</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-6 pt-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Card className="p-4 text-center bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+                <Wallet className="w-12 h-12 mx-auto mb-2" />
+                <p className="text-2xl font-bold">$125,450</p>
+                <p className="text-sm opacity-90">Total Platform Balance</p>
+              </Card>
+              <Card className="p-4 text-center bg-gradient-to-r from-green-500 to-green-600 text-white">
+                <Users className="w-12 h-12 mx-auto mb-2" />
+                <p className="text-2xl font-bold">2,847</p>
+                <p className="text-sm opacity-90">Active Wallets</p>
+              </Card>
+              <Card className="p-4 text-center bg-gradient-to-r from-purple-500 to-purple-600 text-white">
+                <ArrowUpDown className="w-12 h-12 mx-auto mb-2" />
+                <p className="text-2xl font-bold">$8,750</p>
+                <p className="text-sm opacity-90">Pending Transfers</p>
+              </Card>
+            </div>
+
+            <Tabs defaultValue="user-wallets" className="w-full">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="user-wallets">User Wallets</TabsTrigger>
+                <TabsTrigger value="driver-wallets">Driver Wallets</TabsTrigger>
+                <TabsTrigger value="operations">Operations</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="user-wallets" className="space-y-4">
+                <Card className="p-4">
+                  <h4 className="font-semibold mb-3">User Wallet Balances</h4>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>User</TableHead>
+                        <TableHead>Balance</TableHead>
+                        <TableHead>Last Activity</TableHead>
+                        <TableHead>Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {[
+                        { name: "John Doe", balance: "$45.20", activity: "2 hours ago" },
+                        { name: "Alice Johnson", balance: "$128.50", activity: "5 minutes ago" },
+                        { name: "Bob Smith", balance: "$0.00", activity: "1 day ago" },
+                      ].map((user, index) => (
+                        <TableRow key={index}>
+                          <TableCell>{user.name}</TableCell>
+                          <TableCell className="font-medium">{user.balance}</TableCell>
+                          <TableCell>{user.activity}</TableCell>
+                          <TableCell>
+                            <div className="flex gap-2">
+                              <Button size="sm" variant="outline">
+                                <Plus className="w-4 h-4" />
+                              </Button>
+                              <Button size="sm" variant="outline">
+                                <Eye className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="driver-wallets" className="space-y-4">
+                <Card className="p-4">
+                  <h4 className="font-semibold mb-3">Driver Earnings</h4>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Driver</TableHead>
+                        <TableHead>Earnings</TableHead>
+                        <TableHead>Pending Payout</TableHead>
+                        <TableHead>Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {drivers.map((driver) => (
+                        <TableRow key={driver.id}>
+                          <TableCell>{driver.name}</TableCell>
+                          <TableCell className="font-medium">{driver.earnings}</TableCell>
+                          <TableCell>$125.30</TableCell>
+                          <TableCell>
+                            <div className="flex gap-2">
+                              <Button size="sm" className="bg-green-500 hover:bg-green-600 text-white">
+                                Pay Out
+                              </Button>
+                              <Button size="sm" variant="outline">
+                                <Eye className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="operations" className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Card className="p-4">
+                    <h4 className="font-semibold mb-3">Manual Balance Adjustment</h4>
+                    <div className="space-y-3">
+                      <Input placeholder="User email or name" />
+                      <Input placeholder="Amount" type="number" />
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Operation type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="add">Add Balance</SelectItem>
+                          <SelectItem value="deduct">Deduct Balance</SelectItem>
+                          <SelectItem value="set">Set Balance</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Input placeholder="Reason for adjustment" />
+                      <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white">
+                        Apply Adjustment
+                      </Button>
+                    </div>
+                  </Card>
+
+                  <Card className="p-4">
+                    <h4 className="font-semibold mb-3">Bulk Operations</h4>
+                    <div className="space-y-3">
+                      <Button className="w-full" variant="outline">
+                        <Download className="w-4 h-4 mr-2" />
+                        Export All Balances
+                      </Button>
+                      <Button className="w-full" variant="outline">
+                        <HandCoins className="w-4 h-4 mr-2" />
+                        Process All Payouts
+                      </Button>
+                      <Button className="w-full" variant="outline">
+                        <RefreshCw className="w-4 h-4 mr-2" />
+                        Sync Balances
+                      </Button>
+                      <Button className="w-full" variant="outline">
+                        <AlertTriangle className="w-4 h-4 mr-2" />
+                        Freeze Suspicious Accounts
+                      </Button>
+                    </div>
+                  </Card>
+                </div>
+              </TabsContent>
+            </Tabs>
+
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => setShowWalletManagerDialog(false)}
+            >
+              Close Wallet Manager
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
