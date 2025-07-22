@@ -483,22 +483,46 @@ export default function RidePage() {
                   >
                     {/* Background Circle with Gradient */}
                     <defs>
-                      <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <linearGradient
+                        id="bgGradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
                         <stop offset="0%" stopColor="#FF6B9D" />
                         <stop offset="30%" stopColor="#8B5CF6" />
                         <stop offset="70%" stopColor="#3B82F6" />
                         <stop offset="100%" stopColor="#06B6D4" />
                       </linearGradient>
-                      <linearGradient id="carGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <linearGradient
+                        id="carGradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                      >
                         <stop offset="0%" stopColor="#FBBF24" />
                         <stop offset="50%" stopColor="#F59E0B" />
                         <stop offset="100%" stopColor="#D97706" />
                       </linearGradient>
-                      <linearGradient id="roadGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <linearGradient
+                        id="roadGradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                      >
                         <stop offset="0%" stopColor="#6366F1" />
                         <stop offset="100%" stopColor="#8B5CF6" />
                       </linearGradient>
-                      <linearGradient id="bGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <linearGradient
+                        id="bGradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
                         <stop offset="0%" stopColor="#FFFFFF" />
                         <stop offset="50%" stopColor="#F1F5F9" />
                         <stop offset="100%" stopColor="#E2E8F0" />
@@ -506,10 +530,24 @@ export default function RidePage() {
                     </defs>
 
                     {/* Main Background Circle */}
-                    <circle cx="28" cy="28" r="26" fill="url(#bgGradient)" stroke="#FFFFFF" strokeWidth="2"/>
+                    <circle
+                      cx="28"
+                      cy="28"
+                      r="26"
+                      fill="url(#bgGradient)"
+                      stroke="#FFFFFF"
+                      strokeWidth="2"
+                    />
 
                     {/* Inner Glow Effect */}
-                    <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>
+                    <circle
+                      cx="28"
+                      cy="28"
+                      r="22"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.3)"
+                      strokeWidth="1"
+                    />
 
                     {/* Stylized Road/Path */}
                     <path
@@ -532,10 +570,24 @@ export default function RidePage() {
 
                     {/* Stylized Car */}
                     <g transform="translate(35, 26)">
-                      <ellipse cx="0" cy="0" rx="8" ry="4" fill="url(#carGradient)" />
+                      <ellipse
+                        cx="0"
+                        cy="0"
+                        rx="8"
+                        ry="4"
+                        fill="url(#carGradient)"
+                      />
                       <circle cx="-4" cy="2" r="1.5" fill="#1F2937" />
                       <circle cx="4" cy="2" r="1.5" fill="#1F2937" />
-                      <rect x="-6" y="-2" width="4" height="2" rx="1" fill="#F3F4F6" opacity="0.9" />
+                      <rect
+                        x="-6"
+                        y="-2"
+                        width="4"
+                        height="2"
+                        rx="1"
+                        fill="#F3F4F6"
+                        opacity="0.9"
+                      />
                     </g>
 
                     {/* Letter B - Artistic Design */}
@@ -550,16 +602,49 @@ export default function RidePage() {
 
                     {/* Speed/Motion Lines */}
                     <g opacity="0.6">
-                      <path d="M6 20 L12 20" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" />
-                      <path d="M4 24 L10 24" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" />
-                      <path d="M6 36 L12 36" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" />
+                      <path
+                        d="M6 20 L12 20"
+                        stroke="#FFFFFF"
+                        strokeWidth="1"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M4 24 L10 24"
+                        stroke="#FFFFFF"
+                        strokeWidth="1"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M6 36 L12 36"
+                        stroke="#FFFFFF"
+                        strokeWidth="1"
+                        strokeLinecap="round"
+                      />
                     </g>
 
                     {/* Sparkle Effects */}
                     <g className="animate-pulse">
-                      <circle cx="42" cy="16" r="1" fill="#FBBF24" opacity="0.8" />
-                      <circle cx="12" cy="42" r="1.5" fill="#FF6B9D" opacity="0.8" />
-                      <circle cx="44" cy="44" r="1" fill="#8B5CF6" opacity="0.8" />
+                      <circle
+                        cx="42"
+                        cy="16"
+                        r="1"
+                        fill="#FBBF24"
+                        opacity="0.8"
+                      />
+                      <circle
+                        cx="12"
+                        cy="42"
+                        r="1.5"
+                        fill="#FF6B9D"
+                        opacity="0.8"
+                      />
+                      <circle
+                        cx="44"
+                        cy="44"
+                        r="1"
+                        fill="#8B5CF6"
+                        opacity="0.8"
+                      />
                     </g>
 
                     {/* Top Accent Ring */}
@@ -572,7 +657,7 @@ export default function RidePage() {
                       strokeWidth="0.5"
                       strokeDasharray="4 4"
                       className="animate-spin"
-                      style={{ animationDuration: '20s' }}
+                      style={{ animationDuration: "20s" }}
                     />
                   </svg>
                 </div>

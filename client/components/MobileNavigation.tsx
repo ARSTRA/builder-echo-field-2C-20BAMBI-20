@@ -98,27 +98,53 @@ export function MobileNavigation({ userType }: MobileNavigationProps) {
                   className="drop-shadow-md group-hover:drop-shadow-lg transition-all duration-300"
                 >
                   <defs>
-                    <linearGradient id="mobileBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient
+                      id="mobileBgGradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
                       <stop offset="0%" stopColor="#FF6B9D" />
                       <stop offset="50%" stopColor="#8B5CF6" />
                       <stop offset="100%" stopColor="#3B82F6" />
                     </linearGradient>
-                    <linearGradient id="mobileBGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient
+                      id="mobileBGradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
                       <stop offset="0%" stopColor="#FFFFFF" />
                       <stop offset="100%" stopColor="#F8FAFC" />
                     </linearGradient>
                   </defs>
 
                   {/* Background Circle */}
-                  <circle cx="16" cy="16" r="14" fill="url(#mobileBgGradient)" stroke="#FFFFFF" strokeWidth="1"/>
+                  <circle
+                    cx="16"
+                    cy="16"
+                    r="14"
+                    fill="url(#mobileBgGradient)"
+                    stroke="#FFFFFF"
+                    strokeWidth="1"
+                  />
 
                   {/* Simple Road */}
-                  <path d="M4 17 Q12 14 16 17 Q20 20 28 17" stroke="#FFFFFF" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.8"/>
+                  <path
+                    d="M4 17 Q12 14 16 17 Q20 20 28 17"
+                    stroke="#FFFFFF"
+                    strokeWidth="1.5"
+                    fill="none"
+                    strokeLinecap="round"
+                    opacity="0.8"
+                  />
 
                   {/* Compact Car */}
-                  <ellipse cx="22" cy="16" rx="4" ry="2" fill="#FBBF24"/>
-                  <circle cx="20" cy="17" r="0.5" fill="#1F2937"/>
-                  <circle cx="24" cy="17" r="0.5" fill="#1F2937"/>
+                  <ellipse cx="22" cy="16" rx="4" ry="2" fill="#FBBF24" />
+                  <circle cx="20" cy="17" r="0.5" fill="#1F2937" />
+                  <circle cx="24" cy="17" r="0.5" fill="#1F2937" />
 
                   {/* Letter B */}
                   <g transform="translate(8, 8)">
@@ -131,7 +157,13 @@ export function MobileNavigation({ userType }: MobileNavigationProps) {
                   </g>
 
                   {/* Speed dot */}
-                  <circle cx="26" cy="8" r="0.5" fill="#FBBF24" className="animate-pulse"/>
+                  <circle
+                    cx="26"
+                    cy="8"
+                    r="0.5"
+                    fill="#FBBF24"
+                    className="animate-pulse"
+                  />
                 </svg>
               </div>
 

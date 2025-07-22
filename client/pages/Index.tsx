@@ -118,44 +118,102 @@ export default function Index() {
                       className="drop-shadow-2xl hover:drop-shadow-3xl transition-all duration-500"
                     >
                       <defs>
-                        <linearGradient id="heroBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <linearGradient
+                          id="heroBgGradient"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="100%"
+                        >
                           <stop offset="0%" stopColor="#FF6B9D" />
                           <stop offset="25%" stopColor="#8B5CF6" />
                           <stop offset="60%" stopColor="#3B82F6" />
                           <stop offset="85%" stopColor="#06B6D4" />
                           <stop offset="100%" stopColor="#10B981" />
                         </linearGradient>
-                        <linearGradient id="heroCarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <linearGradient
+                          id="heroCarGradient"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="0%"
+                        >
                           <stop offset="0%" stopColor="#FBBF24" />
                           <stop offset="50%" stopColor="#F59E0B" />
                           <stop offset="100%" stopColor="#EF4444" />
                         </linearGradient>
-                        <linearGradient id="heroRoadGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <linearGradient
+                          id="heroRoadGradient"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="0%"
+                        >
                           <stop offset="0%" stopColor="#6366F1" />
                           <stop offset="50%" stopColor="#8B5CF6" />
                           <stop offset="100%" stopColor="#EC4899" />
                         </linearGradient>
-                        <linearGradient id="heroBGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <linearGradient
+                          id="heroBGradient"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="100%"
+                        >
                           <stop offset="0%" stopColor="#FFFFFF" />
                           <stop offset="30%" stopColor="#F8FAFC" />
                           <stop offset="70%" stopColor="#F1F5F9" />
                           <stop offset="100%" stopColor="#E2E8F0" />
                         </linearGradient>
-                        <radialGradient id="heroGlowGradient" cx="50%" cy="50%" r="50%">
+                        <radialGradient
+                          id="heroGlowGradient"
+                          cx="50%"
+                          cy="50%"
+                          r="50%"
+                        >
                           <stop offset="0%" stopColor="rgba(255,255,255,0.8)" />
                           <stop offset="100%" stopColor="rgba(255,255,255,0)" />
                         </radialGradient>
                       </defs>
 
                       {/* Outer Glow Ring */}
-                      <circle cx="48" cy="48" r="46" fill="none" stroke="url(#heroBgGradient)" strokeWidth="2" opacity="0.3" className="animate-pulse"/>
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="46"
+                        fill="none"
+                        stroke="url(#heroBgGradient)"
+                        strokeWidth="2"
+                        opacity="0.3"
+                        className="animate-pulse"
+                      />
 
                       {/* Main Background Circle */}
-                      <circle cx="48" cy="48" r="42" fill="url(#heroBgGradient)" stroke="#FFFFFF" strokeWidth="3"/>
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="42"
+                        fill="url(#heroBgGradient)"
+                        stroke="#FFFFFF"
+                        strokeWidth="3"
+                      />
 
                       {/* Inner Glow Effect */}
-                      <circle cx="48" cy="48" r="38" fill="url(#heroGlowGradient)" opacity="0.5"/>
-                      <circle cx="48" cy="48" r="35" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1"/>
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="38"
+                        fill="url(#heroGlowGradient)"
+                        opacity="0.5"
+                      />
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="35"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.4)"
+                        strokeWidth="1"
+                      />
 
                       {/* Dynamic Road Path */}
                       <path
@@ -169,17 +227,38 @@ export default function Index() {
 
                       {/* Road Markings */}
                       <g opacity="0.9">
-                        <path d="M18 50 L24 50 M36 50 L42 50 M54 50 L60 50 M72 50 L78 50" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round"/>
+                        <path
+                          d="M18 50 L24 50 M36 50 L42 50 M54 50 L60 50 M72 50 L78 50"
+                          stroke="#FFFFFF"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        />
                       </g>
 
                       {/* Stylized Car with Details */}
                       <g transform="translate(62, 46)">
-                        <ellipse cx="0" cy="0" rx="12" ry="6" fill="url(#heroCarGradient)" stroke="#FFFFFF" strokeWidth="0.5"/>
-                        <circle cx="-6" cy="3" r="2.5" fill="#1F2937"/>
-                        <circle cx="6" cy="3" r="2.5" fill="#1F2937"/>
-                        <rect x="-8" y="-3" width="5" height="3" rx="1" fill="#F3F4F6" opacity="0.95"/>
-                        <circle cx="-6" cy="3" r="1.5" fill="#6B7280"/>
-                        <circle cx="6" cy="3" r="1.5" fill="#6B7280"/>
+                        <ellipse
+                          cx="0"
+                          cy="0"
+                          rx="12"
+                          ry="6"
+                          fill="url(#heroCarGradient)"
+                          stroke="#FFFFFF"
+                          strokeWidth="0.5"
+                        />
+                        <circle cx="-6" cy="3" r="2.5" fill="#1F2937" />
+                        <circle cx="6" cy="3" r="2.5" fill="#1F2937" />
+                        <rect
+                          x="-8"
+                          y="-3"
+                          width="5"
+                          height="3"
+                          rx="1"
+                          fill="#F3F4F6"
+                          opacity="0.95"
+                        />
+                        <circle cx="-6" cy="3" r="1.5" fill="#6B7280" />
+                        <circle cx="6" cy="3" r="1.5" fill="#6B7280" />
                       </g>
 
                       {/* Artistic Letter B */}
@@ -191,24 +270,80 @@ export default function Index() {
                           strokeWidth="1"
                         />
                         {/* B Inner Details */}
-                        <circle cx="18" cy="12" r="1" fill="#3B82F6" opacity="0.5"/>
-                        <circle cx="18" cy="28" r="1" fill="#3B82F6" opacity="0.5"/>
+                        <circle
+                          cx="18"
+                          cy="12"
+                          r="1"
+                          fill="#3B82F6"
+                          opacity="0.5"
+                        />
+                        <circle
+                          cx="18"
+                          cy="28"
+                          r="1"
+                          fill="#3B82F6"
+                          opacity="0.5"
+                        />
                       </g>
 
                       {/* Speed/Motion Lines */}
                       <g opacity="0.7">
-                        <path d="M8 32 L18 32" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round"/>
-                        <path d="M6 38 L16 38" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round"/>
-                        <path d="M8 62 L18 62" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round"/>
-                        <path d="M6 68 L16 68" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round"/>
+                        <path
+                          d="M8 32 L18 32"
+                          stroke="#FFFFFF"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M6 38 L16 38"
+                          stroke="#FFFFFF"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M8 62 L18 62"
+                          stroke="#FFFFFF"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M6 68 L16 68"
+                          stroke="#FFFFFF"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        />
                       </g>
 
                       {/* Sparkle Effects */}
                       <g className="animate-pulse">
-                        <circle cx="72" cy="24" r="1.5" fill="#FBBF24" opacity="0.9"/>
-                        <circle cx="18" cy="72" r="2" fill="#FF6B9D" opacity="0.9"/>
-                        <circle cx="78" cy="72" r="1.5" fill="#8B5CF6" opacity="0.9"/>
-                        <circle cx="78" cy="18" r="1" fill="#10B981" opacity="0.9"/>
+                        <circle
+                          cx="72"
+                          cy="24"
+                          r="1.5"
+                          fill="#FBBF24"
+                          opacity="0.9"
+                        />
+                        <circle
+                          cx="18"
+                          cy="72"
+                          r="2"
+                          fill="#FF6B9D"
+                          opacity="0.9"
+                        />
+                        <circle
+                          cx="78"
+                          cy="72"
+                          r="1.5"
+                          fill="#8B5CF6"
+                          opacity="0.9"
+                        />
+                        <circle
+                          cx="78"
+                          cy="18"
+                          r="1"
+                          fill="#10B981"
+                          opacity="0.9"
+                        />
                       </g>
 
                       {/* Rotating Accent Ring */}
@@ -221,7 +356,7 @@ export default function Index() {
                         strokeWidth="0.8"
                         strokeDasharray="8 8"
                         className="animate-spin"
-                        style={{ animationDuration: '30s' }}
+                        style={{ animationDuration: "30s" }}
                       />
 
                       {/* Inner Highlight Ring */}
@@ -234,7 +369,10 @@ export default function Index() {
                         strokeWidth="0.5"
                         strokeDasharray="4 4"
                         className="animate-spin"
-                        style={{ animationDuration: '20s', animationDirection: 'reverse' }}
+                        style={{
+                          animationDuration: "20s",
+                          animationDirection: "reverse",
+                        }}
                       />
                     </svg>
                   </div>

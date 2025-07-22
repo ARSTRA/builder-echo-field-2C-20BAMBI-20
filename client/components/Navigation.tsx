@@ -34,40 +34,99 @@ export function Navigation() {
                   className="drop-shadow-md group-hover:drop-shadow-lg transition-all duration-300"
                 >
                   <defs>
-                    <linearGradient id="desktopBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient
+                      id="desktopBgGradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
                       <stop offset="0%" stopColor="#FF6B9D" />
                       <stop offset="40%" stopColor="#8B5CF6" />
                       <stop offset="80%" stopColor="#3B82F6" />
                       <stop offset="100%" stopColor="#06B6D4" />
                     </linearGradient>
-                    <linearGradient id="desktopCarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <linearGradient
+                      id="desktopCarGradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="0%"
+                    >
                       <stop offset="0%" stopColor="#F59E0B" />
                       <stop offset="100%" stopColor="#EF4444" />
                     </linearGradient>
-                    <linearGradient id="desktopBGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient
+                      id="desktopBGradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
                       <stop offset="0%" stopColor="#FFFFFF" />
                       <stop offset="100%" stopColor="#F1F5F9" />
                     </linearGradient>
                   </defs>
 
                   {/* Background Circle */}
-                  <circle cx="20" cy="20" r="18" fill="url(#desktopBgGradient)" stroke="#FFFFFF" strokeWidth="1.5"/>
+                  <circle
+                    cx="20"
+                    cy="20"
+                    r="18"
+                    fill="url(#desktopBgGradient)"
+                    stroke="#FFFFFF"
+                    strokeWidth="1.5"
+                  />
 
                   {/* Inner Ring */}
-                  <circle cx="20" cy="20" r="15" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="0.5"/>
+                  <circle
+                    cx="20"
+                    cy="20"
+                    r="15"
+                    fill="none"
+                    stroke="rgba(255,255,255,0.3)"
+                    strokeWidth="0.5"
+                  />
 
                   {/* Road Path */}
-                  <path d="M6 21 Q14 18 20 21 Q26 24 34 21" stroke="#FFFFFF" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.8"/>
+                  <path
+                    d="M6 21 Q14 18 20 21 Q26 24 34 21"
+                    stroke="#FFFFFF"
+                    strokeWidth="2"
+                    fill="none"
+                    strokeLinecap="round"
+                    opacity="0.8"
+                  />
 
                   {/* Road markings */}
-                  <path d="M10 21 L12 21 M18 21 L20 21 M26 21 L28 21" stroke="#FFFFFF" strokeWidth="0.8" strokeLinecap="round" opacity="0.7"/>
+                  <path
+                    d="M10 21 L12 21 M18 21 L20 21 M26 21 L28 21"
+                    stroke="#FFFFFF"
+                    strokeWidth="0.8"
+                    strokeLinecap="round"
+                    opacity="0.7"
+                  />
 
                   {/* Car */}
                   <g transform="translate(26, 19)">
-                    <ellipse cx="0" cy="0" rx="6" ry="3" fill="url(#desktopCarGradient)"/>
-                    <circle cx="-3" cy="1.5" r="1" fill="#1F2937"/>
-                    <circle cx="3" cy="1.5" r="1" fill="#1F2937"/>
-                    <rect x="-4" y="-1.5" width="3" height="1.5" rx="0.5" fill="#F3F4F6" opacity="0.9"/>
+                    <ellipse
+                      cx="0"
+                      cy="0"
+                      rx="6"
+                      ry="3"
+                      fill="url(#desktopCarGradient)"
+                    />
+                    <circle cx="-3" cy="1.5" r="1" fill="#1F2937" />
+                    <circle cx="3" cy="1.5" r="1" fill="#1F2937" />
+                    <rect
+                      x="-4"
+                      y="-1.5"
+                      width="3"
+                      height="1.5"
+                      rx="0.5"
+                      fill="#F3F4F6"
+                      opacity="0.9"
+                    />
                   </g>
 
                   {/* Letter B */}
@@ -82,9 +141,21 @@ export function Navigation() {
 
                   {/* Motion Effects */}
                   <g className="animate-pulse">
-                    <circle cx="32" cy="12" r="0.8" fill="#FBBF24" opacity="0.8"/>
-                    <circle cx="8" cy="28" r="1" fill="#FF6B9D" opacity="0.8"/>
-                    <circle cx="32" cy="28" r="0.8" fill="#8B5CF6" opacity="0.8"/>
+                    <circle
+                      cx="32"
+                      cy="12"
+                      r="0.8"
+                      fill="#FBBF24"
+                      opacity="0.8"
+                    />
+                    <circle cx="8" cy="28" r="1" fill="#FF6B9D" opacity="0.8" />
+                    <circle
+                      cx="32"
+                      cy="28"
+                      r="0.8"
+                      fill="#8B5CF6"
+                      opacity="0.8"
+                    />
                   </g>
                 </svg>
               </div>

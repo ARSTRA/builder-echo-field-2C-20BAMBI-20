@@ -320,29 +320,67 @@ export default function DriverDashboard() {
                     className="drop-shadow-lg group-hover:drop-shadow-xl transition-all duration-300"
                   >
                     <defs>
-                      <linearGradient id="driverBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <linearGradient
+                        id="driverBgGradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
                         <stop offset="0%" stopColor="#10B981" />
                         <stop offset="30%" stopColor="#3B82F6" />
                         <stop offset="70%" stopColor="#8B5CF6" />
                         <stop offset="100%" stopColor="#EC4899" />
                       </linearGradient>
-                      <linearGradient id="driverCarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <linearGradient
+                        id="driverCarGradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                      >
                         <stop offset="0%" stopColor="#F59E0B" />
                         <stop offset="100%" stopColor="#EF4444" />
                       </linearGradient>
-                      <linearGradient id="driverBGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <linearGradient
+                        id="driverBGradient"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
                         <stop offset="0%" stopColor="#FFFFFF" />
                         <stop offset="100%" stopColor="#F1F5F9" />
                       </linearGradient>
                     </defs>
 
                     {/* Main Background */}
-                    <circle cx="24" cy="24" r="22" fill="url(#driverBgGradient)" stroke="#FFFFFF" strokeWidth="2"/>
+                    <circle
+                      cx="24"
+                      cy="24"
+                      r="22"
+                      fill="url(#driverBgGradient)"
+                      stroke="#FFFFFF"
+                      strokeWidth="2"
+                    />
 
                     {/* Driver Steering Wheel */}
-                    <circle cx="24" cy="24" r="12" fill="none" stroke="#FFFFFF" strokeWidth="2" opacity="0.7"/>
-                    <circle cx="24" cy="24" r="3" fill="#FFFFFF"/>
-                    <path d="M24 12 L24 16 M24 32 L24 36 M12 24 L16 24 M32 24 L36 24" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round"/>
+                    <circle
+                      cx="24"
+                      cy="24"
+                      r="12"
+                      fill="none"
+                      stroke="#FFFFFF"
+                      strokeWidth="2"
+                      opacity="0.7"
+                    />
+                    <circle cx="24" cy="24" r="3" fill="#FFFFFF" />
+                    <path
+                      d="M24 12 L24 16 M24 32 L24 36 M12 24 L16 24 M32 24 L36 24"
+                      stroke="#FFFFFF"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
 
                     {/* Letter B */}
                     <g transform="translate(14, 12)">
@@ -356,9 +394,27 @@ export default function DriverDashboard() {
 
                     {/* Speed indicators */}
                     <g className="animate-pulse">
-                      <circle cx="38" cy="14" r="1" fill="#10B981" opacity="0.8" />
-                      <circle cx="10" cy="34" r="1" fill="#F59E0B" opacity="0.8" />
-                      <circle cx="38" cy="34" r="1" fill="#EC4899" opacity="0.8" />
+                      <circle
+                        cx="38"
+                        cy="14"
+                        r="1"
+                        fill="#10B981"
+                        opacity="0.8"
+                      />
+                      <circle
+                        cx="10"
+                        cy="34"
+                        r="1"
+                        fill="#F59E0B"
+                        opacity="0.8"
+                      />
+                      <circle
+                        cx="38"
+                        cy="34"
+                        r="1"
+                        fill="#EC4899"
+                        opacity="0.8"
+                      />
                     </g>
                   </svg>
                 </div>
