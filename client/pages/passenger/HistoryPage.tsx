@@ -397,7 +397,7 @@ export default function HistoryPage() {
               <p className="text-taxi-gray mb-6">
                 {searchQuery || filterStatus !== 'all' 
                   ? "Try adjusting your search or filters"
-                  : "Start your first ride with SmartCommute!"
+                  : "Start your first ride with BAMBI!"
                 }
               </p>
               <Button className="btn-mobile btn-primary">
