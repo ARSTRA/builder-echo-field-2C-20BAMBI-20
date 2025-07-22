@@ -43,9 +43,15 @@ import {
   User,
   Gift,
   Percent,
+  Wallet,
+  Banknote,
 } from "lucide-react";
+import { useCurrency } from "@/hooks/use-currency";
+import { PaymentMethod, Currency } from "@shared/currency";
+import { toast } from "sonner";
 
 export default function BookingPage() {
+  const { formatAmount, currency } = useCurrency();
   const [pickupLocation, setPickupLocation] = useState("");
   const [destination, setDestination] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState("comfort");
@@ -53,6 +59,8 @@ export default function BookingPage() {
   const [rideType, setRideType] = useState("personal"); // personal, share
   const [showMap, setShowMap] = useState(false);
   const [estimatedFare, setEstimatedFare] = useState(null);
+  const [isBooked, setIsBooked] = useState(false);
+  const [driverInfo, setDriverInfo] = useState(null);
 
   const vehicleOptions = [
     {
@@ -82,20 +90,45 @@ export default function BookingPage() {
     {
       id: "premium",
       name: "Premium",
-      description: "Luxury vehicles",
+      description: "Luxury vehicles with premium comfort",
       icon: "🚘",
       basePrice: 20,
       perKm: 2.5,
       eta: "5-10 min",
       passengers: 4,
-      features: ["AC", "Music", "Luxury", "WiFi"],
+      features: ["AC", "Music", "Luxury", "WiFi", "Leather Seats"],
       popular: false,
+      image:
+        "https://images.pexels.com/photos/8425026/pexels-photo-8425026.jpeg",
+    },
+    {
+      id: "executive",
+      name: "VIP Executive",
+      description: "Ultimate luxury experience with professional chauffeur",
+      icon: "🚗",
+      basePrice: 35,
+      perKm: 4.0,
+      eta: "10-15 min",
+      passengers: 4,
+      features: [
+        "Premium AC",
+        "Premium Sound",
+        "Luxury Interior",
+        "WiFi",
+        "Leather Seats",
+        "Professional Chauffeur",
+        "Refreshments",
+      ],
+      popular: false,
+      isVip: true,
+      image:
+        "https://images.pexels.com/photos/13101559/pexels-photo-13101559.jpeg",
     },
     {
       id: "share",
       name: "Share",
       description: "Split costs with others",
-      icon: "🚐",
+      icon: "����",
       basePrice: 4,
       perKm: 0.8,
       eta: "5-15 min",
@@ -117,24 +150,50 @@ export default function BookingPage() {
     { id: "extra-luggage", label: "Extra Luggage Space", icon: Car, price: 2 },
   ];
 
-  const paymentMethods = [
+  const paymentMethods: PaymentMethod[] = [
     {
-      id: "card",
-      name: "Credit/Debit Card",
+      id: "card-usd",
+      name: "Credit/Debit Card (USD)",
       icon: CreditCard,
       details: "**** 1234",
+      currency: "USD",
     },
     {
-      id: "wallet",
-      name: "BAMBI Wallet",
-      icon: DollarSign,
+      id: "card-ngn",
+      name: "Credit/Debit Card (NGN)",
+      icon: CreditCard,
+      details: "**** 5678",
+      currency: "NGN",
+    },
+    {
+      id: "wallet-usd",
+      name: "BAMBI Wallet (USD)",
+      icon: Wallet,
       details: "$45.50 available",
+      currency: "USD",
+      balance: 45.5,
     },
     {
-      id: "cash",
-      name: "Cash",
+      id: "wallet-ngn",
+      name: "BAMBI Wallet (NGN)",
+      icon: Wallet,
+      details: "₦70,575 available",
+      currency: "NGN",
+      balance: 70575,
+    },
+    {
+      id: "cash-usd",
+      name: "Cash (USD)",
       icon: DollarSign,
-      details: "Pay driver directly",
+      details: "Pay driver in US Dollars",
+      currency: "USD",
+    },
+    {
+      id: "cash-ngn",
+      name: "Cash (NGN)",
+      icon: Banknote,
+      details: "Pay driver in Nigerian Naira",
+      currency: "NGN",
     },
   ];
 
@@ -171,7 +230,46 @@ export default function BookingPage() {
 
   const handleBookRide = () => {
     // Handle ride booking logic
+    setIsBooked(true);
+    // Mock driver assignment
+    const assignedDriver = {
+      name: "James Wilson",
+      phone: "+1 (555) 123-4567",
+      rating: 4.8,
+      vehicle: "Black Mercedes E-Class",
+      plate: "ABC-123",
+      eta: "5 mins",
+      photo: "👨‍💼",
+    };
+    setDriverInfo(assignedDriver);
+
+    toast.success("Ride booked successfully!", {
+      description: `${assignedDriver.name} will arrive in ${assignedDriver.eta}`,
+    });
+
     console.log("Booking ride...");
+  };
+
+  const handleCallDriver = () => {
+    if (driverInfo) {
+      toast.success("Calling driver", {
+        description: `Connecting you to ${driverInfo.name} at ${driverInfo.phone}`,
+      });
+      // Delay the actual call to show the toast
+      setTimeout(() => {
+        window.location.href = `tel:${driverInfo.phone}`;
+      }, 1000);
+    }
+  };
+
+  const handleMessageDriver = () => {
+    if (driverInfo) {
+      toast.success("Opening chat", {
+        description: `Starting message conversation with ${driverInfo.name}`,
+      });
+      // In a real app, this would open a messaging interface
+      // For now, we'll simulate it with a notification
+    }
   };
 
   return (
@@ -313,22 +411,43 @@ export default function BookingPage() {
                 key={vehicle.id}
                 className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
                   selectedVehicle === vehicle.id
-                    ? "border-primary bg-primary/5"
-                    : "border-gray-200 hover:border-gray-300"
+                    ? vehicle.isVip
+                      ? "border-yellow-400 bg-gradient-to-r from-yellow-100 via-amber-100 to-yellow-100 shadow-lg"
+                      : "border-primary bg-primary/5"
+                    : vehicle.isVip
+                      ? "border-yellow-300 bg-gradient-to-r from-yellow-50 via-amber-50 to-yellow-50 hover:shadow-md hover:border-yellow-400"
+                      : "border-gray-200 hover:border-gray-300"
                 }`}
                 onClick={() => setSelectedVehicle(vehicle.id)}
               >
+                {vehicle.image && (
+                  <div className="mb-3 rounded-lg overflow-hidden">
+                    <img
+                      src={vehicle.image}
+                      alt={`${vehicle.name} luxury vehicle`}
+                      className="w-full h-24 object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="text-2xl">{vehicle.icon}</div>
                     <div>
                       <div className="flex items-center space-x-2">
-                        <h3 className="font-semibold text-taxi-dark">
+                        <h3
+                          className={`font-semibold ${vehicle.isVip ? "text-yellow-800" : "text-taxi-dark"}`}
+                        >
                           {vehicle.name}
                         </h3>
                         {vehicle.popular && (
                           <Badge className="bg-primary text-primary-foreground text-xs">
                             Popular
+                          </Badge>
+                        )}
+                        {vehicle.isVip && (
+                          <Badge className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-yellow-900 text-xs">
+                            VIP
                           </Badge>
                         )}
                       </div>
@@ -359,12 +478,19 @@ export default function BookingPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold text-primary">
-                      ${vehicle.basePrice}+
+                    <div
+                      className={`text-lg font-bold ${vehicle.isVip ? "text-yellow-700" : "text-primary"}`}
+                    >
+                      {formatAmount(vehicle.basePrice)}+
                     </div>
                     <div className="text-xs text-taxi-gray">
-                      ${vehicle.perKm}/km
+                      {formatAmount(vehicle.perKm)}/km
                     </div>
+                    {vehicle.isVip && (
+                      <div className="text-xs text-yellow-600 font-medium mt-1">
+                        Premium Service
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -547,22 +673,88 @@ export default function BookingPage() {
           </CardContent>
         </Card>
 
-        {/* Book Button */}
+        {/* Book Button / Driver Contact */}
         <div className="sticky bottom-20 bg-white/95 backdrop-blur-xl p-4 rounded-2xl shadow-lg border">
-          <Button
-            onClick={handleBookRide}
-            disabled={!pickupLocation || !destination}
-            className="w-full btn-mobile btn-primary text-lg"
-          >
-            <Car className="w-5 h-5 mr-2" />
-            {bookingType === "now" ? "Book Now" : "Schedule Ride"}
-            {estimatedFare && (
-              <span className="ml-2">• ${estimatedFare.total}</span>
-            )}
-          </Button>
-          <p className="text-center text-xs text-taxi-gray mt-2">
-            You'll be matched with a nearby driver
-          </p>
+          {!isBooked ? (
+            <>
+              <Button
+                onClick={handleBookRide}
+                disabled={!pickupLocation || !destination}
+                className="w-full btn-mobile btn-primary text-lg"
+              >
+                <Car className="w-5 h-5 mr-2" />
+                {bookingType === "now" ? "Book Now" : "Schedule Ride"}
+                {estimatedFare && (
+                  <span className="ml-2">• ${estimatedFare.total}</span>
+                )}
+              </Button>
+              <p className="text-center text-xs text-taxi-gray mt-2">
+                You'll be matched with a nearby driver
+              </p>
+            </>
+          ) : (
+            <div className="space-y-3">
+              <div className="text-center py-2">
+                <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-2" />
+                <h3 className="text-lg font-semibold text-taxi-dark">
+                  Ride Booked!
+                </h3>
+                <p className="text-taxi-gray">Driver is on the way</p>
+              </div>
+
+              {/* Driver Contact Card */}
+              {driverInfo && (
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="text-3xl">{driverInfo.photo}</div>
+                      <div>
+                        <h4 className="font-semibold text-taxi-dark">
+                          {driverInfo.name}
+                        </h4>
+                        <p className="text-sm text-taxi-gray">
+                          {driverInfo.vehicle}
+                        </p>
+                        <p className="text-xs text-taxi-gray">
+                          {driverInfo.plate}
+                        </p>
+                        <div className="flex items-center space-x-1 mt-1">
+                          <Star className="w-3 h-3 text-yellow-500 fill-current" />
+                          <span className="text-xs text-taxi-gray">
+                            {driverInfo.rating}
+                          </span>
+                          <span className="text-xs text-taxi-gray">
+                            • ETA: {driverInfo.eta}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Contact Buttons */}
+                  <div className="flex space-x-3">
+                    <Button
+                      onClick={handleCallDriver}
+                      className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+                      size="sm"
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call Driver
+                    </Button>
+                    <Button
+                      onClick={handleMessageDriver}
+                      variant="outline"
+                      className="flex-1 border-green-600 text-green-600 hover:bg-green-50"
+                      size="sm"
+                    >
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      Message
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
