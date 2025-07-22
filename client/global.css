@@ -189,19 +189,19 @@
 
   /* Mobile-optimized glass effects */
   .glass-effect {
-    @apply bg-white/95 backdrop-blur-xl border border-white/30 shadow-lg;
+    @apply bg-white/90 backdrop-blur-xl border border-white/20 shadow-lg;
   }
 
   .glass-effect-strong {
-    @apply bg-white/98 backdrop-blur-xl border border-white/40 shadow-xl;
+    @apply bg-white/95 backdrop-blur-xl border border-white/30 shadow-xl;
   }
 
   .dark .glass-effect {
-    @apply bg-gray-900/95 backdrop-blur-xl border border-gray-700/30;
+    @apply bg-gray-900/90 backdrop-blur-xl border border-gray-700/20;
   }
 
   .dark .glass-effect-strong {
-    @apply bg-gray-900/98 backdrop-blur-xl border border-gray-700/40;
+    @apply bg-gray-900/95 backdrop-blur-xl border border-gray-700/30;
   }
 
   /* Mobile navigation */
