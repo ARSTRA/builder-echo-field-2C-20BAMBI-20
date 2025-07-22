@@ -186,7 +186,7 @@ export default function NotificationsPage() {
           <div className="flex items-center space-x-2">
             {unreadCount > 0 && (
               <Button variant="ghost" size="sm" onClick={markAllAsRead}>
-                <MarkAsRead className="w-4 h-4 mr-1" />
+                <CheckCheck className="w-4 h-4 mr-1" />
                 Mark all read
               </Button>
             )}
