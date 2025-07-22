@@ -59,9 +59,11 @@ interface Trip {
   paymentMethod: string;
   bookingType: "instant" | "scheduled";
   specialRequirements?: string[];
+  currency: "USD" | "NGN";
 }
 
 export default function HistoryPage() {
+  const { formatAmount } = useCurrency();
   const [searchQuery, setSearchQuery] = useState("");
   const [filterPeriod, setFilterPeriod] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
