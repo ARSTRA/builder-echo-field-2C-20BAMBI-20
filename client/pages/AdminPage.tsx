@@ -910,16 +910,282 @@ export default function AdminPage() {
     { id: "features", label: "Advanced Features", icon: Settings },
   ];
 
+  const renderDriversManager = () => (
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 className="text-2xl font-bold text-taxi-dark">Drivers Management</h2>
+          <p className="text-taxi-gray">Manage driver registrations, shifts, and performance</p>
+        </div>
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 border-0"
+            onClick={() => handleExportData("Drivers")}
+            disabled={isLoading}
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Export
+          </Button>
+          <Button
+            className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+            onClick={handleAddDriver}
+            disabled={isLoading}
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Add Driver
+          </Button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card className="shadow-lg bg-gradient-to-r from-green-500 to-green-600 text-white border-0">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-green-100">Online Drivers</p>
+                <p className="text-xl font-bold">847</p>
+              </div>
+              <Users className="w-8 h-8 text-green-200" />
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="shadow-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-blue-100">Day Shift</p>
+                <p className="text-xl font-bold">523</p>
+              </div>
+              <Sun className="w-8 h-8 text-blue-200" />
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="shadow-lg bg-gradient-to-r from-purple-500 to-purple-600 text-white border-0">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-purple-100">Night Shift</p>
+                <p className="text-xl font-bold">324</p>
+              </div>
+              <Moon className="w-8 h-8 text-purple-200" />
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="shadow-lg bg-gradient-to-r from-yellow-500 to-yellow-600 text-white border-0">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-yellow-100">Pending Approval</p>
+                <p className="text-xl font-bold">23</p>
+              </div>
+              <Clock className="w-8 h-8 text-yellow-200" />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
+        <CardHeader>
+          <CardTitle>Driver List</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Driver</TableHead>
+                <TableHead>Vehicle</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Rating</TableHead>
+                <TableHead>Total Rides</TableHead>
+                <TableHead>Earnings</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {drivers.map((driver) => (
+                <TableRow key={driver.id} className="hover:bg-taxi-light-gray/30">
+                  <TableCell>
+                    <div>
+                      <p className="font-medium">{driver.name}</p>
+                      <p className="text-sm text-taxi-gray">{driver.email}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>{driver.vehicle}</TableCell>
+                  <TableCell>
+                    <Badge className={driver.status === "online" ? "bg-green-500 text-white" : driver.status === "busy" ? "bg-yellow-500 text-white" : "bg-gray-500 text-white"}>
+                      {driver.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center">
+                      <Star className="w-4 h-4 text-yellow-500 mr-1" />
+                      {driver.rating}
+                    </div>
+                  </TableCell>
+                  <TableCell>{driver.totalRides}</TableCell>
+                  <TableCell>{driver.earnings}</TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="bg-blue-500 text-white hover:bg-blue-600 border-0"
+                        onClick={() => toast({title: "Driver Details", description: `Viewing ${driver.name}'s profile`})}
+                        disabled={isLoading}
+                      >
+                        <Eye className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="bg-green-500 text-white hover:bg-green-600 border-0"
+                        onClick={() => toast({title: "Driver Communication", description: `Opening chat with ${driver.name}`})}
+                        disabled={isLoading}
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="bg-red-500 text-white hover:bg-red-600 border-0"
+                        onClick={() => toast({title: "Driver Suspended", description: `${driver.name} has been suspended`})}
+                        disabled={isLoading}
+                      >
+                        <Ban className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    </div>
+  );
+
+  const renderAdvancedFeatures = () => (
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-2xl font-bold text-taxi-dark">Advanced Features</h2>
+        <p className="text-taxi-gray">Configure special ride options and accessibility features</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <Accessibility className="w-5 h-5 mr-2 text-primary" />
+              Accessibility
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">Wheelchair Access</p>
+                <p className="text-sm text-taxi-gray">Enable wheelchair-accessible vehicles</p>
+              </div>
+              <Switch defaultChecked />
+            </div>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">Baby Seat</p>
+                <p className="text-sm text-taxi-gray">Allow baby seat requests</p>
+              </div>
+              <Switch defaultChecked />
+            </div>
+            <Button
+              className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0"
+              onClick={() => toast({title: "Accessibility Settings", description: "Accessibility features updated successfully"})}
+              disabled={isLoading}
+            >
+              Save Settings
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <Heart className="w-5 h-5 mr-2 text-primary" />
+              Ride Preferences
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">Gender Preference</p>
+                <p className="text-sm text-taxi-gray">Allow driver gender selection</p>
+              </div>
+              <Switch defaultChecked />
+            </div>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">Favorite Driver</p>
+                <p className="text-sm text-taxi-gray">Save and request preferred drivers</p>
+              </div>
+              <Switch defaultChecked />
+            </div>
+            <Button
+              className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
+              onClick={() => toast({title: "Preferences Updated", description: "Ride preferences saved successfully"})}
+              disabled={isLoading}
+            >
+              Update Preferences
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="shadow-xl bg-white/90 backdrop-blur-md border-0">
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <Building className="w-5 h-5 mr-2 text-primary" />
+              Corporate Features
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">Corporate Accounts</p>
+                <p className="text-sm text-taxi-gray">Business ride accounts</p>
+              </div>
+              <Switch defaultChecked />
+            </div>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">Bulk Booking</p>
+                <p className="text-sm text-taxi-gray">Multiple rides at once</p>
+              </div>
+              <Switch />
+            </div>
+            <Button
+              className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0"
+              onClick={() => toast({title: "Corporate Settings", description: "Corporate features configured successfully"})}
+              disabled={isLoading}
+            >
+              Configure Corporate
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+
   const renderContent = () => {
     switch (activeModule) {
       case "dashboard":
         return renderDashboard();
       case "users":
         return renderUsersManager();
+      case "drivers":
+        return renderDriversManager();
       case "transactions":
         return renderTransactionManager();
       case "payments":
         return renderPaymentMethods();
+      case "features":
+        return renderAdvancedFeatures();
       case "wallet":
         return (
           <div className="text-center py-12">
@@ -928,7 +1194,7 @@ export default function AdminPage() {
             <p className="text-taxi-gray mb-6">Manage user wallets, top-ups, and balance transfers</p>
             <Button
               className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0"
-              onClick={handleManageWallet}
+              onClick={() => toast({title: "Wallet Manager", description: "Opening comprehensive wallet management system"})}
               disabled={isLoading}
             >
               <Wallet className="w-4 h-4 mr-2" />
@@ -960,17 +1226,11 @@ export default function AdminPage() {
             <p className="text-taxi-gray mb-6">Customer support chat system and communication tools</p>
             <Button
               className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
-              onClick={() => {
-                setActiveModule("chat");
-                toast({
-                  title: "Chat Module",
-                  description: "Customer support chat system activated",
-                });
-              }}
+              onClick={() => toast({title: "Chat System", description: "Customer support chat interface loaded"})}
               disabled={isLoading}
             >
               <MessageCircle className="w-4 h-4 mr-2" />
-              Open Chat
+              Open Chat System
             </Button>
           </div>
         );
