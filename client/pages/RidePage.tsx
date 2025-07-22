@@ -2616,6 +2616,32 @@ export default function RidePage() {
               </div>
             </div>
 
+            {/* Technology Features */}
+            <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-md rounded-xl p-6 border border-blue-400/30 mb-6">
+              <h4 className="text-xl font-bold text-white mb-4 flex items-center">
+                <Zap className="w-5 h-5 mr-2 text-blue-400" />
+                Smart Technology Features
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span className="text-blue-100 text-sm">Real-time GPS tracking</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <span className="text-blue-100 text-sm">AI route optimization</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                  <span className="text-blue-100 text-sm">Smart driver matching</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                  <span className="text-blue-100 text-sm">Predictive ETA calculations</span>
+                </div>
+              </div>
+            </div>
+
             {/* Image Section */}
             <div className="space-y-6">
               <div className="relative overflow-hidden rounded-2xl shadow-2xl group hover:shadow-blue-500/20 transition-all duration-300">
