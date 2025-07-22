@@ -43,7 +43,11 @@ import {
   User,
   Gift,
   Percent,
+  Wallet,
+  Banknote,
 } from "lucide-react";
+import { useCurrency } from "@/hooks/use-currency";
+import { PaymentMethod, Currency } from "@shared/currency";
 
 export default function BookingPage() {
   const [pickupLocation, setPickupLocation] = useState("");
