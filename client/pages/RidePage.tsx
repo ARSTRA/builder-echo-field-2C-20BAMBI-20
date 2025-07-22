@@ -1059,11 +1059,16 @@ export default function RidePage() {
                                   <div
                                     className={`text-2xl font-bold ${colors.accent}`}
                                   >
-                                    ${vehicle.basePrice}
+                                    {formatAmount(vehicle.basePrice)}
                                   </div>
                                   <div className="text-xs text-gray-500">
-                                    +${vehicle.perKm}/km
+                                    +{formatAmount(vehicle.perKm)}/km
                                   </div>
+                                  {vehicle.premiumText && (
+                                    <div className="text-xs text-purple-600 font-medium mt-1">
+                                      Premium Service
+                                    </div>
+                                  )}
                                 </div>
                               </div>
 
