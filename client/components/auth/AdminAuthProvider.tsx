@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 interface AdminUser {
@@ -16,7 +22,9 @@ interface AdminAuthContextType {
   checkAuth: () => boolean;
 }
 
-const AdminAuthContext = createContext<AdminAuthContextType | undefined>(undefined);
+const AdminAuthContext = createContext<AdminAuthContextType | undefined>(
+  undefined,
+);
 
 export function useAdminAuth() {
   const context = useContext(AdminAuthContext);
@@ -39,7 +47,7 @@ export function AdminAuthProvider({ children }: AdminAuthProviderProps) {
   // Demo credentials
   const ADMIN_CREDENTIALS = {
     email: "admin@bambi.com",
-    password: "admin123"
+    password: "admin123",
   };
 
   const checkAuth = (): boolean => {
@@ -51,7 +59,8 @@ export function AdminAuthProvider({ children }: AdminAuthProviderProps) {
       // Check if session is still valid (24 hours)
       const loginTime = new Date(userData.loginTime);
       const now = new Date();
-      const hoursDiff = (now.getTime() - loginTime.getTime()) / (1000 * 60 * 60);
+      const hoursDiff =
+        (now.getTime() - loginTime.getTime()) / (1000 * 60 * 60);
 
       if (hoursDiff < 24) {
         return true;
@@ -75,7 +84,8 @@ export function AdminAuthProvider({ children }: AdminAuthProviderProps) {
       // Check if session is still valid (24 hours)
       const loginTime = new Date(userData.loginTime);
       const now = new Date();
-      const hoursDiff = (now.getTime() - loginTime.getTime()) / (1000 * 60 * 60);
+      const hoursDiff =
+        (now.getTime() - loginTime.getTime()) / (1000 * 60 * 60);
 
       if (hoursDiff < 24) {
         setUser(userData);
@@ -97,17 +107,20 @@ export function AdminAuthProvider({ children }: AdminAuthProviderProps) {
     // Simulate API call
     return new Promise((resolve) => {
       setTimeout(() => {
-        if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
+        if (
+          email === ADMIN_CREDENTIALS.email &&
+          password === ADMIN_CREDENTIALS.password
+        ) {
           const userData: AdminUser = {
             email: email,
             name: "Admin User",
             role: "admin",
-            loginTime: new Date().toISOString()
+            loginTime: new Date().toISOString(),
           };
 
           localStorage.setItem("bambi_admin_authenticated", "true");
           localStorage.setItem("bambi_admin_user", JSON.stringify(userData));
-          
+
           setUser(userData);
           setIsAuthenticated(true);
           resolve(true);
@@ -132,9 +145,11 @@ export function AdminAuthProvider({ children }: AdminAuthProviderProps) {
 
   // Redirect to login if not authenticated and trying to access admin routes
   useEffect(() => {
-    if (location.pathname.startsWith("/admin") && 
-        location.pathname !== "/admin/login" && 
-        !isAuthenticated) {
+    if (
+      location.pathname.startsWith("/admin") &&
+      location.pathname !== "/admin/login" &&
+      !isAuthenticated
+    ) {
       navigate("/admin/login");
     }
   }, [location.pathname, isAuthenticated, navigate]);

@@ -3,6 +3,7 @@
 ## 🚀 Quick Access
 
 ### **Direct URL Access**
+
 The admin panel is accessible via direct URL navigation:
 
 ```
@@ -10,6 +11,7 @@ https://your-domain.com/admin/login
 ```
 
 **Current Live URL:**
+
 ```
 https://e2e63a01f8504d18897b24043b69ff01-4aa6a65371494e228d66a5739.fly.dev/admin/login
 ```
@@ -19,6 +21,7 @@ https://e2e63a01f8504d18897b24043b69ff01-4aa6a65371494e228d66a5739.fly.dev/admin
 ## 📋 Login Credentials
 
 ### **Demo Admin Account**
+
 ```
 📧 Email: admin@bambi.com
 🔑 Password: admin123
@@ -29,6 +32,7 @@ https://e2e63a01f8504d18897b24043b69ff01-4aa6a65371494e228d66a5739.fly.dev/admin
 ## 🗺️ Navigation Instructions
 
 ### **Method 1: Direct URL Access**
+
 1. **Open your browser**
 2. **Navigate to:** `/admin/login`
 3. **Enter credentials** (shown above)
@@ -36,6 +40,7 @@ https://e2e63a01f8504d18897b24043b69ff01-4aa6a65371494e228d66a5739.fly.dev/admin
 5. **You'll be redirected to:** `/admin` (Dashboard)
 
 ### **Method 2: From Homepage**
+
 1. **Visit the homepage:** `/`
 2. **Manually navigate to:** `/admin/login` (no button available by design)
 3. **Follow login steps above**
@@ -47,11 +52,13 @@ https://e2e63a01f8504d18897b24043b69ff01-4aa6a65371494e228d66a5739.fly.dev/admin
 After successful login, you'll have access to:
 
 ### **📊 Dashboard** (`/admin`)
+
 - Real-time statistics
 - System status monitoring
 - Quick actions panel
 
 ### **👥 Management Modules**
+
 - **Users Manager** - Passenger account management
 - **Drivers Manager** - Driver registration, shifts, performance
 - **Rides Manager** - Live tracking, trip history
@@ -60,6 +67,7 @@ After successful login, you'll have access to:
 - **Chat Module** - Customer support system
 
 ### **⚙️ Advanced Features**
+
 - **Special Zones** - Red zones, pricing management
 - **Wallet Manager** - User and driver wallets
 - **Advanced Settings** - RTL, corporate rides, accessibility features
@@ -69,11 +77,13 @@ After successful login, you'll have access to:
 ## 🔒 Security Features
 
 ### **Session Management**
+
 - **Session Duration:** 24 hours
 - **Auto-logout:** After session expiration
 - **Secure Storage:** Local session storage
 
 ### **Route Protection**
+
 - All admin routes require authentication
 - Automatic redirect to login if not authenticated
 - Protected against unauthorized access
@@ -83,11 +93,13 @@ After successful login, you'll have access to:
 ## 📱 Responsive Design
 
 ### **Desktop Experience**
+
 - Full sidebar navigation
 - User information display
 - Comprehensive dashboard view
 
 ### **Mobile Experience**
+
 - Collapsible navigation
 - Touch-optimized interface
 - Mobile-specific admin layout
@@ -97,9 +109,11 @@ After successful login, you'll have access to:
 ## 🚪 Logout
 
 ### **Desktop**
+
 - Click **"Sign Out"** in the sidebar
 
 ### **Mobile**
+
 - Tap **"Logout"** in the mobile header
 
 ---
@@ -107,6 +121,7 @@ After successful login, you'll have access to:
 ## 🛠️ Technical Details
 
 ### **Authentication Flow**
+
 1. User enters credentials on `/admin/login`
 2. System validates against demo credentials
 3. Session token stored in localStorage
@@ -114,11 +129,12 @@ After successful login, you'll have access to:
 5. All admin routes protected by authentication guard
 
 ### **Available Routes**
+
 ```
 /admin/login     → Login page
 /admin           → Main dashboard
 /admin/users     → User management
-/admin/trips     → Trip management  
+/admin/trips     → Trip management
 /admin/reports   → Reports & analytics
 /admin/settings  → System settings
 ```
@@ -129,12 +145,14 @@ After successful login, you'll have access to:
 
 **For immediate access:**
 
-1. **Copy this URL:** 
+1. **Copy this URL:**
+
    ```
    https://e2e63a01f8504d18897b24043b69ff01-4aa6a65371494e228d66a5739.fly.dev/admin/login
    ```
 
 2. **Login with:**
+
    ```
    Email: admin@bambi.com
    Password: admin123
@@ -147,6 +165,7 @@ After successful login, you'll have access to:
 ## 📞 Support
 
 **Need help?**
+
 - Demo credentials are displayed on the login page
 - All features are pre-configured and ready to use
 - No additional setup required

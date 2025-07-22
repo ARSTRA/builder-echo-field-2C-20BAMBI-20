@@ -13,7 +13,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -115,7 +121,8 @@ export default function AdminPage() {
   const [showDriverViewDialog, setShowDriverViewDialog] = useState(false);
   const [showDriverChatDialog, setShowDriverChatDialog] = useState(false);
   const [showTransactionDialog, setShowTransactionDialog] = useState(false);
-  const [showTransactionViewDialog, setShowTransactionViewDialog] = useState(false);
+  const [showTransactionViewDialog, setShowTransactionViewDialog] =
+    useState(false);
   const [showPaymentConfigDialog, setShowPaymentConfigDialog] = useState(false);
   const [showPaymentStatsDialog, setShowPaymentStatsDialog] = useState(false);
   const [showWalletManagerDialog, setShowWalletManagerDialog] = useState(false);
@@ -125,11 +132,51 @@ export default function AdminPage() {
   const [activeChatUser, setActiveChatUser] = useState<any>(null);
   const [newMessage, setNewMessage] = useState("");
   const [chatUsers, setChatUsers] = useState<any[]>([
-    { id: 1, name: "John Doe", avatar: "JD", lastMessage: "Need help with my ride", time: "2 min ago", unread: 3, status: "online" },
-    { id: 2, name: "Sarah Smith", avatar: "SS", lastMessage: "Payment issue", time: "5 min ago", unread: 1, status: "online" },
-    { id: 3, name: "Mike Johnson", avatar: "MJ", lastMessage: "Thanks for the help!", time: "10 min ago", unread: 0, status: "offline" },
-    { id: 4, name: "Emma Brown", avatar: "EB", lastMessage: "Driver was late", time: "15 min ago", unread: 2, status: "online" },
-    { id: 5, name: "David Wilson", avatar: "DW", lastMessage: "Great service!", time: "1 hour ago", unread: 0, status: "away" },
+    {
+      id: 1,
+      name: "John Doe",
+      avatar: "JD",
+      lastMessage: "Need help with my ride",
+      time: "2 min ago",
+      unread: 3,
+      status: "online",
+    },
+    {
+      id: 2,
+      name: "Sarah Smith",
+      avatar: "SS",
+      lastMessage: "Payment issue",
+      time: "5 min ago",
+      unread: 1,
+      status: "online",
+    },
+    {
+      id: 3,
+      name: "Mike Johnson",
+      avatar: "MJ",
+      lastMessage: "Thanks for the help!",
+      time: "10 min ago",
+      unread: 0,
+      status: "offline",
+    },
+    {
+      id: 4,
+      name: "Emma Brown",
+      avatar: "EB",
+      lastMessage: "Driver was late",
+      time: "15 min ago",
+      unread: 2,
+      status: "online",
+    },
+    {
+      id: 5,
+      name: "David Wilson",
+      avatar: "DW",
+      lastMessage: "Great service!",
+      time: "1 hour ago",
+      unread: 0,
+      status: "away",
+    },
   ]);
 
   // Show loading if user data is not yet available
@@ -167,7 +214,7 @@ export default function AdminPage() {
   const handleBanUser = async (userData: any) => {
     setIsLoading(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       toast({
         title: "User Banned",
         description: `${userData.name} has been banned from the platform`,
@@ -206,16 +253,17 @@ export default function AdminPage() {
   const handleGenerateReport = async () => {
     setIsLoading(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       toast({
         title: "Report Generated",
-        description: "Financial report has been generated and is ready for download",
+        description:
+          "Financial report has been generated and is ready for download",
       });
       // Simulate download
       const reportData = `BAMBI Admin Report - ${new Date().toISOString()}\n\nRevenue: $42,847\nRides: 18,392\nDrivers: 2,847`;
-      const blob = new Blob([reportData], { type: 'text/plain' });
+      const blob = new Blob([reportData], { type: "text/plain" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
       a.download = `bambi-report-${Date.now()}.txt`;
       a.click();
@@ -227,16 +275,16 @@ export default function AdminPage() {
   const handleExportData = async (dataType: string) => {
     setIsLoading(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       toast({
         title: "Export Complete",
         description: `${dataType} data has been exported successfully`,
       });
       // Simulate CSV download
       const csvData = `Name,Email,Status,Rides\nJohn Doe,john@example.com,active,45\nSarah Smith,sarah@example.com,active,128`;
-      const blob = new Blob([csvData], { type: 'text/csv' });
+      const blob = new Blob([csvData], { type: "text/csv" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
       a.download = `${dataType.toLowerCase()}-export-${Date.now()}.csv`;
       a.click();
@@ -281,16 +329,16 @@ export default function AdminPage() {
   const handleDownloadReceipt = async (transaction: any) => {
     setIsLoading(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       toast({
         title: "Receipt Downloaded",
         description: `Receipt for transaction #${transaction.id} downloaded`,
       });
       // Simulate receipt download
       const receiptData = `BAMBI RECEIPT\nTransaction ID: #${transaction.id}\nAmount: ${transaction.amount}\nUser: ${transaction.user}\nMethod: ${transaction.method}`;
-      const blob = new Blob([receiptData], { type: 'text/plain' });
+      const blob = new Blob([receiptData], { type: "text/plain" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
       a.download = `receipt-${transaction.id}.txt`;
       a.click();
@@ -329,7 +377,7 @@ export default function AdminPage() {
   const handleSuspendDriver = async (driver: any) => {
     setIsLoading(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       toast({
         title: "Driver Suspended",
         description: `${driver.name} has been suspended from the platform`,
@@ -369,14 +417,40 @@ export default function AdminPage() {
   const handleSelectChatUser = (user: any) => {
     setActiveChatUser(user);
     // Mark messages as read
-    setChatUsers(prev => prev.map(u => u.id === user.id ? {...u, unread: 0} : u));
+    setChatUsers((prev) =>
+      prev.map((u) => (u.id === user.id ? { ...u, unread: 0 } : u)),
+    );
 
     // Load mock conversation history
     const mockMessages = [
-      { id: 1, sender: "user", message: user.lastMessage, time: "10:30 AM", type: "text" },
-      { id: 2, sender: "admin", message: "Hello! I'm here to help you. What seems to be the issue?", time: "10:32 AM", type: "text" },
-      { id: 3, sender: "user", message: "I'm having trouble with my recent ride payment", time: "10:33 AM", type: "text" },
-      { id: 4, sender: "admin", message: "I can help you with that. Let me check your account details.", time: "10:34 AM", type: "text" },
+      {
+        id: 1,
+        sender: "user",
+        message: user.lastMessage,
+        time: "10:30 AM",
+        type: "text",
+      },
+      {
+        id: 2,
+        sender: "admin",
+        message: "Hello! I'm here to help you. What seems to be the issue?",
+        time: "10:32 AM",
+        type: "text",
+      },
+      {
+        id: 3,
+        sender: "user",
+        message: "I'm having trouble with my recent ride payment",
+        time: "10:33 AM",
+        type: "text",
+      },
+      {
+        id: 4,
+        sender: "admin",
+        message: "I can help you with that. Let me check your account details.",
+        time: "10:34 AM",
+        type: "text",
+      },
     ];
     setChatMessages(mockMessages);
 
@@ -393,19 +467,24 @@ export default function AdminPage() {
       id: chatMessages.length + 1,
       sender: "admin",
       message: newMessage,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      type: "text"
+      time: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+      type: "text",
     };
 
-    setChatMessages(prev => [...prev, newMsg]);
+    setChatMessages((prev) => [...prev, newMsg]);
     setNewMessage("");
 
     // Update user's last message
-    setChatUsers(prev => prev.map(u =>
-      u.id === activeChatUser.id
-        ? {...u, lastMessage: newMessage, time: "now"}
-        : u
-    ));
+    setChatUsers((prev) =>
+      prev.map((u) =>
+        u.id === activeChatUser.id
+          ? { ...u, lastMessage: newMessage, time: "now" }
+          : u,
+      ),
+    );
 
     toast({
       title: "Message Sent",
@@ -419,54 +498,291 @@ export default function AdminPage() {
   };
 
   const stats = [
-    { label: "Active Drivers", value: "2,847", icon: Users, trend: "+12%", color: "bg-blue-500" },
-    { label: "Total Rides Today", value: "18,392", icon: Car, trend: "+8%", color: "bg-green-500" },
-    { label: "Revenue Today", value: "$42,847", icon: DollarSign, trend: "+15%", color: "bg-purple-500" },
-    { label: "Average Rating", value: "4.9", icon: CheckCircle, trend: "+0.1", color: "bg-orange-500" },
+    {
+      label: "Active Drivers",
+      value: "2,847",
+      icon: Users,
+      trend: "+12%",
+      color: "bg-blue-500",
+    },
+    {
+      label: "Total Rides Today",
+      value: "18,392",
+      icon: Car,
+      trend: "+8%",
+      color: "bg-green-500",
+    },
+    {
+      label: "Revenue Today",
+      value: "$42,847",
+      icon: DollarSign,
+      trend: "+15%",
+      color: "bg-purple-500",
+    },
+    {
+      label: "Average Rating",
+      value: "4.9",
+      icon: CheckCircle,
+      trend: "+0.1",
+      color: "bg-orange-500",
+    },
   ];
 
   const users = [
-    { id: 1, name: "John Doe", email: "john@example.com", phone: "+1234567890", status: "active", role: "passenger", joinDate: "2024-01-15", totalRides: 45 },
-    { id: 2, name: "Sarah Smith", email: "sarah@example.com", phone: "+1234567891", status: "active", role: "driver", joinDate: "2024-02-20", totalRides: 128 },
-    { id: 3, name: "Mike Johnson", email: "mike@example.com", phone: "+1234567892", status: "suspended", role: "passenger", joinDate: "2024-03-10", totalRides: 12 },
+    {
+      id: 1,
+      name: "John Doe",
+      email: "john@example.com",
+      phone: "+1234567890",
+      status: "active",
+      role: "passenger",
+      joinDate: "2024-01-15",
+      totalRides: 45,
+    },
+    {
+      id: 2,
+      name: "Sarah Smith",
+      email: "sarah@example.com",
+      phone: "+1234567891",
+      status: "active",
+      role: "driver",
+      joinDate: "2024-02-20",
+      totalRides: 128,
+    },
+    {
+      id: 3,
+      name: "Mike Johnson",
+      email: "mike@example.com",
+      phone: "+1234567892",
+      status: "suspended",
+      role: "passenger",
+      joinDate: "2024-03-10",
+      totalRides: 12,
+    },
   ];
 
   const drivers = [
-    { id: 1, name: "Sarah Smith", email: "sarah@example.com", phone: "+1234567891", status: "online", rating: 4.8, totalRides: 128, earnings: "$2,450", shift: "day", vehicle: "Toyota Camry 2020" },
-    { id: 2, name: "David Wilson", email: "david@example.com", phone: "+1234567893", status: "offline", rating: 4.9, totalRides: 95, earnings: "$1,890", shift: "night", vehicle: "Honda Accord 2019" },
-    { id: 3, name: "Emma Brown", email: "emma@example.com", phone: "+1234567894", status: "busy", rating: 4.7, totalRides: 76, earnings: "$1,520", shift: "day", vehicle: "Nissan Altima 2021" },
+    {
+      id: 1,
+      name: "Sarah Smith",
+      email: "sarah@example.com",
+      phone: "+1234567891",
+      status: "online",
+      rating: 4.8,
+      totalRides: 128,
+      earnings: "$2,450",
+      shift: "day",
+      vehicle: "Toyota Camry 2020",
+    },
+    {
+      id: 2,
+      name: "David Wilson",
+      email: "david@example.com",
+      phone: "+1234567893",
+      status: "offline",
+      rating: 4.9,
+      totalRides: 95,
+      earnings: "$1,890",
+      shift: "night",
+      vehicle: "Honda Accord 2019",
+    },
+    {
+      id: 3,
+      name: "Emma Brown",
+      email: "emma@example.com",
+      phone: "+1234567894",
+      status: "busy",
+      rating: 4.7,
+      totalRides: 76,
+      earnings: "$1,520",
+      shift: "day",
+      vehicle: "Nissan Altima 2021",
+    },
   ];
 
   const rides = [
-    { id: 1, passenger: "John Doe", driver: "Sarah Smith", from: "Downtown", to: "Airport", fare: "$24.50", status: "completed", date: "2024-01-20", duration: "25 min", distance: "12.5 km" },
-    { id: 2, passenger: "Alice Johnson", driver: "David Wilson", from: "Mall", to: "Hotel", fare: "$18.75", status: "active", date: "2024-01-20", duration: "ongoing", distance: "8.2 km" },
-    { id: 3, passenger: "Bob Smith", driver: "Emma Brown", from: "Office", to: "Home", fare: "$15.30", status: "cancelled", date: "2024-01-20", duration: "N/A", distance: "6.8 km" },
+    {
+      id: 1,
+      passenger: "John Doe",
+      driver: "Sarah Smith",
+      from: "Downtown",
+      to: "Airport",
+      fare: "$24.50",
+      status: "completed",
+      date: "2024-01-20",
+      duration: "25 min",
+      distance: "12.5 km",
+    },
+    {
+      id: 2,
+      passenger: "Alice Johnson",
+      driver: "David Wilson",
+      from: "Mall",
+      to: "Hotel",
+      fare: "$18.75",
+      status: "active",
+      date: "2024-01-20",
+      duration: "ongoing",
+      distance: "8.2 km",
+    },
+    {
+      id: 3,
+      passenger: "Bob Smith",
+      driver: "Emma Brown",
+      from: "Office",
+      to: "Home",
+      fare: "$15.30",
+      status: "cancelled",
+      date: "2024-01-20",
+      duration: "N/A",
+      distance: "6.8 km",
+    },
   ];
 
   const transactions = [
-    { id: 1, user: "John Doe", type: "ride_payment", amount: "$24.50", status: "completed", date: "2024-01-20", method: "credit_card", paymentId: "CC_001" },
-    { id: 2, user: "Sarah Smith", type: "driver_payout", amount: "$19.60", status: "completed", date: "2024-01-20", method: "bank_transfer", paymentId: "BT_002" },
-    { id: 3, user: "Mike Johnson", type: "wallet_topup", amount: "$50.00", status: "pending", date: "2024-01-20", method: "crypto", paymentId: "BTC_003" },
-    { id: 4, user: "Alice Johnson", type: "ride_payment", amount: "$18.75", status: "completed", date: "2024-01-20", method: "debit_card", paymentId: "DC_004" },
-    { id: 5, user: "Bob Smith", type: "refund", amount: "$15.30", status: "processing", date: "2024-01-20", method: "paypal", paymentId: "PP_005" },
+    {
+      id: 1,
+      user: "John Doe",
+      type: "ride_payment",
+      amount: "$24.50",
+      status: "completed",
+      date: "2024-01-20",
+      method: "credit_card",
+      paymentId: "CC_001",
+    },
+    {
+      id: 2,
+      user: "Sarah Smith",
+      type: "driver_payout",
+      amount: "$19.60",
+      status: "completed",
+      date: "2024-01-20",
+      method: "bank_transfer",
+      paymentId: "BT_002",
+    },
+    {
+      id: 3,
+      user: "Mike Johnson",
+      type: "wallet_topup",
+      amount: "$50.00",
+      status: "pending",
+      date: "2024-01-20",
+      method: "crypto",
+      paymentId: "BTC_003",
+    },
+    {
+      id: 4,
+      user: "Alice Johnson",
+      type: "ride_payment",
+      amount: "$18.75",
+      status: "completed",
+      date: "2024-01-20",
+      method: "debit_card",
+      paymentId: "DC_004",
+    },
+    {
+      id: 5,
+      user: "Bob Smith",
+      type: "refund",
+      amount: "$15.30",
+      status: "processing",
+      date: "2024-01-20",
+      method: "paypal",
+      paymentId: "PP_005",
+    },
   ];
 
   const paymentMethods = [
-    { id: "credit_card", name: "Credit Card", icon: CreditCard, color: "bg-blue-600", description: "Visa, Mastercard, Amex" },
-    { id: "debit_card", name: "Debit Card", icon: WalletCards, color: "bg-green-600", description: "Bank debit cards" },
-    { id: "bank_transfer", name: "Bank Transfer", icon: Landmark, color: "bg-purple-600", description: "Direct bank transfers" },
-    { id: "crypto", name: "Cryptocurrency", icon: Bitcoin, color: "bg-orange-600", description: "Bitcoin, Ethereum, USDT" },
-    { id: "digital_wallet", name: "Digital Wallet", icon: Smartphone, color: "bg-pink-600", description: "Apple Pay, Google Pay" },
-    { id: "paypal", name: "PayPal", icon: DollarIcon, color: "bg-blue-500", description: "PayPal payments" },
-    { id: "cash", name: "Cash", icon: Banknote, color: "bg-green-500", description: "Cash payments" },
-    { id: "qr_payment", name: "QR Payment", icon: QrCode, color: "bg-indigo-600", description: "QR code payments" },
-    { id: "gift_card", name: "Gift Card", icon: Coins, color: "bg-yellow-600", description: "Platform gift cards" },
+    {
+      id: "credit_card",
+      name: "Credit Card",
+      icon: CreditCard,
+      color: "bg-blue-600",
+      description: "Visa, Mastercard, Amex",
+    },
+    {
+      id: "debit_card",
+      name: "Debit Card",
+      icon: WalletCards,
+      color: "bg-green-600",
+      description: "Bank debit cards",
+    },
+    {
+      id: "bank_transfer",
+      name: "Bank Transfer",
+      icon: Landmark,
+      color: "bg-purple-600",
+      description: "Direct bank transfers",
+    },
+    {
+      id: "crypto",
+      name: "Cryptocurrency",
+      icon: Bitcoin,
+      color: "bg-orange-600",
+      description: "Bitcoin, Ethereum, USDT",
+    },
+    {
+      id: "digital_wallet",
+      name: "Digital Wallet",
+      icon: Smartphone,
+      color: "bg-pink-600",
+      description: "Apple Pay, Google Pay",
+    },
+    {
+      id: "paypal",
+      name: "PayPal",
+      icon: DollarIcon,
+      color: "bg-blue-500",
+      description: "PayPal payments",
+    },
+    {
+      id: "cash",
+      name: "Cash",
+      icon: Banknote,
+      color: "bg-green-500",
+      description: "Cash payments",
+    },
+    {
+      id: "qr_payment",
+      name: "QR Payment",
+      icon: QrCode,
+      color: "bg-indigo-600",
+      description: "QR code payments",
+    },
+    {
+      id: "gift_card",
+      name: "Gift Card",
+      icon: Coins,
+      color: "bg-yellow-600",
+      description: "Platform gift cards",
+    },
   ];
 
   const specialZones = [
-    { id: 1, name: "Airport Zone", type: "premium", multiplier: "1.5x", status: "active", rides: 234 },
-    { id: 2, name: "Downtown Red Zone", type: "restricted", multiplier: "2.0x", status: "active", rides: 89 },
-    { id: 3, name: "Hospital Zone", type: "priority", multiplier: "1.2x", status: "active", rides: 156 },
+    {
+      id: 1,
+      name: "Airport Zone",
+      type: "premium",
+      multiplier: "1.5x",
+      status: "active",
+      rides: 234,
+    },
+    {
+      id: 2,
+      name: "Downtown Red Zone",
+      type: "restricted",
+      multiplier: "2.0x",
+      status: "active",
+      rides: 89,
+    },
+    {
+      id: 3,
+      name: "Hospital Zone",
+      type: "priority",
+      multiplier: "1.2x",
+      status: "active",
+      rides: 156,
+    },
   ];
 
   const renderDashboard = () => (
@@ -476,18 +792,25 @@ export default function AdminPage() {
         {stats.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <Card key={index} className="shadow-lg bg-white/90 backdrop-blur-md border-0 hover:shadow-xl transition-shadow">
+            <Card
+              key={index}
+              className="shadow-lg bg-white/90 backdrop-blur-md border-0 hover:shadow-xl transition-shadow"
+            >
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-taxi-gray mb-1">{stat.label}</p>
-                    <p className="text-2xl font-bold text-taxi-dark">{stat.value}</p>
+                    <p className="text-2xl font-bold text-taxi-dark">
+                      {stat.value}
+                    </p>
                     <div className="flex items-center mt-2">
                       <TrendingUp className="w-4 h-4 text-success mr-1" />
                       <span className="text-sm text-success">{stat.trend}</span>
                     </div>
                   </div>
-                  <div className={`w-12 h-12 ${stat.color} rounded-lg flex items-center justify-center shadow-lg`}>
+                  <div
+                    className={`w-12 h-12 ${stat.color} rounded-lg flex items-center justify-center shadow-lg`}
+                  >
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                 </div>
@@ -556,15 +879,28 @@ export default function AdminPage() {
           </CardHeader>
           <CardContent className="space-y-3">
             {[
-              { name: "Payment Gateway", status: "online", color: "bg-green-500" },
+              {
+                name: "Payment Gateway",
+                status: "online",
+                color: "bg-green-500",
+              },
               { name: "GPS Tracking", status: "online", color: "bg-green-500" },
-              { name: "SMS Service", status: "degraded", color: "bg-yellow-500" },
+              {
+                name: "SMS Service",
+                status: "degraded",
+                color: "bg-yellow-500",
+              },
               { name: "Mobile Apps", status: "online", color: "bg-green-500" },
               { name: "Driver App", status: "online", color: "bg-green-500" },
               { name: "Admin Panel", status: "online", color: "bg-green-500" },
             ].map((service, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-taxi-light-gray/30 rounded-lg hover:bg-taxi-light-gray/50 transition-colors">
-                <span className="text-taxi-dark font-medium">{service.name}</span>
+              <div
+                key={index}
+                className="flex items-center justify-between p-3 bg-taxi-light-gray/30 rounded-lg hover:bg-taxi-light-gray/50 transition-colors"
+              >
+                <span className="text-taxi-dark font-medium">
+                  {service.name}
+                </span>
                 <Badge className={`${service.color} text-white border-0`}>
                   {service.status}
                 </Badge>
@@ -585,7 +921,9 @@ export default function AdminPage() {
         </div>
         <Button
           className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
-          onClick={() => handleConfigurePayment({id: "new", name: "New Payment Method"})}
+          onClick={() =>
+            handleConfigurePayment({ id: "new", name: "New Payment Method" })
+          }
           disabled={isLoading}
         >
           <Plus className="w-4 h-4 mr-2" />
@@ -598,16 +936,25 @@ export default function AdminPage() {
         {paymentMethods.map((method) => {
           const Icon = method.icon;
           return (
-            <Card key={method.id} className="shadow-lg bg-white/90 backdrop-blur-md border-0 hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <Card
+              key={method.id}
+              className="shadow-lg bg-white/90 backdrop-blur-md border-0 hover:shadow-xl transition-all duration-300 hover:scale-105"
+            >
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <div className={`w-12 h-12 ${method.color} rounded-lg flex items-center justify-center shadow-lg`}>
+                  <div
+                    className={`w-12 h-12 ${method.color} rounded-lg flex items-center justify-center shadow-lg`}
+                  >
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <Switch defaultChecked={method.id !== "cash"} />
                 </div>
-                <h3 className="text-lg font-semibold text-taxi-dark mb-2">{method.name}</h3>
-                <p className="text-sm text-taxi-gray mb-4">{method.description}</p>
+                <h3 className="text-lg font-semibold text-taxi-dark mb-2">
+                  {method.name}
+                </h3>
+                <p className="text-sm text-taxi-gray mb-4">
+                  {method.description}
+                </p>
                 <div className="flex gap-2">
                   <Button
                     size="sm"
@@ -689,7 +1036,9 @@ export default function AdminPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-taxi-dark">Users Management</h2>
+          <h2 className="text-2xl font-bold text-taxi-dark">
+            Users Management
+          </h2>
           <p className="text-taxi-gray">Manage passengers and their accounts</p>
         </div>
         <div className="flex gap-2">
@@ -721,7 +1070,11 @@ export default function AdminPage() {
                 </div>
                 <div>
                   <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="Enter email address" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Enter email address"
+                  />
                 </div>
                 <div>
                   <Label htmlFor="phone">Phone Number</Label>
@@ -743,7 +1096,11 @@ export default function AdminPage() {
                 <Button
                   className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
                   onClick={() => {
-                    toast({title: "User Created", description: "New user account has been created successfully"});
+                    toast({
+                      title: "User Created",
+                      description:
+                        "New user account has been created successfully",
+                    });
                   }}
                   disabled={isLoading}
                 >
@@ -760,9 +1117,9 @@ export default function AdminPage() {
           <div className="flex items-center justify-between">
             <CardTitle>User List</CardTitle>
             <div className="flex items-center gap-2">
-              <Input 
-                placeholder="Search users..." 
-                className="w-64" 
+              <Input
+                placeholder="Search users..."
+                className="w-64"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -771,7 +1128,10 @@ export default function AdminPage() {
                 size="sm"
                 className="bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 border-0"
                 onClick={() => {
-                  toast({title: "Filter Applied", description: "User filter has been applied"});
+                  toast({
+                    title: "Filter Applied",
+                    description: "User filter has been applied",
+                  });
                 }}
                 disabled={isLoading}
               >
@@ -794,60 +1154,76 @@ export default function AdminPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {users.filter(user => 
-                user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                user.email.toLowerCase().includes(searchTerm.toLowerCase())
-              ).map((user) => (
-                <TableRow key={user.id} className="hover:bg-taxi-light-gray/30">
-                  <TableCell className="font-medium">{user.name}</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                  <TableCell>{user.phone}</TableCell>
-                  <TableCell>
-                    <Badge variant={user.role === "driver" ? "default" : "secondary"}>
-                      {user.role}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <Badge 
-                      className={user.status === "active" ? "bg-green-500 text-white" : "bg-red-500 text-white"}
-                    >
-                      {user.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>{user.totalRides}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="bg-blue-500 text-white hover:bg-blue-600 border-0"
-                        onClick={() => handleViewUser(user)}
-                        disabled={isLoading}
+              {users
+                .filter(
+                  (user) =>
+                    user.name
+                      .toLowerCase()
+                      .includes(searchTerm.toLowerCase()) ||
+                    user.email.toLowerCase().includes(searchTerm.toLowerCase()),
+                )
+                .map((user) => (
+                  <TableRow
+                    key={user.id}
+                    className="hover:bg-taxi-light-gray/30"
+                  >
+                    <TableCell className="font-medium">{user.name}</TableCell>
+                    <TableCell>{user.email}</TableCell>
+                    <TableCell>{user.phone}</TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          user.role === "driver" ? "default" : "secondary"
+                        }
                       >
-                        <Eye className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="bg-green-500 text-white hover:bg-green-600 border-0"
-                        onClick={() => handleEditUser(user)}
-                        disabled={isLoading}
+                        {user.role}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        className={
+                          user.status === "active"
+                            ? "bg-green-500 text-white"
+                            : "bg-red-500 text-white"
+                        }
                       >
-                        <Edit className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="bg-red-500 text-white hover:bg-red-600 border-0"
-                        onClick={() => handleBanUser(user)}
-                        disabled={isLoading}
-                      >
-                        <Ban className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
+                        {user.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>{user.totalRides}</TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="bg-blue-500 text-white hover:bg-blue-600 border-0"
+                          onClick={() => handleViewUser(user)}
+                          disabled={isLoading}
+                        >
+                          <Eye className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="bg-green-500 text-white hover:bg-green-600 border-0"
+                          onClick={() => handleEditUser(user)}
+                          disabled={isLoading}
+                        >
+                          <Edit className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="bg-red-500 text-white hover:bg-red-600 border-0"
+                          onClick={() => handleBanUser(user)}
+                          disabled={isLoading}
+                        >
+                          <Ban className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </CardContent>
@@ -859,8 +1235,12 @@ export default function AdminPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-taxi-dark">Transaction Management</h2>
-          <p className="text-taxi-gray">Monitor payments, payouts, and financial transactions</p>
+          <h2 className="text-2xl font-bold text-taxi-dark">
+            Transaction Management
+          </h2>
+          <p className="text-taxi-gray">
+            Monitor payments, payouts, and financial transactions
+          </p>
         </div>
         <div className="flex gap-2">
           <Button
@@ -966,32 +1346,47 @@ export default function AdminPage() {
             </TableHeader>
             <TableBody>
               {transactions.map((transaction) => {
-                const paymentMethod = paymentMethods.find(p => p.id === transaction.method);
+                const paymentMethod = paymentMethods.find(
+                  (p) => p.id === transaction.method,
+                );
                 const PaymentIcon = paymentMethod?.icon || CreditCard;
                 return (
-                  <TableRow key={transaction.id} className="hover:bg-taxi-light-gray/30">
-                    <TableCell className="font-medium">#{transaction.id.toString().padStart(6, '0')}</TableCell>
+                  <TableRow
+                    key={transaction.id}
+                    className="hover:bg-taxi-light-gray/30"
+                  >
+                    <TableCell className="font-medium">
+                      #{transaction.id.toString().padStart(6, "0")}
+                    </TableCell>
                     <TableCell>{transaction.user}</TableCell>
                     <TableCell>
                       <Badge variant="outline">
-                        {transaction.type.replace('_', ' ')}
+                        {transaction.type.replace("_", " ")}
                       </Badge>
                     </TableCell>
-                    <TableCell className="font-medium">{transaction.amount}</TableCell>
+                    <TableCell className="font-medium">
+                      {transaction.amount}
+                    </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
-                        <div className={`w-6 h-6 ${paymentMethod?.color || 'bg-gray-500'} rounded flex items-center justify-center`}>
+                        <div
+                          className={`w-6 h-6 ${paymentMethod?.color || "bg-gray-500"} rounded flex items-center justify-center`}
+                        >
                           <PaymentIcon className="w-3 h-3 text-white" />
                         </div>
-                        <span className="text-sm">{paymentMethod?.name || transaction.method}</span>
+                        <span className="text-sm">
+                          {paymentMethod?.name || transaction.method}
+                        </span>
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge 
+                      <Badge
                         className={
-                          transaction.status === "completed" ? "bg-green-500 text-white" : 
-                          transaction.status === "pending" ? "bg-yellow-500 text-white" : 
-                          "bg-red-500 text-white"
+                          transaction.status === "completed"
+                            ? "bg-green-500 text-white"
+                            : transaction.status === "pending"
+                              ? "bg-yellow-500 text-white"
+                              : "bg-red-500 text-white"
                         }
                       >
                         {transaction.status}
@@ -1048,8 +1443,12 @@ export default function AdminPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-taxi-dark">Drivers Management</h2>
-          <p className="text-taxi-gray">Manage driver registrations, shifts, and performance</p>
+          <h2 className="text-2xl font-bold text-taxi-dark">
+            Drivers Management
+          </h2>
+          <p className="text-taxi-gray">
+            Manage driver registrations, shifts, and performance
+          </p>
         </div>
         <div className="flex gap-2">
           <Button
@@ -1138,7 +1537,10 @@ export default function AdminPage() {
             </TableHeader>
             <TableBody>
               {drivers.map((driver) => (
-                <TableRow key={driver.id} className="hover:bg-taxi-light-gray/30">
+                <TableRow
+                  key={driver.id}
+                  className="hover:bg-taxi-light-gray/30"
+                >
                   <TableCell>
                     <div>
                       <p className="font-medium">{driver.name}</p>
@@ -1147,7 +1549,15 @@ export default function AdminPage() {
                   </TableCell>
                   <TableCell>{driver.vehicle}</TableCell>
                   <TableCell>
-                    <Badge className={driver.status === "online" ? "bg-green-500 text-white" : driver.status === "busy" ? "bg-yellow-500 text-white" : "bg-gray-500 text-white"}>
+                    <Badge
+                      className={
+                        driver.status === "online"
+                          ? "bg-green-500 text-white"
+                          : driver.status === "busy"
+                            ? "bg-yellow-500 text-white"
+                            : "bg-gray-500 text-white"
+                      }
+                    >
                       {driver.status}
                     </Badge>
                   </TableCell>
@@ -1203,7 +1613,9 @@ export default function AdminPage() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-taxi-dark">Advanced Features</h2>
-        <p className="text-taxi-gray">Configure special ride options and accessibility features</p>
+        <p className="text-taxi-gray">
+          Configure special ride options and accessibility features
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1218,20 +1630,29 @@ export default function AdminPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">Wheelchair Access</p>
-                <p className="text-sm text-taxi-gray">Enable wheelchair-accessible vehicles</p>
+                <p className="text-sm text-taxi-gray">
+                  Enable wheelchair-accessible vehicles
+                </p>
               </div>
               <Switch defaultChecked />
             </div>
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">Baby Seat</p>
-                <p className="text-sm text-taxi-gray">Allow baby seat requests</p>
+                <p className="text-sm text-taxi-gray">
+                  Allow baby seat requests
+                </p>
               </div>
               <Switch defaultChecked />
             </div>
             <Button
               className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0"
-              onClick={() => toast({title: "Accessibility Settings", description: "Accessibility features updated successfully"})}
+              onClick={() =>
+                toast({
+                  title: "Accessibility Settings",
+                  description: "Accessibility features updated successfully",
+                })
+              }
               disabled={isLoading}
             >
               Save Settings
@@ -1250,20 +1671,29 @@ export default function AdminPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">Gender Preference</p>
-                <p className="text-sm text-taxi-gray">Allow driver gender selection</p>
+                <p className="text-sm text-taxi-gray">
+                  Allow driver gender selection
+                </p>
               </div>
               <Switch defaultChecked />
             </div>
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">Favorite Driver</p>
-                <p className="text-sm text-taxi-gray">Save and request preferred drivers</p>
+                <p className="text-sm text-taxi-gray">
+                  Save and request preferred drivers
+                </p>
               </div>
               <Switch defaultChecked />
             </div>
             <Button
               className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
-              onClick={() => toast({title: "Preferences Updated", description: "Ride preferences saved successfully"})}
+              onClick={() =>
+                toast({
+                  title: "Preferences Updated",
+                  description: "Ride preferences saved successfully",
+                })
+              }
               disabled={isLoading}
             >
               Update Preferences
@@ -1295,7 +1725,12 @@ export default function AdminPage() {
             </div>
             <Button
               className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0"
-              onClick={() => toast({title: "Corporate Settings", description: "Corporate features configured successfully"})}
+              onClick={() =>
+                toast({
+                  title: "Corporate Settings",
+                  description: "Corporate features configured successfully",
+                })
+              }
               disabled={isLoading}
             >
               Configure Corporate
@@ -1324,8 +1759,12 @@ export default function AdminPage() {
         return (
           <div className="text-center py-12">
             <Wallet className="w-16 h-16 text-taxi-gray mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-taxi-dark mb-2">Wallet Manager</h3>
-            <p className="text-taxi-gray mb-6">Manage user wallets, top-ups, and balance transfers</p>
+            <h3 className="text-lg font-medium text-taxi-dark mb-2">
+              Wallet Manager
+            </h3>
+            <p className="text-taxi-gray mb-6">
+              Manage user wallets, top-ups, and balance transfers
+            </p>
             <Button
               className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0"
               onClick={handleOpenWalletManager}
@@ -1340,8 +1779,12 @@ export default function AdminPage() {
         return (
           <div className="text-center py-12">
             <BarChart3 className="w-16 h-16 text-taxi-gray mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-taxi-dark mb-2">Reports & Analytics</h3>
-            <p className="text-taxi-gray mb-6">Comprehensive reporting and business analytics dashboard</p>
+            <h3 className="text-lg font-medium text-taxi-dark mb-2">
+              Reports & Analytics
+            </h3>
+            <p className="text-taxi-gray mb-6">
+              Comprehensive reporting and business analytics dashboard
+            </p>
             <Button
               className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0"
               onClick={handleGenerateReport}
@@ -1357,14 +1800,23 @@ export default function AdminPage() {
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div>
-                <h2 className="text-2xl font-bold text-taxi-dark">Customer Support Chat</h2>
-                <p className="text-taxi-gray">Real-time customer support and communication</p>
+                <h2 className="text-2xl font-bold text-taxi-dark">
+                  Customer Support Chat
+                </h2>
+                <p className="text-taxi-gray">
+                  Real-time customer support and communication
+                </p>
               </div>
               <div className="flex gap-2">
                 <Button
                   variant="outline"
                   className="bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 border-0"
-                  onClick={() => toast({title: "Chat Settings", description: "Opening chat configuration"})}
+                  onClick={() =>
+                    toast({
+                      title: "Chat Settings",
+                      description: "Opening chat configuration",
+                    })
+                  }
                   disabled={isLoading}
                 >
                   <Settings className="w-4 h-4 mr-2" />
@@ -1372,7 +1824,12 @@ export default function AdminPage() {
                 </Button>
                 <Button
                   className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
-                  onClick={() => toast({title: "New Chat", description: "Starting new customer conversation"})}
+                  onClick={() =>
+                    toast({
+                      title: "New Chat",
+                      description: "Starting new customer conversation",
+                    })
+                  }
                   disabled={isLoading}
                 >
                   <Plus className="w-4 h-4 mr-2" />
@@ -1437,10 +1894,14 @@ export default function AdminPage() {
                   <CardTitle className="flex items-center justify-between">
                     <span>Customer Chats</span>
                     <Badge className="bg-primary text-primary-foreground">
-                      {chatUsers.reduce((acc, user) => acc + user.unread, 0)} unread
+                      {chatUsers.reduce((acc, user) => acc + user.unread, 0)}{" "}
+                      unread
                     </Badge>
                   </CardTitle>
-                  <Input placeholder="Search conversations..." className="mt-2" />
+                  <Input
+                    placeholder="Search conversations..."
+                    className="mt-2"
+                  />
                 </CardHeader>
                 <CardContent className="p-0">
                   <div className="max-h-80 overflow-y-auto">
@@ -1449,7 +1910,9 @@ export default function AdminPage() {
                         key={user.id}
                         onClick={() => handleSelectChatUser(user)}
                         className={`p-4 border-b cursor-pointer hover:bg-gray-50 transition-colors ${
-                          activeChatUser?.id === user.id ? "bg-primary/10 border-l-4 border-l-primary" : ""
+                          activeChatUser?.id === user.id
+                            ? "bg-primary/10 border-l-4 border-l-primary"
+                            : ""
                         }`}
                       >
                         <div className="flex items-center gap-3">
@@ -1457,17 +1920,28 @@ export default function AdminPage() {
                             <div className="w-10 h-10 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center text-white font-medium">
                               {user.avatar}
                             </div>
-                            <div className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${
-                              user.status === "online" ? "bg-green-500" :
-                              user.status === "away" ? "bg-yellow-500" : "bg-gray-400"
-                            }`}></div>
+                            <div
+                              className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${
+                                user.status === "online"
+                                  ? "bg-green-500"
+                                  : user.status === "away"
+                                    ? "bg-yellow-500"
+                                    : "bg-gray-400"
+                              }`}
+                            ></div>
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
-                              <p className="font-medium text-taxi-dark truncate">{user.name}</p>
-                              <span className="text-xs text-taxi-gray">{user.time}</span>
+                              <p className="font-medium text-taxi-dark truncate">
+                                {user.name}
+                              </p>
+                              <span className="text-xs text-taxi-gray">
+                                {user.time}
+                              </span>
                             </div>
-                            <p className="text-sm text-taxi-gray truncate">{user.lastMessage}</p>
+                            <p className="text-sm text-taxi-gray truncate">
+                              {user.lastMessage}
+                            </p>
                           </div>
                           {user.unread > 0 && (
                             <Badge className="bg-primary text-primary-foreground">
@@ -1492,14 +1966,23 @@ export default function AdminPage() {
                             <div className="w-10 h-10 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center text-white font-medium">
                               {activeChatUser.avatar}
                             </div>
-                            <div className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${
-                              activeChatUser.status === "online" ? "bg-green-500" :
-                              activeChatUser.status === "away" ? "bg-yellow-500" : "bg-gray-400"
-                            }`}></div>
+                            <div
+                              className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white ${
+                                activeChatUser.status === "online"
+                                  ? "bg-green-500"
+                                  : activeChatUser.status === "away"
+                                    ? "bg-yellow-500"
+                                    : "bg-gray-400"
+                              }`}
+                            ></div>
                           </div>
                           <div>
-                            <h3 className="font-semibold text-taxi-dark">{activeChatUser.name}</h3>
-                            <p className="text-sm text-taxi-gray capitalize">{activeChatUser.status}</p>
+                            <h3 className="font-semibold text-taxi-dark">
+                              {activeChatUser.name}
+                            </h3>
+                            <p className="text-sm text-taxi-gray capitalize">
+                              {activeChatUser.status}
+                            </p>
                           </div>
                         </div>
                         <div className="flex gap-2">
@@ -1528,7 +2011,9 @@ export default function AdminPage() {
                               }`}
                             >
                               <p className="text-sm">{message.message}</p>
-                              <span className="text-xs opacity-75">{message.time}</span>
+                              <span className="text-xs opacity-75">
+                                {message.time}
+                              </span>
                             </div>
                           </div>
                         ))}
@@ -1539,7 +2024,11 @@ export default function AdminPage() {
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => handleQuickResponse("Thank you for contacting us! How can I help you today?")}
+                          onClick={() =>
+                            handleQuickResponse(
+                              "Thank you for contacting us! How can I help you today?",
+                            )
+                          }
                           disabled={isLoading}
                         >
                           Greeting
@@ -1547,7 +2036,11 @@ export default function AdminPage() {
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => handleQuickResponse("I understand your concern. Let me look into this for you.")}
+                          onClick={() =>
+                            handleQuickResponse(
+                              "I understand your concern. Let me look into this for you.",
+                            )
+                          }
                           disabled={isLoading}
                         >
                           Understanding
@@ -1555,7 +2048,11 @@ export default function AdminPage() {
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => handleQuickResponse("Your issue has been resolved. Is there anything else I can help you with?")}
+                          onClick={() =>
+                            handleQuickResponse(
+                              "Your issue has been resolved. Is there anything else I can help you with?",
+                            )
+                          }
                           disabled={isLoading}
                         >
                           Resolution
@@ -1568,7 +2065,9 @@ export default function AdminPage() {
                           placeholder="Type your message..."
                           value={newMessage}
                           onChange={(e) => setNewMessage(e.target.value)}
-                          onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                          onKeyPress={(e) =>
+                            e.key === "Enter" && handleSendMessage()
+                          }
                           className="flex-1"
                         />
                         <Button
@@ -1584,8 +2083,12 @@ export default function AdminPage() {
                 ) : (
                   <CardContent className="flex flex-col items-center justify-center h-full text-center">
                     <MessageCircle className="w-16 h-16 text-taxi-gray mb-4" />
-                    <h3 className="text-lg font-medium text-taxi-dark mb-2">Select a Chat</h3>
-                    <p className="text-taxi-gray">Choose a customer from the left to start chatting</p>
+                    <h3 className="text-lg font-medium text-taxi-dark mb-2">
+                      Select a Chat
+                    </h3>
+                    <p className="text-taxi-gray">
+                      Choose a customer from the left to start chatting
+                    </p>
                   </CardContent>
                 )}
               </Card>
@@ -1606,7 +2109,7 @@ export default function AdminPage() {
             <div className="flex items-center flex-shrink-0 px-4">
               <h1 className="text-xl font-bold text-taxi-dark">BAMBI Admin</h1>
             </div>
-            
+
             {/* User Info */}
             <div className="mt-6 px-4">
               <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-3">
@@ -1615,7 +2118,9 @@ export default function AdminPage() {
                     <User className="w-4 h-4 text-white" />
                   </div>
                   <div className="ml-3">
-                    <p className="text-sm font-medium text-taxi-dark">{user?.name}</p>
+                    <p className="text-sm font-medium text-taxi-dark">
+                      {user?.name}
+                    </p>
                     <p className="text-xs text-taxi-gray">{user?.email}</p>
                   </div>
                 </div>
@@ -1630,7 +2135,9 @@ export default function AdminPage() {
                     <button
                       key={item.id}
                       onClick={() => setActiveModule(item.id)}
-                      aria-current={activeModule === item.id ? "page" : undefined}
+                      aria-current={
+                        activeModule === item.id ? "page" : undefined
+                      }
                       className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-all duration-200 ${
                         activeModule === item.id
                           ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg"
@@ -1643,7 +2150,7 @@ export default function AdminPage() {
                   );
                 })}
               </nav>
-              
+
               {/* Logout Button */}
               <div className="px-2 pb-4">
                 <button
@@ -1674,7 +2181,7 @@ export default function AdminPage() {
                 Logout
               </Button>
             </div>
-            
+
             {/* User Info on Mobile */}
             <div className="px-4 pb-4">
               <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-3">
@@ -1683,7 +2190,9 @@ export default function AdminPage() {
                     <User className="w-4 h-4 text-white" />
                   </div>
                   <div className="ml-3">
-                    <p className="text-sm font-medium text-taxi-dark">{user?.name}</p>
+                    <p className="text-sm font-medium text-taxi-dark">
+                      {user?.name}
+                    </p>
                     <p className="text-xs text-taxi-gray">{user?.email}</p>
                   </div>
                 </div>
@@ -1724,8 +2233,12 @@ export default function AdminPage() {
       <Dialog open={showUserDialog} onOpenChange={setShowUserDialog}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle>{selectedUser ? `User: ${selectedUser.name}` : "User Details"}</DialogTitle>
-            <DialogDescription>View and edit user information</DialogDescription>
+            <DialogTitle>
+              {selectedUser ? `User: ${selectedUser.name}` : "User Details"}
+            </DialogTitle>
+            <DialogDescription>
+              View and edit user information
+            </DialogDescription>
           </DialogHeader>
           {selectedUser && (
             <div className="space-y-4 pt-4">
@@ -1758,7 +2271,10 @@ export default function AdminPage() {
                 <Button
                   className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
                   onClick={() => {
-                    toast({title: "User Updated", description: `${selectedUser.name}'s information has been updated`});
+                    toast({
+                      title: "User Updated",
+                      description: `${selectedUser.name}'s information has been updated`,
+                    });
                     setShowUserDialog(false);
                   }}
                   disabled={isLoading}
@@ -1782,7 +2298,9 @@ export default function AdminPage() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>Add New Driver</DialogTitle>
-            <DialogDescription>Register a new driver to the platform</DialogDescription>
+            <DialogDescription>
+              Register a new driver to the platform
+            </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 pt-4">
             <div className="grid grid-cols-2 gap-3">
@@ -1825,7 +2343,10 @@ export default function AdminPage() {
               <Button
                 className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
                 onClick={() => {
-                  toast({title: "Driver Added", description: "New driver has been registered successfully"});
+                  toast({
+                    title: "Driver Added",
+                    description: "New driver has been registered successfully",
+                  });
                   setShowDriverDialog(false);
                 }}
                 disabled={isLoading}
@@ -1844,11 +2365,16 @@ export default function AdminPage() {
       </Dialog>
 
       {/* Manual Transaction Dialog */}
-      <Dialog open={showTransactionDialog} onOpenChange={setShowTransactionDialog}>
+      <Dialog
+        open={showTransactionDialog}
+        onOpenChange={setShowTransactionDialog}
+      >
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>Manual Transaction</DialogTitle>
-            <DialogDescription>Create a manual transaction entry</DialogDescription>
+            <DialogDescription>
+              Create a manual transaction entry
+            </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 pt-4">
             <div>
@@ -1897,7 +2423,11 @@ export default function AdminPage() {
               <Button
                 className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
                 onClick={() => {
-                  toast({title: "Transaction Created", description: "Manual transaction has been processed successfully"});
+                  toast({
+                    title: "Transaction Created",
+                    description:
+                      "Manual transaction has been processed successfully",
+                  });
                   setShowTransactionDialog(false);
                 }}
                 disabled={isLoading}
@@ -1920,7 +2450,9 @@ export default function AdminPage() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>Red Zone Configuration</DialogTitle>
-            <DialogDescription>Set up restricted areas and special pricing</DialogDescription>
+            <DialogDescription>
+              Set up restricted areas and special pricing
+            </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 pt-4">
             <div>
@@ -1960,7 +2492,11 @@ export default function AdminPage() {
               <Button
                 className="flex-1 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white border-0"
                 onClick={() => {
-                  toast({title: "Red Zone Created", description: "Restricted zone has been configured successfully"});
+                  toast({
+                    title: "Red Zone Created",
+                    description:
+                      "Restricted zone has been configured successfully",
+                  });
                   setShowZoneDialog(false);
                 }}
                 disabled={isLoading}
@@ -1983,7 +2519,9 @@ export default function AdminPage() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>Price Configuration</DialogTitle>
-            <DialogDescription>Update base rates and surge pricing</DialogDescription>
+            <DialogDescription>
+              Update base rates and surge pricing
+            </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 pt-4">
             <div>
@@ -2014,7 +2552,11 @@ export default function AdminPage() {
               <Button
                 className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
                 onClick={() => {
-                  toast({title: "Prices Updated", description: "Pricing configuration has been saved successfully"});
+                  toast({
+                    title: "Prices Updated",
+                    description:
+                      "Pricing configuration has been saved successfully",
+                  });
                   setShowPriceDialog(false);
                 }}
                 disabled={isLoading}
@@ -2033,11 +2575,20 @@ export default function AdminPage() {
       </Dialog>
 
       {/* Driver View Details Dialog */}
-      <Dialog open={showDriverViewDialog} onOpenChange={setShowDriverViewDialog}>
+      <Dialog
+        open={showDriverViewDialog}
+        onOpenChange={setShowDriverViewDialog}
+      >
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>{selectedDriver ? `Driver Profile: ${selectedDriver.name}` : "Driver Details"}</DialogTitle>
-            <DialogDescription>Complete driver information and performance metrics</DialogDescription>
+            <DialogTitle>
+              {selectedDriver
+                ? `Driver Profile: ${selectedDriver.name}`
+                : "Driver Details"}
+            </DialogTitle>
+            <DialogDescription>
+              Complete driver information and performance metrics
+            </DialogDescription>
           </DialogHeader>
           {selectedDriver && (
             <div className="space-y-6 pt-4">
@@ -2045,11 +2596,23 @@ export default function AdminPage() {
                 <Card className="p-4">
                   <h4 className="font-semibold mb-3">Personal Information</h4>
                   <div className="space-y-2">
-                    <p><span className="font-medium">Name:</span> {selectedDriver.name}</p>
-                    <p><span className="font-medium">Email:</span> {selectedDriver.email}</p>
-                    <p><span className="font-medium">Phone:</span> {selectedDriver.phone}</p>
-                    <p><span className="font-medium">Status:</span>
-                      <Badge className={`ml-2 ${selectedDriver.status === "online" ? "bg-green-500" : "bg-gray-500"}`}>
+                    <p>
+                      <span className="font-medium">Name:</span>{" "}
+                      {selectedDriver.name}
+                    </p>
+                    <p>
+                      <span className="font-medium">Email:</span>{" "}
+                      {selectedDriver.email}
+                    </p>
+                    <p>
+                      <span className="font-medium">Phone:</span>{" "}
+                      {selectedDriver.phone}
+                    </p>
+                    <p>
+                      <span className="font-medium">Status:</span>
+                      <Badge
+                        className={`ml-2 ${selectedDriver.status === "online" ? "bg-green-500" : "bg-gray-500"}`}
+                      >
                         {selectedDriver.status}
                       </Badge>
                     </p>
@@ -2058,18 +2621,38 @@ export default function AdminPage() {
                 <Card className="p-4">
                   <h4 className="font-semibold mb-3">Performance Metrics</h4>
                   <div className="space-y-2">
-                    <p><span className="font-medium">Rating:</span> ⭐ {selectedDriver.rating}/5.0</p>
-                    <p><span className="font-medium">Total Rides:</span> {selectedDriver.totalRides}</p>
-                    <p><span className="font-medium">Earnings:</span> {selectedDriver.earnings}</p>
-                    <p><span className="font-medium">Shift:</span> {selectedDriver.shift}</p>
+                    <p>
+                      <span className="font-medium">Rating:</span> ⭐{" "}
+                      {selectedDriver.rating}/5.0
+                    </p>
+                    <p>
+                      <span className="font-medium">Total Rides:</span>{" "}
+                      {selectedDriver.totalRides}
+                    </p>
+                    <p>
+                      <span className="font-medium">Earnings:</span>{" "}
+                      {selectedDriver.earnings}
+                    </p>
+                    <p>
+                      <span className="font-medium">Shift:</span>{" "}
+                      {selectedDriver.shift}
+                    </p>
                   </div>
                 </Card>
               </div>
               <Card className="p-4">
                 <h4 className="font-semibold mb-3">Vehicle Information</h4>
-                <p><span className="font-medium">Vehicle:</span> {selectedDriver.vehicle}</p>
-                <p><span className="font-medium">License Plate:</span> ABC-123</p>
-                <p><span className="font-medium">Insurance:</span> Valid until Dec 2024</p>
+                <p>
+                  <span className="font-medium">Vehicle:</span>{" "}
+                  {selectedDriver.vehicle}
+                </p>
+                <p>
+                  <span className="font-medium">License Plate:</span> ABC-123
+                </p>
+                <p>
+                  <span className="font-medium">Insurance:</span> Valid until
+                  Dec 2024
+                </p>
               </Card>
               <div className="flex gap-2">
                 <Button
@@ -2082,7 +2665,10 @@ export default function AdminPage() {
                 <Button
                   className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0"
                   onClick={() => {
-                    toast({title: "Driver Location", description: "Opening live GPS tracking"});
+                    toast({
+                      title: "Driver Location",
+                      description: "Opening live GPS tracking",
+                    });
                   }}
                 >
                   <Navigation className="w-4 h-4 mr-2" />
@@ -2101,11 +2687,20 @@ export default function AdminPage() {
       </Dialog>
 
       {/* Driver Chat Dialog */}
-      <Dialog open={showDriverChatDialog} onOpenChange={setShowDriverChatDialog}>
+      <Dialog
+        open={showDriverChatDialog}
+        onOpenChange={setShowDriverChatDialog}
+      >
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>{selectedDriver ? `Chat with ${selectedDriver.name}` : "Driver Chat"}</DialogTitle>
-            <DialogDescription>Real-time communication with driver</DialogDescription>
+            <DialogTitle>
+              {selectedDriver
+                ? `Chat with ${selectedDriver.name}`
+                : "Driver Chat"}
+            </DialogTitle>
+            <DialogDescription>
+              Real-time communication with driver
+            </DialogDescription>
           </DialogHeader>
           {selectedDriver && (
             <div className="space-y-4 pt-4">
@@ -2113,20 +2708,33 @@ export default function AdminPage() {
                 <div className="space-y-3">
                   <div className="flex justify-start">
                     <div className="bg-blue-500 text-white p-2 rounded-lg max-w-xs">
-                      <p className="text-sm">Hello {selectedDriver.name}, how are you doing today?</p>
-                      <span className="text-xs opacity-75">Admin - 2:30 PM</span>
+                      <p className="text-sm">
+                        Hello {selectedDriver.name}, how are you doing today?
+                      </p>
+                      <span className="text-xs opacity-75">
+                        Admin - 2:30 PM
+                      </span>
                     </div>
                   </div>
                   <div className="flex justify-end">
                     <div className="bg-green-500 text-white p-2 rounded-lg max-w-xs">
-                      <p className="text-sm">Hi Admin! Everything is going well. Just finished a ride.</p>
-                      <span className="text-xs opacity-75">{selectedDriver.name} - 2:32 PM</span>
+                      <p className="text-sm">
+                        Hi Admin! Everything is going well. Just finished a
+                        ride.
+                      </p>
+                      <span className="text-xs opacity-75">
+                        {selectedDriver.name} - 2:32 PM
+                      </span>
                     </div>
                   </div>
                   <div className="flex justify-start">
                     <div className="bg-blue-500 text-white p-2 rounded-lg max-w-xs">
-                      <p className="text-sm">Great! Keep up the excellent work!</p>
-                      <span className="text-xs opacity-75">Admin - 2:33 PM</span>
+                      <p className="text-sm">
+                        Great! Keep up the excellent work!
+                      </p>
+                      <span className="text-xs opacity-75">
+                        Admin - 2:33 PM
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -2141,21 +2749,36 @@ export default function AdminPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => toast({title: "Quick Message", description: "Sent: 'Thanks for your hard work!'"})}
+                  onClick={() =>
+                    toast({
+                      title: "Quick Message",
+                      description: "Sent: 'Thanks for your hard work!'",
+                    })
+                  }
                 >
                   Thanks!
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => toast({title: "Quick Message", description: "Sent: 'Please follow traffic rules.'"})}
+                  onClick={() =>
+                    toast({
+                      title: "Quick Message",
+                      description: "Sent: 'Please follow traffic rules.'",
+                    })
+                  }
                 >
                   Safety Reminder
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => toast({title: "Quick Message", description: "Sent: 'Break time if needed.'"})}
+                  onClick={() =>
+                    toast({
+                      title: "Quick Message",
+                      description: "Sent: 'Break time if needed.'",
+                    })
+                  }
                 >
                   Break Time
                 </Button>
@@ -2173,29 +2796,62 @@ export default function AdminPage() {
       </Dialog>
 
       {/* Transaction View Dialog */}
-      <Dialog open={showTransactionViewDialog} onOpenChange={setShowTransactionViewDialog}>
+      <Dialog
+        open={showTransactionViewDialog}
+        onOpenChange={setShowTransactionViewDialog}
+      >
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>{selectedTransaction ? `Transaction #${selectedTransaction.id}` : "Transaction Details"}</DialogTitle>
-            <DialogDescription>Complete transaction information and history</DialogDescription>
+            <DialogTitle>
+              {selectedTransaction
+                ? `Transaction #${selectedTransaction.id}`
+                : "Transaction Details"}
+            </DialogTitle>
+            <DialogDescription>
+              Complete transaction information and history
+            </DialogDescription>
           </DialogHeader>
           {selectedTransaction && (
             <div className="space-y-4 pt-4">
               <Card className="p-4">
                 <h4 className="font-semibold mb-3">Transaction Details</h4>
                 <div className="space-y-2">
-                  <p><span className="font-medium">ID:</span> #{selectedTransaction.id.toString().padStart(6, '0')}</p>
-                  <p><span className="font-medium">User:</span> {selectedTransaction.user}</p>
-                  <p><span className="font-medium">Type:</span> {selectedTransaction.type.replace('_', ' ')}</p>
-                  <p><span className="font-medium">Amount:</span> {selectedTransaction.amount}</p>
-                  <p><span className="font-medium">Method:</span> {selectedTransaction.method}</p>
-                  <p><span className="font-medium">Status:</span>
-                    <Badge className={`ml-2 ${selectedTransaction.status === "completed" ? "bg-green-500" : selectedTransaction.status === "pending" ? "bg-yellow-500" : "bg-red-500"}`}>
+                  <p>
+                    <span className="font-medium">ID:</span> #
+                    {selectedTransaction.id.toString().padStart(6, "0")}
+                  </p>
+                  <p>
+                    <span className="font-medium">User:</span>{" "}
+                    {selectedTransaction.user}
+                  </p>
+                  <p>
+                    <span className="font-medium">Type:</span>{" "}
+                    {selectedTransaction.type.replace("_", " ")}
+                  </p>
+                  <p>
+                    <span className="font-medium">Amount:</span>{" "}
+                    {selectedTransaction.amount}
+                  </p>
+                  <p>
+                    <span className="font-medium">Method:</span>{" "}
+                    {selectedTransaction.method}
+                  </p>
+                  <p>
+                    <span className="font-medium">Status:</span>
+                    <Badge
+                      className={`ml-2 ${selectedTransaction.status === "completed" ? "bg-green-500" : selectedTransaction.status === "pending" ? "bg-yellow-500" : "bg-red-500"}`}
+                    >
                       {selectedTransaction.status}
                     </Badge>
                   </p>
-                  <p><span className="font-medium">Date:</span> {selectedTransaction.date}</p>
-                  <p><span className="font-medium">Payment ID:</span> {selectedTransaction.paymentId}</p>
+                  <p>
+                    <span className="font-medium">Date:</span>{" "}
+                    {selectedTransaction.date}
+                  </p>
+                  <p>
+                    <span className="font-medium">Payment ID:</span>{" "}
+                    {selectedTransaction.paymentId}
+                  </p>
                 </div>
               </Card>
               <Card className="p-4">
@@ -2236,22 +2892,37 @@ export default function AdminPage() {
       </Dialog>
 
       {/* Payment Method Configuration Dialog */}
-      <Dialog open={showPaymentConfigDialog} onOpenChange={setShowPaymentConfigDialog}>
+      <Dialog
+        open={showPaymentConfigDialog}
+        onOpenChange={setShowPaymentConfigDialog}
+      >
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>{selectedPaymentMethod ? `Configure ${selectedPaymentMethod.name}` : "Payment Configuration"}</DialogTitle>
-            <DialogDescription>Set up payment method settings and preferences</DialogDescription>
+            <DialogTitle>
+              {selectedPaymentMethod
+                ? `Configure ${selectedPaymentMethod.name}`
+                : "Payment Configuration"}
+            </DialogTitle>
+            <DialogDescription>
+              Set up payment method settings and preferences
+            </DialogDescription>
           </DialogHeader>
           {selectedPaymentMethod && (
             <div className="space-y-4 pt-4">
               <Card className="p-4">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-10 h-10 ${selectedPaymentMethod.color} rounded-lg flex items-center justify-center`}>
+                  <div
+                    className={`w-10 h-10 ${selectedPaymentMethod.color} rounded-lg flex items-center justify-center`}
+                  >
                     <selectedPaymentMethod.icon className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold">{selectedPaymentMethod.name}</h4>
-                    <p className="text-sm text-gray-600">{selectedPaymentMethod.description}</p>
+                    <h4 className="font-semibold">
+                      {selectedPaymentMethod.name}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      {selectedPaymentMethod.description}
+                    </p>
                   </div>
                 </div>
               </Card>
@@ -2260,7 +2931,9 @@ export default function AdminPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-medium">Enable Payment Method</p>
-                    <p className="text-sm text-gray-600">Allow users to pay with this method</p>
+                    <p className="text-sm text-gray-600">
+                      Allow users to pay with this method
+                    </p>
                   </div>
                   <Switch defaultChecked />
                 </div>
@@ -2280,7 +2953,7 @@ export default function AdminPage() {
                   <Input placeholder="$500.00" />
                 </div>
 
-                {selectedPaymentMethod.id === 'crypto' && (
+                {selectedPaymentMethod.id === "crypto" && (
                   <div>
                     <Label>Supported Cryptocurrencies</Label>
                     <div className="grid grid-cols-3 gap-2 mt-2">
@@ -2305,7 +2978,10 @@ export default function AdminPage() {
                 <Button
                   className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0"
                   onClick={() => {
-                    toast({title: "Configuration Saved", description: `${selectedPaymentMethod.name} settings updated successfully`});
+                    toast({
+                      title: "Configuration Saved",
+                      description: `${selectedPaymentMethod.name} settings updated successfully`,
+                    });
                     setShowPaymentConfigDialog(false);
                   }}
                 >
@@ -2324,17 +3000,28 @@ export default function AdminPage() {
       </Dialog>
 
       {/* Payment Method Statistics Dialog */}
-      <Dialog open={showPaymentStatsDialog} onOpenChange={setShowPaymentStatsDialog}>
+      <Dialog
+        open={showPaymentStatsDialog}
+        onOpenChange={setShowPaymentStatsDialog}
+      >
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>{selectedPaymentMethod ? `${selectedPaymentMethod.name} Statistics` : "Payment Statistics"}</DialogTitle>
-            <DialogDescription>Analytics and performance metrics for payment method</DialogDescription>
+            <DialogTitle>
+              {selectedPaymentMethod
+                ? `${selectedPaymentMethod.name} Statistics`
+                : "Payment Statistics"}
+            </DialogTitle>
+            <DialogDescription>
+              Analytics and performance metrics for payment method
+            </DialogDescription>
           </DialogHeader>
           {selectedPaymentMethod && (
             <div className="space-y-6 pt-4">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <Card className="p-4 text-center">
-                  <div className={`w-12 h-12 ${selectedPaymentMethod.color} rounded-lg flex items-center justify-center mx-auto mb-2`}>
+                  <div
+                    className={`w-12 h-12 ${selectedPaymentMethod.color} rounded-lg flex items-center justify-center mx-auto mb-2`}
+                  >
                     <selectedPaymentMethod.icon className="w-6 h-6 text-white" />
                   </div>
                   <p className="text-2xl font-bold">$24,650</p>
@@ -2367,17 +3054,37 @@ export default function AdminPage() {
                 <h4 className="font-semibold mb-3">Recent Transactions</h4>
                 <div className="space-y-2">
                   {[
-                    { amount: "$24.50", user: "John Doe", time: "2 min ago", status: "completed" },
-                    { amount: "$18.75", user: "Alice Johnson", time: "5 min ago", status: "completed" },
-                    { amount: "$31.20", user: "Bob Smith", time: "8 min ago", status: "completed" },
+                    {
+                      amount: "$24.50",
+                      user: "John Doe",
+                      time: "2 min ago",
+                      status: "completed",
+                    },
+                    {
+                      amount: "$18.75",
+                      user: "Alice Johnson",
+                      time: "5 min ago",
+                      status: "completed",
+                    },
+                    {
+                      amount: "$31.20",
+                      user: "Bob Smith",
+                      time: "8 min ago",
+                      status: "completed",
+                    },
                   ].map((tx, index) => (
-                    <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                    <div
+                      key={index}
+                      className="flex justify-between items-center p-2 bg-gray-50 rounded"
+                    >
                       <div>
                         <p className="font-medium">{tx.amount}</p>
                         <p className="text-sm text-gray-600">{tx.user}</p>
                       </div>
                       <div className="text-right">
-                        <Badge className="bg-green-500 text-white">{tx.status}</Badge>
+                        <Badge className="bg-green-500 text-white">
+                          {tx.status}
+                        </Badge>
                         <p className="text-sm text-gray-600">{tx.time}</p>
                       </div>
                     </div>
@@ -2398,11 +3105,16 @@ export default function AdminPage() {
       </Dialog>
 
       {/* Wallet Manager Dialog */}
-      <Dialog open={showWalletManagerDialog} onOpenChange={setShowWalletManagerDialog}>
+      <Dialog
+        open={showWalletManagerDialog}
+        onOpenChange={setShowWalletManagerDialog}
+      >
         <DialogContent className="max-w-4xl">
           <DialogHeader>
             <DialogTitle>Wallet Manager</DialogTitle>
-            <DialogDescription>Comprehensive wallet management and balance operations</DialogDescription>
+            <DialogDescription>
+              Comprehensive wallet management and balance operations
+            </DialogDescription>
           </DialogHeader>
           <div className="space-y-6 pt-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -2444,13 +3156,27 @@ export default function AdminPage() {
                     </TableHeader>
                     <TableBody>
                       {[
-                        { name: "John Doe", balance: "$45.20", activity: "2 hours ago" },
-                        { name: "Alice Johnson", balance: "$128.50", activity: "5 minutes ago" },
-                        { name: "Bob Smith", balance: "$0.00", activity: "1 day ago" },
+                        {
+                          name: "John Doe",
+                          balance: "$45.20",
+                          activity: "2 hours ago",
+                        },
+                        {
+                          name: "Alice Johnson",
+                          balance: "$128.50",
+                          activity: "5 minutes ago",
+                        },
+                        {
+                          name: "Bob Smith",
+                          balance: "$0.00",
+                          activity: "1 day ago",
+                        },
                       ].map((user, index) => (
                         <TableRow key={index}>
                           <TableCell>{user.name}</TableCell>
-                          <TableCell className="font-medium">{user.balance}</TableCell>
+                          <TableCell className="font-medium">
+                            {user.balance}
+                          </TableCell>
                           <TableCell>{user.activity}</TableCell>
                           <TableCell>
                             <div className="flex gap-2">
@@ -2485,11 +3211,16 @@ export default function AdminPage() {
                       {drivers.map((driver) => (
                         <TableRow key={driver.id}>
                           <TableCell>{driver.name}</TableCell>
-                          <TableCell className="font-medium">{driver.earnings}</TableCell>
+                          <TableCell className="font-medium">
+                            {driver.earnings}
+                          </TableCell>
                           <TableCell>$125.30</TableCell>
                           <TableCell>
                             <div className="flex gap-2">
-                              <Button size="sm" className="bg-green-500 hover:bg-green-600 text-white">
+                              <Button
+                                size="sm"
+                                className="bg-green-500 hover:bg-green-600 text-white"
+                              >
                                 Pay Out
                               </Button>
                               <Button size="sm" variant="outline">
@@ -2507,7 +3238,9 @@ export default function AdminPage() {
               <TabsContent value="operations" className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Card className="p-4">
-                    <h4 className="font-semibold mb-3">Manual Balance Adjustment</h4>
+                    <h4 className="font-semibold mb-3">
+                      Manual Balance Adjustment
+                    </h4>
                     <div className="space-y-3">
                       <Input placeholder="User email or name" />
                       <Input placeholder="Amount" type="number" />

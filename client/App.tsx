@@ -26,11 +26,14 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 // Development helper for admin access
-if (typeof window !== 'undefined') {
-  console.log('%c🔐 BAMBI Admin Access', 'color: #f59e0b; font-weight: bold; font-size: 16px;');
-  console.log('%cURL: /admin/login', 'color: #3b82f6; font-weight: bold;');
-  console.log('%cEmail: admin@bambi.com', 'color: #10b981;');
-  console.log('%cPassword: admin123', 'color: #10b981;');
+if (typeof window !== "undefined") {
+  console.log(
+    "%c🔐 BAMBI Admin Access",
+    "color: #f59e0b; font-weight: bold; font-size: 16px;",
+  );
+  console.log("%cURL: /admin/login", "color: #3b82f6; font-weight: bold;");
+  console.log("%cEmail: admin@bambi.com", "color: #10b981;");
+  console.log("%cPassword: admin123", "color: #10b981;");
 }
 
 function AppContent() {
@@ -81,31 +84,46 @@ function AppContent() {
 
           {/* Admin Panel Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={
-            <ProtectedAdminRoute>
-              <AdminPage />
-            </ProtectedAdminRoute>
-          } />
-          <Route path="/admin/users" element={
-            <ProtectedAdminRoute>
-              <AdminPage />
-            </ProtectedAdminRoute>
-          } />
-          <Route path="/admin/trips" element={
-            <ProtectedAdminRoute>
-              <AdminPage />
-            </ProtectedAdminRoute>
-          } />
-          <Route path="/admin/reports" element={
-            <ProtectedAdminRoute>
-              <AdminPage />
-            </ProtectedAdminRoute>
-          } />
-          <Route path="/admin/settings" element={
-            <ProtectedAdminRoute>
-              <AdminPage />
-            </ProtectedAdminRoute>
-          } />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedAdminRoute>
+                <AdminPage />
+              </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedAdminRoute>
+                <AdminPage />
+              </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/trips"
+            element={
+              <ProtectedAdminRoute>
+                <AdminPage />
+              </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/reports"
+            element={
+              <ProtectedAdminRoute>
+                <AdminPage />
+              </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/settings"
+            element={
+              <ProtectedAdminRoute>
+                <AdminPage />
+              </ProtectedAdminRoute>
+            }
+          />
 
           {/* Legacy Routes */}
           <Route path="/ride" element={<RidePage />} />

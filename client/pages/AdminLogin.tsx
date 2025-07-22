@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Eye, EyeOff, Shield, Lock, User, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -51,14 +57,18 @@ export default function AdminLogin() {
           <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-xl">
             <Shield className="w-10 h-10 text-primary-foreground" />
           </div>
-          <h1 className="text-3xl font-bold text-taxi-dark mb-2">BAMBI Admin</h1>
+          <h1 className="text-3xl font-bold text-taxi-dark mb-2">
+            BAMBI Admin
+          </h1>
           <p className="text-taxi-gray">Secure Access Portal</p>
         </div>
 
         {/* Login Card */}
         <Card className="shadow-2xl bg-white/90 backdrop-blur-md border-0">
           <CardHeader className="text-center pb-6">
-            <CardTitle className="text-2xl font-bold text-taxi-dark">Admin Login</CardTitle>
+            <CardTitle className="text-2xl font-bold text-taxi-dark">
+              Admin Login
+            </CardTitle>
             <CardDescription>
               Enter your credentials to access the admin dashboard
             </CardDescription>
@@ -76,8 +86,10 @@ export default function AdminLogin() {
             <Alert className="mb-6 border-primary/50 bg-primary/5">
               <User className="h-4 w-4" />
               <AlertDescription>
-                <strong>Demo Credentials:</strong><br />
-                Email: admin@bambi.com<br />
+                <strong>Demo Credentials:</strong>
+                <br />
+                Email: admin@bambi.com
+                <br />
                 Password: admin123
               </AlertDescription>
             </Alert>
@@ -128,9 +140,9 @@ export default function AdminLogin() {
                 </div>
               </div>
 
-              <Button 
-                type="submit" 
-                className="w-full h-12 btn-primary" 
+              <Button
+                type="submit"
+                className="w-full h-12 btn-primary"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -161,7 +173,10 @@ export default function AdminLogin() {
         <div className="text-center mt-8">
           <p className="text-sm text-taxi-gray">
             Need help? Contact{" "}
-            <a href="mailto:support@bambi.com" className="text-primary hover:underline">
+            <a
+              href="mailto:support@bambi.com"
+              className="text-primary hover:underline"
+            >
               support@bambi.com
             </a>
           </p>
