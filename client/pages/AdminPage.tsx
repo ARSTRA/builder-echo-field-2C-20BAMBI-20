@@ -55,7 +55,6 @@ import {
   Trash2,
   Plus,
   Download,
-  Upload,
   Filter,
   Search,
   Eye,
