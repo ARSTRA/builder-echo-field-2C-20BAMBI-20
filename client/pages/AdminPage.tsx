@@ -942,9 +942,9 @@ export default function AdminPage() {
             <BarChart3 className="w-16 h-16 text-taxi-gray mx-auto mb-4" />
             <h3 className="text-lg font-medium text-taxi-dark mb-2">Reports & Analytics</h3>
             <p className="text-taxi-gray mb-6">Comprehensive reporting and business analytics dashboard</p>
-            <Button 
+            <Button
               className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0"
-              onClick={() => handleAction("Generate Reports")}
+              onClick={handleGenerateReport}
               disabled={isLoading}
             >
               <FileText className="w-4 h-4 mr-2" />
