@@ -1102,7 +1102,7 @@ export default function AdminPage() {
                         variant="outline"
                         size="sm"
                         className="bg-blue-500 text-white hover:bg-blue-600 border-0"
-                        onClick={() => toast({title: "Driver Details", description: `Viewing ${driver.name}'s profile`})}
+                        onClick={() => handleViewDriver(driver)}
                         disabled={isLoading}
                       >
                         <Eye className="w-4 h-4" />
@@ -1111,7 +1111,7 @@ export default function AdminPage() {
                         variant="outline"
                         size="sm"
                         className="bg-green-500 text-white hover:bg-green-600 border-0"
-                        onClick={() => toast({title: "Driver Communication", description: `Opening chat with ${driver.name}`})}
+                        onClick={() => handleChatWithDriver(driver)}
                         disabled={isLoading}
                       >
                         <MessageCircle className="w-4 h-4" />
@@ -1120,7 +1120,7 @@ export default function AdminPage() {
                         variant="outline"
                         size="sm"
                         className="bg-red-500 text-white hover:bg-red-600 border-0"
-                        onClick={() => toast({title: "Driver Suspended", description: `${driver.name} has been suspended`})}
+                        onClick={() => handleSuspendDriver(driver)}
                         disabled={isLoading}
                       >
                         <Ban className="w-4 h-4" />
