@@ -84,8 +84,9 @@ export default function HistoryPage() {
       distance: 8.2,
       duration: 22,
       rating: 5,
-      paymentMethod: "Credit Card",
+      paymentMethod: "Credit Card (USD)",
       bookingType: "instant",
+      currency: "USD",
     },
     {
       id: "TR001235",
