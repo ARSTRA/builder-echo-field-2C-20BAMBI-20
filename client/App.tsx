@@ -7,6 +7,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { MobileNavigation } from "@/components/MobileNavigation";
+import { AdminAuthProvider } from "@/components/auth/AdminAuthProvider";
+import { ProtectedAdminRoute } from "@/components/auth/ProtectedAdminRoute";
 import Index from "./pages/Index";
 import PassengerHome from "./pages/passenger/PassengerHome";
 import BookingPage from "./pages/passenger/BookingPage";
@@ -18,6 +20,7 @@ import EarningsPage from "./pages/driver/EarningsPage";
 import RidePage from "./pages/RidePage";
 import DriverPage from "./pages/DriverPage";
 import AdminPage from "./pages/AdminPage";
+import AdminLogin from "./pages/AdminLogin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
