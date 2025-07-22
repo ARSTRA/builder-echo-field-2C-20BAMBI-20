@@ -97,7 +97,7 @@ export default function Index() {
                 <span className="text-transparent bg-clip-text taxi-gradient"> Anytime</span>
               </h1>
               <p className="text-xl text-taxi-gray mb-8 max-w-lg">
-                Experience the future of urban transportation with SmartCommute. 
+                Experience the future of urban transportation with BAMBI. 
                 Safe, reliable, and affordable rides at your fingertips.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -167,7 +167,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-taxi-dark mb-4">
-              Why Choose SmartCommute?
+              Why Choose BAMBI?
             </h2>
             <p className="text-xl text-taxi-gray max-w-3xl mx-auto">
               We're committed to providing the safest, most reliable, and convenient 
@@ -234,7 +234,7 @@ export default function Index() {
             Ready to Start Your Journey?
           </h2>
           <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-            Join millions of satisfied customers who trust SmartCommute for their daily transportation needs.
+            Join millions of satisfied customers who trust BAMBI for their daily transportation needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/ride">
