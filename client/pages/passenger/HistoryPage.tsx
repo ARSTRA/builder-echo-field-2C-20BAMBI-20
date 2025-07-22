@@ -375,7 +375,7 @@ export default function HistoryPage() {
                       <div>
                         <p className="text-xs text-taxi-gray">Fare</p>
                         <p className="font-semibold text-primary">
-                          ${trip.fare}
+                          {formatCurrency(trip.fare, trip.currency)}
                         </p>
                       </div>
                     </div>
