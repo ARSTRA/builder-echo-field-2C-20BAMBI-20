@@ -385,9 +385,13 @@ export default function BookingPage() {
                 key={vehicle.id}
                 className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
                   selectedVehicle === vehicle.id
-                    ? "border-primary bg-primary/5"
-                    : "border-gray-200 hover:border-gray-300"
-                } ${vehicle.isVip ? "bg-gradient-to-r from-yellow-50 via-amber-50 to-yellow-50 border-yellow-200" : ""}`}
+                    ? vehicle.isVip
+                      ? "border-yellow-400 bg-gradient-to-r from-yellow-100 via-amber-100 to-yellow-100 shadow-lg"
+                      : "border-primary bg-primary/5"
+                    : vehicle.isVip
+                      ? "border-yellow-300 bg-gradient-to-r from-yellow-50 via-amber-50 to-yellow-50 hover:shadow-md hover:border-yellow-400"
+                      : "border-gray-200 hover:border-gray-300"
+                }`}
                 onClick={() => setSelectedVehicle(vehicle.id)}
               >
                 {vehicle.image && (
