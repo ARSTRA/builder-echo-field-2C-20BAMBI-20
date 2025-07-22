@@ -1311,6 +1311,7 @@ export default function AdminPage() {
                     <button
                       key={item.id}
                       onClick={() => setActiveModule(item.id)}
+                      aria-current={activeModule === item.id ? "page" : undefined}
                       className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors ${
                         activeModule === item.id
                           ? "bg-primary text-primary-foreground"
