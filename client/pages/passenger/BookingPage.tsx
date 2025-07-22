@@ -48,6 +48,7 @@ import {
 } from "lucide-react";
 import { useCurrency } from "@/hooks/use-currency";
 import { PaymentMethod, Currency } from "@shared/currency";
+import { toast } from "sonner";
 
 export default function BookingPage() {
   const { formatAmount, currency } = useCurrency();
