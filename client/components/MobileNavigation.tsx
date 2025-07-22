@@ -19,6 +19,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import { CurrencySelector } from "./CurrencySelector";
 
 interface NavigationItem {
   name: string;
