@@ -7,6 +7,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { MobileNavigation } from "@/components/MobileNavigation";
+import { AdminAuthProvider } from "@/components/auth/AdminAuthProvider";
+import { ProtectedAdminRoute } from "@/components/auth/ProtectedAdminRoute";
 import Index from "./pages/Index";
 import PassengerHome from "./pages/passenger/PassengerHome";
 import BookingPage from "./pages/passenger/BookingPage";
@@ -18,9 +20,21 @@ import EarningsPage from "./pages/driver/EarningsPage";
 import RidePage from "./pages/RidePage";
 import DriverPage from "./pages/DriverPage";
 import AdminPage from "./pages/AdminPage";
+import AdminLogin from "./pages/AdminLogin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+
+// Development helper for admin access
+if (typeof window !== "undefined") {
+  console.log(
+    "%c🔐 BAMBI Admin Access",
+    "color: #f59e0b; font-weight: bold; font-size: 16px;",
+  );
+  console.log("%cURL: /admin/login", "color: #3b82f6; font-weight: bold;");
+  console.log("%cEmail: admin@bambi.com", "color: #10b981;");
+  console.log("%cPassword: admin123", "color: #10b981;");
+}
 
 function AppContent() {
   const location = useLocation();
@@ -33,11 +47,10 @@ function AppContent() {
     return "passenger"; // default
   };
 
-  // Show mobile navigation for app routes
+  // Show mobile navigation for app routes (but not admin)
   const shouldShowMobileNav =
     location.pathname.startsWith("/passenger") ||
-    location.pathname.startsWith("/driver") ||
-    location.pathname.startsWith("/admin");
+    location.pathname.startsWith("/driver");
 
   return (
     <>
@@ -70,11 +83,47 @@ function AppContent() {
           <Route path="/driver/home" element={<DriverHome />} />
 
           {/* Admin Panel Routes */}
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/admin/users" element={<AdminPage />} />
-          <Route path="/admin/trips" element={<AdminPage />} />
-          <Route path="/admin/reports" element={<AdminPage />} />
-          <Route path="/admin/settings" element={<AdminPage />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedAdminRoute>
+                <AdminPage />
+              </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedAdminRoute>
+                <AdminPage />
+              </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/trips"
+            element={
+              <ProtectedAdminRoute>
+                <AdminPage />
+              </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/reports"
+            element={
+              <ProtectedAdminRoute>
+                <AdminPage />
+              </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="/admin/settings"
+            element={
+              <ProtectedAdminRoute>
+                <AdminPage />
+              </ProtectedAdminRoute>
+            }
+          />
 
           {/* Legacy Routes */}
           <Route path="/ride" element={<RidePage />} />
@@ -93,7 +142,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <AppContent />
+        <AdminAuthProvider>
+          <AppContent />
+        </AdminAuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
