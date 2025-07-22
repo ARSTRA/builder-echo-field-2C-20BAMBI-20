@@ -926,9 +926,9 @@ export default function AdminPage() {
             <Wallet className="w-16 h-16 text-taxi-gray mx-auto mb-4" />
             <h3 className="text-lg font-medium text-taxi-dark mb-2">Wallet Manager</h3>
             <p className="text-taxi-gray mb-6">Manage user wallets, top-ups, and balance transfers</p>
-            <Button 
+            <Button
               className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0"
-              onClick={() => handleAction("Open Wallet Manager")}
+              onClick={handleManageWallet}
               disabled={isLoading}
             >
               <Wallet className="w-4 h-4 mr-2" />
