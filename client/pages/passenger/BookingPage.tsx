@@ -361,9 +361,19 @@ export default function BookingPage() {
                   selectedVehicle === vehicle.id
                     ? "border-primary bg-primary/5"
                     : "border-gray-200 hover:border-gray-300"
-                }`}
+                } ${vehicle.isVip ? "bg-gradient-to-r from-yellow-50 via-amber-50 to-yellow-50 border-yellow-200" : ""}`}
                 onClick={() => setSelectedVehicle(vehicle.id)}
               >
+                {vehicle.image && (
+                  <div className="mb-3 rounded-lg overflow-hidden">
+                    <img
+                      src={vehicle.image}
+                      alt={`${vehicle.name} luxury vehicle`}
+                      className="w-full h-24 object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="text-2xl">{vehicle.icon}</div>
