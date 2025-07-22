@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,6 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 import { Progress } from "@/components/ui/progress";
 import { AuthModal } from "@/components/auth/AuthModal";
+import { toast } from "sonner";
 import { 
   MapPin, 
   Navigation, 
@@ -58,7 +59,8 @@ import {
   Wallet,
   Receipt,
   ThumbsUp,
-  ThumbsDown
+  ThumbsDown,
+  Plus
 } from "lucide-react";
 
 export default function RidePage() {
@@ -67,12 +69,17 @@ export default function RidePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentTrip, setCurrentTrip] = useState(null);
   const [estimatedFare, setEstimatedFare] = useState(null);
+  const [isTracking, setIsTracking] = useState(false);
+  const [driverETA, setDriverETA] = useState(3);
+  const [tripProgress, setTripProgress] = useState("assigned");
 
   // Booking state
   const [pickupLocation, setPickupLocation] = useState("");
   const [destination, setDestination] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState("comfort");
   const [bookingType, setBookingType] = useState("now");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
 
   // Profile state
   const [profile, setProfile] = useState({
@@ -83,6 +90,34 @@ export default function RidePage() {
     photo: "👨‍💼",
     emergencyContact: "+1 (555) 987-6543"
   });
+
+  // Notifications state
+  const [notifications, setNotifications] = useState([
+    {
+      id: "1",
+      title: "Driver Arrived",
+      message: "Your driver Sarah is waiting outside",
+      time: "2 min ago",
+      type: "urgent",
+      read: false
+    },
+    {
+      id: "2",
+      title: "Trip Completed",
+      message: "Your ride to Airport has been completed",
+      time: "1 hour ago",
+      type: "info",
+      read: true
+    }
+  ]);
+
+  // Payment state
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("card");
+  const [walletBalance, setWalletBalance] = useState(45.50);
+
+  // Review state
+  const [tripRating, setTripRating] = useState(0);
+  const [reviewText, setReviewText] = useState("");
 
   const vehicleOptions = [
     {
@@ -143,29 +178,47 @@ export default function RidePage() {
     }
   ];
 
-  const notifications = [
-    {
-      id: "1",
-      title: "Driver Arrived",
-      message: "Your driver Sarah is waiting outside",
-      time: "2 min ago",
-      type: "urgent",
-      read: false
-    },
-    {
-      id: "2",
-      title: "Trip Completed",
-      message: "Your ride to Airport has been completed",
-      time: "1 hour ago",
-      type: "info",
-      read: true
+  // Simulate driver tracking
+  useEffect(() => {
+    if (isTracking && driverETA > 0) {
+      const timer = setInterval(() => {
+        setDriverETA(prev => {
+          if (prev <= 1) {
+            setTripProgress("pickup");
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 3000);
+      return () => clearInterval(timer);
     }
-  ];
+  }, [isTracking, driverETA]);
+
+  // Button Handlers
+  const handleNotificationClick = () => {
+    toast.info("Opening notifications...", {
+      description: `You have ${notifications.filter(n => !n.read).length} unread notifications`
+    });
+  };
+
+  const handleSignInClick = () => {
+    setShowAuthModal(true);
+    toast.info("Please sign in to continue");
+  };
+
+  const handleAuthSuccess = () => {
+    setIsLoggedIn(true);
+    setShowAuthModal(false);
+    toast.success("Successfully signed in!");
+  };
 
   const calculateFare = () => {
-    const selectedVehicleData = vehicleOptions.find(v => v.id === selectedVehicle);
-    if (!selectedVehicleData || !pickupLocation || !destination) return;
+    if (!pickupLocation || !destination) {
+      toast.error("Please enter both pickup and destination locations");
+      return;
+    }
 
+    const selectedVehicleData = vehicleOptions.find(v => v.id === selectedVehicle);
     const mockDistance = Math.random() * 15 + 2;
     const basePrice = selectedVehicleData.basePrice;
     const distancePrice = mockDistance * selectedVehicleData.perKm;
@@ -177,6 +230,161 @@ export default function RidePage() {
       distancePrice: distancePrice.toFixed(2),
       total: total.toFixed(2),
       duration: Math.floor(mockDistance * 2 + 5)
+    });
+
+    toast.success("Fare calculated successfully!", {
+      description: `Estimated total: $${total.toFixed(2)}`
+    });
+  };
+
+  const handleBookRide = () => {
+    if (!pickupLocation || !destination) {
+      toast.error("Please enter pickup and destination locations");
+      return;
+    }
+
+    if (!isLoggedIn) {
+      toast.error("Please sign in to book a ride");
+      setShowAuthModal(true);
+      return;
+    }
+
+    // Simulate booking process
+    toast.loading("Booking your ride...", { duration: 2000 });
+    
+    setTimeout(() => {
+      setCurrentTrip({
+        id: "TR" + Math.random().toString(36).substr(2, 9),
+        status: "searching",
+        pickup: pickupLocation,
+        destination: destination,
+        vehicle: selectedVehicle,
+        fare: estimatedFare?.total || "0"
+      });
+      
+      setIsTracking(true);
+      setActiveTab("tracking");
+      
+      toast.success("Ride booked successfully!", {
+        description: "Finding a driver near you..."
+      });
+    }, 2000);
+  };
+
+  const handleCancelTrip = () => {
+    setCurrentTrip(null);
+    setIsTracking(false);
+    setDriverETA(3);
+    setTripProgress("assigned");
+    setActiveTab("booking");
+    toast.success("Trip cancelled successfully");
+  };
+
+  const handleCallDriver = () => {
+    toast.info("Calling driver...", {
+      description: "Connecting you to Mike Johnson"
+    });
+  };
+
+  const handleMessageDriver = () => {
+    toast.info("Opening chat...", {
+      description: "Chat with your driver"
+    });
+  };
+
+  const handleEmergency = () => {
+    toast.error("Emergency alert sent!", {
+      description: "Notifying emergency contacts and authorities"
+    });
+  };
+
+  const handleShareTrip = () => {
+    toast.success("Trip shared successfully!", {
+      description: "Emergency contacts have been notified"
+    });
+  };
+
+  const handleDownloadReceipt = (tripId) => {
+    toast.success("Receipt downloaded!", {
+      description: `Receipt for trip ${tripId} saved to downloads`
+    });
+  };
+
+  const handleRebookTrip = (trip) => {
+    setPickupLocation(trip.from);
+    setDestination(trip.to);
+    setActiveTab("booking");
+    toast.success("Trip details copied to booking form");
+  };
+
+  const handleProfileSave = () => {
+    toast.success("Profile updated successfully!", {
+      description: "Your changes have been saved"
+    });
+  };
+
+  const handlePhotoUpload = () => {
+    toast.info("Photo upload coming soon!", {
+      description: "Camera integration will be available in the next update"
+    });
+  };
+
+  const handleAddPaymentMethod = () => {
+    toast.info("Add payment method", {
+      description: "This will open the payment setup flow"
+    });
+  };
+
+  const handleTopUpWallet = () => {
+    const amount = 50;
+    setWalletBalance(prev => prev + amount);
+    toast.success(`Wallet topped up!`, {
+      description: `Added $${amount} to your wallet`
+    });
+  };
+
+  const handleMarkNotificationRead = (id) => {
+    setNotifications(prev => 
+      prev.map(n => n.id === id ? { ...n, read: true } : n)
+    );
+    toast.success("Notification marked as read");
+  };
+
+  const handleMarkAllNotificationsRead = () => {
+    setNotifications(prev => 
+      prev.map(n => ({ ...n, read: true }))
+    );
+    toast.success("All notifications marked as read");
+  };
+
+  const handleDeleteNotification = (id) => {
+    setNotifications(prev => prev.filter(n => n.id !== id));
+    toast.success("Notification deleted");
+  };
+
+  const handleSubmitReview = () => {
+    if (tripRating === 0) {
+      toast.error("Please select a rating");
+      return;
+    }
+
+    toast.success("Review submitted!", {
+      description: `Thank you for rating ${tripRating} stars`
+    });
+    
+    setTripRating(0);
+    setReviewText("");
+  };
+
+  const handleCallSupport = () => {
+    toast.info("Calling support...", {
+      description: "Connecting you to customer service"
+    });
+  };
+
+  const handleLiveChat = () => {
+    toast.info("Opening live chat...", {
+      description: "Chat with our support team"
     });
   };
 
@@ -197,16 +405,33 @@ export default function RidePage() {
             </div>
             
             <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="sm" className="relative">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="relative"
+                onClick={handleNotificationClick}
+              >
                 <Bell className="w-5 h-5" />
                 <Badge className="absolute -top-1 -right-1 h-4 w-4 p-0 text-xs bg-red-500">
-                  2
+                  {notifications.filter(n => !n.read).length}
                 </Badge>
               </Button>
               {!isLoggedIn && (
-                <Button onClick={() => setShowAuthModal(true)} size="sm">
+                <Button onClick={handleSignInClick} size="sm">
                   Sign In
                 </Button>
+              )}
+              {isLoggedIn && (
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm">Welcome, {profile.firstName}!</span>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => setIsLoggedIn(false)}
+                  >
+                    Sign Out
+                  </Button>
+                </div>
               )}
             </div>
           </div>
@@ -261,7 +486,7 @@ export default function RidePage() {
                     <CardContent className="pt-0">
                       <div className="grid grid-cols-2 gap-3">
                         <Button 
-                          onClick={() => setShowAuthModal(true)}
+                          onClick={handleSignInClick}
                           className="bg-blue-600 hover:bg-blue-700"
                         >
                           <User className="w-4 h-4 mr-2" />
@@ -269,7 +494,10 @@ export default function RidePage() {
                         </Button>
                         <Button 
                           variant="outline"
-                          onClick={() => setShowAuthModal(true)}
+                          onClick={() => {
+                            setShowAuthModal(true);
+                            toast.info("Registration form opened");
+                          }}
                         >
                           <Edit className="w-4 h-4 mr-2" />
                           Register
@@ -292,7 +520,10 @@ export default function RidePage() {
                       <Button
                         variant={bookingType === "now" ? "default" : "outline"}
                         className="h-16 flex-col"
-                        onClick={() => setBookingType("now")}
+                        onClick={() => {
+                          setBookingType("now");
+                          toast.success("Book now selected");
+                        }}
                       >
                         <Zap className="w-6 h-6 mb-1" />
                         <span>Book Now</span>
@@ -300,7 +531,10 @@ export default function RidePage() {
                       <Button
                         variant={bookingType === "schedule" ? "default" : "outline"}
                         className="h-16 flex-col"
-                        onClick={() => setBookingType("schedule")}
+                        onClick={() => {
+                          setBookingType("schedule");
+                          toast.success("Schedule ride selected");
+                        }}
                       >
                         <Calendar className="w-6 h-6 mb-1" />
                         <span>Schedule</span>
@@ -329,6 +563,17 @@ export default function RidePage() {
                           value={pickupLocation}
                           onChange={(e) => setPickupLocation(e.target.value)}
                         />
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                          onClick={() => {
+                            setPickupLocation("Current Location");
+                            toast.success("Current location selected");
+                          }}
+                        >
+                          <Target className="w-4 h-4" />
+                        </Button>
                       </div>
                     </div>
                     
@@ -350,11 +595,23 @@ export default function RidePage() {
                       <div className="grid grid-cols-2 gap-3">
                         <div className="space-y-2">
                           <Label htmlFor="date">Date</Label>
-                          <Input id="date" type="date" className="h-12" />
+                          <Input 
+                            id="date" 
+                            type="date" 
+                            className="h-12"
+                            value={selectedDate}
+                            onChange={(e) => setSelectedDate(e.target.value)}
+                          />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="time">Time</Label>
-                          <Input id="time" type="time" className="h-12" />
+                          <Input 
+                            id="time" 
+                            type="time" 
+                            className="h-12"
+                            value={selectedTime}
+                            onChange={(e) => setSelectedTime(e.target.value)}
+                          />
                         </div>
                       </div>
                     )}
@@ -378,7 +635,10 @@ export default function RidePage() {
                             ? "border-blue-500 bg-blue-50"
                             : "border-gray-200 hover:border-gray-300"
                         }`}
-                        onClick={() => setSelectedVehicle(vehicle.id)}
+                        onClick={() => {
+                          setSelectedVehicle(vehicle.id);
+                          toast.success(`${vehicle.name} selected`);
+                        }}
                       >
                         <div 
                           className="h-24 bg-cover bg-center"
@@ -462,6 +722,7 @@ export default function RidePage() {
                 {/* Book Button */}
                 <Button 
                   size="lg"
+                  onClick={handleBookRide}
                   disabled={!pickupLocation || !destination}
                   className="w-full h-14 text-lg bg-gradient-to-r from-yellow-400 to-blue-500 hover:from-yellow-500 hover:to-blue-600"
                 >
@@ -471,6 +732,19 @@ export default function RidePage() {
                     <span className="ml-2">• ${estimatedFare.total}</span>
                   )}
                 </Button>
+
+                {/* Cancel Trip Button (shown when trip is active) */}
+                {currentTrip && (
+                  <Button 
+                    variant="destructive"
+                    size="lg"
+                    onClick={handleCancelTrip}
+                    className="w-full h-14 text-lg"
+                  >
+                    <X className="w-5 h-5 mr-2" />
+                    Cancel Trip
+                  </Button>
+                )}
               </div>
             </div>
           </TabsContent>
@@ -492,14 +766,16 @@ export default function RidePage() {
                     {/* Live tracking overlay */}
                     <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md rounded-lg p-3">
                       <div className="flex items-center space-x-2">
-                        <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                        <span className="text-sm font-medium">Live Tracking Active</span>
+                        <div className={`w-3 h-3 rounded-full ${isTracking ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
+                        <span className="text-sm font-medium">
+                          {isTracking ? 'Live Tracking Active' : 'Tracking Inactive'}
+                        </span>
                       </div>
                     </div>
 
                     {/* Driver location marker */}
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                      <div className="bg-blue-500 rounded-full p-3 shadow-lg animate-bounce">
+                      <div className={`bg-blue-500 rounded-full p-3 shadow-lg ${isTracking ? 'animate-bounce' : ''}`}>
                         <Car className="w-6 h-6 text-white" />
                       </div>
                     </div>
@@ -510,7 +786,9 @@ export default function RidePage() {
                         <div className="flex items-center justify-between">
                           <div>
                             <p className="text-sm text-gray-600">Driver arriving in</p>
-                            <p className="text-lg font-bold text-blue-600">3 minutes</p>
+                            <p className="text-lg font-bold text-blue-600">
+                              {driverETA > 0 ? `${driverETA} minutes` : 'Arrived!'}
+                            </p>
                           </div>
                           <div className="text-right">
                             <p className="text-sm text-gray-600">Distance</p>
@@ -549,11 +827,19 @@ export default function RidePage() {
                     </div>
                     
                     <div className="space-y-3">
-                      <Button variant="outline" className="w-full">
+                      <Button 
+                        variant="outline" 
+                        className="w-full"
+                        onClick={handleCallDriver}
+                      >
                         <Phone className="w-4 h-4 mr-2" />
                         Call Driver
                       </Button>
-                      <Button variant="outline" className="w-full">
+                      <Button 
+                        variant="outline" 
+                        className="w-full"
+                        onClick={handleMessageDriver}
+                      >
                         <MessageCircle className="w-4 h-4 mr-2" />
                         Message
                       </Button>
@@ -580,18 +866,22 @@ export default function RidePage() {
                       </div>
                       
                       <div className="flex items-center space-x-3">
-                        <div className="w-4 h-4 bg-yellow-500 rounded-full animate-pulse"></div>
+                        <div className={`w-4 h-4 rounded-full ${tripProgress === "enroute" || driverETA > 0 ? "bg-yellow-500 animate-pulse" : "border-2 border-gray-300"}`}></div>
                         <div>
                           <p className="font-medium">En Route to Pickup</p>
-                          <p className="text-sm text-gray-500">ETA: 3 minutes</p>
+                          <p className="text-sm text-gray-500">
+                            {driverETA > 0 ? `ETA: ${driverETA} minutes` : "Arriving now"}
+                          </p>
                         </div>
                       </div>
                       
-                      <div className="flex items-center space-x-3 opacity-50">
-                        <div className="w-4 h-4 border-2 border-gray-300 rounded-full"></div>
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-4 h-4 rounded-full ${tripProgress === "pickup" ? "bg-blue-500 animate-pulse" : "border-2 border-gray-300"}`}></div>
                         <div>
                           <p className="font-medium">Pickup</p>
-                          <p className="text-sm text-gray-500">Waiting...</p>
+                          <p className="text-sm text-gray-500">
+                            {tripProgress === "pickup" ? "Driver waiting" : "Waiting..."}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -608,11 +898,19 @@ export default function RidePage() {
                   </CardHeader>
                   <CardContent className="pt-0">
                     <div className="space-y-3">
-                      <Button variant="destructive" className="w-full">
+                      <Button 
+                        variant="destructive" 
+                        className="w-full"
+                        onClick={handleEmergency}
+                      >
                         <AlertTriangle className="w-4 h-4 mr-2" />
                         Emergency
                       </Button>
-                      <Button variant="outline" className="w-full">
+                      <Button 
+                        variant="outline" 
+                        className="w-full"
+                        onClick={handleShareTrip}
+                      >
                         <Users className="w-4 h-4 mr-2" />
                         Share Trip
                       </Button>
@@ -633,10 +931,18 @@ export default function RidePage() {
                     Trip History
                   </CardTitle>
                   <div className="flex items-center space-x-2">
-                    <Button variant="ghost" size="sm">
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      onClick={() => toast.info("Filter options coming soon")}
+                    >
                       <Filter className="w-4 h-4" />
                     </Button>
-                    <Button variant="ghost" size="sm">
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      onClick={() => toast.success("Downloading trip history...")}
+                    >
                       <Download className="w-4 h-4" />
                     </Button>
                   </div>
@@ -681,11 +987,19 @@ export default function RidePage() {
                       </div>
                       
                       <div className="mt-3 flex items-center space-x-2">
-                        <Button variant="ghost" size="sm">
+                        <Button 
+                          variant="ghost" 
+                          size="sm"
+                          onClick={() => handleDownloadReceipt(trip.id)}
+                        >
                           <Download className="w-4 h-4 mr-1" />
                           Receipt
                         </Button>
-                        <Button variant="ghost" size="sm">
+                        <Button 
+                          variant="ghost" 
+                          size="sm"
+                          onClick={() => handleRebookTrip(trip)}
+                        >
                           <RotateCcw className="w-4 h-4 mr-1" />
                           Rebook
                         </Button>
@@ -716,11 +1030,18 @@ export default function RidePage() {
                         backgroundImage: "url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face')"
                       }}
                     ></div>
-                    <Button size="sm" className="absolute bottom-0 right-0 rounded-full w-10 h-10 p-0">
+                    <Button 
+                      size="sm" 
+                      className="absolute bottom-0 right-0 rounded-full w-10 h-10 p-0"
+                      onClick={handlePhotoUpload}
+                    >
                       <Camera className="w-4 h-4" />
                     </Button>
                   </div>
-                  <Button variant="outline">
+                  <Button 
+                    variant="outline"
+                    onClick={handlePhotoUpload}
+                  >
                     <Upload className="w-4 h-4 mr-2" />
                     Change Photo
                   </Button>
@@ -785,7 +1106,10 @@ export default function RidePage() {
                     />
                   </div>
                   
-                  <Button className="w-full">
+                  <Button 
+                    className="w-full"
+                    onClick={handleProfileSave}
+                  >
                     <Save className="w-4 h-4 mr-2" />
                     Save Changes
                   </Button>
@@ -808,15 +1132,33 @@ export default function RidePage() {
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <Label htmlFor="music">Music Allowed</Label>
-                        <Switch id="music" defaultChecked />
+                        <Switch 
+                          id="music" 
+                          defaultChecked 
+                          onCheckedChange={(checked) => 
+                            toast.success(`Music ${checked ? 'enabled' : 'disabled'}`)
+                          }
+                        />
                       </div>
                       <div className="flex items-center justify-between">
                         <Label htmlFor="conversation">Conversation</Label>
-                        <Switch id="conversation" defaultChecked />
+                        <Switch 
+                          id="conversation" 
+                          defaultChecked 
+                          onCheckedChange={(checked) => 
+                            toast.success(`Conversation ${checked ? 'enabled' : 'disabled'}`)
+                          }
+                        />
                       </div>
                       <div className="flex items-center justify-between">
                         <Label htmlFor="ac">Air Conditioning</Label>
-                        <Switch id="ac" defaultChecked />
+                        <Switch 
+                          id="ac" 
+                          defaultChecked 
+                          onCheckedChange={(checked) => 
+                            toast.success(`AC ${checked ? 'enabled' : 'disabled'}`)
+                          }
+                        />
                       </div>
                     </div>
                   </div>
@@ -826,15 +1168,33 @@ export default function RidePage() {
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <Label htmlFor="shareTrip">Auto Share Trip</Label>
-                        <Switch id="shareTrip" defaultChecked />
+                        <Switch 
+                          id="shareTrip" 
+                          defaultChecked 
+                          onCheckedChange={(checked) => 
+                            toast.success(`Auto share ${checked ? 'enabled' : 'disabled'}`)
+                          }
+                        />
                       </div>
                       <div className="flex items-center justify-between">
                         <Label htmlFor="smsAlerts">SMS Alerts</Label>
-                        <Switch id="smsAlerts" defaultChecked />
+                        <Switch 
+                          id="smsAlerts" 
+                          defaultChecked 
+                          onCheckedChange={(checked) => 
+                            toast.success(`SMS alerts ${checked ? 'enabled' : 'disabled'}`)
+                          }
+                        />
                       </div>
                       <div className="flex items-center justify-between">
                         <Label htmlFor="locationSharing">Location Sharing</Label>
-                        <Switch id="locationSharing" defaultChecked />
+                        <Switch 
+                          id="locationSharing" 
+                          defaultChecked 
+                          onCheckedChange={(checked) => 
+                            toast.success(`Location sharing ${checked ? 'enabled' : 'disabled'}`)
+                          }
+                        />
                       </div>
                     </div>
                   </div>
@@ -855,7 +1215,15 @@ export default function RidePage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0 space-y-4">
-                  <div className="border rounded-lg p-4 bg-blue-50 border-blue-200">
+                  <div 
+                    className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                      selectedPaymentMethod === "card" ? "bg-blue-50 border-blue-200" : "hover:bg-gray-50"
+                    }`}
+                    onClick={() => {
+                      setSelectedPaymentMethod("card");
+                      toast.success("Credit card selected");
+                    }}
+                  >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <CreditCard className="w-6 h-6 text-blue-600" />
@@ -864,26 +1232,48 @@ export default function RidePage() {
                           <p className="text-sm text-gray-500">Expires 12/25</p>
                         </div>
                       </div>
-                      <Badge className="bg-blue-600">Primary</Badge>
+                      {selectedPaymentMethod === "card" && (
+                        <Badge className="bg-blue-600">Primary</Badge>
+                      )}
                     </div>
                   </div>
                   
-                  <div className="border rounded-lg p-4">
+                  <div 
+                    className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                      selectedPaymentMethod === "wallet" ? "bg-purple-50 border-purple-200" : "hover:bg-gray-50"
+                    }`}
+                    onClick={() => {
+                      setSelectedPaymentMethod("wallet");
+                      toast.success("Wallet selected");
+                    }}
+                  >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <Wallet className="w-6 h-6 text-purple-600" />
                         <div>
                           <p className="font-medium">SmartCommute Wallet</p>
-                          <p className="text-sm text-gray-500">$45.50 available</p>
+                          <p className="text-sm text-gray-500">${walletBalance.toFixed(2)} available</p>
                         </div>
                       </div>
-                      <Button variant="ghost" size="sm">
-                        <ArrowRight className="w-4 h-4" />
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleTopUpWallet();
+                        }}
+                      >
+                        <Plus className="w-4 h-4 mr-1" />
+                        Top Up
                       </Button>
                     </div>
                   </div>
                   
-                  <Button variant="outline" className="w-full">
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={handleAddPaymentMethod}
+                  >
                     <Plus className="w-4 h-4 mr-2" />
                     Add Payment Method
                   </Button>
@@ -900,7 +1290,7 @@ export default function RidePage() {
                 </CardHeader>
                 <CardContent className="pt-0">
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 border rounded-lg">
+                    <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
                           <Car className="w-4 h-4 text-green-600" />
@@ -916,7 +1306,10 @@ export default function RidePage() {
                       </div>
                     </div>
                     
-                    <div className="flex items-center justify-between p-3 border rounded-lg">
+                    <div 
+                      className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50 cursor-pointer"
+                      onClick={() => toast.info("Transaction details: Wallet top-up")}
+                    >
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
                           <Wallet className="w-4 h-4 text-blue-600" />
@@ -946,15 +1339,27 @@ export default function RidePage() {
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <Button variant="outline" className="h-20 flex-col">
+                  <Button 
+                    variant="outline" 
+                    className="h-20 flex-col"
+                    onClick={() => toast.success("Downloading all receipts...")}
+                  >
                     <Download className="w-6 h-6 mb-2" />
                     <span>Download All</span>
                   </Button>
-                  <Button variant="outline" className="h-20 flex-col">
+                  <Button 
+                    variant="outline" 
+                    className="h-20 flex-col"
+                    onClick={() => toast.success("Receipts will be emailed to you")}
+                  >
                     <Mail className="w-6 h-6 mb-2" />
                     <span>Email Receipts</span>
                   </Button>
-                  <Button variant="outline" className="h-20 flex-col">
+                  <Button 
+                    variant="outline" 
+                    className="h-20 flex-col"
+                    onClick={() => toast.info("Tax settings opened")}
+                  >
                     <Settings className="w-6 h-6 mb-2" />
                     <span>Tax Settings</span>
                   </Button>
@@ -972,7 +1377,9 @@ export default function RidePage() {
                     <Bell className="w-5 h-5 mr-2 text-red-600" />
                     Notifications & Alerts
                   </CardTitle>
-                  <Badge className="bg-red-500">2 New</Badge>
+                  <Badge className="bg-red-500">
+                    {notifications.filter(n => !n.read).length} New
+                  </Badge>
                 </div>
               </CardHeader>
               <CardContent>
@@ -980,9 +1387,10 @@ export default function RidePage() {
                   {notifications.map((notification) => (
                     <div 
                       key={notification.id} 
-                      className={`p-4 rounded-lg border ${
+                      className={`p-4 rounded-lg border cursor-pointer transition-colors ${
                         !notification.read ? 'bg-blue-50 border-blue-200' : 'bg-gray-50 border-gray-200'
                       }`}
+                      onClick={() => handleMarkNotificationRead(notification.id)}
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
@@ -995,7 +1403,14 @@ export default function RidePage() {
                           <p className="text-sm text-gray-600 mb-2">{notification.message}</p>
                           <p className="text-xs text-gray-500">{notification.time}</p>
                         </div>
-                        <Button variant="ghost" size="sm">
+                        <Button 
+                          variant="ghost" 
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteNotification(notification.id);
+                          }}
+                        >
                           <X className="w-4 h-4" />
                         </Button>
                       </div>
@@ -1004,11 +1419,17 @@ export default function RidePage() {
                 </div>
                 
                 <div className="mt-6 flex items-center justify-between">
-                  <Button variant="outline">
+                  <Button 
+                    variant="outline"
+                    onClick={handleMarkAllNotificationsRead}
+                  >
                     <CheckCheck className="w-4 h-4 mr-2" />
                     Mark All Read
                   </Button>
-                  <Button variant="outline">
+                  <Button 
+                    variant="outline"
+                    onClick={() => toast.info("Notification settings opened")}
+                  >
                     <Settings className="w-4 h-4 mr-2" />
                     Settings
                   </Button>
@@ -1026,11 +1447,19 @@ export default function RidePage() {
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Button variant="outline" className="h-16 flex-col">
+                  <Button 
+                    variant="outline" 
+                    className="h-16 flex-col"
+                    onClick={handleCallSupport}
+                  >
                     <Phone className="w-6 h-6 mb-2" />
                     <span>Call Support</span>
                   </Button>
-                  <Button variant="outline" className="h-16 flex-col">
+                  <Button 
+                    variant="outline" 
+                    className="h-16 flex-col"
+                    onClick={handleLiveChat}
+                  >
                     <MessageCircle className="w-6 h-6 mb-2" />
                     <span>Live Chat</span>
                   </Button>
@@ -1049,17 +1478,30 @@ export default function RidePage() {
                         variant="ghost"
                         size="sm"
                         className="p-1"
+                        onClick={() => {
+                          setTripRating(star);
+                          toast.success(`Rated ${star} stars`);
+                        }}
                       >
-                        <Star className="w-6 h-6 text-yellow-400 fill-current" />
+                        <Star 
+                          className={`w-6 h-6 ${
+                            star <= tripRating ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                          }`} 
+                        />
                       </Button>
                     ))}
                   </div>
                   <Textarea 
                     placeholder="Leave a review for your driver..."
                     className="mb-3"
+                    value={reviewText}
+                    onChange={(e) => setReviewText(e.target.value)}
                   />
                   <div className="flex space-x-2">
-                    <Button className="flex-1">
+                    <Button 
+                      className="flex-1"
+                      onClick={handleSubmitReview}
+                    >
                       <Send className="w-4 h-4 mr-2" />
                       Submit Review
                     </Button>
@@ -1101,27 +1543,6 @@ function Calculator({ className, ...props }: React.SVGProps<SVGSVGElement>) {
       <path d="M8 10h8"/>
       <path d="M8 14h8"/>
       <path d="M8 18h8"/>
-    </svg>
-  );
-}
-
-function Plus({ className, ...props }: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      {...props}
-    >
-      <path d="M5 12h14"/>
-      <path d="M12 5v14"/>
     </svg>
   );
 }
