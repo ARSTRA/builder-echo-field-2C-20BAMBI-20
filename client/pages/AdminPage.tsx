@@ -683,29 +683,29 @@ export default function AdminPage() {
                   <TableCell>{user.totalRides}</TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         size="sm"
                         className="bg-blue-500 text-white hover:bg-blue-600 border-0"
-                        onClick={() => handleAction("View User", user)}
+                        onClick={() => handleViewUser(user)}
                         disabled={isLoading}
                       >
                         <Eye className="w-4 h-4" />
                       </Button>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         size="sm"
                         className="bg-green-500 text-white hover:bg-green-600 border-0"
-                        onClick={() => handleAction("Edit User", user)}
+                        onClick={() => handleEditUser(user)}
                         disabled={isLoading}
                       >
                         <Edit className="w-4 h-4" />
                       </Button>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         size="sm"
                         className="bg-red-500 text-white hover:bg-red-600 border-0"
-                        onClick={() => handleAction("Ban User", user)}
+                        onClick={() => handleBanUser(user)}
                         disabled={isLoading}
                       >
                         <Ban className="w-4 h-4" />
