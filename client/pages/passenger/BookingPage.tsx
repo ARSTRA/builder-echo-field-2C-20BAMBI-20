@@ -634,22 +634,76 @@ export default function BookingPage() {
           </CardContent>
         </Card>
 
-        {/* Book Button */}
+        {/* Book Button / Driver Contact */}
         <div className="sticky bottom-20 bg-white/95 backdrop-blur-xl p-4 rounded-2xl shadow-lg border">
-          <Button
-            onClick={handleBookRide}
-            disabled={!pickupLocation || !destination}
-            className="w-full btn-mobile btn-primary text-lg"
-          >
-            <Car className="w-5 h-5 mr-2" />
-            {bookingType === "now" ? "Book Now" : "Schedule Ride"}
-            {estimatedFare && (
-              <span className="ml-2">• ${estimatedFare.total}</span>
-            )}
-          </Button>
-          <p className="text-center text-xs text-taxi-gray mt-2">
-            You'll be matched with a nearby driver
-          </p>
+          {!isBooked ? (
+            <>
+              <Button
+                onClick={handleBookRide}
+                disabled={!pickupLocation || !destination}
+                className="w-full btn-mobile btn-primary text-lg"
+              >
+                <Car className="w-5 h-5 mr-2" />
+                {bookingType === "now" ? "Book Now" : "Schedule Ride"}
+                {estimatedFare && (
+                  <span className="ml-2">• ${estimatedFare.total}</span>
+                )}
+              </Button>
+              <p className="text-center text-xs text-taxi-gray mt-2">
+                You'll be matched with a nearby driver
+              </p>
+            </>
+          ) : (
+            <div className="space-y-3">
+              <div className="text-center py-2">
+                <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-2" />
+                <h3 className="text-lg font-semibold text-taxi-dark">Ride Booked!</h3>
+                <p className="text-taxi-gray">Driver is on the way</p>
+              </div>
+
+              {/* Driver Contact Card */}
+              {driverInfo && (
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="text-3xl">{driverInfo.photo}</div>
+                      <div>
+                        <h4 className="font-semibold text-taxi-dark">{driverInfo.name}</h4>
+                        <p className="text-sm text-taxi-gray">{driverInfo.vehicle}</p>
+                        <p className="text-xs text-taxi-gray">{driverInfo.plate}</p>
+                        <div className="flex items-center space-x-1 mt-1">
+                          <Star className="w-3 h-3 text-yellow-500 fill-current" />
+                          <span className="text-xs text-taxi-gray">{driverInfo.rating}</span>
+                          <span className="text-xs text-taxi-gray">• ETA: {driverInfo.eta}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Contact Buttons */}
+                  <div className="flex space-x-3">
+                    <Button
+                      onClick={handleCallDriver}
+                      className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+                      size="sm"
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call Driver
+                    </Button>
+                    <Button
+                      onClick={handleMessageDriver}
+                      variant="outline"
+                      className="flex-1 border-green-600 text-green-600 hover:bg-green-50"
+                      size="sm"
+                    >
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      Message
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
