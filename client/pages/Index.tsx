@@ -21,6 +21,7 @@ import {
   CheckCircle,
   ArrowRight,
   Play,
+  ShieldCheck,
 } from "lucide-react";
 
 export default function Index() {
