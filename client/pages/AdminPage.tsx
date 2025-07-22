@@ -85,6 +85,18 @@ export default function AdminPage() {
   const [activeModule, setActiveModule] = useState("dashboard");
   const { user, logout } = useAdminAuth();
 
+  // Show loading if user data is not yet available
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-taxi-light-blue via-white to-taxi-light-gray flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-taxi-gray">Loading admin dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
   const stats = [
     { label: "Active Drivers", value: "2,847", icon: Users, trend: "+12%" },
     { label: "Total Rides Today", value: "18,392", icon: Car, trend: "+8%" },
