@@ -222,7 +222,7 @@ export default function BookingPage() {
     // Handle ride booking logic
     setIsBooked(true);
     // Mock driver assignment
-    setDriverInfo({
+    const assignedDriver = {
       name: "James Wilson",
       phone: "+1 (555) 123-4567",
       rating: 4.8,
@@ -230,7 +230,13 @@ export default function BookingPage() {
       plate: "ABC-123",
       eta: "5 mins",
       photo: "👨‍💼"
+    };
+    setDriverInfo(assignedDriver);
+
+    toast.success("Ride booked successfully!", {
+      description: `${assignedDriver.name} will arrive in ${assignedDriver.eta}`,
     });
+
     console.log("Booking ride...");
   };
 
