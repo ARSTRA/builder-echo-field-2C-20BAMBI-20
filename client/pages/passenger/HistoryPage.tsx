@@ -122,8 +122,9 @@ export default function HistoryPage() {
       fare: 0,
       distance: 0,
       duration: 0,
-      paymentMethod: "Cash",
+      paymentMethod: "Cash (NGN)",
       bookingType: "instant",
+      currency: "NGN",
     },
     {
       id: "TR001237",
