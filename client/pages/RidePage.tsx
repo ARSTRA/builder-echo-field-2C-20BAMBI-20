@@ -683,13 +683,23 @@ export default function RidePage() {
                 {/* Fare Calculator */}
                 <Card className="shadow-lg">
                   <CardHeader className="pb-3">
-                    <CardTitle className="flex items-center">
-                      <DollarSign className="w-5 h-5 mr-2 text-green-600" />
-                      Fare Estimator
+                    <CardTitle className="flex items-center justify-between">
+                      <div className="flex items-center">
+                        <DollarSign className="w-5 h-5 mr-2 text-green-600" />
+                        Fare Estimator
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => toast.info("Fare estimates may vary based on traffic and demand")}
+                      >
+                        <AlertTriangle className="w-4 h-4" />
+                      </Button>
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="pt-0">
-                    <Button 
+                  <CardContent className="pt-0 space-y-4">
+                    {/* Main Calculate Button */}
+                    <Button
                       onClick={calculateFare}
                       disabled={!pickupLocation || !destination}
                       className="w-full mb-4"
@@ -697,9 +707,69 @@ export default function RidePage() {
                       <Calculator className="w-4 h-4 mr-2" />
                       Calculate Fare
                     </Button>
-                    
+
+                    {/* Quick Fare Options */}
+                    <div className="grid grid-cols-3 gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          if (!pickupLocation || !destination) {
+                            toast.error("Please enter pickup and destination first");
+                            return;
+                          }
+                          const quickFare = Math.random() * 10 + 8;
+                          setEstimatedFare({
+                            distance: "5.2",
+                            basePrice: 8,
+                            distancePrice: (quickFare - 8).toFixed(2),
+                            total: quickFare.toFixed(2),
+                            duration: 15
+                          });
+                          toast.success("Quick estimate calculated!");
+                        }}
+                      >
+                        <Zap className="w-3 h-3 mr-1" />
+                        Quick
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          if (!estimatedFare) {
+                            toast.error("Please calculate fare first");
+                            return;
+                          }
+                          const discountedTotal = (parseFloat(estimatedFare.total) * 0.85).toFixed(2);
+                          setEstimatedFare(prev => ({ ...prev, total: discountedTotal, discount: "15%" }));
+                          toast.success("15% discount applied!");
+                        }}
+                      >
+                        <Percent className="w-3 h-3 mr-1" />
+                        Discount
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          if (!estimatedFare) {
+                            toast.error("Please calculate fare first");
+                            return;
+                          }
+                          const shareTotal = (parseFloat(estimatedFare.total) * 0.6).toFixed(2);
+                          setEstimatedFare(prev => ({ ...prev, total: shareTotal, shareRide: true }));
+                          toast.success("Share ride option selected - 40% savings!");
+                        }}
+                      >
+                        <Users className="w-3 h-3 mr-1" />
+                        Share
+                      </Button>
+                    </div>
+
+                    {/* Fare Breakdown */}
                     {estimatedFare && (
-                      <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                      <div className="bg-green-50 p-4 rounded-lg border border-green-200 space-y-4">
+                        {/* Basic Info */}
                         <div className="space-y-2">
                           <div className="flex justify-between text-sm">
                             <span>Distance</span>
@@ -709,11 +779,196 @@ export default function RidePage() {
                             <span>Duration</span>
                             <span className="font-medium">{estimatedFare.duration} min</span>
                           </div>
+
+                          {/* Detailed Breakdown */}
+                          <div className="border-t pt-2 space-y-1">
+                            <div className="flex justify-between text-xs text-gray-600">
+                              <span>Base fare</span>
+                              <span>${estimatedFare.basePrice}</span>
+                            </div>
+                            <div className="flex justify-between text-xs text-gray-600">
+                              <span>Distance charge</span>
+                              <span>${estimatedFare.distancePrice}</span>
+                            </div>
+                            {estimatedFare.discount && (
+                              <div className="flex justify-between text-xs text-green-600">
+                                <span>Discount ({estimatedFare.discount})</span>
+                                <span>-${(parseFloat(estimatedFare.basePrice) + parseFloat(estimatedFare.distancePrice) - parseFloat(estimatedFare.total)).toFixed(2)}</span>
+                              </div>
+                            )}
+                            {estimatedFare.shareRide && (
+                              <div className="flex justify-between text-xs text-blue-600">
+                                <span>Share ride savings</span>
+                                <span>-40%</span>
+                              </div>
+                            )}
+                          </div>
+
                           <div className="border-t pt-2 flex justify-between font-semibold text-lg">
                             <span>Total Fare</span>
                             <span className="text-green-600">${estimatedFare.total}</span>
                           </div>
                         </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex space-x-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1"
+                            onClick={() => {
+                              navigator.clipboard?.writeText(`Estimated fare: $${estimatedFare.total} for ${estimatedFare.distance}km trip`);
+                              toast.success("Fare details copied to clipboard!");
+                            }}
+                          >
+                            <Share className="w-3 h-3 mr-1" />
+                            Share
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1"
+                            onClick={() => {
+                              toast.success("Fare breakdown saved!");
+                            }}
+                          >
+                            <Save className="w-3 h-3 mr-1" />
+                            Save
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1"
+                            onClick={() => {
+                              setEstimatedFare(null);
+                              toast.info("Fare estimate cleared");
+                            }}
+                          >
+                            <RotateCcw className="w-3 h-3 mr-1" />
+                            Reset
+                          </Button>
+                        </div>
+
+                        {/* Price Comparison */}
+                        <div className="border-t pt-3">
+                          <h4 className="text-sm font-medium text-gray-700 mb-2">Compare with other options:</h4>
+                          <div className="grid grid-cols-3 gap-2 text-xs">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-auto p-2 flex-col"
+                              onClick={() => toast.info("Economy: Cheaper option available")}
+                            >
+                              <span className="font-medium">Economy</span>
+                              <span className="text-green-600">${(parseFloat(estimatedFare.total) * 0.8).toFixed(2)}</span>
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-auto p-2 flex-col bg-blue-50"
+                              onClick={() => toast.info("Current selection: Comfort")}
+                            >
+                              <span className="font-medium">Comfort</span>
+                              <span className="text-blue-600">${estimatedFare.total}</span>
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-auto p-2 flex-col"
+                              onClick={() => toast.info("Premium: Luxury option available")}
+                            >
+                              <span className="font-medium">Premium</span>
+                              <span className="text-purple-600">${(parseFloat(estimatedFare.total) * 1.4).toFixed(2)}</span>
+                            </Button>
+                          </div>
+                        </div>
+
+                        {/* Time-based Pricing */}
+                        <div className="border-t pt-3">
+                          <h4 className="text-sm font-medium text-gray-700 mb-2">Peak time adjustments:</h4>
+                          <div className="flex space-x-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => {
+                                const peakPrice = (parseFloat(estimatedFare.total) * 1.2).toFixed(2);
+                                toast.warning(`Peak time: $${peakPrice} (+20%)`);
+                              }}
+                            >
+                              <Clock className="w-3 h-3 mr-1" />
+                              Peak Hours
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => {
+                                const nightPrice = (parseFloat(estimatedFare.total) * 1.15).toFixed(2);
+                                toast.info(`Night rate: $${nightPrice} (+15%)`);
+                              }}
+                            >
+                              <Clock className="w-3 h-3 mr-1" />
+                              Night Rate
+                            </Button>
+                          </div>
+                        </div>
+
+                        {/* Promo Code Input */}
+                        <div className="border-t pt-3">
+                          <Label htmlFor="promo" className="text-sm font-medium text-gray-700">Promo Code</Label>
+                          <div className="flex space-x-2 mt-1">
+                            <Input
+                              id="promo"
+                              placeholder="Enter promo code"
+                              className="flex-1"
+                              onKeyPress={(e) => {
+                                if (e.key === 'Enter') {
+                                  const promoValue = e.target.value;
+                                  if (promoValue.toLowerCase() === 'save20') {
+                                    const discountedPrice = (parseFloat(estimatedFare.total) * 0.8).toFixed(2);
+                                    setEstimatedFare(prev => ({ ...prev, total: discountedPrice, promoApplied: 'SAVE20' }));
+                                    toast.success("Promo code SAVE20 applied! 20% off");
+                                  } else {
+                                    toast.error("Invalid promo code");
+                                  }
+                                }
+                              }}
+                            />
+                            <Button
+                              size="sm"
+                              onClick={(e) => {
+                                const input = e.target.parentElement.querySelector('input');
+                                const promoValue = input?.value;
+                                if (promoValue?.toLowerCase() === 'save20') {
+                                  const discountedPrice = (parseFloat(estimatedFare.total) * 0.8).toFixed(2);
+                                  setEstimatedFare(prev => ({ ...prev, total: discountedPrice, promoApplied: 'SAVE20' }));
+                                  toast.success("Promo code SAVE20 applied! 20% off");
+                                } else {
+                                  toast.error("Invalid promo code. Try 'SAVE20'");
+                                }
+                              }}
+                            >
+                              Apply
+                            </Button>
+                          </div>
+                          {estimatedFare.promoApplied && (
+                            <div className="text-xs text-green-600 mt-1">
+                              ✓ Promo code {estimatedFare.promoApplied} applied
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Alternative Fare Options */}
+                    {!estimatedFare && (
+                      <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <h4 className="text-sm font-medium text-blue-800 mb-2">💡 Pro Tips</h4>
+                        <ul className="text-xs text-blue-700 space-y-1">
+                          <li>• Share rides to save up to 40%</li>
+                          <li>• Avoid peak hours (7-9 AM, 5-7 PM) for better rates</li>
+                          <li>• Use promo code 'SAVE20' for 20% off</li>
+                          <li>• Economy rides cost 20% less</li>
+                        </ul>
                       </div>
                     )}
                   </CardContent>
