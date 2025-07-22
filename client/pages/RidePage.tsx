@@ -189,12 +189,14 @@ export default function RidePage() {
       name: "Executive",
       subtitle: "Luxury Redefined",
       description:
-        "First-class travel experience with premium vehicles, top-rated drivers, and exclusive amenities for discerning passengers.",
+        "First-class travel experience with premium vehicles, professional chauffeurs, and exclusive amenities for discerning passengers.",
       features: [
         "Luxury vehicles",
-        "Executive service",
-        "Complimentary water",
+        "Professional chauffeur",
+        "Complimentary refreshments",
         "Priority support",
+        "Door-to-door service",
+        "Business-class comfort",
       ],
       icon: "👑",
       basePrice: 20,
@@ -205,7 +207,7 @@ export default function RidePage() {
       premiumText: "VIP Experience",
       color: "purple",
       image:
-        "https://images.unsplash.com/photo-1563720223-b09b1bd4f6c2?w=500&h=300&fit=crop&crop=center",
+        "https://images.pexels.com/photos/8425035/pexels-photo-8425035.jpeg",
     },
     {
       id: "xl",
