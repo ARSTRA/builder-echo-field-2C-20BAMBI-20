@@ -236,14 +236,23 @@ export default function BookingPage() {
 
   const handleCallDriver = () => {
     if (driverInfo) {
-      window.location.href = `tel:${driverInfo.phone}`;
+      toast.success("Calling driver", {
+        description: `Connecting you to ${driverInfo.name} at ${driverInfo.phone}`,
+      });
+      // Delay the actual call to show the toast
+      setTimeout(() => {
+        window.location.href = `tel:${driverInfo.phone}`;
+      }, 1000);
     }
   };
 
   const handleMessageDriver = () => {
     if (driverInfo) {
+      toast.success("Opening chat", {
+        description: `Starting message conversation with ${driverInfo.name}`,
+      });
       // In a real app, this would open a messaging interface
-      alert(`Opening message chat with ${driverInfo.name}`);
+      // For now, we'll simulate it with a notification
     }
   };
 
