@@ -127,7 +127,7 @@ export function AdminAuthProvider({ children }: AdminAuthProviderProps) {
   };
 
   useEffect(() => {
-    checkAuth();
+    initializeAuth();
   }, []);
 
   // Redirect to login if not authenticated and trying to access admin routes
