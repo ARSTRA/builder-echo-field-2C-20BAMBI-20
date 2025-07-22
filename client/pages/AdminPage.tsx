@@ -1284,7 +1284,23 @@ export default function AdminPage() {
             <div className="flex items-center flex-shrink-0 px-4">
               <h1 className="text-xl font-bold text-taxi-dark">BAMBI Admin</h1>
             </div>
-            <div className="mt-8 flex-grow flex flex-col">
+
+            {/* User Info */}
+            <div className="mt-6 px-4">
+              <div className="bg-primary/5 rounded-lg p-3">
+                <div className="flex items-center">
+                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                    <User className="w-4 h-4 text-primary-foreground" />
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm font-medium text-taxi-dark">{user?.name}</p>
+                    <p className="text-xs text-taxi-gray">{user?.email}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 flex-grow flex flex-col">
               <nav className="flex-1 px-2 space-y-1">
                 {navigationItems.map((item) => {
                   const Icon = item.icon;
@@ -1304,6 +1320,17 @@ export default function AdminPage() {
                   );
                 })}
               </nav>
+
+              {/* Logout Button */}
+              <div className="px-2 pb-4">
+                <button
+                  onClick={logout}
+                  className="group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left text-destructive hover:bg-destructive/10 transition-colors"
+                >
+                  <LogOut className="mr-3 h-5 w-5" />
+                  Sign Out
+                </button>
+              </div>
             </div>
           </div>
         </div>
