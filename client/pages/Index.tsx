@@ -107,21 +107,151 @@ export default function Index() {
             <div className="mb-12 lg:mb-0">
               <div className="flex items-center justify-center lg:justify-start mb-8">
                 <div className="relative">
-                  <div className="w-20 h-20 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-3xl flex items-center justify-center shadow-2xl">
-                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-3xl opacity-30 animate-pulse"></div>
-                    <span className="relative text-white font-black text-4xl tracking-wider">
-                      B
-                    </span>
+                  {/* Hero SVG Logo */}
+                  <div className="w-24 h-24 hover:scale-105 transition-transform duration-500">
+                    <svg
+                      width="96"
+                      height="96"
+                      viewBox="0 0 96 96"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="drop-shadow-2xl hover:drop-shadow-3xl transition-all duration-500"
+                    >
+                      <defs>
+                        <linearGradient id="heroBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#FF6B9D" />
+                          <stop offset="25%" stopColor="#8B5CF6" />
+                          <stop offset="60%" stopColor="#3B82F6" />
+                          <stop offset="85%" stopColor="#06B6D4" />
+                          <stop offset="100%" stopColor="#10B981" />
+                        </linearGradient>
+                        <linearGradient id="heroCarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="#FBBF24" />
+                          <stop offset="50%" stopColor="#F59E0B" />
+                          <stop offset="100%" stopColor="#EF4444" />
+                        </linearGradient>
+                        <linearGradient id="heroRoadGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="#6366F1" />
+                          <stop offset="50%" stopColor="#8B5CF6" />
+                          <stop offset="100%" stopColor="#EC4899" />
+                        </linearGradient>
+                        <linearGradient id="heroBGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#FFFFFF" />
+                          <stop offset="30%" stopColor="#F8FAFC" />
+                          <stop offset="70%" stopColor="#F1F5F9" />
+                          <stop offset="100%" stopColor="#E2E8F0" />
+                        </linearGradient>
+                        <radialGradient id="heroGlowGradient" cx="50%" cy="50%" r="50%">
+                          <stop offset="0%" stopColor="rgba(255,255,255,0.8)" />
+                          <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+                        </radialGradient>
+                      </defs>
+
+                      {/* Outer Glow Ring */}
+                      <circle cx="48" cy="48" r="46" fill="none" stroke="url(#heroBgGradient)" strokeWidth="2" opacity="0.3" className="animate-pulse"/>
+
+                      {/* Main Background Circle */}
+                      <circle cx="48" cy="48" r="42" fill="url(#heroBgGradient)" stroke="#FFFFFF" strokeWidth="3"/>
+
+                      {/* Inner Glow Effect */}
+                      <circle cx="48" cy="48" r="38" fill="url(#heroGlowGradient)" opacity="0.5"/>
+                      <circle cx="48" cy="48" r="35" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1"/>
+
+                      {/* Dynamic Road Path */}
+                      <path
+                        d="M12 50 Q28 42 48 50 Q68 58 84 50"
+                        stroke="url(#heroRoadGradient)"
+                        strokeWidth="4"
+                        fill="none"
+                        strokeLinecap="round"
+                        className="animate-pulse"
+                      />
+
+                      {/* Road Markings */}
+                      <g opacity="0.9">
+                        <path d="M18 50 L24 50 M36 50 L42 50 M54 50 L60 50 M72 50 L78 50" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round"/>
+                      </g>
+
+                      {/* Stylized Car with Details */}
+                      <g transform="translate(62, 46)">
+                        <ellipse cx="0" cy="0" rx="12" ry="6" fill="url(#heroCarGradient)" stroke="#FFFFFF" strokeWidth="0.5"/>
+                        <circle cx="-6" cy="3" r="2.5" fill="#1F2937"/>
+                        <circle cx="6" cy="3" r="2.5" fill="#1F2937"/>
+                        <rect x="-8" y="-3" width="5" height="3" rx="1" fill="#F3F4F6" opacity="0.95"/>
+                        <circle cx="-6" cy="3" r="1.5" fill="#6B7280"/>
+                        <circle cx="6" cy="3" r="1.5" fill="#6B7280"/>
+                      </g>
+
+                      {/* Artistic Letter B */}
+                      <g transform="translate(24, 20)">
+                        <path
+                          d="M0 0 L0 40 L20 40 Q30 40 30 30 Q30 25 25 22.5 Q30 20 30 15 Q30 0 20 0 Z M8 8 L20 8 Q20 8 20 15 Q20 20 16 20 L8 20 Z M8 24 L20 24 Q25 24 25 30 Q25 34 20 34 L8 34 Z"
+                          fill="url(#heroBGradient)"
+                          stroke="#3B82F6"
+                          strokeWidth="1"
+                        />
+                        {/* B Inner Details */}
+                        <circle cx="18" cy="12" r="1" fill="#3B82F6" opacity="0.5"/>
+                        <circle cx="18" cy="28" r="1" fill="#3B82F6" opacity="0.5"/>
+                      </g>
+
+                      {/* Speed/Motion Lines */}
+                      <g opacity="0.7">
+                        <path d="M8 32 L18 32" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round"/>
+                        <path d="M6 38 L16 38" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round"/>
+                        <path d="M8 62 L18 62" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round"/>
+                        <path d="M6 68 L16 68" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round"/>
+                      </g>
+
+                      {/* Sparkle Effects */}
+                      <g className="animate-pulse">
+                        <circle cx="72" cy="24" r="1.5" fill="#FBBF24" opacity="0.9"/>
+                        <circle cx="18" cy="72" r="2" fill="#FF6B9D" opacity="0.9"/>
+                        <circle cx="78" cy="72" r="1.5" fill="#8B5CF6" opacity="0.9"/>
+                        <circle cx="78" cy="18" r="1" fill="#10B981" opacity="0.9"/>
+                      </g>
+
+                      {/* Rotating Accent Ring */}
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="40"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.2)"
+                        strokeWidth="0.8"
+                        strokeDasharray="8 8"
+                        className="animate-spin"
+                        style={{ animationDuration: '30s' }}
+                      />
+
+                      {/* Inner Highlight Ring */}
+                      <circle
+                        cx="48"
+                        cy="48"
+                        r="32"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.15)"
+                        strokeWidth="0.5"
+                        strokeDasharray="4 4"
+                        className="animate-spin"
+                        style={{ animationDuration: '20s', animationDirection: 'reverse' }}
+                      />
+                    </svg>
                   </div>
-                  <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
-                    <span className="text-white font-bold text-lg">🚗</span>
+
+                  {/* Premium Badge */}
+                  <div className="absolute -top-4 -right-4 w-10 h-10 bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-500 rounded-full flex items-center justify-center shadow-xl border-3 border-white animate-bounce">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="white" />
+                    </svg>
                   </div>
                 </div>
-                <div className="ml-4">
-                  <h1 className="text-5xl lg:text-7xl font-black bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+
+                <div className="ml-6">
+                  <h1 className="text-5xl lg:text-7xl font-black bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent mb-2 tracking-tight">
                     BAMBI
                   </h1>
-                  <p className="text-lg text-gray-600 font-medium">
+                  <p className="text-lg bg-gradient-to-r from-gray-700 to-gray-500 bg-clip-text text-transparent font-semibold">
                     Beautiful Rides, Anywhere
                   </p>
                 </div>
