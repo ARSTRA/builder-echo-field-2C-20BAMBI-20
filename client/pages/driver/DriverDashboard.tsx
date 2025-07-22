@@ -289,15 +289,24 @@ export default function DriverDashboard() {
       <div className="bg-white/90 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-xl flex items-center justify-center">
-                <Car className="w-6 h-6 text-white" />
+            <button
+              onClick={() => window.location.href = '/'}
+              className="flex items-center space-x-3 hover:opacity-80 transition-opacity cursor-pointer group"
+            >
+              <div className="relative">
+                <div className="w-12 h-12 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                  <span className="relative text-white font-black text-lg tracking-wider">B</span>
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
+                  <Car className="w-2.5 h-2.5 text-white" />
+                </div>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">SmartCommute Driver</h1>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">BAMBI Driver</h1>
                 <p className="text-sm text-gray-600">Professional driver dashboard</p>
               </div>
-            </div>
+            </button>
             
             <div className="flex items-center space-x-4">
               {/* Online/Offline Toggle */}
