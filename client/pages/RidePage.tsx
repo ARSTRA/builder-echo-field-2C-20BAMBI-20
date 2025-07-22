@@ -988,7 +988,7 @@ export default function RidePage() {
                               isSelected
                                 ? `${colors.selected} shadow-xl scale-[1.02]`
                                 : `border-gray-200 bg-white ${colors.hover} shadow-lg hover:shadow-xl`
-                            }`}
+                            } ${vehicle.premiumText ? 'ring-2 ring-purple-200 ring-opacity-50' : ''}`}
                             onClick={() => {
                               setSelectedVehicle(vehicle.id);
                               toast.success(
