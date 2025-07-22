@@ -95,7 +95,7 @@ export default function BookingPage() {
 
   const specialRequirements = [
     { id: "baby-seat", label: "Baby Seat", icon: Baby, price: 5 },
-    { id: "wheelchair", label: "Wheelchair Accessible", icon: Wheelchair, price: 0 },
+    { id: "wheelchair", label: "Wheelchair Accessible", icon: Accessibility, price: 0 },
     { id: "pet-friendly", label: "Pet Friendly", icon: Heart, price: 3 },
     { id: "extra-luggage", label: "Extra Luggage Space", icon: Car, price: 2 }
   ];
