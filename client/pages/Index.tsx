@@ -92,10 +92,25 @@ export default function Index() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
             <div className="mb-12 lg:mb-0">
-              <h1 className="text-4xl lg:text-6xl font-bold text-taxi-dark mb-6">
+              <div className="flex items-center justify-center lg:justify-start mb-8">
+                <div className="relative">
+                  <div className="w-20 h-20 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-3xl flex items-center justify-center shadow-2xl">
+                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-3xl opacity-30 animate-pulse"></div>
+                    <span className="relative text-white font-black text-4xl tracking-wider">B</span>
+                  </div>
+                  <div className="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                    <span className="text-white font-bold text-lg">🚗</span>
+                  </div>
+                </div>
+                <div className="ml-4">
+                  <h1 className="text-5xl lg:text-7xl font-black bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">BAMBI</h1>
+                  <p className="text-lg text-gray-600 font-medium">Beautiful Rides, Anywhere</p>
+                </div>
+              </div>
+              <h2 className="text-3xl lg:text-5xl font-bold text-taxi-dark mb-6">
                 Your Ride,
                 <span className="text-transparent bg-clip-text taxi-gradient"> Anytime</span>
-              </h1>
+              </h2>
               <p className="text-xl text-taxi-gray mb-8 max-w-lg">
                 Experience the future of urban transportation with BAMBI. 
                 Safe, reliable, and affordable rides at your fingertips.
