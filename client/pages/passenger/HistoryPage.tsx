@@ -103,8 +103,9 @@ export default function HistoryPage() {
       distance: 18.5,
       duration: 35,
       rating: 4,
-      paymentMethod: "Wallet",
+      paymentMethod: "Wallet (USD)",
       bookingType: "scheduled",
+      currency: "USD",
       specialRequirements: ["Extra Luggage"],
     },
     {
