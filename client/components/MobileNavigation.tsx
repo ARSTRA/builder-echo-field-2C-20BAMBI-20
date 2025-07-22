@@ -87,13 +87,56 @@ export function MobileNavigation({ userType }: MobileNavigationProps) {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
             <div className="relative">
-              <div className="w-8 h-8 bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-600 rounded-lg opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                <span className="relative text-white font-black text-sm tracking-wider">
-                  B
-                </span>
+              {/* Compact Mobile SVG Logo */}
+              <div className="w-8 h-8 group-hover:scale-110 transition-transform duration-300">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="drop-shadow-md group-hover:drop-shadow-lg transition-all duration-300"
+                >
+                  <defs>
+                    <linearGradient id="mobileBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#FF6B9D" />
+                      <stop offset="50%" stopColor="#8B5CF6" />
+                      <stop offset="100%" stopColor="#3B82F6" />
+                    </linearGradient>
+                    <linearGradient id="mobileBGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#FFFFFF" />
+                      <stop offset="100%" stopColor="#F8FAFC" />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Background Circle */}
+                  <circle cx="16" cy="16" r="14" fill="url(#mobileBgGradient)" stroke="#FFFFFF" strokeWidth="1"/>
+
+                  {/* Simple Road */}
+                  <path d="M4 17 Q12 14 16 17 Q20 20 28 17" stroke="#FFFFFF" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.8"/>
+
+                  {/* Compact Car */}
+                  <ellipse cx="22" cy="16" rx="4" ry="2" fill="#FBBF24"/>
+                  <circle cx="20" cy="17" r="0.5" fill="#1F2937"/>
+                  <circle cx="24" cy="17" r="0.5" fill="#1F2937"/>
+
+                  {/* Letter B */}
+                  <g transform="translate(8, 8)">
+                    <path
+                      d="M0 0 L0 16 L8 16 Q12 16 12 12 Q12 10 10 9 Q12 8 12 6 Q12 0 8 0 Z M3 3 L8 3 Q8 3 8 6 Q8 8 6 8 L3 8 Z M3 10 L8 10 Q10 10 10 12 Q10 14 8 14 L3 14 Z"
+                      fill="url(#mobileBGradient)"
+                      stroke="#3B82F6"
+                      strokeWidth="0.3"
+                    />
+                  </g>
+
+                  {/* Speed dot */}
+                  <circle cx="26" cy="8" r="0.5" fill="#FBBF24" className="animate-pulse"/>
+                </svg>
               </div>
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+
+              {/* Mobile Badge */}
+              <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center border border-white">
                 <Car className="w-1.5 h-1.5 text-white" />
               </div>
             </div>
