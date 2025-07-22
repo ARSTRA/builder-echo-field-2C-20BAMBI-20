@@ -50,6 +50,7 @@ import { useCurrency } from "@/hooks/use-currency";
 import { PaymentMethod, Currency } from "@shared/currency";
 
 export default function BookingPage() {
+  const { formatAmount, currency } = useCurrency();
   const [pickupLocation, setPickupLocation] = useState("");
   const [destination, setDestination] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState("comfort");
