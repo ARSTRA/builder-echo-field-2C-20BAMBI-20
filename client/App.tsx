@@ -48,8 +48,8 @@ function AppContent() {
           <Route path="/passenger/schedule" element={<BookingPage />} />
           <Route path="/passenger/share" element={<BookingPage />} />
           <Route path="/passenger/packages" element={<BookingPage />} />
-          <Route path="/passenger/history" element={<PassengerHome />} />
-          <Route path="/passenger/notifications" element={<PassengerHome />} />
+          <Route path="/passenger/history" element={<HistoryPage />} />
+          <Route path="/passenger/notifications" element={<NotificationsPage />} />
           <Route path="/passenger/profile" element={<PassengerHome />} />
           <Route path="/passenger/offers" element={<PassengerHome />} />
 
