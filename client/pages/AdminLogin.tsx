@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Eye, EyeOff, Shield, Lock, User, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAdminAuth } from "@/components/auth/AdminAuthProvider";
 
 export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
