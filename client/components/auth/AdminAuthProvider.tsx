@@ -45,28 +45,52 @@ export function AdminAuthProvider({ children }: AdminAuthProviderProps) {
   const checkAuth = (): boolean => {
     const isAuth = localStorage.getItem("bambi_admin_authenticated") === "true";
     const userStr = localStorage.getItem("bambi_admin_user");
-    
+
     if (isAuth && userStr) {
       const userData = JSON.parse(userStr);
       // Check if session is still valid (24 hours)
       const loginTime = new Date(userData.loginTime);
       const now = new Date();
       const hoursDiff = (now.getTime() - loginTime.getTime()) / (1000 * 60 * 60);
-      
+
       if (hoursDiff < 24) {
-        setUser(userData);
-        setIsAuthenticated(true);
         return true;
       } else {
-        // Session expired
-        logout();
+        // Session expired - clear storage but don't call logout to avoid navigation during render
+        localStorage.removeItem("bambi_admin_authenticated");
+        localStorage.removeItem("bambi_admin_user");
         return false;
       }
     }
-    
-    setIsAuthenticated(false);
-    setUser(null);
+
     return false;
+  };
+
+  const initializeAuth = () => {
+    const isAuth = localStorage.getItem("bambi_admin_authenticated") === "true";
+    const userStr = localStorage.getItem("bambi_admin_user");
+
+    if (isAuth && userStr) {
+      const userData = JSON.parse(userStr);
+      // Check if session is still valid (24 hours)
+      const loginTime = new Date(userData.loginTime);
+      const now = new Date();
+      const hoursDiff = (now.getTime() - loginTime.getTime()) / (1000 * 60 * 60);
+
+      if (hoursDiff < 24) {
+        setUser(userData);
+        setIsAuthenticated(true);
+      } else {
+        // Session expired
+        localStorage.removeItem("bambi_admin_authenticated");
+        localStorage.removeItem("bambi_admin_user");
+        setUser(null);
+        setIsAuthenticated(false);
+      }
+    } else {
+      setIsAuthenticated(false);
+      setUser(null);
+    }
   };
 
   const login = async (email: string, password: string): Promise<boolean> => {
