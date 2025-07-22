@@ -41,7 +41,7 @@ export default function AdminPage() {
             Admin Dashboard
           </h1>
           <p className="text-lg text-taxi-gray">
-            Manage your SmartCommute operations and monitor system performance
+            Manage your BAMBI operations and monitor system performance
           </p>
         </div>
 
