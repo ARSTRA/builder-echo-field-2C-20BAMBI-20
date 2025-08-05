@@ -38,6 +38,8 @@ import {
   Phone,
   User,
 } from "lucide-react";
+import { useCurrency } from "@/hooks/use-currency";
+import { formatCurrency } from "@shared/currency";
 
 interface Trip {
   id: string;
@@ -57,9 +59,11 @@ interface Trip {
   paymentMethod: string;
   bookingType: "instant" | "scheduled";
   specialRequirements?: string[];
+  currency: "USD" | "NGN";
 }
 
 export default function HistoryPage() {
+  const { formatAmount } = useCurrency();
   const [searchQuery, setSearchQuery] = useState("");
   const [filterPeriod, setFilterPeriod] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
@@ -80,8 +84,9 @@ export default function HistoryPage() {
       distance: 8.2,
       duration: 22,
       rating: 5,
-      paymentMethod: "Credit Card",
+      paymentMethod: "Credit Card (USD)",
       bookingType: "instant",
+      currency: "USD",
     },
     {
       id: "TR001235",
@@ -98,8 +103,9 @@ export default function HistoryPage() {
       distance: 18.5,
       duration: 35,
       rating: 4,
-      paymentMethod: "Wallet",
+      paymentMethod: "Wallet (USD)",
       bookingType: "scheduled",
+      currency: "USD",
       specialRequirements: ["Extra Luggage"],
     },
     {
@@ -116,8 +122,9 @@ export default function HistoryPage() {
       fare: 0,
       distance: 0,
       duration: 0,
-      paymentMethod: "Cash",
+      paymentMethod: "Cash (NGN)",
       bookingType: "instant",
+      currency: "NGN",
     },
     {
       id: "TR001237",
@@ -130,12 +137,13 @@ export default function HistoryPage() {
       vehicleType: "Comfort",
       vehiclePlate: "GHI-3456",
       status: "completed",
-      fare: 15.75,
+      fare: 24413, // Equivalent to ~$15.75 in NGN
       distance: 4.1,
       duration: 12,
       rating: 5,
-      paymentMethod: "Credit Card",
+      paymentMethod: "Credit Card (NGN)",
       bookingType: "instant",
+      currency: "NGN",
       specialRequirements: ["Wheelchair Accessible"],
     },
   ];
@@ -367,7 +375,7 @@ export default function HistoryPage() {
                       <div>
                         <p className="text-xs text-taxi-gray">Fare</p>
                         <p className="font-semibold text-primary">
-                          ${trip.fare}
+                          {formatCurrency(trip.fare, trip.currency)}
                         </p>
                       </div>
                     </div>

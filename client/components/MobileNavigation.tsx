@@ -19,6 +19,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import { CurrencySelector } from "./CurrencySelector";
 
 interface NavigationItem {
   name: string;
@@ -179,6 +180,7 @@ export function MobileNavigation({ userType }: MobileNavigationProps) {
 
           {/* Header Actions */}
           <div className="flex items-center space-x-2">
+            <CurrencySelector />
             <Button
               variant="ghost"
               size="sm"
